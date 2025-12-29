@@ -1,13 +1,20 @@
 {
   "name": "DT-Prompt Pro",
-  "short_name": "DT-Prompt",
+  "short_name": "DT-Prompt Pro",
   "description": "المحرك الهندسي المتقدم لتوليد الأوامر - DicelionTechnique",
   "version": "1.5.0",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
     }
   ],
   "theme_color": "#020617",
