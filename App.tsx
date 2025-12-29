@@ -34,26 +34,31 @@ const UI_TRANSLATIONS: any = {
     pasted: 'تم لصق المحتوى!',
     saved: 'تمت الأرشفة بنجاح!',
     historyEmpty: 'الأرشيف فارغ حالياً.',
-    promptMode: { image: 'توليد الصور', video: 'إنتاج الفيديو', post: 'نص إعلاني احترافي' },
+    promptMode: { image: 'توليد الصور', video: 'إنتاج الفيديو', post: 'نص إحترافي' },
     placeholders: { text: 'عنوان الحملة أو الموضوع الرئيسي...', details: 'الفئة المستهدفة، الهدف من الإعلان، ومعلومات إضافية...', search: 'بحث سريع في التخصصات...' },
     labels: { lang: 'محرك اللغة', ratio: 'أبعاد المخرج', mood: 'نبرة الصوت والأسلوب', bg: 'سياق المحتوى والبيئة', tech: 'قالب الهيكلة الاحترافي', text: 'الموضوع الأساسي', details: 'تفاصيل الحملة والهدف', useRef: 'تحليل سيكولوجي 🧠', engOnly: 'تصدير إنجليزي 🇺🇸', aiTarget: 'منصة الذكاء المستهدفة', useImgSource: 'الصورة المرفقة مع برومبت 🖼️', visualEnglish: 'حروف إنجليزية حصراً 🔠', visualEnglishDesc: 'لضمان دقة النصوص داخل الصور (للمحركات التي لا تدعم العربية)' },
     useBtn: 'اعتماد',
     guide: {
-        title: 'الموسوعة الشاملة لـ DT-Prompt Pro',
+        title: 'دليل إحتراف DT-Prompt Pro',
         subtitle: 'دليل المستخدم النهائي لإتقان هندسة الأوامر',
-        intro: 'أهلاً بك يا بطل في عالم هندسة الذكاء الاصطناعي. هذا التطبيق صُمم خصيصاً ليكون "عقلك المدبر" الذي يترجم أفكارك البسيطة إلى أوامر برمجية معقدة تفهمها أقوى محركات الذكاء الاصطناعي في العالم. لا تقلق إذا كنت تستخدم الهاتف لأول مرة، هذا الدليل سيشرح لك كل "نفس" في التطبيق بالتفصيل الممل لضمان احترافك الكامل.',
-        navTitle: 'شرح أيقونات شريط التنقل السفلي',
-        studioTitle: 'شرح خانات "الاستوديو" بالتفصيل الممل',
-        logicTitle: 'شرح المربعات الاختيارية (Advanced Logic)',
-        stepTitle: 'دليلك العملي لصناعة أول صورة (خطوة بخطوة) 🚀',
-        funcTitle: 'شرح الأزرار الوظيفية (Function Buttons)',
-        glossaryTitle: 'قاموس المصطلح البسيطة 📖',
-        step1: 'تأكد أنك اخترت "توليد الصور" من الشريط العلوي الصغير في صفحة الاستوديو.',
-        step2: 'في مربع "الموضوع الأساسي" اكتب فكرتك البسيطة (مثلاً: أسد يركب دراجة).',
-        step3: 'من قائمة "سياق المحتوى والبيئة"، اختر مثلاً "شارع طوكيو نيوني ليلاً".',
-        step4: 'من قائمة "نبرة الصوت"، اختر مثلاً "واقعية سينمائية".',
-        step5: 'اضغط على زر "معالجة الأمر ✨" الكبير. انتظر ثانية واحدة وستظهر النتيجة.',
-        step6: 'اضغط على زر "نسخ القالب" واذهب لبرنامج الرسم الخاص بك وألصقه هناك.'
+        intro: 'مرحباً بك في رحلة احتراف الذكاء الاصطناعي. هذا التطبيق ليس مجرد أداة، بل هو "مترجم ذكي" يأخذ أفكارك البسيطة ويحولها إلى لغة برمجية تفهمها أقوى العقول الاصطناعية في العالم. هذا الدليل صُمم ليكون رفيقك، يشرح لك كل زر وكل قائمة وكأنك تمسك هاتفاً ذكياً لأول مرة في حياتك.',
+        navTitle: '⭐ البوصلة: شريط التنقل السفلي (أين تذهب؟)',
+        navDesc: 'في أسفل الشاشة، تجد 7 أيقونات سحرية هي مفاتيح التنقل:\n1️⃣ 🏠 البيت: هو "الاستوديو" حيث تصنع أوامرك.\n2️⃣ 📚 الكتاب: هي "المكتبة" التي تحتوي على أفكار جاهزة.\n3️⃣ 📂 الملف: هو "الأرشيف" حيث تُحفظ كنوزك القديمة.\n4️⃣ 🌍 الكرة الأرضية: لتغيير لغة التطبيق بالكامل.\n5️⃣ 📖 الدليل: الصفحة التي تقرأها الآن لتتعلم.\n6️⃣ ℹ️ الدائرة: معلومات عن المطور وكيفية التواصل معه.',
+        studioTitle: '🎨 الاستوديو: مختبر صناعة الجمال',
+        studioDesc: 'هنا يقع السحر الحقيقي، إليك شرح الخانات:\n• الخانة الأولى (الموضوع): اكتب هنا بكلمة واحدة ما تريد رؤيته (مثلاً: قطة، سيارة، محامي).\n• الخانة الثانية (التفاصيل): صف هنا المشهد (مثلاً: تجري في الغابة، تحت المطر، يبتسم).\n• قوائم الاختيار: هي قوائم منسدلة تفتح لك خيارات مذهلة، اختر منها "بيئة المشهد" و"أبعاد الصورة" و"محرك الذكاء" الذي ستستخدمه.',
+        logicTitle: '🧠 المفاتيح الذكية: خيارات المحترفين',
+        logicDesc: 'هذه المربعات الصغيرة تغير "تفكير" الذكاء الاصطناعي:\n• 🧠 تحليل سيكولوجي: يجعل الذكاء يركز على المشاعر والألوان التي تؤثر في الناظر.\n• 🇺🇸 تصدير إنجليزي: يحول فكرتك العربية إلى لغة إنجليزية تقنية قوية جداً.\n• 🔠 حروف إنجليزية حصراً: خيار حيوي يمنع الذكاء من كتابة لغات غريبة داخل الصورة، ويجبره على استخدام الحروف الإنجليزية الواضحة فقط.',
+        funcTitle: '🛠️ الأدوات الوظيفية: أزرار التحكم',
+        funcDesc: '• ✨ معالجة الأمر: هو الزر الأكبر، اضغط عليه ليقوم التطبيق "بطبخ" الفكرة.\n• 📋 نسخ القالب: ليحفظ النص في ذاكرة الهاتف لتلصقه في برامج الرسم.\n• 💾 أرشفة المشروع: ليحفظ هذا الأمر في قائمة "الأرشيف" للعودة له لاحقاً.\n• 🗑️ إزالة: لمسح أي مشروع قديم لم تعد بحاجته.',
+        stepTitle: '🚀 خطة العمل: كيف تصنع أول صورة في دقيقة؟',
+        step1: 'ادخل "الاستوديو" واختر نوع المهمة (صورة أو فيديو) من الأعلى.',
+        step2: 'اكتب في المربع الأول فكرتك (مثلاً: فارس عربي).',
+        step3: 'اختر من القوائم "فخامة مؤسسية" و "واقعية سينمائية".',
+        step4: 'فعل خيار "تصدير إنجليزي" لضمان أفضل نتيجة عالمية.',
+        step5: 'اضغط "معالجة الأمر ✨" وراقب النص المذهل الذي سيظهر بالأسفل.',
+        step6: 'اضغط "نسخ القالب" واذهب لأي موقع توليد صور وألصق النص هناك.',
+        glossaryTitle: 'قاموس المصطلحات البسيطة 📖',
+        glossaryDesc: '• برومبت (Prompt): هو "الأمر" أو "الرسالة" التي نوجهها للذكاء الاصطناعي.\n• رندر (Render): هي عملية تحويل البيانات إلى صورة مرئية نهائية.\n• أبعاد (Ratio): هي شكل الصورة، هل هي طويلة للجوال (9:16) أم مربعة (1:1).'
     },
     about: {
         title: 'Dicelion Technique®',
@@ -97,26 +102,31 @@ const UI_TRANSLATIONS: any = {
     pasted: 'Content pasted!',
     saved: 'Archived successfully!',
     historyEmpty: 'No projects found.',
-    promptMode: { image: 'Image Gen', video: 'Video Gen', post: 'Pro Ad Copy' },
+    promptMode: { image: 'Image Gen', video: 'Video Gen', post: 'Pro Text' },
     placeholders: { text: 'Campaign title or subject...', details: 'Target audience, goal, extra info...', search: 'Search specialty...' },
     labels: { lang: 'Language', ratio: 'Ratio', mood: 'Tone & Style', bg: 'Content Context', tech: 'Structure Template', text: 'Core Subject', details: 'Campaign Details', useRef: 'Psych Analysis 🧠', engOnly: 'EN Only 🇺🇸', aiTarget: 'Target AI Platform', useImgSource: 'Image-Based Prompt 🖼️', visualEnglish: 'English Letters Only 🔠', visualEnglishDesc: 'Ensures text accuracy inside visuals (For engines lacking Arabic support)' },
     useBtn: 'APPLY',
     guide: {
-        title: 'DT-Prompt Pro Comprehensive Encyclopedia',
+        title: 'DT-Prompt Pro Pro-Guide',
         subtitle: 'The Ultimate Guide to Mastering Prompt Engineering',
-        intro: 'Welcome hero to the world of AI engineering. This app is designed to be your "Mastermind" translating simple ideas into complex prompts understood by the world\'s most powerful AI engines. Don\'t worry if you\'re new to mobile apps, this guide explains every detail to ensure your professional mastery.',
-        navTitle: 'Bottom Navigation Bar Icons Explained',
-        studioTitle: 'Studio Fields Explained in Detail',
-        logicTitle: 'Advanced Logic (Checkboxes)',
-        stepTitle: 'Step-by-Step Guide for Your First Image 🚀',
-        funcTitle: 'Function Buttons Explained',
-        glossaryTitle: 'Simple Glossary 📖',
-        step1: 'Ensure you selected "Image Gen" from the top bar in the Studio page.',
-        step2: 'In the "Core Subject" box, write your simple idea (e.g., a lion riding a bicycle).',
-        step3: 'From the "Backgrounds" list, choose "Tokyo Neon Street at Night".',
-        step4: 'From the "Mood" list, choose "Cinematic Realism".',
-        step5: 'Click the large "Process Engine ✨" button. Wait a second for the result.',
-        step6: 'Click "Copy Template" and paste it into your preferred AI drawing app.'
+        intro: 'Welcome to your journey into the world of AI mastery. This app is more than a tool; it\'s an "intelligent translator" that takes your simple ideas and converts them into the precise language understood by the world\'s most advanced AI engines.',
+        navTitle: '⭐ The Compass: Bottom Navigation (Where to go?)',
+        navDesc: 'At the bottom of your screen, 7 magic icons are your keys:\n1️⃣ 🏠 Home: The "Studio" where you create your commands.\n2️⃣ 📚 Book: The "Library" containing pre-made inspiration.\n3️⃣ 📂 Folder: The "Archive" where your saved treasures live.\n4️⃣ 🌍 Globe: Change the entire app language.\n5️⃣ 📖 Guide: This page you are reading now.\n6️⃣ ℹ️ Info: Developer info and contact links.',
+        studioTitle: '🎨 Studio: The Lab of Creation',
+        studioDesc: 'This is where the magic happens:\n• Box 1 (Core Subject): Write what you want to see in one word (e.g., Cat, Car).\n• Box 2 (Details): Describe the scene (e.g., running in forest, raining).\n• Selection Lists: Dropdowns for "Backgrounds", "Aspect Ratios", and "AI Models".',
+        logicTitle: '🧠 Smart Switches: Pro Options',
+        logicDesc: 'These small checkboxes change how the AI "thinks":\n• 🧠 Psych Analysis: Focuses on emotional resonance and color theory.\n• 🇺🇸 EN Export: Converts Arabic ideas into high-tech English technical commands.\n• 🔠 English Letters Only: Ensures text generated inside images uses only clear Latin characters.',
+        funcTitle: '🛠️ Functional Tools: Control Buttons',
+        funcDesc: '• ✨ Process Engine: The main button to "cook" your prompt.\n• 📋 Copy Template: Saves text to your phone\'s memory.\n• 💾 Archive: Saves the project to your history.\n• 🗑️ Delete: Removes old projects.',
+        stepTitle: '🚀 Action Plan: Create your first image in 60 seconds',
+        step1: 'Enter the "Studio" and choose a mode (Image/Video) from the top.',
+        step2: 'Type your idea in the first box (e.g., Ancient Knight).',
+        step3: 'Choose "Cinematic Movie" and "Epic Scale" from the lists.',
+        step4: 'Enable "EN Only" to ensure global-quality technical output.',
+        step5: 'Click "Process Engine ✨" and watch the magic text appear below.',
+        step6: 'Click "Copy Template" and paste it into any AI generator app.',
+        glossaryTitle: '📖 Simple Glossary',
+        glossaryDesc: '• Prompt: The command or message we give to the AI.\n• Render: The process of turning data into a final visual image.\n• Aspect Ratio: The shape of the image (Portrait/Square/Landscape).'
     },
     about: {
         title: 'Dicelion Technique®',
@@ -501,6 +511,9 @@ const App: React.FC = () => {
                 <span className="w-3 h-3 bg-sky-500 rounded-full animate-pulse"></span>
                 {t.guide.navTitle}
               </h3>
+              <div className="p-6 bg-white/5 rounded-3xl mb-4 border border-white/5">
+                 <p className="text-slate-300 text-sm whitespace-pre-wrap leading-relaxed">{t.guide.navDesc}</p>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-slate-200">
                 <DetailedGuideItem icon="🏠" title={t.tabs.create} desc={appLang === 'ar' ? 'هذه هي ورشة العمل الأساسية.' : 'This is the main creative workshop.'} />
                 <DetailedGuideItem icon="📚" title={t.tabs.library} desc={appLang === 'ar' ? 'خزانة المعرفة الجاهزة.' : 'Ready-to-use knowledge base.'} />
@@ -511,6 +524,9 @@ const App: React.FC = () => {
 
             <section className="glass-ui p-12 rounded-[3.5rem] space-y-12 border-white/5 bg-slate-950/20">
               <h3 className="text-2xl font-black text-sky-400 border-b border-sky-500/20 pb-4">{t.guide.studioTitle}</h3>
+              <div className="p-6 bg-white/5 rounded-3xl mb-4 border border-white/5">
+                 <p className="text-slate-300 text-sm whitespace-pre-wrap leading-relaxed">{t.guide.studioDesc}</p>
+              </div>
               <div className="space-y-6">
                   <h4 className="text-xl font-black text-white flex items-center gap-3 pr-4 border-r-4 border-sky-500 px-4">
                     {appLang === 'ar' ? 'أوضاع التوليد' : 'Generation Modes'}:
@@ -532,6 +548,20 @@ const App: React.FC = () => {
               </div>
             </section>
 
+            <section className="glass-ui p-12 rounded-[3.5rem] space-y-10 border-white/5">
+              <h3 className="text-2xl font-black text-sky-400 border-b border-sky-500/20 pb-4">{t.guide.logicTitle}</h3>
+              <div className="p-6 bg-white/5 rounded-3xl border border-white/5">
+                 <p className="text-slate-300 text-sm whitespace-pre-wrap leading-relaxed">{t.guide.logicDesc}</p>
+              </div>
+            </section>
+
+            <section className="glass-ui p-12 rounded-[3.5rem] space-y-10 border-white/5">
+              <h3 className="text-2xl font-black text-sky-400 border-b border-sky-500/20 pb-4">{t.guide.funcTitle}</h3>
+              <div className="p-6 bg-white/5 rounded-3xl border border-white/5">
+                 <p className="text-slate-300 text-sm whitespace-pre-wrap leading-relaxed">{t.guide.funcDesc}</p>
+              </div>
+            </section>
+
             <section className="glass-ui p-12 rounded-[3.5rem] space-y-10 border-sky-500/10 bg-gradient-to-tr from-sky-900/10 to-transparent">
               <h3 className="text-2xl font-black text-white text-center">{t.guide.stepTitle}</h3>
               <div className="space-y-6">
@@ -541,6 +571,13 @@ const App: React.FC = () => {
                 <StepItem num="4" title={appLang === 'ar' ? 'تحديد الشعور' : 'Set Mood'} desc={t.guide.step4} />
                 <StepItem num="5" title={appLang === 'ar' ? 'الضغط على السحر' : 'Magic Click'} desc={t.guide.step5} />
                 <StepItem num="6" title={appLang === 'ar' ? 'استخدام النتيجة' : 'Use Result'} desc={t.guide.step6} />
+              </div>
+            </section>
+
+            <section className="glass-ui p-12 rounded-[3.5rem] space-y-10 border-white/5">
+              <h3 className="text-2xl font-black text-sky-400 border-b border-sky-500/20 pb-4">{t.guide.glossaryTitle}</h3>
+              <div className="p-6 bg-white/5 rounded-3xl border border-white/5">
+                 <p className="text-slate-300 text-sm whitespace-pre-wrap leading-relaxed">{t.guide.glossaryDesc}</p>
               </div>
             </section>
 
