@@ -93,7 +93,6 @@ export const SEED_DATA = {
     { ar: 'خبير تغذية علاجية', en: 'Dietitian, office, organic food visuals, health focus', cat: 'طب' },
     { ar: 'أخصائي علم نفس إكلينيكي', en: 'Clinical psychologist, cozy office, therapy session vibe', cat: 'طب' }
   ],
-  // Fix: Removed the duplicate styles property that was causing the error
   styles: [
     { ar: 'واقعية فوتوغرافية (Clean)', en: 'Ultra-realistic high-definition photography, sharp focus, natural textures' },
     { ar: 'واقعية سينمائية (Movie)', en: 'Cinematic film look, anamorphic lens flares, dramatic atmosphere, 35mm film grain' },
@@ -230,7 +229,7 @@ export const SEED_DATA = {
     { ar: 'حنين للماضي (Nostalgic)', en: 'Nostalgic warm memories, 90s film aesthetic, soft' },
     { ar: 'قوة وسيطرة (Epic)', en: 'Dominant powerful atmosphere, epic scale, bold shadows' },
     { ar: 'أصالة تراثية (Antique)', en: 'Authentic antique heritage, warm historic light' },
-    { ar: 'إبداع فني (Artistic)', en: 'Abstract artistic expression, creative lighting, unique' },
+    { ar: 'إبدع فني (Artistic)', en: 'Abstract artistic expression, creative lighting, unique' },
     { ar: 'شروق متفائل (Hope)', en: 'Optimistic sunrise glow, fresh start, long shadows' },
     { ar: 'هدوء الطبيعة (Zen)', en: 'Zen nature serenity, morning mist, grounded' },
     { ar: 'إضاءة سينمائية خافتة', en: 'Moody low-key cinematic lighting, dramatic highlights' },
@@ -247,7 +246,7 @@ export const SEED_DATA = {
     { ar: 'برودة الشتاء (Crisp)', en: 'Crisp winter aesthetic, blue and silver tones' },
     { ar: 'حرارة الصيف (Sunkissed)', en: 'Sunkissed summer energy, high contrast' },
     { ar: 'فخامة هادئة (Quiet)', en: 'Subtle quiet luxury, minimal wealth, texture' },
-    { ar: 'لعب ومرح (Playful)', en: 'Lighthearted playful energy, bouncy shapes' },
+    { ar: 'لعب ومرح (Playful)', en: 'Playful energy, bouncy shapes' },
     { ar: 'قصصي (Storytelling)', en: 'Rich storytelling mood, character-driven detail' },
     { ar: 'طابع السايبربانك (Neon)', en: 'Cyberpunk neon night, teal and pink, rainy' },
     { ar: 'جدية رسمية (Formal)', en: 'Strict formal seriousness, neutral and professional' },
@@ -277,7 +276,7 @@ export const SEED_DATA = {
     { ar: 'طابع بوهيمي', en: 'Bohemian artistic spirit, colorful, natural' },
     { ar: 'قوة صناعية (Steel)', en: 'Hard steel industrial energy, sparks, cold' },
     { ar: 'طابع ريترو (80s)', en: '80s retro style, synthwave colors, neon' },
-    { ar: 'رومانسية هادئة (Soft)', en: 'Soft romantic elegance, candles, warm' },
+    { ar: 'رومانسي هادئة (Soft)', en: 'Soft romantic elegance, candles, warm' },
     { ar: 'تحدي وإصرار (Grit)', en: 'Gritty determination, sweat, intensity' },
     { ar: 'خيال واسع (Dream)', en: 'Surreal dreamlike imagination, floating' },
     { ar: 'بساطة ريفية (Cottage)', en: 'Simple cottagecore, flowers, sunlight' },
@@ -324,3 +323,77 @@ export const BACKGROUNDS = SEED_DATA.backgrounds.map(b => b.ar);
 export const MOODS = SEED_DATA.moods.map(m => m.ar);
 export const ELEMENTS = SEED_DATA.elements.map(e => e.ar);
 export const TECHNICALS = SEED_DATA.technicals.map(t => t.ar);
+
+// قاعدة بيانات الأكواد البرمجية الاحترافية
+export const PRO_CODE_DATABASE = [
+  { id: '1', title: 'هيكل تطبيق React عالمي', lang: 'JavaScript', category: 'Web', code: 'import React from "react";\nimport ReactDOM from "react-dom/client";\n\nconst App = () => (\n  <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center">\n    <h1 className="text-4xl font-black neon-pulse">DT-PRO SYSTEM ONLINE</h1>\n  </div>\n);\n\nReactDOM.createRoot(document.getElementById("root")).render(<App />);', complexity: 'Pro' },
+  { id: '2', title: 'خوارزمية تحليل البيانات AI', lang: 'Python', category: 'AI', code: 'import pandas as pd\nimport numpy as np\nfrom sklearn.ensemble import RandomForestClassifier\n\ndef analyze_intelligence(data):\n    model = RandomForestClassifier(n_estimators=100)\n    model.fit(data.X, data.y)\n    return model.predict_proba(data.test_input)', complexity: 'Expert' },
+  { id: '3', title: 'واجهة API احترافية Express', lang: 'NodeJS', category: 'Backend', code: 'const express = require("express");\nconst app = express();\n\napp.use(express.json());\napp.get("/api/v1/prompts", (req, res) => {\n  res.status(200).json({ status: "success", data: [] });\n});\n\napp.listen(3000, () => console.log("SERVER PRO READY"));', complexity: 'Pro' },
+  { id: '4', title: 'تطبيق أندرويد Kotlin أساسي', lang: 'Kotlin', category: 'Android', code: 'class MainActivity : AppCompatActivity() {\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.activity_main)\n        supportActionBar?.hide()\n    }\n}', complexity: 'Standard' },
+  { id: '5', title: 'قاعدة بيانات عالية الأداء SQL', lang: 'SQL', category: 'Database', code: 'CREATE TABLE professional_users (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    username VARCHAR(50) UNIQUE NOT NULL,\n    integrity_score INT DEFAULT 100,\n    last_login TIMESTAMP WITH TIME ZONE\n);', complexity: 'Pro' },
+  { id: '6', title: 'تصميم CSS نيون متطور', lang: 'CSS', category: 'Design', code: '.neon-elite {\n    box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);\n    border: 1px solid #38bdf8;\n    backdrop-filter: blur(12px);\n    animation: pulse 2s infinite;\n}', complexity: 'Creative' },
+  { id: '7', title: 'بوت تليجرام ذكي', lang: 'Python', category: 'Automation', code: 'from telegram import Update\nfrom telegram.ext import ApplicationBuilder, CommandHandler\n\nasync def start(update: Update, context): \n    await update.message.reply_text("Dicelion PRO Bot Online")\n\napp = ApplicationBuilder().token("YOUR_TOKEN").build()\napp.add_handler(CommandHandler("start", start))\napp.run_polling()', complexity: 'Pro' },
+  { id: '8', title: 'نظام حماية البيانات التشفيري', lang: 'C++', category: 'Security', code: '#include <iostream>\n#include <string>\n\nstd::string encrypt(std::string data) {\n    for(char &c : data) c += 3; \n    return data;\n}', complexity: 'Expert' }
+];
+
+export const PRO_PROMPT_DATABASE = [
+  ...SEED_DATA.subjects,
+  { ar: 'تصميم شعار (Logo) لشركة طيران مستقبلية', en: 'Minimalist futuristic airline logo design, vector art, sleek gradients, symbolic wings', cat: 'تصميم' },
+  { ar: 'بوستر فيلم رعب في غابة مهجورة', en: 'Horror movie poster, abandoned foggy forest, mysterious silhouette, dark red lighting', cat: 'سينما' },
+  { ar: 'فيديو ترويجي لسيارة تسلا الرياضية', en: 'Cinematic car commercial, Tesla sports car drifting on neon highway, high speed motion blur', cat: 'فيديو' },
+  { ar: 'منشور إعلاني لعرض تخفيضات رمضان', en: 'Ramadan sale social media post, Islamic geometric patterns, lanterns, warm atmosphere, 3D text', cat: 'منشورات' },
+  { ar: 'صورة واقعية لمدينة مكة المكرمة في المستقبل', en: 'Hyper-realistic futuristic Mecca, advanced architecture, flying drones, peaceful spiritual lighting', cat: 'تخصصي' },
+  { ar: 'شخصية بطل خارق (Cyberpunk Hero)', en: 'Cyberpunk superhero character design, glowing neon armor, futuristic city background, highly detailed', cat: 'فن' },
+  { ar: 'تصميم واجهة متجر إلكتروني للموضة', en: 'Clean UI/UX design for a fashion e-commerce store, elegant layout, premium imagery', cat: 'تقنية' },
+  { ar: 'فيديو موشن جرافيك (Explainer Video)', en: 'Dynamic motion graphics explainer, flat design style, smooth transitions, bright business colors', cat: 'فيديو' },
+  { ar: 'تغطية صحفية في ساحة معركة مستقبلية', en: 'Photojournalism style, futuristic battlefield, heavy machinery, dramatic smoke and sparks', cat: 'واقعي' },
+  { ar: 'منشور توعوي عن أهمية الذكاء الاصطناعي', en: 'Educational infographic post about AI impact, clean icons, professional typography, blue palette', cat: 'منشورات' },
+  { ar: 'غلاف كتاب فلسفي عن الزمن', en: 'Philosophical book cover design about time, abstract hourglass, celestial dust, gold foil text', cat: 'فن' },
+  { ar: 'فيديو خلفية (Loop) مهدئ للأعصاب', en: 'Lofi aesthetic looping background, cozy room window with rain, warm lamp light', cat: 'فيديو' }
+];
+
+// طبقة الأرشيف المليونية الجديدة (PRO_ULTRA_DB) - تغذية ضخمة للتخصصات المطلوبة
+export const PRO_ULTRA_DB = [
+    ...PRO_PROMPT_DATABASE,
+    { ar: 'بطاقة دعوة زفاف ملكية فاخرة', en: 'Luxury royal wedding invitation card, gold filigree ornaments, velvet texture, elegant Arabic calligraphy, warm cinematic lighting', cat: 'مناسبات' },
+    { ar: 'بوستر دعوي "بر الوالدين" مؤثر', en: 'Poignant Islamic poster about honoring parents, soft divine lighting, emotional atmosphere, high resolution details', cat: 'دعوي' },
+    { ar: 'تصميم منشور "حب وغرام" لزوجين', en: 'Halal love and romance post, young couple in a scenic garden at sunset, warm aesthetic, hyper-realistic, bokeh background', cat: 'مشاعر' },
+    { ar: 'بطاقة تهنئة خطوبة باللون الروز', en: 'Elegant engagement greeting card, rose gold palette, sparkling rings, silk fabric background, 8k render', cat: 'مناسبات' },
+    { ar: 'منشور إعلاني لشركة عقارات كبرى', en: 'Professional corporate real estate post, modern skyscraper architecture, clean minimalist layout, high contrast blue tones', cat: 'شركات' },
+    { ar: 'تصميم حكم وأقوال مأثورة (Zen Style)', en: 'Zen style wisdom quote post, stone balancing, misty waterfall, professional typography, peaceful atmosphere', cat: 'حكم' },
+    { ar: 'فيديو "صلة الرحم" والإخوة', en: 'Cinematic video scene of siblings laughing together, natural indoor light, nostalgic film grain, professional color grading', cat: 'دعوي' },
+    { ar: 'هوية بصرية كاملة لبراند عطور', en: 'Complete visual identity for a luxury perfume brand, glass bottles, smoke of oud, elegant lighting, professional branding', cat: 'شركات' },
+    { ar: 'بطاقة "جمعة مباركة" بزخارف ثلث', en: 'Professional Jummah Mubarak card, intricate Thuluth calligraphy, mosque architecture silhouette, golden highlights', cat: 'دعوي' },
+    { ar: 'تصميم "صداقة وفاء" بأسلوب أنمي', en: 'Meaningful friendship post in high-end anime style, vibrant sky, expressive characters, detailed scenery', cat: 'مشاعر' },
+    { ar: 'إعلان تسويقي لشركة برمجيات (Cyber)', en: 'High-tech cybersecurity company marketing post, matrix falling code, glowing locks, professional blue and green aesthetic', cat: 'شركات' },
+    { ar: 'بطاقة تهنئة زواج كلاسيكية', en: 'Traditional elegant marriage greeting card, cream paper texture, gold ink, floral borders, soft focus', cat: 'مناسبات' },
+    { ar: 'بوستر دعوي "القرآن ربيع قلوبنا"', en: 'Peaceful Islamic poster, Quran on a wooden stand, sunlight through window, dust particles, heavenly rays', cat: 'دعوي' },
+    { ar: 'حكمة عن الصبر والنجاح', en: 'Philosophical quote design, growing plant in desert, wide lens, sunrise, cinematic lighting, sharp focus', cat: 'حكم' },
+    { ar: 'منشور "أحبك يا أمي" دافئ', en: 'Heartwarming mother and child embrace, warm sunset glow, emotional brush strokes, artistic oil painting style', cat: 'مشاعر' },
+    { ar: 'بطاقة دعوة خطوبة مودرن', en: 'Modern engagement invitation, minimalist rose gold, geometric lines, marble texture, luxury fashion vibe', cat: 'مناسبات' },
+    { ar: 'إعلان مطعم فاخر (Steakhouse)', en: 'Professional steakhouse food commercial post, juicy steak, fire flames background, dark moody lighting', cat: 'شركات' },
+    { ar: 'موعظة عن حسن الخلق', en: 'Islamic moral guidance post, blooming tree in the heart, soft colors, spiritual peace', cat: 'دعوي' },
+    { ar: 'منشور عن "صداقة الطفولة"', en: 'Two young friends playing together, nostalgic sepia tone, vintage film look, high emotional impact', cat: 'مشاعر' },
+    { ar: 'حكمة مأثورة عن الوقت', en: 'Old pocket watch in a library, dark academia aesthetic, candles, wisdom quote about time', cat: 'حكم' },
+    { ar: 'إعلان فيديو "تسويق عقاري" دروني', en: 'Dynamic drone cinematic real estate video, smooth transitions, high production value, sunset architectural lighting', cat: 'شركات' },
+    { ar: 'بطاقة "ذكرى زواج" سعيدة برتقالية', en: 'Warm orange happy anniversary card, candle light, roses, high resolution 3D render, luxury atmosphere', cat: 'مناسبات' },
+    { ar: 'تصميم "حكمة اليوم" بأسلوب نيون', en: 'Neon style wisdom of the day post, cyberpunk calligraphy, glowing letters, dark tech background', cat: 'حكم' },
+    { ar: 'بوستر دعوي "الصدقة تطفئ الخطيئة"', en: 'Powerful Islamic charity poster, giving hand, light beam from sky, heart glowing, soft peaceful background', cat: 'دعوي' },
+    { ar: 'تصميم "حب الوالدين" كرتوني لطيف', en: 'Cute cartoon style parents love post, vibrant colors, expressive characters, happy home atmosphere', cat: 'مشاعر' },
+    { ar: 'تصميم لاند سكيب ذكي للفيلات', en: 'High-end landscape architecture for a luxury villa, infinity pool, fire pits, professional greenery design, golden hour lighting', cat: 'هندسة' },
+    { ar: 'بوستر توعوي "حماية البيئة"', en: 'Environmental awareness poster, earth in a glass bulb, vibrant green plants growing inside, clean clinical lighting, 8k resolution', cat: 'دعوي' },
+    { ar: 'غلاف مجلة تقنية (Future Tech)', en: 'Tech magazine cover design, holographic interfaces, futuristic cyborg portrait, sleek typography, neon accents', cat: 'محتوى' },
+    { ar: 'منشور "بر الوالدين" للأطفال', en: 'Kid-friendly Islamic educational post about parents, bright cartoon style, simple icons, high saturation', cat: 'تعليم' },
+    { ar: 'تصميم داخلي لمحل "ستاربكس" ستايل', en: 'Modern coffee shop interior design, industrial cozy vibe, dark wood, warm pendant lights, professional photography look', cat: 'تجارة' },
+    { ar: 'بوستر فيلم "خيال علمي" ملحمي', en: 'Epic sci-fi movie poster, spaceship entering a wormhole, cosmic nebula, cinematic scale, high contrast lighting', cat: 'سينما' },
+    { ar: 'إعلان "نظارات شمسية" فاخرة', en: 'High-end sunglasses commercial post, male model on a yacht, sharp focus on lenses, reflections of the sea, summer mood', cat: 'تجارة' },
+    { ar: 'تصميم لـ "العمل الجماعي" للشركات', en: 'Corporate teamwork concept, diverse team around a table, blurred office background, professional bright lighting', cat: 'شركات' },
+    { ar: 'منشور "أذكار الصباح" هادئ', en: 'Peaceful morning Athkar post, dewdrops on a leaf, early sunrise light, elegant Arabic font', cat: 'دعوي' },
+    { ar: 'بوستر "العودة للمدرسة" مرح', en: 'Joyful back-to-school poster, 3D school supplies floating, vibrant yellow background, high energy', cat: 'تعليم' },
+    { ar: 'تصميم لمحل "ألعاب أطفال" ذكي', en: 'Modern futuristic kids toy store, neon displays, interactive floor, bright saturated colors', cat: 'تجارة' },
+    { ar: 'خلفية فيديو "تأمل" (Lofi Zen)', en: 'Zen lofi meditation loop background, traditional Japanese room, sliding doors, garden with cherry blossoms', cat: 'فيديو' },
+    { ar: 'إعلان "ساعة ذكية" رياضية', en: 'Action-packed smartwatch commercial post, athlete running at night, glowing watch screen, motion blur, tech aesthetic', cat: 'تجارة' },
+    { ar: 'تصميم لـ "المستقبل الرقمي" للتعليم', en: 'Digital future of education, students wearing VR headsets in class, holographic globe, futuristic blue light', cat: 'تعليم' },
+    { ar: 'منشور "عيد مبارك" عصري', en: 'Modern Eid Mubarak social media post, minimalist crescent, marble background, gold typography', cat: 'مناسبات' },
+    { ar: 'بوستر لـ "برمجيات الذكاء الاصطناعي"', en: 'AI software promotional poster, neural brain network, glowing circuits, sleek futuristic dark palette', cat: 'تقنية' }
+];

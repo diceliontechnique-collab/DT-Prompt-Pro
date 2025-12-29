@@ -3,104 +3,33 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#020617">
-    <meta name="description" content="DT-Prompt Pro - المحرك الهندسي المتقدم لتوليد الأوامر">
-    <title>DT-Prompt Pro | المحرك الاحترافي</title>
+    <title>DT-Prompt Pro | Professional Tool</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #38bdf8;
-            --secondary-color: #1d4ed8;
-            --bg-deep: #020617;
-            --bg-card: rgba(15, 23, 42, 0.9);
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --border-soft: rgba(255, 255, 255, 0.08);
-        }
-
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: var(--bg-deep);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            line-height: 1.7;
-            -webkit-tap-highlight-color: transparent;
-            background-attachment: fixed;
-            /* منع السحب للتحديث في المتصفحات */
-            overscroll-behavior-y: contain;
-        }
-
-        .bg-pro-gradient {
-            background-image: 
-                radial-gradient(circle at top right, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at bottom left, rgba(29, 78, 216, 0.05) 0%, transparent 40%);
-        }
-
-        @keyframes neon-glow-pulse {
-            0% { 
-                box-shadow: 0 0 5px rgba(56, 189, 248, 0.05), 0 15px 40px -10px rgba(0, 0, 0, 0.6);
-                border-color: var(--border-soft);
-            }
-            50% { 
-                box-shadow: 0 0 20px rgba(56, 189, 248, 0.15), 0 15px 40px -10px rgba(0, 0, 0, 0.6);
-                border-color: rgba(56, 189, 248, 0.25);
-            }
-            100% { 
-                box-shadow: 0 0 5px rgba(56, 189, 248, 0.05), 0 15px 40px -10px rgba(0, 0, 0, 0.6);
-                border-color: var(--border-soft);
-            }
-        }
-
-        .glass-ui {
-            background: var(--bg-card);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--border-soft);
-            box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.6);
-            animation: neon-glow-pulse 6s ease-in-out infinite;
-        }
-
-        .neon-accent {
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
-        }
-
+        :root { --primary-color: #38bdf8; --bg-deep: #020617; }
+        body { font-family: 'Cairo', sans-serif; background-color: var(--bg-deep); color: #fff; margin: 0; overflow-x: hidden; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
+        .glass-ui { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); }
+        .neon-accent { text-shadow: 0 0 10px rgba(56, 189, 248, 0.3); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-        select {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2338bdf8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='C19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: left 0.75rem center;
-            background-size: 1.2em;
-            padding-left: 2.5rem !important;
-        }
-
-        input::placeholder, textarea::placeholder {
-            color: rgba(148, 163, 184, 0.3);
-        }
-
-        .btn-hover:active { transform: scale(0.96); transition: 0.2s; }
-
-        /* تحسينات إضافية للتوافق مع الأجهزة القديمة */
-        input, textarea, select {
-            font-size: 16px !important; /* يمنع الزووم التلقائي في iOS */
+        @media (max-width: 768px) {
+            .glass-ui { padding: 1rem !important; }
+            h1 { font-size: 1.5rem !important; }
+            textarea, input, select { font-size: 16px !important; }
+            * { word-wrap: break-word !important; overflow-wrap: break-word !important; }
         }
     </style>
 <script type="importmap">
 {
   "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+    "react": "https://esm.sh/react@^19.2.3"
   }
 }
 </script>
