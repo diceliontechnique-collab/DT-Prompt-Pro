@@ -20,6 +20,11 @@ export interface PromptFormData {
   secondaryText: string;
   secondaryTextPos: string;
   videoMotion: string;
+  useReferenceImage: boolean;
+  forceEnglish: boolean;
+  targetModel: string;
+  useImageAsMainSource: boolean;
+  onlyEnglishVisuals: boolean;
 }
 
 export interface SavedPrompt {
