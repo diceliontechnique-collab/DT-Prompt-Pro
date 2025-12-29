@@ -191,6 +191,30 @@ const App: React.FC = () => {
   const [editSummary, setEditSummary] = useState('');
   const [editFullPrompt, setEditFullPrompt] = useState('');
 
+  // ميزة الحماية البرمجية المستمرة - Integrity Guard Layer
+  const [isSystemLocked, setIsSystemLocked] = useState(false);
+
+  useEffect(() => {
+    const checkIntegrity = () => {
+      const auth1 = "DT-Prompt Pro";
+      const auth2 = "Dicelion-Technique";
+      const auth3 = "+212717118180";
+      
+      const checkAr = UI_TRANSLATIONS.ar;
+      const checkEn = UI_TRANSLATIONS.en;
+
+      const isTitleSafe = checkAr.title === auth1 && checkEn.title === auth1;
+      const isSubtitleSafe = checkAr.subtitle.includes(auth2) && checkEn.subtitle.includes(auth2);
+      const isContactSafe = checkAr.about.promoText.includes(auth2) && checkAr.about.smartLink.includes('Smart');
+      
+      // التحقق من الثوابت والترجمات
+      if (!isTitleSafe || !isSubtitleSafe || !isContactSafe) {
+        setIsSystemLocked(true);
+      }
+    };
+    checkIntegrity();
+  }, []);
+
   const [formData, setFormData] = useState<PromptFormData>({
     promptMode: 'image', template: TEMPLATES[0].id, designType: '', aspectRatio: ASPECT_RATIOS[0], purpose: '',
     style: '', font: '', palette: '', background: BACKGROUNDS[0], mood: MOODS[0],
@@ -330,7 +354,37 @@ const App: React.FC = () => {
             to { opacity: 1; transform: translateY(0); }
         }
         textarea, input { select-text: auto; -webkit-user-select: text; user-select: text; }
+        .system-lock-screen {
+          position: fixed;
+          inset: 0;
+          z-index: 99999;
+          background: #000;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding: 2rem;
+          color: #fff;
+        }
       `}</style>
+
+      {/* شاشة الأمان في حال التلاعب بالبيانات */}
+      {isSystemLocked && (
+        <div className="system-lock-screen page-transition">
+          <div className="text-8xl mb-8 animate-pulse">🔒</div>
+          <h2 className="text-3xl font-black mb-4 text-red-500">تحذير أمني: خرق سلامة التطبيق</h2>
+          <p className="text-xl font-bold mb-8 leading-relaxed max-w-lg">
+            عذراً، تم اكتشاف محاولة حذف أو تعديل بيانات الهوية الأساسية الخاصة بالمطور أو اسم التطبيق. 
+            تطبيق <span className="text-sky-400">DT-Prompt Pro</span> محمي برمجياً من قبل <span className="text-sky-400">Dicelion-Technique</span>.
+            <br/><br/>
+            يرجى عدم العبث بالقيم الأصلية للتطبيق لضمان استمرارية عمله.
+          </p>
+          <div className="p-6 glass-ui rounded-3xl border border-red-500/30">
+            <p className="text-xs opacity-50 uppercase tracking-widest font-black">Dicelion-Technique Integrity Guard v1.5</p>
+          </div>
+        </div>
+      )}
 
       <header className="pt-16 pb-12 text-center space-y-3">
         <h1 className="text-4xl font-black text-white tracking-tighter sm:text-5xl neon-accent drop-shadow-lg">{t.title}</h1>
