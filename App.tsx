@@ -24,7 +24,7 @@ const UI_TRANSLATIONS: any = {
     langName: 'العربية',
     title: 'DT-Prompt',
     subtitle: 'Dicelion-Technique | Intelligent Prompt System v1.5',
-    tabs: { create: 'المختبر', library: 'المكتبة المليونية', history: 'السجل الرقمي', codes: 'الأكواد', appLang: 'اللغة', guide: 'دليل الاحتراف', about: 'عن المطور', home: 'الرئيسية', sunlight: 'وضع السطوع' },
+    tabs: { create: 'المختبر', library: 'مليون برمبت', history: 'سجل المحفوظات', codes: 'الأكواد', appLang: 'اللغة', guide: 'دليل المستخدم', about: 'عن المطور', home: 'الرئيسية', sunlight: 'وضع السطوع' },
     generateBtn: 'معالجة الأمر ✨',
     copyBtn: 'نسخ القالب',
     saveBtn: 'أرشفة المشروع',
@@ -54,7 +54,7 @@ const UI_TRANSLATIONS: any = {
         cancel: 'إلغاء'
     },
     guide: { 
-      title: 'دليلك لاحتراف DT-Prompt', 
+      title: 'دليل المستخدم DT-Prompt', 
       subtitle: 'موسوعة هندسة الأوامر الذكية v1.5',
       intro: 'تطبيق DT-Prompt هو مختبر هندسي متكامل صُمم ليكون الجسر الرابط بين خيالك البشري وقدرة الآلة التوليدية العظمى. إليك تشريحاً دقيقاً لكل ركن في هذه الواجهة الذكية:',
       infographicTitle: 'تشريح الواجهة الذكية (Interface Map) 🗺️',
@@ -112,7 +112,7 @@ const UI_TRANSLATIONS: any = {
     langName: 'English',
     title: 'DT-Prompt',
     subtitle: 'Dicelion-Technique | Intelligent Prompt System v1.5',
-    tabs: { create: 'Laboratory', library: 'Millionth Library', history: 'Digital Logs', codes: 'Codes', appLang: 'Langs', guide: 'Pro Guide', about: 'Developer', home: 'Home', sunlight: 'Brightness' },
+    tabs: { create: 'Laboratory', library: 'Million Prompts', history: 'History Log', codes: 'Codes', appLang: 'Language', guide: 'User Guide', about: 'Developer', home: 'Home', sunlight: 'Brightness' },
     generateBtn: 'Process Engine ✨',
     copyBtn: 'Copy',
     saveBtn: 'Save',
@@ -460,6 +460,13 @@ const App: React.FC = () => {
         /* BUILD SAFETY LAYER */
         .page-transition { min-height: 80vh; display: block !important; visibility: visible !important; }
         .search-bar-container { position: sticky; top: 120px; z-index: 400; background: inherit; padding-top: 10px; padding-bottom: 10px; }
+
+        /* NEON NAVIGATION UPGRADE */
+        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .animate-spin-slow { animation: spin-slow 4s linear infinite; }
+        .nav-btn-pro { transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; }
+        .nav-btn-pro:active { transform: scale(0.85) !important; transition: all 0.1s !important; }
+        .neon-glow-active { box-shadow: 0 0 35px rgba(56, 189, 248, 0.8) !important; }
       `}</style>
 
       {showAnnouncement && (
@@ -495,14 +502,14 @@ const App: React.FC = () => {
 
       <nav className="nav-fixed-top">
         <div className="max-w-xl mx-auto flex items-center justify-between gap-1 w-full px-2">
-             <NavIcon active={activeTab === 'create'} onClick={() => setActiveTab('create')} icon="🏠" label={t.tabs.home} isSunlight={isSunlightMode} />
+             <NavIcon active={activeTab === 'create'} onClick={() => setActiveTab('create')} icon="الرئيسية" label={t.tabs.home} isSunlight={isSunlightMode} />
              <div className="flex items-center gap-4 overflow-x-auto no-scrollbar py-1 flex-1 justify-around relative z-[600]">
-                <NavIcon active={activeTab === 'library'} onClick={() => setActiveTab('library')} icon="📚" label={t.tabs.library} isSunlight={isSunlightMode} />
-                <NavIcon active={activeTab === 'history'} onClick={() => setActiveTab('history')} icon="🕒" label={t.tabs.history} isSunlight={isSunlightMode} />
-                <NavIcon active={isSunlightMode} onClick={() => setIsSunlightMode(!isSunlightMode)} icon={isSunlightMode ? '☀️' : '🔆'} label={t.tabs.sunlight} isSunlight={isSunlightMode} />
-                <NavIcon active={showLangSelector} onClick={() => setShowLangSelector(true)} icon="🌍" label={t.tabs.appLang} isSunlight={isSunlightMode} />
-                <NavIcon active={activeTab === 'guide'} onClick={() => setActiveTab('guide')} icon="📖" label={t.tabs.guide} isSunlight={isSunlightMode} />
-                <NavIcon active={activeTab === 'about'} onClick={() => setActiveTab('about')} icon="ℹ️" label={t.tabs.about} isSunlight={isSunlightMode} />
+                <NavIcon active={activeTab === 'library'} onClick={() => setActiveTab('library')} icon={<div className="flex flex-col leading-none"><span>مليون</span><span className="text-[6px] mt-0.5 opacity-80 tracking-tighter">Prompt</span></div>} label={t.tabs.library} isSunlight={isSunlightMode} />
+                <NavIcon active={activeTab === 'history'} onClick={() => setActiveTab('history')} icon={<div className="flex flex-col leading-none"><span>سجل</span><span className="text-[5px] mt-0.5 opacity-80">المحفوظات</span></div>} label={t.tabs.history} isSunlight={isSunlightMode} />
+                <NavIcon active={isSunlightMode} onClick={() => setIsSunlightMode(!isSunlightMode)} icon="سطوع" label={t.tabs.sunlight} isSunlight={isSunlightMode} />
+                <NavIcon active={showLangSelector} onClick={() => setShowLangSelector(true)} icon="لغة" label={t.tabs.appLang} isSunlight={isSunlightMode} />
+                <NavIcon active={activeTab === 'guide'} onClick={() => setActiveTab('guide')} icon={<div className="flex flex-col leading-none"><span>دليل</span><span className="text-[5px] mt-0.5 opacity-80">المستخدم</span></div>} label={t.tabs.guide} isSunlight={isSunlightMode} />
+                <NavIcon active={activeTab === 'about'} onClick={() => setActiveTab('about')} icon={<div className="flex flex-col leading-none"><span>عن</span><span className="text-[5px] mt-0.5 opacity-80">المطور</span></div>} label={t.tabs.about} isSunlight={isSunlightMode} />
              </div>
         </div>
       </nav>
@@ -711,7 +718,7 @@ const App: React.FC = () => {
                  <div className={`p-10 rounded-[4rem] border space-y-6 text-center mx-2 ${isSunlightMode ? 'bg-slate-100 border-slate-300' : 'bg-slate-950/80 border-sky-500/20'}`}>
                    <h5 className={`text-lg font-black uppercase tracking-widest ${isSunlightMode ? 'text-sky-900' : 'text-sky-400'}`}>{t.about.suggestion.title}</h5>
                    <p className={`text-[13px] font-bold leading-relaxed max-w-xl mx-auto ${isSunlightMode ? 'text-slate-600' : 'text-slate-200'}`}>{t.about.suggestion.desc}</p>
-                   <a href="mailto:diceliontechnique@gmail.com?subject=Strategic Feedback: DT-Prompt" className={`inline-block py-3 px-10 rounded-full text-[10px] font-black border transition-all ${isSunlightMode ? 'bg-sky-600 text-white border-sky-700 hover:bg-sky-700' : 'bg-sky-500/10 text-white border-sky-500/30 hover:bg-sky-500'}`}> {appLang === 'ar' ? 'أرسل رؤيتك الفنية الآن 📬' : 'Submit your vision now 📬'} </a>
+                   <a href="mailto:diceliontechnique@gmail.com?subject=Strategic Feedback: DT-Prompt" className={`inline-block py-3 px-10 rounded-full text-[10px] font-black border transition-all ${isSunlightMode ? 'bg-sky-600 text-white border-sky-700 hover:bg-sky-700' : 'bg-sky-500/10 text-white border-sky-500/30 hover:bg-sky-50'}`}> {appLang === 'ar' ? 'أرسل رؤيتك الفنية الآن 📬' : 'Submit your vision now 📬'} </a>
                  </div>
 
                  <div className="pt-8">
@@ -798,21 +805,33 @@ const NavIcon = ({ active, icon, onClick, isSunlight, label }: any) => (
   <div className="relative group flex flex-col items-center flex-shrink-0">
     <button 
       onClick={(e) => { e.stopPropagation(); onClick(); }} 
-      className={`w-12 h-12 flex items-center justify-center rounded-full transition-all duration-500 relative overflow-hidden cursor-pointer NavIcon
+      className={`w-14 h-14 flex items-center justify-center rounded-full transition-all duration-700 relative overflow-hidden cursor-pointer NavIcon nav-btn-pro
         ${active 
-          ? 'bg-gradient-to-tr from-sky-400 to-blue-600 text-white scale-125 shadow-[0_0_25px_rgba(56,189,248,0.6)] border-2 border-white/30 active' 
+          ? isSunlight 
+            ? 'bg-sky-600 text-white scale-110 shadow-[0_0_35px_rgba(2,132,199,0.5)] border-2 border-white/80 active'
+            : 'bg-gradient-to-br from-[#1e293b] to-[#0f172a] text-white scale-110 shadow-[0_0_35px_rgba(56,189,248,0.9)] border-2 border-sky-400 active' 
           : isSunlight 
             ? 'bg-slate-100 text-slate-800 hover:bg-slate-200 hover:scale-110 shadow-lg border border-slate-300' 
-            : 'bg-white/10 text-white hover:bg-white/20 hover:scale-110 shadow-xl border border-white/10'}`}
+            : 'bg-white/5 text-white hover:bg-white/10 hover:scale-110 shadow-xl border border-white/5'}`}
     >
-      <span className={`text-2xl transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]`}>
+      {/* rotating neon border layer */}
+      <div className={`absolute inset-0 z-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 ${active ? 'opacity-100' : ''}`}>
+        <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[conic-gradient(#38bdf8,#1e40af,transparent,transparent,#38bdf8)] animate-spin-slow"></div>
+      </div>
+      
+      {/* Inner mask to keep solid background and fix the "blackness" issue */}
+      <div className={`absolute inset-[2.5px] rounded-full z-[1] transition-all duration-500 ${active ? (isSunlight ? 'bg-sky-600' : 'bg-gradient-to-tr from-[#1e293b] to-[#334155]') : isSunlight ? 'bg-slate-100' : 'bg-[#1e293b]'}`}></div>
+
+      <span className={`relative z-10 ${React.isValidElement(icon) ? 'w-full h-full flex items-center justify-center' : typeof icon === 'string' && icon.length > 1 ? 'text-[9px] leading-tight font-black uppercase text-center px-1' : 'text-3xl'} transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 ${active ? 'text-white' : isSunlight ? 'text-slate-800' : 'text-slate-200'} drop-shadow-[0_0_12px_rgba(56,189,248,0.4)]`}>
         {icon}
       </span>
-      <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+      
+      {/* Glint effect on hover */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out z-20 pointer-events-none"></div>
     </button>
     
-    <div className="absolute -bottom-8 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-[2000]">
-      <span className={`text-[9px] font-black uppercase tracking-tighter px-2 py-0.5 rounded-md bg-sky-500 text-white shadow-lg animate-pulse-fast`}>
+    <div className="absolute -bottom-9 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none whitespace-nowrap z-[2000] scale-75 group-hover:scale-100">
+      <span className={`text-[10px] font-black uppercase tracking-tighter px-3 py-1 rounded-full bg-gradient-to-r from-sky-600 to-blue-700 text-white shadow-[0_5px_15px_rgba(0,0,0,0.3)] border border-white/10`}>
         {label}
       </span>
     </div>
