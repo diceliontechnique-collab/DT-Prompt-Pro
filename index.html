@@ -30,7 +30,14 @@
             overscroll-behavior-y: none;
             min-height: 100vh;
             /* دعم الأجهزة القديمة أندرويد 7 */
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
             display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
             flex-direction: column;
         }
         .glass-ui { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); }
@@ -38,7 +45,7 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
         /* طبقة الإصلاح الهندسي العالمية - Global Fix Layer */
-        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         html { scroll-behavior: smooth; }
         
         /* معالجة تداخل التخطيط في الشاشات الصغيرة جداً */
@@ -55,7 +62,7 @@
         }
 
         /* تحسين التمرير لجميع الإصدارات */
-        main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        main { -webkit-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
         
         /* معالجة تداخل العناصر - Layout Overlap Shield */
         .glass-ui, .glass-card { z-index: 10; position: relative; }
@@ -66,6 +73,16 @@
             textarea, input, select { font-size: 16px !important; }
             * { word-wrap: break-word !important; overflow-wrap: break-word !important; }
         }
+
+        /* إصلاح جذري لقص العناوين - Vertical Clearance Fix */
+        /* زيادة الهامش العلوي لضمان عدم القص تحت شريط التنقل */
+        .app-content-wrapper { padding-top: 160px !important; }
+        @media (max-width: 480px) { .app-content-wrapper { padding-top: 175px !important; } }
+
+        /* طبقة حماية الوضع الساطع النهائية - Ultimate Sunlight Armor */
+        .sunlight-theme { background: #fdfdfd !important; }
+        .sunlight-theme body { background-color: #fdfdfd !important; }
+        .sunlight-theme .nav-fixed-top { background: #ffffff !important; border-bottom: 2px solid #f1f5f9 !important; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05) !important; }
     </style>
 <script type="importmap">
 {
@@ -77,7 +94,7 @@
 }
 </script>
 </head>
-<body class="bg-pro-gradient">
+<body class="bg-pro-gradient app-content-wrapper">
     <div id="root"></div>
 </body>
 </html>

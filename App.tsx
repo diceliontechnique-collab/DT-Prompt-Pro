@@ -221,10 +221,10 @@ const WisdomCard: React.FC<{ appLang: string, isSunlight: boolean }> = ({ appLan
   const [phase, setPhase] = useState<'hidden' | 'visible' | 'initial'>('initial');
 
   useEffect(() => {
-    // الانتظار دقيقة واحدة قبل الظهور الأول
+    // التعديل: تقليل فترة الانتظار الأولى لبدء التغيير فوراً تقريباً
     const initialDelay = setTimeout(() => {
       setPhase('visible');
-    }, 60000);
+    }, 2000);
 
     return () => clearTimeout(initialDelay);
   }, []);
@@ -233,47 +233,47 @@ const WisdomCard: React.FC<{ appLang: string, isSunlight: boolean }> = ({ appLan
     if (phase === 'initial') return;
 
     if (phase === 'visible') {
+      // التعديل: تظل الحكمة ظاهرة لمدة 7 ثوانٍ
       const timer = setTimeout(() => {
         setPhase('hidden');
-      }, 60000); // تظل دقيقة
+      }, 7000); 
       return () => clearTimeout(timer);
     } else if (phase === 'hidden') {
+      // التعديل: تظل مخفية لمدة 3 ثوانٍ ليتم التبديل (المجموع 10 ثوانٍ)
       const timer = setTimeout(() => {
         setIndex((prev) => (prev + 1) % WISDOM_QUOTES.length);
         setPhase('visible');
-      }, 10000); // تختفي 10 ثواني
+      }, 3000); 
       return () => clearTimeout(timer);
     }
   }, [phase]);
 
-  if (phase === 'initial' || phase === 'hidden') return <div className="h-24 w-full" />; // مساحة محجوزة للحفاظ على استقرار الهيكل
-
+  // استخدام مساحة محجوزة ثابتة لمنع اهتزاز الواجهة
   return (
-    <div className={`w-full overflow-hidden transition-all duration-1000 transform animate-in zoom-in slide-in-from-top-4 ${phase === 'visible' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-      <div className={`relative p-6 rounded-[2.5rem] border-2 shadow-2xl flex flex-col items-center justify-center text-center gap-2 overflow-hidden group min-h-[110px]
-        ${isSunlight 
-          ? 'bg-white border-sky-600 text-sky-900 shadow-sky-200' 
-          : 'bg-slate-900/80 border-sky-400 text-white shadow-[0_0_30px_rgba(56,189,248,0.2)]'}`}>
-        
-        {/* مؤثرات الخلفية القوية */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-sky-500/10 via-transparent to-blue-500/10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
-        <div className="absolute -top-10 -right-10 w-24 h-24 bg-sky-400/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-10 -left-10 w-24 h-24 bg-blue-600/20 rounded-full blur-3xl animate-pulse"></div>
+    <div className="h-[120px] w-full flex items-center justify-center">
+        <div className={`w-full overflow-hidden transition-all duration-1000 transform 
+          ${phase === 'visible' ? 'opacity-100 scale-100 blur-none' : 'opacity-0 scale-95 blur-md'}`}>
+          <div className={`relative p-6 rounded-[2.5rem] border-2 shadow-2xl flex flex-col items-center justify-center text-center gap-2 overflow-hidden group min-h-[110px] 
+            ${isSunlight 
+              ? 'bg-white border-sky-600 text-sky-900 shadow-sky-200' 
+              : 'bg-slate-900/80 border-sky-400 text-white shadow-[0_0_30px_rgba(56,189,248,0.2)]'}`}>
+            
+            {/* مؤثرات الخلفية */}
+            <div className={`absolute inset-0 opacity-50 ${isSunlight ? 'bg-gradient-to-tr from-sky-50/50 to-transparent' : 'bg-gradient-to-tr from-sky-500/10 via-transparent to-blue-500/10'}`}></div>
+            
+            <span className={`text-[10px] font-black uppercase tracking-[0.3em] opacity-60 mb-1 ${isSunlight ? 'text-sky-700' : 'text-sky-300'}`}>
+              {appLang === 'ar' ? 'حكمة اليوم' : 'Daily Wisdom'}
+            </span>
+            
+            <p className={`text-[13.5px] font-black leading-relaxed px-2 transition-all duration-700 glow-text-shimmer ${isSunlight ? '!text-sky-900 !bg-none !-webkit-text-fill-color-inherit' : 'text-white'}`}>
+              {WISDOM_QUOTES[index]}
+            </p>
 
-        <span className={`text-[10px] font-black uppercase tracking-[0.3em] opacity-60 mb-1 ${isSunlight ? 'text-sky-700' : 'text-sky-300'}`}>
-          {appLang === 'ar' ? 'حكمة اليوم' : 'Daily Wisdom'}
-        </span>
-        
-        <p className={`text-[13.5px] font-black leading-relaxed px-2 transition-all duration-700 glow-text-shimmer ${isSunlight ? '!text-sky-900' : 'text-white'}`}>
-          {WISDOM_QUOTES[index]}
-        </p>
-
-        <div className="flex items-center gap-1.5 mt-2 opacity-40">
-           <div className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-ping"></div>
-           <div className="w-1 h-1 rounded-full bg-sky-500/50"></div>
-           <div className="w-1 h-1 rounded-full bg-sky-500/50"></div>
+            <div className="flex items-center gap-1.5 mt-2 opacity-40">
+               <div className={`w-1.5 h-1.5 rounded-full animate-ping ${isSunlight ? 'bg-sky-600' : 'bg-sky-500'}`}></div>
+            </div>
+          </div>
         </div>
-      </div>
     </div>
   );
 };
@@ -505,7 +505,7 @@ const App: React.FC = () => {
 
         /* SUNLIGHT THEME (Refined for zero distortion) */
         .sunlight-theme { background: #fdfdfd !important; color: #000000 !important; }
-        .sunlight-theme .nav-fixed-top { background: #ffffff !important; border-bottom: 1px solid #e2e8f0 !important; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important; }
+        .sunlight-theme .nav-fixed-top { background: #ffffff !important; border-bottom: 2px solid #f1f5f9 !important; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important; }
         .sunlight-theme .glass-ui, .sunlight-theme .glass-card { background: #ffffff !important; border: 2px solid #cbd5e1 !important; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1) !important; }
         .sunlight-theme h1, .sunlight-theme h2, .sunlight-theme h3, .sunlight-theme h4, .sunlight-theme p, .sunlight-theme span { color: #000000 !important; }
         .sunlight-theme .library-item-card { background: #f8fafc !important; border: 2px solid #e2e8f0 !important; }
@@ -543,6 +543,41 @@ const App: React.FC = () => {
 
         /* INCREMENTAL SHIELD LAYER: Permanently hide the specific Nav Labels as per user instruction without deleting code */
         .NavIcon + div { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; height: 0 !important; width: 0 !important; overflow: hidden !important; }
+
+        /* FINAL COMPREHENSIVE DESIGN SHIELD: Fixing Top cut-off and ensuring layout integrity */
+        header { margin-top: 10px !important; z-index: 50; position: relative; }
+        .main-app-container { position: relative; z-index: 5; }
+        
+        /* Quantum Wisdom Sparkle Animation (New Incremental Layer) */
+        .wisdom-glow-pulse { animation: wisdom-sparkle 10s infinite; }
+        @keyframes wisdom-sparkle {
+          0%, 100% { filter: brightness(1) drop-shadow(0 0 5px rgba(56,189,248,0.2)); }
+          50% { filter: brightness(1.2) drop-shadow(0 0 15px rgba(56,189,248,0.6)); transform: translateY(-2px); }
+        }
+        
+        /* Fix for potential Dark Bar artifacts in Sunlight Mode */
+        .sunlight-theme .nav-fixed-top > div { background: transparent !important; }
+        .sunlight-theme .bg-pro-gradient { background: #fdfdfd !important; }
+
+        /* LIBRARY OVERLAP SHIELD: Final correction for sticky header spacing and opacity */
+        .search-bar-container { 
+            background-color: #020617 !important; 
+            z-index: 480 !important; 
+            padding-bottom: 24px !important;
+            margin-bottom: 0 !important;
+        }
+        .sunlight-theme .search-bar-container { 
+            background-color: #fdfdfd !important; 
+            border-bottom: 2px solid #f1f5f9 !important;
+        }
+        /* Quantum Grid Spacer Addition */
+        .library-grid-spacer { 
+            margin-top: 6.5rem !important; 
+            padding-top: 2rem !important; 
+        }
+        @media (max-width: 480px) {
+            .library-grid-spacer { margin-top: 8.5rem !important; }
+        }
       `}</style>
 
       {showAnnouncement && (
@@ -576,7 +611,7 @@ const App: React.FC = () => {
         </div>
       )}
 
-      <nav className="nav-fixed-top">
+      <nav className={`nav-fixed-top ${isSunlightMode ? 'sunlight-theme' : ''}`}>
         <div className="max-w-xl mx-auto flex items-center justify-between gap-1 w-full px-2">
              <NavIcon active={activeTab === 'create'} onClick={() => setActiveTab('create')} icon="الرئيسية" label={t.tabs.home} isSunlight={isSunlightMode} />
              <div className="flex items-center gap-4 overflow-x-auto no-scrollbar py-1 flex-1 justify-around relative z-[600]">
@@ -590,12 +625,12 @@ const App: React.FC = () => {
         </div>
       </nav>
 
-      <header className="pt-4 pb-8 text-center px-4 w-full">
+      <header className={`pb-8 text-center px-4 w-full ${isSunlightMode ? 'mt-4' : 'mt-0'}`}>
         <h1 className={`text-3xl sm:text-4xl font-black tracking-tighter ${isSunlightMode ? 'text-sky-700' : 'text-white neon-accent'}`}>{t.title}</h1>
         <p className={`text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] mt-2 leading-relaxed ${isSunlightMode ? 'text-slate-500' : 'text-sky-400'}`}>{t.subtitle}</p>
       </header>
 
-      <main className="flex-grow w-full max-w-4xl mx-auto space-y-8 px-0 sm:px-4">
+      <main className="flex-grow w-full max-w-4xl mx-auto space-y-8 px-0 sm:px-4 main-app-container">
         {activeTab === 'create' && (
           <div className="page-transition space-y-8 w-full animate-in fade-in duration-500">
             <nav className={`glass-ui p-1.5 rounded-2xl flex gap-1 w-full overflow-hidden shadow-2xl ${isSunlightMode ? 'bg-slate-100 !border-slate-300' : ''}`}>
@@ -829,7 +864,7 @@ const App: React.FC = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full pt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full pt-4 library-grid-spacer">
               {filteredSubjects.length > 0 ? filteredSubjects.map((s) => (
                 <div key={s.id} className="library-item-card p-8 group relative overflow-hidden">
                   <div className="absolute top-4 left-4"><span className="prompt-id-badge">#{s.id}</span></div>
