@@ -39,6 +39,118 @@ export const LANGUAGES = [
 
 export const ASPECT_RATIOS = ['1:1', '9:16', '16:9', '4:5', '2:3'];
 
+// مصفوفة الأوصاف الحقيقية والمشاهد التخصصية (The Human-Action Matrix)
+const ACTION_MATRICES: any = {
+  'طب': [
+    'طبيب يجري عملية جراحية دقيقة بمساعدة الروبوت',
+    'طبيبة تفحص مريضاً في عيادة حديثة متطورة',
+    'سيارة إسعاف تنطلق في شوارع نيون مستقبلية',
+    'مختبر تحاليل طبية بتقنية النانو لعام 2026',
+    'طبيب أسنان يعالج مريضاً باستخدام تقنية الليزر',
+    'غرفة عناية مركزة مجهزة بأجهزة تنفس رقمية',
+    'صيدلي يجهز وصفة دواء في صيدلية ذكية',
+    'جراح قلب يراقب شاشات مراقبة العمليات الحيوية',
+    'فحص أشعة رنين مغناطيسي بدقة 8K',
+    'ممرضة تقدم الرعاية لمريض في جناح ملكي'
+  ],
+  'طفل': [
+    'طفل يلعب في حديقة خضراء واسعة تحت الشمس',
+    'طفلة تدرس بتركيز عالٍ أمام حاسوب شفاف',
+    'أطفال يرسمون لوحة فنية عملاقة على الجدار',
+    'طفل يركب دراجة هوائية في مضمار حديث',
+    'طفلة تأكل وجبة صحية بابتسامة مشرقة',
+    'أطفال في مدرسة مستقبلية يتعلمون بالواقع المعزز',
+    'طفل نائم بسلام في غرفة نوم بتصميم سحابي',
+    'طفلة تلعب مع قطة في غرفة مشمسة',
+    'أطفال في رحلة تخييم يشاهدون النجوم',
+    'طفل عبقري يفكك روبوتاً صغيراً بذكاء'
+  ],
+  'إنفوجرافيك': [
+    'مخطط انسيابي لنمو شركات الذكاء الاصطناعي 2026',
+    'إحصائيات استهلاك الطاقة المتجددة في العالم',
+    'رسم بياني ثلاثي الأبعاد لتحليل البيانات الضخمة',
+    'إنفوجرافيك تعليمي عن دورة حياة المجرات',
+    'تصميم مقارنة تقنية بين الهواتف الرائدة',
+    'خريطة تفاعلية لتوزيع الثروات الرقمية',
+    'مخطط هيكلي لمؤسسة عالمية بأسلوب المينيماليزم',
+    'رسوم بيانية طبية توضح كفاءة اللقاحات الحديثة',
+    'تصميم توضيحي لرحلة العميل في المتاجر الذكية'
+  ],
+  'شخص في السماء': [
+    'رائد فضاء يسبح بين سدم المجرات البعيدة',
+    'شخص يمشي على السحاب وقت الغروب الذهبي',
+    'ملاك طائر بأجنحة نورانية في سماء أسطورية',
+    'مغامر يقفز بالمظلة من قمة برج نيون',
+    'شخص يتأمل الكون من نافذة محطة فضائية',
+    'كيان نوري يتشكل وسط السحب الرعدية',
+    'شخص يطير في سماء خيالية مليئة بالجزر الطائرة'
+  ],
+  'تصميم 2026': [
+    'هيكل معماري سائل يتفاعل مع الضوء المحيط',
+    'تصميم سيارة طائرة بانسيابية فائقة لعام 2026',
+    'أزياء رقمية تتغير ألوانها حسب الحالة النفسية',
+    'أثاث منزلي مطبوع ثلاثي الأبعاد بتصميم عضوي',
+    'واجهة مستخدم ثلاثية الأبعاد تطفو في الهواء',
+    'منتج تكنولوجي بتغليف من مادة الكروم السائل',
+    'ديكور داخلي يدمج الطبيعة الحية مع التكنولوجيا'
+  ],
+  'فلاحة': [
+    'فلاح يحرث الأرض بجرار كهربائي ذاتي القيادة',
+    'حصاد محاصيل القمح في سهول شاسعة وقت الفجر',
+    'نظام ري ذكي يعتمد على الذكاء الاصطناعي',
+    'فلاحة تعتني بشتلات الزهور في مشتل زجاجي',
+    'جني ثمار الزيتون في مزارع جبلية عريقة',
+    'بيوت محمية ذكية لزراعة الفواكه الاستوائية',
+    'فلاح يراقب نمو المحاصيل عبر جهاز لوحي'
+  ],
+  'تسويق': [
+    'حملة إعلانية لمنتج فاخر في شوارع طوكيو',
+    'تصميم بوستر سينمائي لفيلم أكشن عالمي',
+    'واجهة متجر إلكتروني جذابة بأسلوب عصري',
+    'عرض تقديمي لعلامة تجارية بأسلوب النيون',
+    'تصميم غلاف مجلة عالمية للأعمال والتجارة',
+    'شعار احترافي يجسد القوة والابتكار'
+  ]
+};
+
+// الأفعال والمواضيع العامة للأقسام غير المحددة
+const GENERAL_ACTIONS = [
+  'يقوم بالعمل ببراعة', 'في بيئة عمل احترافية', 'يستخدم أحدث التقنيات', 'بتصميم فريد ومبتكر',
+  'في مشهد سينمائي مهيب', 'بتفاصيل بصرية مذهلة', 'بأسلوب فني معاصر', 'يجسد الإبداع والجمال',
+  'في لحظة تاريخية خالدة', 'بتقنية تصوير فائقة الدقة'
+];
+
+export const NEURAL_FACTORY_ASSETS = {
+  styles: [
+    'Hyper-realistic 8K Cinema 4D', 'Surrealist Dreamscapes v2026', 'Professional Infographic Vector', 
+    'Cinematic Street Photography', 'Minimalist UI/UX Design', 'Epic Fantasy Oil Painting', 
+    'Quantum Render Engine v2', 'Abstract Expressionism 2026', 'Magical Realism Style', 
+    'Advanced Blueprint Engineering', 'Cyberpunk Neon Aesthetic', 'Royal Islamic Calligraphy',
+    '3D Isometric Illustration', 'Studio Ghibli Anime Aesthetic', 'Vogue Editorial Style',
+    'Macro Photography Texture', 'Glassmorphism Digital Art'
+  ],
+  techs: [
+    'Octane Render, Raytraced shadows', 'Unreal Engine 5.4, Lumen Lighting', 'Sub-atomic texture detail, f/1.4', 
+    'Global Illumination, 32k resolution', 'Deep Neural Texturing v3', 'Holographic Projection mapping', 
+    'Quantum Post-processing', 'Anamorphic lens flares, raw photo', 'Physically Based Rendering (PBR)',
+    'Dynamic fluid simulation', 'Particle system cloud rendering'
+  ],
+  moods: [
+    'Prestigious & Authoritative', 'Ethereal & Spiritual', 'Energetic Viral Hook', 
+    'Calm Zen Serenity', 'Dramatic Suspense Noir', 'Futuristic Innovation', 
+    'Joyful Childlike Wonder', 'Luxury High-end Corporate', 'Melancholic Cinematic Depth',
+    'Vibrant Neon Glow', 'Sophisticated Minimalist'
+  ],
+  categorySpecifics: {
+    'إنفوجرافيك': 'Clear data flow diagrams, futuristic UI elements, flat color palettes, corporate font styling, vector clarity',
+    'شخص في السماء': 'Celestial walking, cloud textures, divine sun rays, ethereal wings, gravity-defying pose, majestic atmosphere',
+    'تصميم 2026': 'Post-modern digital structures, bio-morphic shapes, iridescent liquid metal textures, quantum light refraction',
+    'مواقع التواصل': 'High engagement visual, eye-catching thumbnail style, social media optimized composition, trending influencer aesthetic',
+    'تسويق': 'Product-focused dramatic lighting, brand identity integration, professional commercial photography, persuasive visual story',
+    'طب': 'Sterile clinical aesthetic, high-tech diagnostic HUD, molecular visualization, professional medical empathy'
+  }
+};
+
 export const SEED_DATA = {
   subjects: [
     { ar: 'فني إصلاح مذربورد هواتف محترف', en: 'Professional smartphone motherboard repair, microscope soldering, electronic components', cat: 'صيانة' },
@@ -50,48 +162,7 @@ export const SEED_DATA = {
     { ar: 'شيف حلويات يزين كعكة فنية', en: 'Pastry chef decorating an artistic cake, gourmet kitchen, sharp focus', cat: 'فن' },
     { ar: 'فني تركيب أنظمة طاقة شمسية', en: 'Solar energy system installer on rooftop, professional gear, sunny day', cat: 'بناء' },
     { ar: 'مصمم جرافيك واجهات مستخدم', en: 'UI/UX Graphic designer, creative workspace, multiple monitors, neon blue light', cat: 'تقنية' },
-    { ar: 'طبيب أسنان في عيادة مودرن', en: 'Dentist in modern clinic, high-end dental chair, medical aesthetic', cat: 'طب' },
-    { ar: 'مهندس معماري يراجع مخططات 3D', en: 'Architect reviewing 3D blueprints, minimalist office, scale models', cat: 'هندسة' },
-    { ar: 'صانع محتوى ألعاب (Pro Gamer)', en: 'Professional gaming streamer, RGB lighting, high-tech setup, energetic', cat: 'ترفيه' },
-    { ar: 'خبير تسويق رقمي وإعلانات', en: 'Digital marketing expert, analytics dashboard, creative agency vibe', cat: 'بزنس' },
-    { ar: 'محاسب قانوني في شركة كبرى', en: 'Certified accountant, corporate office, financial documents, professional', cat: 'بزنس' },
-    { ar: 'نجار حرفي في ورشة خشبية', en: 'Master carpenter, woodworking workshop, sawdust, warm lighting', cat: 'حرف' },
-    { ar: 'فني لحام معادن تحت الماء', en: 'Underwater welder, professional diving gear, sparks in deep blue water', cat: 'صيانة' },
-    { ar: 'مصممة أزياء وفساتين سهرة', en: 'Fashion designer, atelier studio, mannequins, luxury silk fabrics', cat: 'فن' },
-    { ar: 'خبير تداول عملات رقمية (Crypto)', en: 'Crypto trader, multiple screens with charts, dark tech room', cat: 'تقنية' },
-    { ar: 'مدرب لياقة بدنية (Personal Trainer)', en: 'Fitness trainer in luxury gym, motivational atmosphere, sharp focus', cat: 'خدمات' },
-    { ar: 'محلل بيانات وذكاء اصطناعي', en: 'AI Data Scientist, neural network visuals, holographic code', cat: 'تقنية' },
-    { ar: 'خبير سيو (SEO Specialist)', en: 'SEO expert, Google search ranking visuals, data-driven workspace', cat: 'تجارة' },
-    { ar: 'صانع بودكاست في استوديو معزول', en: 'Podcast host, professional mic, acoustic foam, moody warm light', cat: 'محتوى' },
-    { ar: 'مطور تطبيقات موبايل Full-Stack', en: 'Full-stack mobile dev, writing code, coffee on desk, tech aesthetic', cat: 'تقنية' },
-    { ar: 'صيدلي في صيدلية ذكية', en: 'Pharmacist in modern smart pharmacy, clean white lighting, organized', cat: 'طب' },
-    { ar: 'مستشار عقاري فاخر', en: 'Luxury real estate consultant, penthouse view, high-end suit', cat: 'بزنس' },
-    { ar: 'خبير أدلة جنائية (Forensics)', en: 'Forensic investigator, crime lab, scientific tools, dramatic light', cat: 'قانون' },
-    { ar: 'مدرس خصوصي أونلاين', en: 'Online private tutor, digital whiteboard, interactive learning', cat: 'تعليم' },
-    { ar: 'فني ميكانيك سيارات سوبركار', en: 'Supercar mechanic, luxury garage, engine tuning, high-end tools', cat: 'صيانة' },
-    { ar: 'خبير عطور وبخور ملكي', en: 'Luxury perfumer, scent lab, glass bottles, smoke of bukhoor', cat: 'حرف' },
-    { ar: 'مخرج أفلام سينمائية', en: 'Film director, camera rig, movie set, professional lighting', cat: 'فن' },
-    { ar: 'مديرة صالون تجميل VIP', en: 'VIP beauty salon manager, gold and marble interior, luxury vibe', cat: 'خدمات' },
-    { ar: 'باحث في العلوم الإسلامية', en: 'Islamic scholar, desk full of old books, sunlight, scholarly', cat: 'تعليم' },
-    { ar: 'فني كهرباء منازل ذكية', en: 'Smart home electrician, installing control panels, modern tech', cat: 'صيانة' },
-    { ar: 'ميكب آرتست مشاهير', en: 'Celebrity makeup artist, vanity ring light, cosmetics kit', cat: 'فن' },
-    { ar: 'خبير شحن ولوجستيك عالمي', en: 'Global logistics expert, shipping port background, containers', cat: 'بزنس' },
-    { ar: 'مصور فوتوغرافي محترف', en: 'Professional photographer, high-end camera, studio setup', cat: 'فن' },
-    { ar: 'محرر فيديوهات سينمائي', en: 'Cinematic video editor, dark room, pro editing software', cat: 'محتوى' },
-    { ar: 'سباك أنظمة حديثة', en: 'Modern plumbing specialist, industrial tools, water systems', cat: 'حرف' },
-    { ar: 'خياط رجالي كلاسيكي', en: 'Classic bespoke tailor, measuring suit, traditional workshop', cat: 'حرف' },
-    { ar: 'منظم حفلات ومناسبات', en: 'Event planner, floral arrangements, luxury ballroom interior', cat: 'خدمات' },
-    { ar: 'مترجم فوري في مؤتمر دولي', en: 'Simultaneous translator, headset, international booth, formal', cat: 'خدمات' },
-    { ar: 'خبير دروب شيبنج وأمازون', en: 'Dropshipping expert, managing online store, digital products', cat: 'تجارة' },
-    { ar: 'فني سباكة غاز وتدفئة', en: 'Heating and gas technician, industrial pipes, technical gear', cat: 'صيانة' },
-    { ar: 'خبير أحجار كريمة وألماس', en: 'Gemologist, inspecting diamond, loupe, sparkling jewels', cat: 'حرف' },
-    { ar: 'مربي خيول عربية أصيلة', en: 'Arabian horse trainer, stables, sunrise, dust particles', cat: 'حرف' },
-    { ar: 'مدير مشاريع إنشائية', en: 'Construction project manager, safety helmet, site map', cat: 'بناء' },
-    { ar: 'طبيب بيطري לحيوانات أليفة', en: 'Veterinarian, animal clinic, caring for a kitten, soft light', cat: 'طب' },
-    { ar: 'خبير ذكاء أعمال (BI)', en: 'Business Intelligence analyst, data charts, corporate office', cat: 'بزنس' },
-    { ar: 'صانع محتوى تيك توك ترند', en: 'TikTok influencer, viral challenge, ring light, colorful room', cat: 'ترفيه' },
-    { ar: 'خبير تغذية علاجية', en: 'Dietitian, office, organic food visuals, health focus', cat: 'طب' },
-    { ar: 'أخصائي علم نفس إكلينيكي', en: 'Clinical psychologist, cozy office, therapy session vibe', cat: 'طب' }
+    { ar: 'طبيب أسنان في عيادة مودرن', en: 'Dentist in modern clinic, high-end dental chair, medical aesthetic', cat: 'طب' }
   ],
   styles: [
     { ar: 'واقعية فوتوغرافية (Clean)', en: 'Ultra-realistic high-definition photography, sharp focus, natural textures' },
@@ -101,223 +172,20 @@ export const SEED_DATA = {
   backgrounds: [
     { ar: 'بدون (يدوي)', en: 'None/Manual: No specific background, follow manual subject input only' },
     { ar: 'مختبر إصلاح ميكروسكوبي للهواتف', en: 'High-tech smartphone repair lab, microscopic soldering station, precision tools' },
-    { ar: 'معرض بيع هواتف ذكية Premium', en: 'Luxury smartphone showroom, minimalist glass displays, Apple-style interior' },
-    { ar: 'متجر إكسسوارات هواتف عصرية', en: 'Trendy mobile accessories wall, colorful cases, aesthetic shelf lighting' },
-    { ar: 'مستودع تجارة إلكترونية ذكي', en: 'Modern e-commerce warehouse, tech gadgets inventory, organized shelving' },
-    { ar: 'مكتب تسويق رقمي وإعلانات', en: 'Digital marketing agency office, creative mood board, sleek monitors' },
-    { ar: 'غرفة اجتماعات شركات عالمية', en: 'Corporate boardroom, glass walls, city skyline view, professional' },
-    { ar: 'استوديو تصوير إعلانات تجارية', en: 'Commercial photography studio, professional lighting, infinity wall' },
-    { ar: 'مسرح كوميدي (Stand-up)', en: 'Stand-up comedy stage, spotlight on brick wall, vibrant microphone' },
-    { ar: 'استوديو تصوير فيديوهات ضحك', en: 'Funny video creator studio, colorful props, ring light, bright' },
-    { ar: 'غرفة جيمنج RGB احترافية', en: 'Pro gaming room, neon RGB lights, multiple screens, tech aesthetic' },
-    { ar: 'مركز بيانات وسيرفرات عملاق', en: 'Massive data center, rows of glowing server racks, futuristic blue lighting' },
-    { ar: 'غرفة تحكم أمن سيبراني نيون', en: 'Cybersecurity control room, holographic displays, neon interface, dark tech' },
-    { ar: 'مكتب هندسة برمجيات مودرن', en: 'Modern software engineering office, open space, collaborative tech vibe' },
-    { ar: 'مختبر أبحاث ذكاء اصطناعي', en: 'AI research lab, neural network visualizations, high-speed workstations' },
-    { ar: 'ستوديو تطوير تطبيقات موبايل', en: 'Mobile app development studio, creative devices, UX wireboards' },
-    { ar: 'غرفة عمليات جراحية رقمية', en: 'Digital operating room, robotic surgery tools, 8k medical monitors' },
-    { ar: 'عيادة تشخيص ذكية (AI Clinic)', en: 'AI-integrated diagnostic clinic, clean white aesthetic, medical holograms' },
-    { ar: 'مركز أشعة وتحليل متطور', en: 'Advanced radiology center, MRI machines, professional medical lighting' },
-    { ar: 'صيدلية مستقبلية أوتوماتيكية', en: 'Futuristic automated pharmacy, robotic dispensing, organized medical bins' },
-    { ar: 'مختبر جينات وبيولوجيا', en: 'Genetics and biology lab, DNA sequencers, sterile scientific environment' },
-    { ar: 'قاعة محكمة تاريخية مهيبة', en: 'Majestic historic courtroom, dark wood, prestigious legal atmosphere' },
-    { ar: 'مكتب محاماة يطل على ناطحات سحاب', en: 'Law office with skyscraper view, luxury interior, professional success' },
-    { ar: 'مكتبة قانونية كلاسيكية', en: 'Classical legal library, floor-to-ceiling bookshelves, warm academic light' },
-    { ar: 'مركز تحكيم دولي فاخر', en: 'Luxury international arbitration center, formal diplomatic setting' },
-    { ar: 'غرفة تحقيقات جنائية (Noir)', en: 'Criminal investigation room, dramatic lighting, evidence board, moody' },
-    { ar: 'مسجد بتصميم معماري حديث', en: 'Modern mosque interior, sunlight through geometric domes, spiritual' },
-    { ar: 'مكتبة إسلامية كبرى عريقة', en: 'Grand historic Islamic library, ancient manuscripts, scholarly peace' },
-    { ar: 'ساحة صلاة مفتوحة وقت الفجر', en: 'Open prayer courtyard at dawn, ethereal mist, soft blue light' },
-    { ar: 'محراب صلاة مزخرف (Art)', en: 'Ornate prayer niche, intricate calligraphy, soft candlelight' },
-    { ar: 'مركز تحفيظ قرآن عصري', en: 'Modern Quran memorization center, bright educational atmosphere' },
-    { ar: 'صالون تجميل VIP ملكي', en: 'Royal VIP beauty salon, gold and marble, luxury pampering' },
-    { ar: 'استوديو مكياج احترافي كامل', en: 'Professional makeup studio, ring lights, mirror reflections, glam' },
-    { ar: 'منتجع سبا واستجمام طبيعي', en: 'Natural spa and wellness resort, wood and water elements, relaxing' },
-    { ar: 'متجر عطور وبخور فاخر', en: 'Luxury perfume boutique, smoky bukhoor, elegant glass displays' },
-    { ar: 'كافيه Aesthetic وردي', en: 'Aesthetic pink cafe, floral walls, trendy social media spot' },
-    { ar: 'مدرسة ذكية للأطفال (Fun)', en: 'Fun smart school for kids, colorful interactive walls, joyful' },
-    { ar: 'ملاهي أطفال خيالية (Fantasy)', en: 'Fantasy theme park for kids, magical castles, vibrant sparks' },
-    { ar: 'غرفة ألعاب تعليمية مونتيسوري', en: 'Montessori educational playroom, natural toys, bright and clean' },
-    { ar: 'حديقة أطفال مشمسة', en: 'Sunny kids playground, green grass, safe colorful equipment' },
-    { ar: 'مخيم كشافة تحت النجوم', en: 'Scout camp under stars, campfire, night sky, adventurous' },
-    { ar: 'مطبخ شيف عالمي (Gourmet)', en: 'Gourmet professional kitchen, stainless steel, artistic food plating' },
-    { ar: 'مطعم تحت الماء (Luxury)', en: 'Luxury underwater restaurant, blue ocean view, coral reef' },
-    { ar: 'ركن قهوة مختصة بارنيستا', en: 'Specialty coffee bar, industrial rustic style, professional espresso machines' },
-    { ar: 'مخبز يدوي دافئ (Artisan)', en: 'Artisan bakery, fresh bread, golden oven lighting, cozy' },
-    { ar: 'سوق شعبي قديم (Heritage)', en: 'Traditional heritage market, vibrant spices, lanterns, cultural' },
-    { ar: 'شارع طوكيو نيوني ليلاً', en: 'Tokyo neon street at night, cyberpunk vibes, rain reflections' },
-    { ar: 'ساحة تزلج حضرية (Skate)', en: 'Urban skate park, graffiti art, youthful energy, sunset' },
-    { ar: 'سطح بناية ناطحة سحاب (Roof)', en: 'Skyscraper rooftop, infinity pool, city lights at night' },
-    { ar: 'محطة قطار مستقبلية (Sci-Fi)', en: 'Futuristic train station, sleek silver designs, high-tech' },
-    { ar: 'شارع أوروبي كلاسيكي مطر', en: 'Classic European street in rain, cobblestones, warm shop lights' },
-    { ar: 'غرفة فلوج (Vlog) احترافية', en: 'Professional vlog studio, acoustic foam, colorful LED background' },
-    { ar: 'استوديو بودكاست مودرن', en: 'Modern podcast studio, high-end microphones, warm orange light' },
-    { ar: 'غرفة جيمنج RGB متكاملة', en: 'Ultimate RGB gaming room, multiple curved monitors, neon tech' },
-    { ar: 'موقع تصوير سينمائي (Set)', en: 'Cinema film set, cameras, lighting rigs, professional drama' },
-    { ar: 'خلفية ستريمر يوتيوبر', en: 'YouTuber streamer background, shelf with tech toys, ring light' },
-    { ar: 'ورشة نجارة يدوية (Master)', en: 'Master woodworking workshop, wood shavings, vintage hand tools' },
-    { ar: 'مصنع تصنيع سيارات ذكي', en: 'Smart car assembly factory, robotic arms, high-tech industrial' },
-    { ar: 'ورشة صيانة طائرات هنجر', en: 'Aircraft maintenance hangar, jet engines, professional scale' },
-    { ar: 'موقع بناء ضخم (Aerial)', en: 'Massive construction site aerial, cranes, steel structures' },
-    { ar: 'ورشة ميكانيك سيارات فارهة', en: 'Luxury car mechanic shop, supercars on lifts, pristine floor' },
-    { ar: 'مكتب عقارات فاخر مودرن', en: 'Modern luxury real estate office, property models, elegant view' },
-    { ar: 'بورصة تداول (Trading Floor)', en: 'Live trading floor, stock charts, high-energy business' },
-    { ar: 'معرض سيارات كلاسيكية', en: 'Classic car showroom, polished chrome, museum quality lighting' },
-    { ar: 'متجر ملابس براند عالمي', en: 'Global brand fashion store, minimalist displays, high-end' },
-    { ar: 'مركز تسوق (Mall) عصري', en: 'Modern shopping mall interior, glass elevators, bright lights' },
-    { ar: 'طائرة خاصة من الداخل (Jet)', en: 'Private jet interior, luxury leather seats, sunset window view' },
-    { ar: 'يخت فاخر في عرض البحر', en: 'Luxury yacht deck, deep blue ocean, sunny clear sky' },
-    { ar: 'قصر ملكي بحدائق غناء', en: 'Royal palace with lush gardens, fountains, architectural majesty' },
-    { ar: 'جناح فندقي 7 نجوم', en: '7-star hotel suite, premium amenities, panoramic city view' },
-    { ar: 'نادي غولف أخضر شاسع', en: 'Vast green golf club, elite sports atmosphere, perfect grass' },
-    { ar: 'غابة استوائية ضبابية', en: 'Mist-covered tropical jungle, sunbeams through trees, exotic' },
-    { ar: 'قمة جبل ثلجي (Epic)', en: 'Epic snowy mountain peak, blue sky, wide winter landscape' },
-    { ar: 'صحراء رملية وقت الغروب', en: 'Sand desert at sunset, golden dunes, dramatic shadows' },
-    { ar: 'شلال مياه وسط طبيعة', en: 'Nature waterfall, lush greenery, refreshing misty atmosphere' },
-    { ar: 'شاطئ استوائي مياه فيروزية', en: 'Tropical beach, turquoise water, white sand, palm trees' },
-    { ar: 'فضاء خارجي وسديم كوني', en: 'Deep space nebula, cosmic dust, stars, cinematic scale' },
-    { ar: 'محطة فضاء مستقبلية (Interior)', en: 'Futuristic space station interior, sci-fi window to Earth' },
-    { ar: 'سطح كوكب مريخ أحمر', en: 'Red Mars planet surface, rocky terrain, dust storms' },
-    { ar: 'بوابة زمن هولوجرافية', en: 'Holographic time portal, glowing light, futuristic mystery' },
-    { ar: 'مدينة سايبربانك 2077', en: 'Cyberpunk city style, neon rain, flying cars, dark future' },
-    { ar: 'متحف فنون حديثة (Gallery)', en: 'Modern art gallery, white walls, abstract sculptures' },
-    { ar: 'استوديو فن تشكيلي ورشة', en: 'Artist painting studio, paint splatters, creative chaos' },
-    { ar: 'مكتبة Dark Academia قديمة', en: 'Old Dark Academia library, candles, mysterious books' },
-    { ar: 'قاعة رقص باليه كلاسيك', en: 'Classic ballet dance hall, mirrors, wooden floor, soft light' },
-    { ar: 'مسرح موسيقى أوبرا مهيب', en: 'Grand opera music theater, red velvet, gold ornaments' },
-    { ar: 'مختبر عطور وبخور ملكي', en: 'Luxury perfume and bukhoor lab, glass flasks, smoke' },
-    { ar: 'محل لبيع أدوات الصيد', en: 'Fishing gear shop, wooden theme, outdoor equipment' },
-    { ar: 'متجر بيع نباتات داخلية', en: 'Indoor plant shop, jungle vibes, glass ceiling' },
-    { ar: 'محل لبيع سجاد يدوي عتيق', en: 'Antique handmade rug gallery, vibrant patterns' },
-    { ar: 'متجر بيع آلات موسيقية', en: 'Musical instrument shop, wall of guitars, piano' },
-    { ar: 'مدرج تخرج جامعي احتفالي', en: 'Ceremonial university graduation hall, balloons, caps' },
-    { ar: 'مكتبة دراسة هادئة مودرن', en: 'Quiet modern study library, laptops, coffee, student vibe' },
-    { ar: 'فصل دراسي ذكي (Smart)', en: 'Smart classroom, digital whiteboard, interactive tablets' },
-    { ar: 'مختبر لغات وترجمة', en: 'Language and translation lab, headsets, linguistic tech' },
-    { ar: 'حرم جامعي (Campus) شاسع', en: 'Grand university campus, historic buildings, green parks' },
-    { ar: 'زاوية قراءة دافئة (Nook)', en: 'Cozy reading nook, window seat, rainy weather outside' },
-    { ar: 'خلفية تيك توك ترند (Abstract)', en: 'Abstract colorful TikTok trend background, dynamic shapes' },
-    { ar: 'منطقة استلام شحن ولوجستيك', en: 'Logistics pickup zone, boxes, barcode scanners, fast' },
-    { ar: 'مخيم بري فاخر (Camping)', en: 'Luxury desert camp, fire pit, stars, traditional rugs' },
-    { ar: 'واجهة متجر أبل (Minimal)', en: 'Minimalist Apple-style storefront, large glass, bright' },
-    { ar: 'غرفة خياطة وتصميم أزياء', en: 'Fashion design and sewing room, silk rolls, mannequins' }
+    { ar: 'معرض بيع هواتف ذكية Premium', en: 'Luxury smartphone showroom, minimalist glass displays, Apple-style interior' }
   ],
   moods: [
     { ar: 'بدون (يدوي)', en: 'None/Manual: No preset mood, follow manual subject input only' },
     { ar: 'جذب انتباه تسويقي (Hook)', en: 'High-energy marketing hook, vibrant colors, bold lighting' },
-    { ar: 'إثارة بصرية (Viral)', en: 'Viral-ready visual impact, attention-grabbing, high contrast' },
-    { ar: 'فخامة مؤسسية (Corporate)', en: 'Prestige corporate mood, trustworthy, clean professional' },
-    { ar: 'بساطة عصرية (Minimal)', en: 'Minimalist clean aesthetic, Apple-style, spacious' },
-    { ar: 'دراما سينمائية (Movie)', en: 'Cinematic drama, high-key lighting, intense atmosphere' },
-    { ar: 'كوميديا وضحك (Funny)', en: 'Hilarious comedy mood, exaggerated expressions, bright pop' },
-    { ar: 'طاقة كوميدية صاخبة', en: 'Energetic funny vibe, playful composition, colorful' },
-    { ar: 'سخرية وذكاء (Witty)', en: 'Smart witty mood, subtle humor, clever lighting' },
-    { ar: 'روحانية هادئة (Peace)', en: 'Serene spiritual peace, soft golden light, divine' },
-    { ar: 'قدسية وخشوع (Reverent)', en: 'Reverent spiritual mood, holy atmosphere, ethereal beams' },
-    { ar: 'هيبة ووقار إسلامي', en: 'Dignified Islamic prestige, balanced, respectful' },
-    { ar: 'دفء عائلي (Homey)', en: 'Warm family atmosphere, cozy, inviting sunlight' },
-    { ar: 'سحر وخيال للأطفال', en: 'Magical whimsical fantasy, sparkling particles, dreamy' },
-    { ar: 'عالم كرتوني مرح', en: 'Playful cartoon aesthetic, bold outlines, saturated' },
-    { ar: 'بهجة وااحتفال للأطفال', en: 'Kids celebration joy, confetti, bright happy colors' },
-    { ar: 'أناقة أنثوية (Chic)', en: 'Chic feminine elegance, soft lighting, sophisticated' },
-    { ar: 'لطافة (Kawaii/Cute)', en: 'Super cute aesthetic, pastel tones, adorable vibe' },
-    { ar: 'جمالية ماتش (Trendy)', en: 'Trendy social media aesthetic, color-coordinated' },
-    { ar: 'طاقة شبابية (Dynamic)', en: 'Fast-paced youth energy, dynamic movement, bold' },
-    { ar: 'غموض Noir (Suspense)', en: 'Suspenseful film noir, long shadows, mysterious' },
-    { ar: 'واقعية حرفية خشنة', en: 'Gritty industrial realism, high texture, raw energy' },
-    { ar: 'دقة متناهية (Precision)', en: 'Ultra-precise technical focus, clinical, sharp' },
-    { ar: 'ذكاء اصطناعي مستقبلي', en: 'Futuristic AI intelligence, cyber blue glow, sharp' },
-    { ar: 'ألوان الباستيل الهادئة', en: 'Gentle pastel palette, calming, aesthetic' },
-    { ar: 'حنين للماضي (Nostalgic)', en: 'Nostalgic warm memories, 90s film aesthetic, soft' },
-    { ar: 'قوة وسيطرة (Epic)', en: 'Dominant powerful atmosphere, epic scale, bold shadows' },
-    { ar: 'أصالة تراثية (Antique)', en: 'Authentic antique heritage, warm historic light' },
-    { ar: 'إبدع فني (Artistic)', en: 'Abstract artistic expression, creative lighting, unique' },
-    { ar: 'شروق متفائل (Hope)', en: 'Optimistic sunrise glow, fresh start, long shadows' },
-    { ar: 'هدوء الطبيعة (Zen)', en: 'Zen nature serenity, morning mist, grounded' },
-    { ar: 'إضاءة سينمائية خافتة', en: 'Moody low-key cinematic lighting, dramatic highlights' },
-    { ar: 'ثقة ومصداقية (Expert)', en: 'Expert authority mood, reliable and sharp' },
-    { ar: 'غموض وتشويق (Mystery)', en: 'Intriguing mystery, hidden details, moody' },
-    { ar: 'أناقة كلاسيكية (Timeless)', en: 'Timeless luxury elegance, sophisticated' },
-    { ar: 'طابع ريفي (Rustic)', en: 'Handmade rustic charm, natural wood, earthy' },
-    { ar: 'ابتكار تقني (Innovation)', en: 'Forward-thinking innovation, blueprints style' },
-    { ar: 'روح المغامرة (Explorer)', en: 'Adventurous explorer spirit, wide horizons' },
-    { ar: 'توازن هندسي (Symmetry)', en: 'Perfectly balanced symmetry, ordered, calm' },
-    { ar: 'إثارة (High Octane)', en: 'High energy excitement, fast motion, intense' },
-    { ar: 'نظافة مخبرية (Pure)', en: 'Pure sterile clean mood, bright white' },
-    { ar: 'عفوية (Candid)', en: 'Natural candid moment, authentic, unposed' },
-    { ar: 'برودة الشتاء (Crisp)', en: 'Crisp winter aesthetic, blue and silver tones' },
-    { ar: 'حرارة الصيف (Sunkissed)', en: 'Sunkissed summer energy, high contrast' },
-    { ar: 'فخامة هادئة (Quiet)', en: 'Subtle quiet luxury, minimal wealth, texture' },
-    { ar: 'لعب ومرح (Playful)', en: 'Playful energy, bouncy shapes' },
-    { ar: 'قصصي (Storytelling)', en: 'Rich storytelling mood, character-driven detail' },
-    { ar: 'طابع السايبربانك (Neon)', en: 'Cyberpunk neon night, teal and pink, rainy' },
-    { ar: 'جدية رسمية (Formal)', en: 'Strict formal seriousness, neutral and professional' },
-    { ar: 'تفاؤل وإشراق (Sunny)', en: 'Bright sunny optimism, cheerful and open' },
-    { ar: 'تواضع وبساطة (Humble)', en: 'Humble simple mood, authentic and grounded' },
-    { ar: 'هيبة ملكية (Royal)', en: 'Royal prestige, gold and velvet aesthetic' },
-    { ar: 'ذكاء حاد (Sharp)', en: 'Sharp intellectual mood, cold lighting, focus' },
-    { ar: 'لطافة طفولية (Soft)', en: 'Soft childlike innocence, warm and gentle' },
-    { ar: 'رعب وتشويق (Spooky)', en: 'Spooky suspenseful atmosphere, dark shadows' },
-    { ar: 'تحفيز وقوة (Inspiration)', en: 'Inspirational powerful mood, motivational' },
-    { ar: 'هدوء ما قبل العاصفة', en: 'Calm before the storm, tense atmospheric mood' },
-    { ar: 'أناقة أولد ماني', en: 'Old money aesthetic, timeless luxury, class' },
-    { ar: 'طابع فضاء (Galactic)', en: 'Galactic cosmic mood, mysterious and vast' },
-    { ar: 'حيوية (Vibrant)', en: 'Vibrant and alive, full of color and light' },
-    { ar: 'تركيز فني (Focus)', en: 'Artistic focused mood, depth of field effect' },
-    { ar: 'طابع شعبي (Traditional)', en: 'Traditional folk mood, cultural and warm' },
-    { ar: 'غموض غابة (Wild)', en: 'Untamed wild mood, natural and intense' },
-    { ar: 'أناقة عصرية (Sleek)', en: 'Sleek modern polish, reflective and clean' },
-    { ar: 'فرح غامر (Euphoric)', en: 'Euphoric joyful mood, bright and energetic' },
-    { ar: 'حكمة ووقار (Wise)', en: 'Wise and scholarly mood, warm wooden tones' },
-    { ar: 'طابع رياضي (Athletic)', en: 'Athletic determined mood, high sweat, action' },
-    { ar: 'براءة (Innocent)', en: 'Innocent and pure mood, soft lighting' },
-    { ar: 'غموض سري', en: 'Top secret mysterious mood, hidden, tech' },
-    { ar: 'إشراق إيماني (Glow)', en: 'Radiant spiritual glow, heavenly light' },
-    { ar: 'طاقة مبيعات (Sales)', en: 'Aggressive sales energy, bold and loud' },
-    { ar: 'هدوء ليلي (Midnight)', en: 'Midnight calm mood, blue and black tones' },
-    { ar: 'طابع بوهيمي', en: 'Bohemian artistic spirit, colorful, natural' },
-    { ar: 'قوة صناعية (Steel)', en: 'Hard steel industrial energy, sparks, cold' },
-    { ar: 'طابع ريترو (80s)', en: '80s retro style, synthwave colors, neon' },
-    { ar: 'رومانسي هادئة (Soft)', en: 'Soft romantic elegance, candles, warm' },
-    { ar: 'تحدي وإصرار (Grit)', en: 'Gritty determination, sweat, intensity' },
-    { ar: 'خيال واسع (Dream)', en: 'Surreal dreamlike imagination, floating' },
-    { ar: 'بساطة ريفية (Cottage)', en: 'Simple cottagecore, flowers, sunlight' },
-    { ar: 'أناقة دارك', en: 'Dark aesthetic elegance, mysterious wealth' },
-    { ar: 'حيوية تيك توك', en: 'Hyper-vibrant TikTok energy, fast cuts feel' },
-    { ar: 'هدوء سبا (Relax)', en: 'Relaxing spa mood, water, soft green' },
-    { ar: 'طابع هكر (Matrix)', en: 'Hacker matrix vibe, falling code, tech' },
-    { ar: 'فخامة رولكس', en: 'Watch boutique luxury, high precision' },
-    { ar: 'طابع كوميكس', en: 'Comic book style, bold lines, action' },
-    { ar: 'هدوء الفجر (Dawn)', en: 'Quiet dawn serenity, bluish mist' },
-    { ar: 'طاقة روك (Heavy)', en: 'Heavy rock energy, dark, dramatic' },
-    { ar: 'أناقة باريسية', en: 'Parisian chic, artistic and fashionable' },
-    { ar: 'طابع تكنو (Club)', en: 'Techno club mood, laser lights, smoke' },
-    { ar: 'وقار أزهري', en: 'Dignified scholarly religious mood' },
-    { ar: 'لطافة بيبي', en: 'Baby soft innocence, pastel blue/pink' },
-    { ar: 'خيال ديزني', en: 'Disney-like magical wonder, sparkles' },
-    { ar: 'طاقة يوتيوبر', en: 'High-energy YouTuber vibe, direct and fun' },
-    { ar: 'غموض صحراوي', en: 'Mysterious desert night, stars, sand' },
-    { ar: 'أناقة بزنس', en: 'Strict business elegance, sharp suit vibe' },
-    { ar: 'طابع ستريت', en: 'Urban street style, raw and cool' },
-    { ar: 'هدوء ريف', en: 'Quiet countryside peace, natural' },
-    { ar: 'فخامة قصر', en: 'Palatial luxury, grand and gold' },
-    { ar: 'طاقة كرنفال', en: 'Carnival joy, colorful and chaotic' },
-    { ar: 'ذكاء عبقري', en: 'Genius focus mood, complex and deep' },
-    { ar: 'جمالية لو-فاي', en: 'Lo-fi chill aesthetic, nostalgic blur' }
+    { ar: 'إثارة بصرية (Viral)', en: 'Viral-ready visual impact, attention-grabbing, high contrast' }
   ],
   technicals: [
     { ar: 'بدون (يدوي)', en: 'None/Manual: No preset structure, follow manual subject input only' },
-    { ar: 'رندر أوكتان احترافي (Octane)', en: 'Professional Octane Render, 8K resolution, physically based rendering (PBR), raytraced global illumination, volumetric lighting' },
-    { ar: 'محرك أنريل 5 (UE5)', en: 'Unreal Engine 5 style, Lumen global illumination, Nanite detail, photorealistic textures, cinematic post-processing' },
-    { ar: 'واقعية فوتوغرافية قصوى (RAW)', en: 'Hyper-realistic raw photo, f/1.8 lens, sharp focus, ISO 100, professional studio lighting, detailed pores and textures' },
-    { ar: 'سينما 4D متطور (C4D)', en: 'Advanced Cinema 4D render, glossy metallic surfaces, subsurface scattering, Redshift render style' },
-    { ar: 'تتبع أشعة مذهل (Raytrace)', en: 'Advanced Raytracing, perfect reflections, refraction, soft shadows, high dynamic range (HDR)' },
-    { ar: 'عدسة عريضة 35mm', en: 'Cinematic 35mm wide lens, natural perspective, professional depth of field (bokeh), 8k master' }
+    { ar: 'رندر أوكتان احترافي (Octane)', en: 'Professional Octane Render, 8K resolution, physically based rendering (PBR), raytraced global illumination, volumetric lighting' }
   ],
   elements: [
     { ar: 'تركيز على الوجه', en: 'Extreme close-up on face, emotional detail, sharp eyes' },
-    { ar: 'تكوين متماثل', en: 'Symmetrical composition, perfectly centered, balanced' },
-    { ar: 'قاعدة الأثلاث', en: 'Rule of thirds, dynamic placement, professional framing' }
+    { ar: 'تكوين متماثل', en: 'Symmetrical composition, perfectly centered, balanced' }
   ]
 };
 
@@ -327,113 +195,39 @@ export const MOODS = SEED_DATA.moods.map(m => m.ar);
 export const ELEMENTS = SEED_DATA.elements.map(e => e.ar);
 export const TECHNICALS = SEED_DATA.technicals.map(t => t.ar);
 
-// قاعدة بيانات الأكواد البرمجية الاحترافية
 export const PRO_CODE_DATABASE = [
-  { id: '1', title: 'هيكل تطبيق React عالمي', lang: 'JavaScript', category: 'Web', code: 'import React from "react";\nimport ReactDOM from "react-dom/client";\n\nconst App = () => (\n  <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center">\n    <h1 className="text-4xl font-black neon-pulse">DT-PRO SYSTEM ONLINE</h1>\n  </div>\n);\n\nReactDOM.createRoot(document.getElementById("root")).render(<App />);', complexity: 'Pro' },
-  { id: '2', title: 'خوارزمية تحليل البيانات AI', lang: 'Python', category: 'AI', code: 'import pandas as pd\nimport numpy as np\nfrom sklearn.ensemble import RandomForestClassifier\n\ndef analyze_intelligence(data):\n    model = RandomForestClassifier(n_estimators=100)\n    model.fit(data.X, data.y)\n    return model.predict_proba(data.test_input)', complexity: 'Expert' },
-  { id: '3', title: 'واجهة API احترافية Express', lang: 'NodeJS', category: 'Backend', code: 'const express = require("express");\nconst app = express();\n\napp.use(express.json());\napp.get("/api/v1/prompts", (req, res) => {\n  res.status(200).json({ status: "success", data: [] });\n});\n\napp.listen(3000, () => console.log("SERVER PRO READY"));', complexity: 'Pro' },
-  { id: '4', title: 'تطبيق أندرويد Kotlin أساسي', lang: 'Kotlin', category: 'Android', code: 'class MainActivity : AppCompatActivity() {\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.activity_main)\n        supportActionBar?.hide()\n    }\n}', complexity: 'Standard' },
-  { id: '5', title: 'قاعدة بيانات عالية الأداء SQL', lang: 'SQL', category: 'Database', code: 'CREATE TABLE professional_users (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    username VARCHAR(50) UNIQUE NOT NULL,\n    integrity_score INT DEFAULT 100,\n    last_login TIMESTAMP WITH TIME ZONE\n);', complexity: 'Pro' },
-  { id: '6', title: 'تصميم CSS نيون متطور', lang: 'CSS', category: 'Design', code: '.neon-elite {\n    box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);\n    border: 1px solid #38bdf8;\n    backdrop-filter: blur(12px);\n    animation: pulse 2s infinite;\n}', complexity: 'Creative' },
-  { id: '7', title: 'بوت تليجرام ذكي', lang: 'Python', category: 'Automation', code: 'from telegram import Update\nfrom telegram.ext import ApplicationBuilder, CommandHandler\n\nasync def start(update: Update, context): \n    await update.message.reply_text("Dicelion PRO Bot Online")\n\napp = ApplicationBuilder().token("YOUR_TOKEN").build()\napp.add_handler(CommandHandler("start", start))\napp.run_polling()', complexity: 'Pro' },
-  { id: '8', title: 'نظام حماية البيانات التشفيري', lang: 'C++', category: 'Security', code: '#include <iostream>\n#include <string>\n\nstd::string encrypt(std::string data) {\n    for(char &c : data) c += 3; \n    return data;\n}', complexity: 'Expert' }
+  { id: '1', title: 'هيكل تطبيق React عالمي', lang: 'JavaScript', category: 'Web', code: 'import React from "react";\nimport ReactDOM from "react-dom/client";\n\nconst App = () => (\n  <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center">\n    <h1 className="text-4xl font-black neon-pulse">DT-PRO SYSTEM ONLINE</h1>\n  </div>\n);\n\nReactDOM.createRoot(document.getElementById("root")).render(<App />);', complexity: 'Pro' }
 ];
 
-// إضافة بذور متخصصة للغاية للميادين المطلوبة (Nucleus Seeds)
-export const SPECIALIZED_ULTRA_SEEDS = [
-    { ar: 'استراتيجية تنويع المحاصيل الزراعية', en: 'Precision agriculture crop rotation strategy, soil health analysis, irrigation optimization, sustainable farming yield forecasting', cat: 'فلاحة' },
-    { ar: 'تصميم مركبة استكشاف فضائي (Rover)', en: 'Mars rover design concept, autonomous navigation sensors, geological sampling drill, radiation shielding, high-gain antenna, NASA aesthetic', cat: 'فضاء' },
-    { ar: 'تحليل اقتصاديات "بلوك تشين"', en: 'Macroeconomic impact analysis of blockchain adoption, decentralized finance (DeFi) regulatory framework, tokenomics design, global trade efficiency', cat: 'اقتصاد' },
-    { ar: 'سياسة دولية: توازن القوى النووي', en: 'International relations geopolitical analysis of nuclear deterrence, multilateral treaty negotiations, strategic stability framework, academic tone', cat: 'سياسة' },
-    { ar: 'هندسة مفاعلات "الاندماج النووي"', en: 'Nuclear fusion reactor engineering blueprint, magnetic confinement tokamak design, plasma stability controls, clean energy infrastructure', cat: 'تكنولوجيا' },
-    { ar: 'خطة تشجير مدن "الصفر كربون"', en: 'Urban afforestation master plan for carbon-neutral cities, native species selection, heat island mitigation, IoT water management', cat: 'بيئة' },
-    { ar: 'نظام قضائي "ذكاء اصطناعي"', en: 'AI-driven judicial decision support system, case law database integration, legal precedent analysis, ethical bias mitigation, professional law style', cat: 'قانون' },
-    { ar: 'استراتيجية تسويق "المنتجات العضوية"', en: 'Holistic marketing plan for premium organic food brands, consumer trust building, farm-to-table storytelling, visual eco-branding', cat: 'تسويق' }
-];
-
-export const PRO_PROMPT_DATABASE = [
-  ...SEED_DATA.subjects,
-  ...SPECIALIZED_ULTRA_SEEDS,
-  { ar: 'تصميم شعار (Logo) لشركة طيران مستقبلية', en: 'Minimalist futuristic airline logo design, vector art, sleek gradients, symbolic wings', cat: 'تصميم' },
-  { ar: 'بوستر فيلم رعب في غابة مهجورة', en: 'Horror movie poster, abandoned foggy forest, mysterious silhouette, dark red lighting', cat: 'سينما' },
-  { ar: 'فيديو ترويجي لسيارة تسلا الرياضية', en: 'Cinematic car commercial, Tesla sports car drifting on neon highway, high speed motion blur', cat: 'فيديو' },
-  { ar: 'منشور إعلاني لعرض تخفيضات رمضان', en: 'Ramadan sale social media post, Islamic geometric patterns, lanterns, warm atmosphere, 3D text', cat: 'منشورات' },
-  { ar: 'صورة واقعية لمدينة مكة المكرمة في المستقبل', en: 'Hyper-realistic futuristic Mecca, advanced architecture, flying drones, peaceful spiritual lighting', cat: 'تخصصي' },
-  { ar: 'شخصية بطل خارق (Cyberpunk Hero)', en: 'Cyberpunk superhero character design, glowing neon armor, futuristic city background, highly detailed', cat: 'فن' },
-  { ar: 'تصميم واجهة متجر إلكتروني للموضة', en: 'Clean UI/UX design for a fashion e-commerce store, elegant layout, premium imagery', cat: 'تقنية' },
-  { ar: 'فيديو موشن جرافيك (Explainer Video)', en: 'Dynamic motion graphics explainer, flat design style, smooth transitions, bright business colors', cat: 'فيديو' },
-  { ar: 'تغطية صحفية في ساحة معركة مستقبلية', en: 'Photojournalism style, futuristic battlefield, heavy machinery, dramatic smoke and sparks', cat: 'واقعي' },
-  { ar: 'منشور توعوي عن أهمية الذكاء الاصطناعي', en: 'Educational infographic post about AI impact, clean icons, professional typography, blue palette', cat: 'منشورات' },
-  { ar: 'غلاف كتاب فلسفي عن الزمن', en: 'Philosophical book cover design about time, abstract hourglass, celestial dust, gold foil text', cat: 'فن' },
-  { ar: 'فيديو خلفية (Loop) مهدئ للأعصاب', en: 'Lofi aesthetic looping background, cozy room window with rain, warm lamp light', cat: 'فيديو' }
-];
-
-// طبقة الأرشيف المليونية الجديدة (PRO_ULTRA_DB) - تغذية ضخمة للتخصصات المطلوبة
 export const PRO_ULTRA_DB = [
-    ...PRO_PROMPT_DATABASE,
-    // ميادين التسويق والأعمال (Marketing & Business)
-    { ar: 'استراتيجية تسويق محتوى (Content Plan)', en: 'Expert digital marketing content plan, customer journey mapping, viral hooks, SEO keywords, high conversion CTA, professional business tone', cat: 'تسويق' },
-    { ar: 'تحليل سوات (SWOT Analysis) لشركة ناشئة', en: 'Detailed SWOT analysis for a tech startup, identifying strengths, weaknesses, opportunities, and threats, strategic recommendations, corporate style', cat: 'بزنس' },
-    { ar: 'إعلان فيسبوك (Facebook Ads) لمنتج تجميل', en: 'High-converting Facebook ad copy for a luxury beauty product, attention-grabbing headline, benefit-driven body, social proof, strong call-to-action', cat: 'تسويق' },
-    { ar: 'بريد إلكتروني بيعي (Cold Email) لشركات B2B', en: 'Professional cold email for B2B sales, personalized approach, pain point identification, value proposition, clear follow-up request', cat: 'تسويق' },
-    { ar: 'منشور لينكد إن (LinkedIn) قيادي', en: 'Thought leadership LinkedIn post, professional storytelling about career growth, industry insights, engagement triggers, sleek formatting', cat: 'تسويق' },
-    { ar: 'سكريبت فيديو ترويجي (Script) لمنتج تقني', en: 'Promotional video script for a SaaS product, problem-solution framework, fast-paced dialogue, visual scene descriptions, upbeat tone', cat: 'تسويق' },
-    { ar: 'خطة إعلانية لسلسلة مطاعم عالمية', en: 'Strategic advertising plan for a global restaurant chain, multi-channel approach, seasonal campaign ideas, budget allocation, brand consistency', cat: 'بزنس' },
-    { ar: 'تصميم تجربة مستخدم (UX Case Study)', en: 'Detailed UX case study report, user research findings, wireframe explanations, interactive prototype description, professional design terminology', cat: 'تقنية' },
-    
-    // الفن والسينما (Art & Cinema)
-    { ar: 'بوستر فيلم "خيال علمي" ملحمي (Epic)', en: 'Epic sci-fi movie poster, massive spaceship over a futuristic desert city, cosmic nebula, cinematic lighting, teal and orange palette, high-resolution', cat: 'سينما' },
-    { ar: 'رسم رقمي (Digital Painting) لشخصية فانتزي', en: 'Masterful digital painting of a fantasy warrior, ornate golden armor, glowing sword, ethereal forest background, sharp focus, vibrant magical particles', cat: 'فن' },
-    { ar: 'لوحة زيتية (Oil Painting) لمنظر طبيعي', en: 'Classic oil painting style, Italian lakeside villa, lush gardens, sunlight reflecting on water, thick brushstrokes, warm Mediterranean colors', cat: 'فن' },
-    { ar: 'تصميم خلفية (Concept Art) لغابة مسحورة', en: 'Concept art of an enchanted bioluminescent forest, giant glowing mushrooms, mysterious mist, soft cool lighting, immersive atmosphere', cat: 'فن' },
-    { ar: 'بوستر فيلم "رعب نفسي" (Psychological)', en: 'Psychological horror movie poster, distorted mirror reflections, dark shadows, pale face, high contrast noir lighting, unsettling mood', cat: 'سينما' },
-    { ar: 'شخصية أنمي (Anime Style) محاربة سيافة', en: 'High-quality anime character design, female samurai, dynamic pose, cherry blossom petals, vibrant cel-shaded style, detailed background', cat: 'فن' },
-    { ar: 'تصميم شعار (Logo) لبراند ملابس ستريت', en: 'Minimalist street-wear brand logo, vector art, bold typography, symbolic urban icon, sleek and modern', cat: 'فن' },
-    
-    // الطب والعلوم (Medicine & Science)
-    { ar: 'تقرير طبي (Medical Report) عن حالة نادرة', en: 'Professional medical case study report, clinical terminology, diagnostic findings, treatment protocol, research-based tone', cat: 'طب' },
-    { ar: 'خوارزمية تشخيص أمراض (AI Diagnosis)', en: 'Technical explanation of an AI diagnostic algorithm, neural network architecture, data training parameters, accuracy metrics, expert tech style', cat: 'طب' },
-    { ar: 'مقالة علمية عن "تعديل الجينات"', en: 'Scientific article about CRISPR gene editing, ethical considerations, breakthrough research summary, academic tone, detailed references', cat: 'علوم' },
-    { ar: 'نظام رعاية صحية ذكي (Smart Health)', en: 'Design concept for a smart healthcare monitoring system, IoT integration, real-time data visualization, patient-centric UI', cat: 'طب' },
-    { ar: 'بحث في الصيدلة السريرية', en: 'Clinical pharmacy research paper, drug interaction analysis, patient outcomes, statistical methodology, professional academic writing', cat: 'طب' },
-    
-    // المهن والحرف (Professions & Crafts)
-    { ar: 'فني تكييف وتبريد (HVAC) في موقع صناعي', en: 'HVAC technician working on a massive industrial cooling system, professional safety gear, industrial environment, sparks, realistic lighting', cat: 'صيانة' },
-    { ar: 'نجار مبدع يصمم أثاث مودرن', en: 'Creative carpenter in a modern workshop, hand-crafting a minimalist oak table, wood shavings, natural window light, artisanal vibe', cat: 'حرف' },
-    { ar: 'كهربائي أنظمة ذكية (Smart Home)', en: 'Smart home electrician installing a complex control panel, high-tech devices, glowing LEDs, precise workmanship, modern home background', cat: 'صيانة' },
-    { ar: 'خياط ملكي (Bespoke Tailor)', en: 'Bespoke tailor measuring a luxury silk suit, prestigious workshop interior, rolls of fine fabric, sewing machine, warm professional light', cat: 'حرف' },
-    { ar: 'سباك محترف في مشروع ضخم', en: 'Professional plumber installing industrial pipe systems, technical blueprints background, professional tools, sharp focus, gritty realism', cat: 'صيانة' },
-    
-    // الأفلام والإنتاج (Movies & Production)
-    { ar: 'موقع تصوير (Set) لفيلم تاريخي', en: 'Cinema set of an ancient Roman street, authentic costumes, massive stone structures, cinematic lighting rigs, professional cameras, epic scale', cat: 'فيديو' },
-    { ar: 'سكريبت فيلم "غموض وتشويق"', en: 'Short scene script for a mystery thriller, intense dialogue, suspenseful stage directions, psychological character depth', cat: 'سينما' },
-    { ar: 'تصميم شخصية (CGI) لشرير خارق', en: 'Hyper-detailed CGI character of a powerful villain, obsidian armor, glowing red eyes, dark atmospheric smoke, Octane render, master composition', cat: 'فن' },
-    
-    // الإسلاميات والدعوة (Islamic & Dawah)
-    { ar: 'بوستر دعوي "فضل الصلاة"', en: 'Beautiful Islamic dawah poster about the virtue of prayer, soft heavenly light, mosque silhouette, elegant calligraphy, peaceful atmosphere', cat: 'دعوي' },
-    { ar: 'منشور "أذكار الصباح" بتصميم عصري', en: 'Modern morning Athkar social media post, minimalist geometric patterns, soft teal and gold palette, professional typography', cat: 'دعوي' },
-    { ar: 'تصميم "حكمة إسلامية" عن الصبر', en: 'Spiritual wisdom post about patience, Arabic calligraphy style, desert oasis background at sunrise, warm divine lighting', cat: 'دعوي' },
-    
-    // المناسبات والاجتماعيات (Social & Events)
-    { ar: 'بطاقة دعوة زفاف ملكية فاخرة', en: 'Luxury royal wedding invitation card, gold filigree ornaments, velvet texture, elegant Arabic calligraphy, warm cinematic lighting', cat: 'مناسبات' },
-    { ar: 'منشور "حب وغرام" لزوجين (Halal)', en: 'Halal love and romance post, young couple in a scenic garden at sunset, warm aesthetic, hyper-realistic, bokeh background', cat: 'مشاعر' },
-    { ar: 'بطاقة تهنئة خطوبة باللون الروز', en: 'Elegant engagement greeting card, rose gold palette, sparkling rings, silk fabric background, 8k render', cat: 'مناسبات' },
-    { ar: 'تصميم "صداقة وفاء" بأسلوب أنمي', en: 'Meaningful friendship post in high-end anime style, vibrant sky, expressive characters, detailed scenery', cat: 'مشاعر' },
-    { ar: 'بطاقة "جمعة مباركة" بزخارف ثلث', en: 'Professional Jummah Mubarak card, intricate Thuluth calligraphy, mosque architecture silhouette, golden highlights', cat: 'دعوي' },
-    
-    // الشركات والإدارة (Corporate & Management)
-    { ar: 'منشور إعلاني لشركة عقارات كبرى', en: 'Professional corporate real estate post, modern skyscraper architecture, clean minimalist layout, high contrast blue tones', cat: 'شركات' },
-    { ar: 'إعلان تسويقي لشركة برمجيات (Cyber)', en: 'High-tech cybersecurity company marketing post, matrix falling code, glowing locks, professional blue and green aesthetic', cat: 'شركات' },
-    { ar: 'إعلان مطعم فاخر (Steakhouse)', en: 'Professional steakhouse food commercial post, juicy steak, fire flames background, dark moody lighting', cat: 'شركات' },
-    { ar: 'إعلان فيديو "تسويق عقاري" دروني', en: 'Dynamic drone cinematic real estate video, smooth transitions, high production value, sunset architectural lighting', cat: 'شركات' },
-    { ar: 'تصميم لاند سكيب ذكي للفيلات', en: 'High-end landscape architecture for a luxury villa, infinity pool, fire pits, professional greenery design, golden hour lighting', cat: 'هندسة' },
-    { ar: 'هوية بصرية كاملة لبراند عطور', en: 'Complete visual identity for a luxury perfume brand, glass bottles, smoke of oud, elegant lighting, professional branding', cat: 'شركات' },
-    
-    // الحكم والتعليم (Wisdom & Education)
-    { ar: 'تصميم حكم وأقوال مأثورة (Zen Style)', en: 'Zen style wisdom quote post, stone balancing, misty waterfall, professional typography, peaceful atmosphere', cat: 'حكم' },
-    { ar: 'حكمة مأثورة عن الوقت', en: 'Old pocket watch in a library, dark academia aesthetic, candles, wisdom quote about time', cat: 'حكم' },
-    { ar: 'بوستر توعوي "حماية البيئة"', en: 'Environmental awareness poster, earth in a glass bulb, vibrant green plants growing inside, clean clinical lighting, 8k resolution', cat: 'دعوي' },
-    { ar: 'غلاف مجلة تقنية (Future Tech)', en: 'Tech magazine cover design, holographic interfaces, futuristic cyborg portrait, sleek typography, neon accents', cat: 'محتوى' },
-    { ar: 'منشور "بر الوالدين" للأطفال', en: 'Kid-friendly Islamic educational post about parents, bright cartoon style, simple icons, high saturation', cat: 'تعليم' },
-    { ar: 'بوستر لـ "برمجيات الذكاء الاصطناعي"', en: 'AI software promotional poster, neural brain network, glowing circuits, sleek futuristic dark palette', cat: 'تقنية' }
+    ...SEED_DATA.subjects,
+    { ar: 'إنفوجرافيك ذكي (Smart Infographic)', en: 'Professional data visualization infographic, futuristic charts, flat vector art, clean professional typography, 8k business presentation', cat: 'إنفوجرافيك' },
+    { ar: 'شخص في السماء (Sky Person)', en: 'Surreal cinematic shot of a person walking on clouds in the sky, celestial lighting, ethereal atmosphere, dreamlike visuals, masterpiece composition', cat: 'شخص في السماء' },
+    { ar: 'تصميم فني مستقبل 2026 (Art 2026)', en: 'Hyper-futuristic abstract sculpture design trending in 2026, iridescent textures, holographic refractions, quantum render style, avant-garde digital art', cat: 'تصميم 2026' }
 ];
+
+// محرك الـ مليون برومبت النوروني المطور (Neural Mapping Engine v4.0)
+export const getMillionthNeuralPrompt = (id: number, category: string) => {
+    const factory = NEURAL_FACTORY_ASSETS;
+    const style = factory.styles[id % factory.styles.length];
+    const tech = factory.techs[(id + 7) % factory.techs.length];
+    const mood = factory.moods[(id + 13) % factory.moods.length];
+    const spec = (factory.categorySpecifics as any)[category] || 'Professional execution with extreme attention to material detail, atmospheric depth, and perfect composition.';
+
+    // استخراج الفعل الوصفي بناءً على القسم
+    let descriptiveTitle = '';
+    const actions = ACTION_MATRICES[category] || ACTION_MATRICES[category.includes('طفل') ? 'طفل' : ''] || GENERAL_ACTIONS;
+    descriptiveTitle = actions[id % actions.length];
+
+    const arTitle = `برومبت #${id} - ${descriptiveTitle}`;
+    const enPrompt = `[DT_PROMPT_ENGINE_LOG: ID_${id}] 
+CORE SUBJECT: Descriptive High-End execution of ${category}. 
+SCENE DESCRIPTION: ${descriptiveTitle} (Translated context).
+SPECIFICATION: ${spec}
+ART STYLE: ${style}
+TECHNICAL STACK: ${tech}
+TONE: ${mood}
+ENVIRONMENT: 2026 AI Architecture Optimized. Global illumination, sub-atomic textures, volumetric atmospheric depth. 32k Super Resolution Render.`;
+
+    return { ar: arTitle, en: enPrompt, cat: category, id };
+};

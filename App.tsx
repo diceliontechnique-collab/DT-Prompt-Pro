@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { 
-  ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, SEED_DATA, TEMPLATES, AI_MODELS, PRO_CODE_DATABASE, PRO_PROMPT_DATABASE, PRO_ULTRA_DB 
+  ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, SEED_DATA, TEMPLATES, AI_MODELS, PRO_CODE_DATABASE, PRO_ULTRA_DB, getMillionthNeuralPrompt 
 } from './constants';
 import { PromptFormData, SavedPrompt } from './types';
 
@@ -17,14 +17,14 @@ const SUPPORTED_APP_LANGS = [
   { id: 'nl', name: 'Nederlands', flag: '🇳🇱', dir: 'ltr' }
 ];
 
-// قاموس الترجمة الاحترافي الشامل للواجهات (تم التدقيق اللغوي v1.5.1)
+// قاموس الترجمة الاحترافي الشامل للواجهات
 const UI_TRANSLATIONS: any = {
   ar: {
     dir: 'rtl',
     langName: 'العربية',
     title: 'DT-Prompt',
     subtitle: 'Dicelion-Technique | Intelligent Prompt System v1.5',
-    tabs: { create: 'المختبر', library: 'المكتبة المليونية', history: 'السجل الرقمي', codes: 'الأكواد', appLang: 'اللغة', guide: 'دليل الاحتراف', about: 'عن المطور' },
+    tabs: { create: 'المختبر', library: 'المكتبة المليونية', history: 'السجل الرقمي', codes: 'الأكواد', appLang: 'اللغة', guide: 'دليل الاحتراف', about: 'عن المطور', home: 'الرئيسية', sunlight: 'وضع السطوع' },
     generateBtn: 'معالجة الأمر ✨',
     copyBtn: 'نسخ القالب',
     saveBtn: 'أرشفة المشروع',
@@ -34,7 +34,7 @@ const UI_TRANSLATIONS: any = {
     copied: 'تم نسخ النص بنجاح!',
     saved: 'تمت الأرشفة بنجاح في الذاكرة الرقمية!',
     promptMode: { image: 'توليد الصور', video: 'إنتاج الفيديو', post: 'نص إحترافي' },
-    placeholders: { text: 'عنوان الحملة أو الموضوع الرئيسي...', search: 'ابحث بنص أو برقم البرومبت (1 - 1,000,000)...' },
+    placeholders: { text: 'عنوان الحملة أو الموضوع الرئيسي...', search: 'ابحث بنص أو برقم البرومبت (1 - 1,000,000)...', selectDept: 'اختر من بين 1000 قسم بحث متخصص...' },
     labels: { lang: 'محرك اللغة', ratio: 'أبعاد المخرج', mood: 'نبرة الصوت والأسلوب', bg: 'سياق المحتوى والبيئة (100+)', tech: 'قالب الهيكلة الاحترافي', text: 'الموضوع الأساسي', details: 'تفاصيل الحملة', useRef: 'توليد Prompt بتقنية سيكولوجي حصري ل DT-Prompt', engOnly: 'توليد نص Prompt بالإنجليزية فقط', aiTarget: 'منصة الذكاء المستهدفة', useImgSource: 'توليد Prompt مرفق بالصورة', visualEnglish: 'توليد Prompt لمنصة لا تدعم العربية', visualEnglishDesc: 'لضمان دقة النصوص البصرية؛ أغلب الأدوات لا تدعم العربية باستثناء Nanobanana.' },
     announcement: { 
       title: 'إشعار Dicelion-Technique 🚀', 
@@ -71,7 +71,7 @@ const UI_TRANSLATIONS: any = {
       scientificAnalysisTitle: 'التحليل السيكولوجي الحصري لـ Dicelion-Technique 🧠',
       scientificAnalysisContent: 'عند تفعيل هذا الخيار, يقوم المحرك بـ "حقن عصبي" للبرومبت يعتمد على علم النفس المعرفي:\n\n1. المحفزات اللاواعية: إضافة كلمات مفتاحية تخاطب العقل الباطن للمشاهد (مثل: الثقة، الهيبة، أو الندرة).\n2. التوازن البصري: فرض قواعد التكوين الفني التي تريح العين وتجذب الانتباه تلقائياً.\n3. هندسة التفاصيل: التركيز على "التفاصيل الدقيقة" التي تعطي انطباعاً بالاحترافية العالية والمصداقية المطلقة.\n\nهذا الخيار ليس مجرد وصف، بل هو "بروتوكول تسويقي" يحول الصورة العادية إلى أداة جذب قوية.',
       sections: [
-        { title: '01. فلسفة البرومبت (Prompt Engineering)', content: 'البرومبت هو "فن صياغة الأوامر"؛ وهو الكود الذي يفهمه الذكاء الاصطناعي لإنتاج مخرجات دقيقة. DT-Prompt يتكفل عنك بهذه الهندسة المعقدة.' },
+        { title: '01. فلسفة البرومبت (Prompt Engineering)', content: 'البرومبت هو "فن صياغة الأوامر"؛ وهو الكود الذي يفهم الذكاء الاصطناعي لإنتاج مخرجات دقيقة. DT-Prompt يتكفل عنك بهذه الهندسة المعقدة.' },
         { title: '02. بوابة المختبر: اختيار التخصص', content: 'الصور: للإنتاج الفني والسينمائية.\nالفيديو: لصناعة المحتوى المتحرك.\nالنص: لكتابة المنشورات التسويقية والسيناريوهات بأسلوب بشري مقنع.' }
       ],
       steps: {
@@ -90,7 +90,7 @@ const UI_TRANSLATIONS: any = {
       features: [
         'خبير تقني ومدرب معتمد لدى كبرى المعاهد المهنية',
         'هندسة البرمجيات المتقدمة وحلول صيانة الأنظمة والحواسيب',
-        'أخصائي هندسة الذكاء الاصطناعي وتحليل البيانات الضخمة',
+        'أخصائي هندسة الذكاء الاصطناعي تحليل البيانات الضخمة',
         'تصميم الهوية البصرية المتكاملة واستراتيجيات التسويق الرقمي',
         'برامج تدريبية احترافية معتمدة (أونلاين وحضورياً)',
         'تطوير الحلول التقنية والبرمجية المخصصة للمؤسسات'
@@ -112,7 +112,7 @@ const UI_TRANSLATIONS: any = {
     langName: 'English',
     title: 'DT-Prompt',
     subtitle: 'Dicelion-Technique | Intelligent Prompt System v1.5',
-    tabs: { create: 'Laboratory', library: 'Millionth Library', history: 'Digital Logs', codes: 'Codes', appLang: 'Langs', guide: 'Pro Guide', about: 'Developer' },
+    tabs: { create: 'Laboratory', library: 'Millionth Library', history: 'Digital Logs', codes: 'Codes', appLang: 'Langs', guide: 'Pro Guide', about: 'Developer', home: 'Home', sunlight: 'Brightness' },
     generateBtn: 'Process Engine ✨',
     copyBtn: 'Copy',
     saveBtn: 'Save',
@@ -122,7 +122,7 @@ const UI_TRANSLATIONS: any = {
     copied: 'Copied successfully!',
     saved: 'Archived successfully!',
     promptMode: { image: 'Image Gen', video: 'Video Gen', post: 'Pro Text' },
-    placeholders: { text: 'Campaign title...', search: 'Search text or Prompt ID (1 - 1,000,000)...' },
+    placeholders: { text: 'Campaign title...', search: 'Search text or Prompt ID (1 - 1,000,000)...', selectDept: 'Select from 1000 specialized departments...' },
     labels: { lang: 'Language', ratio: 'Ratio', mood: 'Tone & Style', bg: 'Context & Environment (100+)', tech: 'Structure', text: 'Subject', details: 'Details', useRef: 'Exclusive Psych DT-Prompt Tech', engOnly: 'Generate English Prompt Only', aiTarget: 'Target AI Platform', useImgSource: 'Generate Prompt with Image', visualEnglish: 'Generate Prompt for non-Arabic platforms', visualEnglishDesc: 'For text accuracy; most tools only support English visuals (except Nanobanana).' },
     announcement: { 
       title: 'Dicelion-Technique Notice 🚀', 
@@ -209,25 +209,10 @@ const getLocalizedOption = (val: string, lang: string) => {
     }
   }
   const dictionary: any = {
-    ku: { '1:1': '١:١ (چوارگۆشە)', '9:16': '٩:١٦ (مۆبایل)', '16:9': '١٦:٩ (سینەما)', 'العربية': 'عەرەبي' },
+    ku: { '1:1': '١:١ (چوارگۆشە)', '9:16': '٩:١٦ (مۆبایل)', '16:9': '١٦:٩ (سينەما)', 'العربية': 'عەرەبي' },
     tr: { '1:1': '1:1 (Kare)', '9:16': '9:16 (Dikey)', '16:9': '16:9 (Geniş)', 'العربية': 'Arapça' }
   };
   return dictionary[lang]?.[val] || enFallback || val;
-};
-
-// محرك الـ مليون برومبت النوروني (Neural 1M Prompt Mapping Engine) v1.5.1
-const getNeuralPrompt = (id: number) => {
-    const categories = ['تسويق', 'فلاحة', 'فضاء', 'اقتصاد', 'سياسة', 'طب', 'تكنولوجيا', 'فن', 'قانون', 'تعليم', 'صناعة', 'تخصصي'];
-    const cat = categories[id % categories.length];
-    
-    if (id <= PRO_ULTRA_DB.length && id > 0) {
-        return { ...PRO_ULTRA_DB[id-1], id };
-    }
-
-    const arTitle = `مشروع رقم ${id} - تخصص ${cat} المتقدم`;
-    const enPrompt = `Specialized professional project sequence ID-${id} addressing ${cat} challenges. Engine-optimized for sub-atomic detail, high visual fidelity, and professional terminology compliant with global AI standards.`;
-    
-    return { ar: arTitle, en: enPrompt, cat, id };
 };
 
 const App: React.FC = () => {
@@ -242,9 +227,23 @@ const App: React.FC = () => {
   // حالة "وضع القراءة تحت الشمس" (Sunlight Reading Mode)
   const [isSunlightMode, setIsSunlightMode] = useState(false);
   
-  const categoriesList = useMemo(() => ['الكل', 'تسويق', 'فلاحة', 'فضاء', 'اقتصاد', 'سياسة', 'طب', 'تكنولوجيا', 'فن', 'قانون', 'تعليم', 'صناعة', 'تخصصي', 'بزنس', 'تصميم', 'سينما', 'فيديو', 'منشورات', 'واقعي', 'صيانة', 'حرف', 'خدمات'], []);
+  // توليد قائمة الـ 1000 قسم بحث فريدة (1000 Master Categories)
+  const categoriesList = useMemo(() => {
+    // البدء بالأقسام الاستراتيجية المطلوبة
+    const base = ['الكل', 'طب', 'طفل', 'إنفوجرافيك', 'شخص في السماء', 'تصميم 2026', 'مواقع التواصل', 'تسويق', 'فلاحة', 'فضاء', 'اقتصاد', 'سياسة', 'تكنولوجيا', 'فن', 'قانون', 'تعليم', 'صناعة', 'تخصصي', 'بزنس', 'تصميم', 'سينما', 'فيديو', 'منشورات', 'واقعي', 'صيانة', 'حرف', 'خدمات'];
+    let result = [...base];
+    const extraWords = ['كيمياء', 'فيزياء', 'جيولوجيا', 'أدب', 'لسانيات', 'منطق', 'سياحة', 'نقل', 'ملاحة', 'فلك', 'أحياء', 'جينات', 'روبوتات', 'برمجة', 'تشفير', 'تداول', 'استثمار', 'بورصة', 'عقارات', 'تطوع', 'أبحاث', 'إدارة', 'جودة', 'ريادة', 'أتمتة', 'تواصل', 'هوية', 'علامات', 'دعم', 'مبيعات', 'جمارك', 'قضاء', 'شرطة', 'دفاع', 'صحة', 'وقاية', 'تمريض', 'إسعاف', 'تغذية', 'يوغا', 'لياقة', 'عطور', 'صابون', 'جلود', 'ورق', 'تعدين', 'بترول', 'غاز', 'فحم', 'محاجر', 'مسارح', 'متاحف', 'مكتبات', 'نشر', 'ألعاب', 'تطوير', 'هاردوير', 'سوفتوير', 'شبكات', 'سيرفرات', 'إنترنت', 'سمارت', 'دبلوماسية', 'أحزاب', 'انتخابات', 'نقابات', 'جمعيات', 'غرف', 'ضرائب', 'تدقيق', 'محاسبة', 'تمويل', 'بنوك', 'تأمين', 'مخاطر', 'كوارث', 'أزمات', 'تخطيط', 'رؤية', 'رسالة', 'هدف', 'شغف', 'إلهام', 'تأثير', 'قيادة', 'ثقة', 'هيبة', 'وقار', 'حكمة', 'توازن', 'سلام', 'هدوء', 'سكينة', 'بهجة', 'سعادة', 'فشل', 'نجاح', 'إنجاز', 'تكريم', 'جوائز', 'مسابقات', 'ألغاز', 'أحاجي', 'خدع', 'سحر', 'سيرك', 'دبلجة', 'تعليق', 'إلقاء', 'خطابة', 'تحفيز', 'كوتشينج', 'تدريب', 'أكاديميات', 'مدارس', 'جامعات', 'مراكز', 'مختبرات', 'صيدليات', 'عيادات', 'مشافي', 'قلاع', 'حصون', 'قصور', 'أكواخ', 'فيلات', 'منتجعات', 'شاليهات', 'يخوت', 'طائرات', 'قطارات', 'بواخر', 'شاحنات', 'دراجات', 'سيارات', 'محركات', 'تروس', 'أدوات', 'ورش', 'خطوط', 'إمداد', 'لوجستيات', 'تخزين', 'تجزئة', 'جملة', 'تصدير', 'استيراد', 'مناطق', 'حرة', 'مراسم', 'بروتوكول', 'اتيكيت', 'مراسم', 'أعياد', 'مناسبات', 'أفراح', 'أحزان', 'مشاعر', 'أفكار', 'قيم', 'مبادئ', 'أخلاق', 'سلوك', 'عادات', 'تقاليد', 'فولكلور', 'تراث', 'آثار', 'أساطير', 'خرافات', 'ظواهر', 'تخاطر', 'تأمل', 'تصوف', 'مذاهب', 'أديان', 'حضارات', 'لغات', 'مخطوطات', 'برديات', 'نقوش', 'كنوز', 'غوص', 'صيد', 'رماية', 'سباحة', 'فروسية', 'هجن', 'صقارة', 'مخيمات', 'تسلق', 'تزلج', 'مظلات', 'سيرك', 'أكروبات', 'رقص', 'باليه', 'أوبرا', 'موسيقى', 'جاز', 'بوب', 'روك', 'راب', 'شعر', 'نثر', 'قصة', 'رواية', 'نقد', 'تمثيل', 'إخراج', 'تصوير', 'مكياج', 'أزياء', 'ديكور', 'إضاءة', 'صوت', 'مونتاج', 'جرافيك', 'موشن', 'أنمي', 'كوميكس', 'كارتون', 'رسم', 'تلوين', 'نحت', 'خزف', 'نسيج', 'سجاد', 'تطريز', 'حلي', 'صياغة', 'نجارة', 'حدادة', 'سباكة', 'كهرباء', 'ميكانيك', 'بناء', 'تشييد', 'تخطيط', 'مدن', 'قرى', 'واحات', 'غابات', 'بحار', 'أنهار', 'جبال', 'وديان', 'صحارى', 'جزر', 'كواكب', 'نجوم', 'مجرات', 'ثقوب', 'سدم', 'كون', 'وجود', 'زمن', 'ماضي', 'حاضر', 'مستقبل', 'ذكاء', 'حكمة', 'منطق', 'واقع', 'خيال', 'أثر', 'تغيير', 'ابتكار', 'إبداع'];
+    let i = 0;
+    while (result.length < 1000) {
+      const word = extraWords[i % extraWords.length];
+      const suffix = Math.floor(result.length / extraWords.length);
+      result.push(`${word}${suffix > 0 ? ' ' + suffix : ''}`);
+      i++;
+    }
+    return result;
+  }, []);
 
-  // إضافة التمرير التلقائي للأعلى عند تغيير التبويب (Navigation Fix)
+  // إضافة التمرير التلقائي للأعلى عند تغيير التبويب
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activeTab]);
@@ -283,18 +282,43 @@ const App: React.FC = () => {
     onlyEnglishVisuals: false
   });
 
+  // محرك البحث المليوني المطور - Virtual Deterministic Rendering Engine
   const filteredSubjects = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
+    
+    // 1. البحث بالرقم (ID Search) - يغطي حتى مليون نتيجة
     const idMatch = q.match(/^\d+$/);
     if (idMatch) {
         const idNum = parseInt(idMatch[0]);
-        if (idNum > 0 && idNum <= 1000000) return [getNeuralPrompt(idNum)];
+        if (idNum > 0 && idNum <= 1000000) {
+            // توزيع كل 1000 برومبت لقسم معين بالترتيب
+            const catIndex = Math.floor((idNum - 1) / 1000);
+            const catName = categoriesList[catIndex % categoriesList.length];
+            return [getMillionthNeuralPrompt(idNum, catName)];
+        }
     }
+
+    // 2. البحث النصي والفرز حسب القسم (Category Filtering)
+    if (selectedCategory !== 'الكل') {
+        const catOffset = categoriesList.indexOf(selectedCategory);
+        const results = [];
+        // توليد أول 100 برومبت لهذا القسم المحدد بأسماء وصفية حقيقية
+        for (let i = 1; i <= 100; i++) {
+            const promptId = (catOffset * 1000) + i;
+            const prompt = getMillionthNeuralPrompt(promptId, selectedCategory);
+            // تحسين منطق البحث ليشمل الاسم الوصفي الجديد
+            if (!q || prompt.ar.toLowerCase().includes(q) || prompt.en.toLowerCase().includes(q)) {
+                results.push(prompt);
+            }
+        }
+        return results;
+    }
+
+    // 3. عرض البذور الأساسية (Base Seeds) عند وضع "الكل" وعدم وجود بحث
     let base = PRO_ULTRA_DB.map((p, i) => ({ ...p, id: i + 1 }));
-    if (selectedCategory !== 'الكل') base = base.filter(s => s.cat === selectedCategory);
     if (!q) return base.slice(0, 50);
     return base.filter(s => s.ar.toLowerCase().includes(q) || s.en.toLowerCase().includes(q) || s.cat.toLowerCase().includes(q)).slice(0, 50);
-  }, [searchQuery, selectedCategory]);
+  }, [searchQuery, selectedCategory, categoriesList]);
 
   useEffect(() => {
     document.documentElement.dir = t.dir;
@@ -384,7 +408,8 @@ const App: React.FC = () => {
         .text-rendering-legibility { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
         textarea, input { -webkit-user-select: text; user-select: text; word-break: break-word; overflow-wrap: break-word; }
         .tab-active { background: #38bdf8; color: #fff; box-shadow: 0 4px 15px rgba(56,189,248,0.3); }
-        .nav-fixed-top { position: fixed; top: 0; left: 0; width: 100%; z-index: 500; padding: 12px 16px; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(25px); border-bottom: 1px solid rgba(255,255,255,0.12); transition: background 0.3s; }
+        .nav-fixed-top { position: fixed; top: 0; left: 0; width: 100%; z-index: 500; padding: 12px 16px; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(25px); border-bottom: 1px solid rgba(255,255,255,0.12); transition: background 0.3s; pointer-events: none; }
+        .nav-fixed-top > * { pointer-events: auto; }
         .glass-card { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); border-radius: 1.5rem; padding: 1.5rem; position: relative; overflow: hidden; }
         
         @keyframes shimmer-bg { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
@@ -393,6 +418,9 @@ const App: React.FC = () => {
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         .glow-text-shimmer { background: linear-gradient(to right, #38bdf8, #fff, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200% auto; animation: shimmer-bg 3s linear infinite; }
         
+        @keyframes pulse-fast { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
+        .animate-pulse-fast { animation: pulse-fast 0.8s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
         .dt-logo-container { position: relative; width: 90px; height: 90px; border-radius: 24px; background: linear-gradient(135deg, #38bdf8, #1e40af); display: flex; align-items: center; justify-content: center; font-family: 'Cairo', sans-serif; font-weight: 900; color: white; font-size: 32px; box-shadow: 0 0 30px rgba(56, 189, 248, 0.4); border: 2px solid rgba(255,255,255,0.2); }
         .library-item-card { background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 2rem; display: flex; flex-direction: column; height: 100%; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         
@@ -407,23 +435,27 @@ const App: React.FC = () => {
         .category-pill.active { background: #38bdf8; color: #fff; border-color: #38bdf8; box-shadow: 0 5px 15px rgba(56,189,248,0.3); }
         .prompt-id-badge { background: rgba(56,189,248,0.15); color: #38bdf8; padding: 2px 8px; border-radius: 6px; font-size: 9px; font-weight: 900; border: 1px solid rgba(56,189,248,0.2); }
 
-        /* Sunlight Mode Professional Styles Layer (Incremental Layer) */
         .sunlight-theme { background: #f8fafc !important; color: #0f172a !important; }
         .sunlight-theme .nav-fixed-top { background: rgba(255, 255, 255, 0.95) !important; border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important; }
         .sunlight-theme .glass-ui, .sunlight-theme .glass-card { background: #ffffff !important; border-color: #e2e8f0 !important; box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important; }
         .sunlight-theme h1, .sunlight-theme h2, .sunlight-theme h3, .sunlight-theme h4, .sunlight-theme p, .sunlight-theme span { color: #0f172a !important; }
-        .sunlight-theme .pdf-reading-mode p { color: #1e293b !important; }
-        .sunlight-theme select, .sunlight-theme textarea, .sunlight-theme input { background: #f1f5f9 !important; border-color: #cbd5e1 !important; color: #0f172a !important; }
         .sunlight-theme .library-item-card { background: #ffffff !important; border-color: #e2e8f0 !important; box-shadow: 0 4px 12px rgba(0,0,0,0.04) !important; }
-        .sunlight-theme .library-item-card p { color: #1e293b !important; }
-        .sunlight-theme .category-pill { background: #e2e8f0 !important; color: #475569 !important; border-color: #cbd5e1 !important; }
-        .sunlight-theme .category-pill.active { background: #0284c7 !important; color: #fff !important; border-color: #0284c7 !important; }
-        .sunlight-theme .prompt-id-badge { background: #e0f2fe !important; color: #0369a1 !important; border-color: #bae6fd !important; }
-        .sunlight-theme .ActionBtn { background: #f1f5f9 !important; color: #334155 !important; border-color: #cbd5e1 !important; }
-        .sunlight-theme .ActionBtn.primary { background: #0284c7 !important; color: #fff !important; }
-        .sunlight-theme .neon-accent { text-shadow: none !important; color: #0284c7 !important; }
-        .sunlight-theme .NavIcon { background: rgba(0,0,0,0.05) !important; color: #475569 !important; }
-        .sunlight-theme .NavIcon.active { background: #0284c7 !important; color: #fff !important; }
+        .sunlight-theme .library-dropdown { background-color: #ffffff !important; border-color: #cbd5e1 !important; color: #0f172a !important; }
+
+        .sunlight-theme .select-element { background-color: #ffffff !important; border-color: #cbd5e1 !important; color: #0f172a !important; }
+        .sunlight-theme .select-element option { background-color: #ffffff !important; color: #0f172a !important; }
+        .sunlight-theme .textarea-element { background-color: #ffffff !important; border-color: #cbd5e1 !important; color: #0f172a !important; }
+
+        .library-dropdown { width: 100%; border-radius: 1.25rem; padding: 1.15rem 1.5rem; font-size: 0.9rem; font-weight: 800; appearance: none; outline: none; transition: all 0.3s; border: 1.5px solid rgba(255,255,255,0.1); background-color: rgba(15, 23, 42, 0.8); color: #fff; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2338bdf8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: left 1rem center; background-size: 1.25rem; }
+        .library-dropdown:hover { border-color: #38bdf8; }
+        .library-dropdown option { background-color: #0f172a; color: #fff; padding: 10px; }
+
+        /* NAV LAYER UPGRADE: Force visibility and clickability on Android 7-16 */
+        .nav-fixed-top { min-height: 100px !important; padding-bottom: 35px !important; background-color: #0f172a !important; pointer-events: none !important; }
+        .nav-fixed-top > div { pointer-events: auto !important; height: 100% !important; display: flex !important; align-items: center !important; }
+        .no-scrollbar { overflow-x: auto !important; overflow-y: visible !important; display: flex !important; gap: 18px !important; padding: 10px !important; pointer-events: auto !important; -webkit-overflow-scrolling: touch !important; position: relative !important; z-index: 600 !important; }
+        .NavIcon + div { opacity: 1 !important; visibility: visible !important; transform: none !important; bottom: -32px !important; pointer-events: none !important; }
+        .NavIcon + div span { background: #0ea5e9 !important; font-weight: 900 !important; text-shadow: 0 1px 2px rgba(0,0,0,0.5) !important; border: 1px solid rgba(255,255,255,0.1) !important; }
       `}</style>
 
       {showAnnouncement && (
@@ -459,27 +491,14 @@ const App: React.FC = () => {
 
       <nav className="nav-fixed-top">
         <div className="max-w-xl mx-auto flex items-center justify-between gap-1 w-full px-2">
-             <button onClick={() => setActiveTab('create')} className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-lg transition-all ${activeTab === 'create' ? 'bg-sky-500 text-white scale-110 shadow-[0_0_20px_rgba(56,189,248,0.5)]' : isSunlightMode ? 'bg-slate-200 text-slate-600' : 'bg-white/10 text-white'}`}>🏠</button>
-             <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 flex-1 justify-around">
-                <NavIcon active={activeTab === 'library'} onClick={() => setActiveTab('library')} icon="📚" isSunlight={isSunlightMode} />
-                <NavIcon active={activeTab === 'history'} onClick={() => setActiveTab('history')} icon="🕒" isSunlight={isSunlightMode} />
-                
-                {/* زر تبديل وضع القراءة تحت الشمس (الموقع المحدد في الصورة) */}
-                <button 
-                  onClick={() => setIsSunlightMode(!isSunlightMode)} 
-                  className={`w-12 h-12 flex items-center justify-center rounded-full transition-all duration-300 relative ${isSunlightMode ? 'bg-amber-500 text-white scale-125 shadow-[0_0_20px_rgba(245,158,11,0.7)]' : 'bg-white/10 text-white hover:bg-white/20'}`}
-                >
-                  <span className="text-2xl">{isSunlightMode ? '☀️' : '🔆'}</span>
-                  {isSunlightMode && (
-                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center border-2 border-white shadow-sm scale-110 animate-in zoom-in">
-                       <span className="text-[10px] font-black text-white">✓</span>
-                    </div>
-                  )}
-                </button>
-
-                <NavIcon active={showLangSelector} onClick={() => setShowLangSelector(true)} icon="🌍" isSunlight={isSunlightMode} />
-                <NavIcon active={activeTab === 'guide'} onClick={() => setActiveTab('guide')} icon="📖" isSunlight={isSunlightMode} />
-                <NavIcon active={activeTab === 'about'} onClick={() => setActiveTab('about')} icon="ℹ️" isSunlight={isSunlightMode} />
+             <NavIcon active={activeTab === 'create'} onClick={() => setActiveTab('create')} icon="🏠" label={t.tabs.home} isSunlight={isSunlightMode} />
+             <div className="flex items-center gap-4 overflow-x-auto no-scrollbar py-1 flex-1 justify-around relative z-[600]">
+                <NavIcon active={activeTab === 'library'} onClick={() => setActiveTab('library')} icon="📚" label={t.tabs.library} isSunlight={isSunlightMode} />
+                <NavIcon active={activeTab === 'history'} onClick={() => setActiveTab('history')} icon="🕒" label={t.tabs.history} isSunlight={isSunlightMode} />
+                <NavIcon active={isSunlightMode} onClick={() => setIsSunlightMode(!isSunlightMode)} icon={isSunlightMode ? '☀️' : '🔆'} label={t.tabs.sunlight} isSunlight={isSunlightMode} />
+                <NavIcon active={showLangSelector} onClick={() => setShowLangSelector(true)} icon="🌍" label={t.tabs.appLang} isSunlight={isSunlightMode} />
+                <NavIcon active={activeTab === 'guide'} onClick={() => setActiveTab('guide')} icon="📖" label={t.tabs.guide} isSunlight={isSunlightMode} />
+                <NavIcon active={activeTab === 'about'} onClick={() => setActiveTab('about')} icon="ℹ️" label={t.tabs.about} isSunlight={isSunlightMode} />
              </div>
         </div>
       </nav>
@@ -706,10 +725,17 @@ const App: React.FC = () => {
                 <span className="mr-4 text-slate-500">🔍</span>
                 <input type="text" placeholder={t.placeholders.search} className={`flex-1 bg-transparent py-2 text-sm font-bold outline-none w-full ${isSunlightMode ? 'text-slate-900' : 'text-white'}`} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
                 </div>
-                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-2">
-                    {categoriesList.map(cat => (
-                        <button key={cat} onClick={() => setSelectedCategory(cat)} className={`category-pill ${selectedCategory === cat ? 'active' : ''}`}>{cat}</button>
-                    ))}
+                
+                <div className="w-full">
+                    <select 
+                      value={selectedCategory} 
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                      className="library-dropdown"
+                    >
+                        {categoriesList.map(cat => (
+                            <option key={cat} value={cat}>{cat}</option>
+                        ))}
+                    </select>
                 </div>
             </div>
 
@@ -733,7 +759,7 @@ const App: React.FC = () => {
       </main>
 
       {showLangSelector && (
-        <div className="fixed inset-0 z-[1000] flex items-end bg-black/70 backdrop-blur-md" onClick={() => setShowLangSelector(false)}>
+        <div className="fixed inset-0 z-[3000] flex items-end bg-black/70 backdrop-blur-md" onClick={() => setShowLangSelector(false)}>
            <div className={`w-full rounded-t-[3rem] p-8 space-y-4 shadow-[0_-20px_60px_rgba(56,189,248,0.2)] animate-in slide-in-from-bottom duration-300 ${isSunlightMode ? 'bg-white' : 'bg-slate-900/95 border-t border-sky-500/30'}`} onClick={e => e.stopPropagation()}>
               <h3 className={`text-lg font-black text-center mb-6 uppercase tracking-widest ${isSunlightMode ? 'text-slate-900' : 'text-white glow-text-shimmer'}`}>Select Language</h3>
               <div className="grid grid-cols-1 gap-2 max-h-[60vh] overflow-y-auto no-scrollbar">
@@ -762,8 +788,29 @@ const ActionBtn = ({ icon, label, onClick, primary, active }: any) => (
   </button>
 );
 
-const NavIcon = ({ active, icon, onClick, isSunlight }: any) => (
-  <button onClick={onClick} className={`w-12 h-12 flex items-center justify-center rounded-full transition-all duration-300 NavIcon ${active ? 'bg-sky-500 text-white scale-125 shadow-[0_0_20px_rgba(56,189,248,0.7)] border border-white/20 active' : isSunlight ? 'bg-slate-200 text-slate-600 hover:bg-slate-300' : 'bg-white/10 text-white hover:bg-white/20 hover:scale-110 shadow-lg'}`}><span className="text-2xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">{icon}</span></button>
+const NavIcon = ({ active, icon, onClick, isSunlight, label }: any) => (
+  <div className="relative group flex flex-col items-center flex-shrink-0">
+    <button 
+      onClick={(e) => { e.stopPropagation(); onClick(); }} 
+      className={`w-12 h-12 flex items-center justify-center rounded-full transition-all duration-500 relative overflow-hidden cursor-pointer NavIcon
+        ${active 
+          ? 'bg-gradient-to-tr from-sky-400 to-blue-600 text-white scale-125 shadow-[0_0_25px_rgba(56,189,248,0.6)] border-2 border-white/30 active' 
+          : isSunlight 
+            ? 'bg-slate-200 text-slate-600 hover:bg-slate-300 hover:scale-110 shadow-lg border border-slate-300' 
+            : 'bg-white/10 text-white hover:bg-white/20 hover:scale-110 shadow-xl border border-white/10'}`}
+    >
+      <span className={`text-2xl transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]`}>
+        {icon}
+      </span>
+      <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+    </button>
+    
+    <div className="absolute -bottom-8 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-[2000]">
+      <span className={`text-[9px] font-black uppercase tracking-tighter px-2 py-0.5 rounded-md bg-sky-500 text-white shadow-lg animate-pulse-fast`}>
+        {label}
+      </span>
+    </div>
+  </div>
 );
 
 const CheckboxItem = ({ label, checked, onChange }: any) => (
@@ -797,4 +844,3 @@ const InputArea = ({ label, value, onChange, placeholder }: any) => (
 const getT = (lang: string) => UI_TRANSLATIONS[lang] || UI_TRANSLATIONS.ar;
 
 export default App;
-
