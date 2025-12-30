@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -20,6 +19,9 @@
             --bg-deep: #020617; 
             --safe-top: env(safe-area-inset-top);
             --safe-bottom: env(safe-area-inset-bottom);
+            /* ألوان النيون الأزرق الملكي المضافة حديثاً */
+            --neon-blue: #38bdf8;
+            --neon-glow: rgba(56, 189, 248, 0.4);
         }
         body { 
             font-family: 'Cairo', sans-serif; 
@@ -49,6 +51,12 @@
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         html { scroll-behavior: smooth; }
         
+        /* معالجة تخطيط الشاشات المتوسطة والكبيرة */
+        @media (min-width: 769px) {
+            .app-content-wrapper { padding-top: 140px !important; }
+            main { max-width: 1200px !important; margin: 0 auto !important; }
+        }
+
         /* معالجة تداخل التخطيط في الشاشات الصغيرة جداً */
         @media (max-width: 360px) {
             .nav-fixed-top { padding: 8px 4px !important; min-height: 90px !important; }
@@ -84,6 +92,24 @@
         .sunlight-theme { background: #fdfdfd !important; }
         .sunlight-theme body { background-color: #fdfdfd !important; }
         .sunlight-theme .nav-fixed-top { background: #ffffff !important; border-bottom: 2px solid #f1f5f9 !important; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05) !important; }
+        
+        /* طبقة التوافقية الأوفلاين الشاملة لملفات APK */
+        img, svg { max-width: 100%; height: auto; }
+        .main-app-container { opacity: 1 !important; visibility: visible !important; }
+
+        /* حقن أضواء النيون الزرقاء في كافة المكونات (Blue Neon Global Injection) */
+        .glass-ui, .glass-card, .library-item-card, .ActionBtn, .nav-btn-pro, select, input, textarea {
+            box-shadow: 0 0 12px var(--neon-glow), inset 0 0 8px rgba(56, 189, 248, 0.05) !important;
+            border-color: rgba(56, 189, 248, 0.3) !important;
+        }
+        select:focus, input:focus, textarea:focus {
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.5) !important;
+            border-color: var(--neon-blue) !important;
+        }
+        label {
+            color: var(--neon-blue) !important;
+            text-shadow: 0 0 8px var(--neon-glow) !important;
+        }
     </style>
 <script type="importmap">
 {

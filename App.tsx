@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { 
   ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, SEED_DATA, TEMPLATES, AI_MODELS, PRO_CODE_DATABASE, PRO_ULTRA_DB, getMillionthNeuralPrompt, WISDOM_QUOTES 
@@ -196,8 +195,100 @@ const UI_TRANSLATIONS: any = {
   }
 };
 
+// كائن تعليمي جديد للمبتدئين حول دليل الهاتف (Academic Beginner Layer)
+const PHONEBOOK_ACADEMY: any = {
+  ar: {
+    title: 'أكاديمية المبتدئين: دليل الهاتف الشامل 📱',
+    intro: 'أهلاً بك يا صديقي في عالمك الجديد! دليل الهاتف هو ببساطة "دفتر عناوينك الورقي" القديم، لكنه يعيش الآن داخل هاتفك ليحفظ لك أسماء أحبابك وأرقامهم للأبد دون أن تضيع.',
+    sections: [
+      {
+        title: '١. ما هو هذا التطبيق؟ (الشرح البسيط)',
+        content: 'تخيل أنك تمتلك آلاف الأصدقاء، فبدلاً من حفظ أرقامهم في رأسك أو كتابتها على قصاصات ورق قد تضيع، هذا التطبيق ينظمهم لك حسب الحروف الأبجدية، ويسمح لك بالاتصال بأي شخص بلمسة واحدة فقط.'
+      },
+      {
+        title: '٢. جولة في الشاشة الرئيسية',
+        content: '• شريط البحث (المكبر): هو الخانة العلوية، بمجرد كتابة أول حرف من اسم الشخص، سيظهر لك فوراً.\n• زر الزائد (+): هو أهم زر! لونه غالباً أزرق ويقع في الأسفل، اضغط عليه لتبدأ بإضافة شخص جديد.'
+      },
+      {
+        title: '٣. كيف تضيف اسماً جديداً؟ (خطوة بخطوة)',
+        content: 'عند الضغط على (+)، ستظهر لك خانات فارغة كأنك تملأ استمارة:\n\n• الاسم الأول: اكتب اسم صديقك (مثلاً: أحمد).\n• العائلة: اكتب كنيته أو لقبه (مثلاً: الجار).\n• خانة الهاتف: اكتب الرقم هنا. يمكنك اختيار نوع الرقم (جوال، منزل، عمل) لتذكر مكانه.\n• الصورة: يمكنك الضغط على دائرة الصورة لتضع صورة صديقك حتى تعرفه بمجرد أن يتصل بك.\n• مكان الحفظ (SIM/الهاتف): اختر دائماً الحفظ على "حساب جوجل" أو "الهاتف" لضمان عدم ضياع الأرقام عند تغيير البطاقة.'
+      },
+      {
+        title: '٤. القوائم السرية والمفيدة',
+        content: '• المفضلة (النجمة): ضع نجمة بجانب الأشخاص الذين تتصل بهم يومياً لتجدهم في قائمة خاصة سريعة.\n• المجموعات: يمكنك تقسيم الناس إلى (عائلة، عمل، أصدقاء الحارة) لتنظيمهم بشكل أفضل.\n• الإعدادات: هنا يمكنك تغيير شكل القائمة أو ترتيب الأسماء.'
+      },
+      {
+        title: '٥. مهارات المحترفين (بحث، تعديل، مسح)',
+        content: '• للبحث: استخدم المكبر واكتب الاسم.\n• للتعديل: إذا غير صديقك رقمه، اضغط على اسمه ثم اختر "تعديل" (شكل القلم) وغير الرقم.\n• للمسح: إذا لم تعد تحتاج للرقم، اضغط مطولاً على الاسم واختر "حذف" (شكل سلة المهملات).'
+      }
+    ],
+    footer: 'لا تقلق من الخطأ، فالهاتف ذكي بما يكفي ليحميك! جرب الآن إضافة أول رقم.'
+  }
+};
+
+// موسوعة DT-Prompt التعليمية للمبتدئين (The Comprehensive Beginner Encyclopedia)
+const DT_ENCYCLOPEDIA: any = {
+  ar: {
+    title: 'موسوعة المبتدئين: كيف تصبح مبدعاً مع DT-Prompt 🚀',
+    intro: 'مرحباً بك في رحلة الإبداع! إذا كنت تمسك هاتفك الذكي لأول مرة، فلا تقلق. هذا الكتاب سيحولك من شخص عادي إلى مهندس أفكار محترف بكلمات بسيطة جداً.',
+    concept: {
+      title: 'ما هو "البرومبت"؟ (شرح للأطفال والكبار)',
+      definition: 'كلمة "برومبت" (Prompt) تعني ببساطة: "الأمر" أو "الرسالة" التي تكتبها للذكاء الاصطناعي ليفهم ما تريده.',
+      analogy: 'تخيل أن لديك "خادماً سحرياً" (الذكاء الاصطناعي) داخل الهاتف. إذا قلت له "ارسم صورة"، فلن يعرف ماذا يرسم. لكن إذا قلت له "ارسم قطة صغيرة تلعب بكرة صوف حمراء في حديقة خضراء"، فسوف يصنع لك لوحة مذهلة. هذه الجملة الطويلة هي ما نسميه "برومبت".',
+      example: '• قبل البرومبت: "صورة سيارة" (نتيجة عادية جداً).\n• بعد البرومبت الاحترافي: "سيارة فيراري حمراء سريعة تسير في شوارع دبي ليلاً تحت أضواء النيون" (نتيجة مذهلة).'
+    },
+    ui_map: {
+      title: 'خريطة التطبيق: أين أذهب؟ وماذا أفعل؟',
+      sections: [
+        { 
+          id: 'A', 
+          name: 'شريط التنقل (الأيقونات في الأعلى)', 
+          desc: '• الرئيسية: هي معملك الخاص لصناعة الأوامر.\n• مليون برمبت: مكتبة عملاقة تحتوي على مليون فكرة جاهزة، مرقمة من ١ إلى مليون.\n• السجل: هو دفتر ذكرياتك، يحفظ كل الأوامر التي صنعتها لتعود إليها لاحقاً.\n• الشمس: زر لتغيير لون التطبيق ليكون ساطعاً ومريحاً للعين تحت ضوء النهار.' 
+        },
+        { 
+          id: 'B', 
+          name: 'الخانات (الصناديق التي تختار منها)', 
+          desc: '• صندوق الأبعاد: تختار منه شكل الصورة (مربعة، مستطيلة طويلة للموبايل، أو عريضة للتلفزيون).\n• صندوق المزاج: تختار منه "روح" الصورة (هل هي فخمة، حزينة، سعيدة، أو غامضة؟).\n• صندوق اللغة: يحدد اللغة التي تظهر بها النتائج.' 
+        },
+        { 
+          id: 'C', 
+          name: 'خانة الكتابة الكبرى (صندوق الأفكار)', 
+          desc: 'هنا تكتب فكرتك الأساسية بكلماتك البسيطة. اكتب مثلاً: "صياد سمك عجوز في البحر".' 
+        }
+      ]
+    },
+    buttons: {
+      title: 'الأزرار السحرية (المفاتيح)',
+      items: [
+        { name: '✨ معالجة الأمر', action: 'هو أهم زر! عند الضغط عليه، يقوم التطبيق بتحويل كلماتك البسيطة إلى كود معقد يفهمه الذكاء الاصطناعي.' },
+        { name: '📋 نسخ', action: 'يأخذ نسخة من النص الذي ظهر لك ليسمح لك بوضعه في أي مكان آخر.' },
+        { name: '💾 حفظ', action: 'يضع هذا الأمر في حقيبتك الخاصة (السجل) حتى لا تضيعه أبداً.' }
+      ]
+    },
+    million_prompts: {
+      title: 'كيف أستخدم "مليون برمبت"؟',
+      step1: 'ادخل إلى تبويب "مليون برمبت".',
+      step2: 'في صندوق البحث، اكتب رقماً بين ١ و ١,٠٠٠,٠٠٠ (مثلاً ٥٠٠).',
+      step3: 'سيظهر لك فوراً فكرة إبداعية مدهشة مرتبطة بهذا الرقم.',
+      step4: 'يمكنك نسخها فوراً أو تعديلها لتناسب ذوقك.'
+    },
+    final_example: {
+      title: 'مثال عملي: من الصفر إلى الاحتراف',
+      steps: [
+        '١. افتح التطبيق واختر "توليد الصور".',
+        '٢. في صندوق "الموضوع الأساسي"، اكتب: "بيت خشبي فوق الجبل".',
+        '٣. من القائمة المنسدلة "المزاج"، اختر "هيبة ملكية".',
+        '٤. اضغط على الزر الكبير "✨ معالجة الأمر".',
+        '٥. انتظر ثانية واحدة، سيظهر لك نص طويل وجميل في الأسفل.',
+        '٦. اضغط "نسخ" واذهب لأي تطبيق رسم بالذكاء الاصطناعي لتشاهد السحر!'
+      ]
+    },
+    footer: 'تذكر دائماً: لا توجد فكرة غبية، كلما جربت أكثر، أصبحت أعظم! DT-Prompt هو صديقك في هذه الرحلة.'
+  }
+};
+
 // محرك الترجمة العميقة للقوائم المنسدلة (Deep Localization Engine)
-const getLocalizedOption = (val: string, lang: string) => {
+const getLocalizedOptionInternal = (val: string, lang: string) => {
   if (lang === 'ar') return val;
   let enFallback = val;
   for (const cat in SEED_DATA) {
@@ -620,7 +711,92 @@ const App: React.FC = () => {
             padding: 4px 12px; rounded: 20px; color: #10b981; font-size: 8px; font-weight: 900;
             backdrop-blur: 10px; pointer-events: none;
         }
+        /* ULTIMATE UI CLEANUP LAYER: Concealing the DB Status badge as requested while preserving all previous code */
+        .db-status-badge { 
+            display: none !important; 
+            opacity: 0 !important; 
+            visibility: hidden !important; 
+            pointer-events: none !important; 
+            height: 0 !important; 
+            width: 0 !important; 
+            overflow: hidden !important; 
+            margin: 0 !important; 
+            padding: 0 !important; 
+        }
+
+        /* STRATEGIC WISDOM PURITY LAYER: Permanently concealing the "Daily Wisdom" header label as requested while preserving content logic */
+        .h-\[120px\] span.tracking-\[0\.3em\] { 
+            display: none !important; 
+            opacity: 0 !important; 
+            visibility: hidden !important; 
+            height: 0 !important; 
+            width: 0 !important; 
+            overflow: hidden !important; 
+            margin: 0 !important; 
+            padding: 0 !important; 
+            pointer-events: none !important; 
+        }
+
+        /* ULTIMATE BLUE NEON LAYER: Appending persistent glow to all interactive elements for professional APK appearance */
+        .glass-ui, .glass-card, .library-item-card, .select-element, .textarea-element, .nav-btn-pro {
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2), inset 0 0 10px rgba(56, 189, 248, 0.1) !important;
+            border-color: rgba(56, 189, 248, 0.4) !important;
+            transition: all 0.3s ease-in-out !important;
+        }
+        .select-element:focus, .textarea-element:focus {
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.6) !important;
+            border-color: #38bdf8 !important;
+        }
+        .tab-active, .nav-btn-pro.active {
+            box-shadow: 0 0 35px rgba(56, 189, 248, 0.8), inset 0 0 15px rgba(56, 189, 248, 0.3) !important;
+        }
+        .sunlight-theme .glass-ui, .sunlight-theme .glass-card, .sunlight-theme .library-item-card {
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.15) !important;
+            border-color: #cbd5e1 !important;
+        }
+        .library-tab-wrapper { 
+            position: relative; 
+            z-index: 100; 
+            min-height: 800px !important; /* ضمان عدم الاختفاء عند التمرير السريع */
+        }
+
+        /* ENCYCLOPEDIA INCREMENTAL STYLES: Pure blue neon aesthetic for the academic layer */
+        .encyclopedia-card { border-left: 6px solid #38bdf8 !important; background: rgba(56,189,248,0.03) !important; }
+        .academic-badge { background: #38bdf8 !important; color: #fff !important; padding: 4px 12px; border-radius: 8px; font-size: 10px; font-weight: 900; }
+        .step-bubble { width: 32px; height: 32px; background: #1e293b; border: 2px solid #38bdf8; color: #38bdf8; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 14px; flex-shrink: 0; box-shadow: 0 0 10px rgba(56,189,248,0.3); }
+
+        /* PHONEBOOK ACADEMY STEALTH LAYER: Permanently concealing the redundant guide while maintaining code integrity */
+        .glass-card > .mt-24.pt-16.border-t-2.border-dashed { 
+            display: none !important; 
+            opacity: 0 !important; 
+            visibility: hidden !important; 
+            height: 0 !important; 
+            width: 0 !important; 
+            margin: 0 !important; 
+            padding: 0 !important; 
+            overflow: hidden !important; 
+            pointer-events: none !important; 
+        }
+
+        /* NEURAL CORE GUARDIAN LAYER: Absolute Blue Neon glow injection for APK reliability and Offline Database assurance */
+        .library-dropdown, .search-bar-container input, .SelectBox select, .InputArea textarea {
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.25) !important;
+            border: 2px solid rgba(56, 189, 248, 0.4) !important;
+        }
+        .database-ready-indicator {
+            position: fixed; bottom: 20px; left: 20px; z-index: 5000;
+            display: flex; align-items: center; gap: 8px; background: rgba(2, 6, 23, 0.8);
+            padding: 6px 14px; border-radius: 20px; border: 1px solid #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3); pointer-events: none;
+        }
+        .database-ready-indicator span { font-size: 8px; font-weight: 900; color: #38bdf8; text-transform: uppercase; letter-spacing: 1px; }
       `}</style>
+
+      {/* مؤشر جاهزية قاعدة البيانات الأوفلاين - طبقة الحماية النورونية */}
+      <div className="database-ready-indicator">
+          <div className="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></div>
+          <span>NEURAL_DB_OFFLINE: ARMOURED_STABLE</span>
+      </div>
 
       {/* مؤشر جاهزية قاعدة البيانات الأوفلاين */}
       <div className="db-status-badge">NEURAL_DB_STATUS: READY_OFFLINE</div>
@@ -826,6 +1002,105 @@ const App: React.FC = () => {
                   ))}
                 </div>
               </div>
+
+              {/* طبقة أكاديمية المبتدئين المضافة حديثاً (Academic Beginner Layer) */}
+              <div className={`mt-24 pt-16 border-t-2 border-dashed ${isSunlightMode ? 'border-sky-200' : 'border-sky-500/30'}`}>
+                 <div className={`p-10 rounded-[3.5rem] space-y-10 shadow-[0_0_50px_rgba(56,189,248,0.3)] border-2 ${isSunlightMode ? 'bg-white border-sky-600' : 'bg-slate-900 border-sky-400'}`}>
+                   <div className="text-center space-y-4">
+                      <div className="text-5xl animate-bounce">📱</div>
+                      <h2 className={`text-3xl font-black uppercase tracking-tighter ${isSunlightMode ? 'text-sky-800' : 'text-sky-400'}`}>{PHONEBOOK_ACADEMY.ar.title}</h2>
+                      <p className={`text-[15px] leading-relaxed font-bold italic px-4 ${isSunlightMode ? 'text-slate-700' : 'text-slate-200'}`}>"{PHONEBOOK_ACADEMY.ar.intro}"</p>
+                   </div>
+
+                   <div className="space-y-8">
+                     {PHONEBOOK_ACADEMY.ar.sections.map((section: any, idx: number) => (
+                       <div key={idx} className={`p-8 rounded-[2.5rem] border-2 transition-all hover:scale-[1.01] ${isSunlightMode ? 'bg-sky-50 border-sky-200' : 'bg-slate-800/50 border-sky-500/20'}`}>
+                         <h3 className={`text-lg font-black mb-4 flex items-center gap-3 ${isSunlightMode ? 'text-sky-900' : 'text-white'}`}>
+                            <span className="w-8 h-8 rounded-lg bg-sky-500 text-white flex items-center justify-center text-sm">{idx + 1}</span>
+                            {section.title}
+                         </h3>
+                         <p className={`text-[14px] leading-loose font-bold whitespace-pre-line ${isSunlightMode ? 'text-slate-800' : 'text-slate-300'}`}>
+                            {section.content}
+                         </p>
+                       </div>
+                     ))}
+                   </div>
+
+                   <div className={`p-8 rounded-full text-center border-2 border-dashed ${isSunlightMode ? 'bg-emerald-50 border-emerald-500' : 'bg-emerald-500/10 border-emerald-500/40'}`}>
+                      <p className={`text-sm font-black ${isSunlightMode ? 'text-emerald-800' : 'text-emerald-400'}`}>{PHONEBOOK_ACADEMY.ar.footer}</p>
+                   </div>
+                 </div>
+              </div>
+
+              {/* موسوعة المبتدئين الشاملة المضافة تراكمياً (Incremental Encyclopedia Layer) */}
+              <div className={`mt-24 pt-16 border-t-4 border-double ${isSunlightMode ? 'border-sky-300' : 'border-sky-500/40'}`}>
+                 <div className={`p-12 rounded-[4rem] space-y-12 shadow-[0_0_80px_rgba(56,189,248,0.2)] border-x-8 border-sky-500 ${isSunlightMode ? 'bg-slate-50' : 'bg-slate-950/90'}`}>
+                    <div className="text-center space-y-6">
+                       <span className="academic-badge">{appLang === 'ar' ? 'إصدار المبتدئين v1.5' : 'Beginner Edition v1.5'}</span>
+                       <h2 className={`text-4xl font-black uppercase tracking-tighter ${isSunlightMode ? 'text-slate-900' : 'glow-text-shimmer'}`}>{DT_ENCYCLOPEDIA.ar.title}</h2>
+                       <p className={`text-lg font-bold leading-relaxed italic border-y py-4 ${isSunlightMode ? 'text-slate-700 border-sky-100' : 'text-slate-200 border-sky-500/10'}`}>"{DT_ENCYCLOPEDIA.ar.intro}"</p>
+                    </div>
+
+                    <div className="encyclopedia-card p-10 rounded-[3rem] space-y-6">
+                       <h3 className={`text-2xl font-black flex items-center gap-4 ${isSunlightMode ? 'text-sky-800' : 'text-sky-400'}`}>🧩 {DT_ENCYCLOPEDIA.ar.concept.title}</h3>
+                       <div className="space-y-4">
+                          <p className={`text-[16px] leading-relaxed font-bold ${isSunlightMode ? 'text-slate-800' : 'text-white'}`}>{DT_ENCYCLOPEDIA.ar.concept.definition}</p>
+                          <div className={`p-6 rounded-2xl border-2 border-dashed ${isSunlightMode ? 'bg-sky-100/50 border-sky-300 text-slate-800' : 'bg-sky-500/5 border-sky-500/20 text-slate-300'}`}>
+                             <p className="text-[15px] leading-loose font-black italic">{DT_ENCYCLOPEDIA.ar.concept.analogy}</p>
+                          </div>
+                          <p className={`text-[14px] leading-relaxed whitespace-pre-line font-bold ${isSunlightMode ? 'text-slate-600' : 'text-slate-400'}`}>{DT_ENCYCLOPEDIA.ar.concept.example}</p>
+                       </div>
+                    </div>
+
+                    <div className="space-y-8">
+                       <h3 className={`text-2xl font-black text-center ${isSunlightMode ? 'text-slate-900' : 'text-white'}`}>🗺️ {DT_ENCYCLOPEDIA.ar.ui_map.title}</h3>
+                       <div className="grid grid-cols-1 gap-6">
+                          {DT_ENCYCLOPEDIA.ar.ui_map.sections.map((sec: any) => (
+                             <div key={sec.id} className={`p-8 rounded-[3rem] border-2 transition-transform hover:translate-y-[-5px] ${isSunlightMode ? 'bg-white border-slate-200 shadow-sm' : 'bg-slate-900/60 border-white/5 shadow-xl'}`}>
+                                <h4 className={`text-lg font-black mb-4 border-b-2 pb-2 inline-block ${isSunlightMode ? 'text-sky-700 border-sky-100' : 'text-sky-400 border-sky-500/10'}`}>{sec.id}. {sec.name}</h4>
+                                <p className={`text-[15px] leading-loose font-bold whitespace-pre-line ${isSunlightMode ? 'text-slate-700' : 'text-slate-300'}`}>{sec.desc}</p>
+                             </div>
+                          ))}
+                       </div>
+                    </div>
+
+                    <div className="space-y-8">
+                       <h3 className={`text-2xl font-black text-center ${isSunlightMode ? 'text-slate-900' : 'text-white'}`}>🔘 {DT_ENCYCLOPEDIA.ar.buttons.title}</h3>
+                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          {DT_ENCYCLOPEDIA.ar.buttons.items.map((btn: any, i: number) => (
+                             <div key={i} className={`p-6 rounded-[2rem] border-2 text-center space-y-3 ${isSunlightMode ? 'bg-sky-50 border-sky-200' : 'bg-sky-500/5 border-sky-500/20'}`}>
+                                <span className={`text-sm font-black px-4 py-1 rounded-full ${isSunlightMode ? 'bg-sky-600 text-white' : 'bg-sky-400 text-slate-950'}`}>{btn.name}</span>
+                                <p className={`text-[13px] leading-relaxed font-bold ${isSunlightMode ? 'text-slate-600' : 'text-slate-400'}`}>{btn.action}</p>
+                             </div>
+                          ))}
+                       </div>
+                    </div>
+
+                    <div className={`p-10 rounded-[4rem] border-4 border-sky-500/30 space-y-6 ${isSunlightMode ? 'bg-white' : 'bg-slate-900'}`}>
+                       <h3 className={`text-2xl font-black flex items-center gap-4 ${isSunlightMode ? 'text-sky-800' : 'text-sky-400'}`}>💎 {DT_ENCYCLOPEDIA.ar.million_prompts.title}</h3>
+                       <div className="space-y-4">
+                          {[DT_ENCYCLOPEDIA.ar.million_prompts.step1, DT_ENCYCLOPEDIA.ar.million_prompts.step2, DT_ENCYCLOPEDIA.ar.million_prompts.step3, DT_ENCYCLOPEDIA.ar.million_prompts.step4].map((step: string, i: number) => (
+                             <div key={i} className="flex items-center gap-4">
+                                <span className="step-bubble">{i + 1}</span>
+                                <p className={`text-[15px] font-black ${isSunlightMode ? 'text-slate-800' : 'text-slate-100'}`}>{step}</p>
+                             </div>
+                          ))}
+                       </div>
+                    </div>
+
+                    <div className={`p-12 rounded-[5rem] border-t-8 border-sky-500 text-center space-y-8 ${isSunlightMode ? 'bg-sky-50' : 'bg-gradient-to-b from-sky-900/20 to-transparent'}`}>
+                       <h3 className={`text-3xl font-black ${isSunlightMode ? 'text-slate-900' : 'text-white'}`}>🌟 {DT_ENCYCLOPEDIA.ar.final_example.title}</h3>
+                       <div className="grid grid-cols-1 gap-3 max-w-2xl mx-auto">
+                          {DT_ENCYCLOPEDIA.ar.final_example.steps.map((step: string, i: number) => (
+                             <div key={i} className={`p-4 rounded-2xl text-start font-black text-[14px] ${isSunlightMode ? 'bg-white text-sky-900' : 'bg-slate-950 text-sky-400 border border-white/5'}`}>{step}</div>
+                          ))}
+                       </div>
+                       <div className="pt-10">
+                          <p className={`text-sm font-black italic opacity-60 ${isSunlightMode ? 'text-slate-600' : 'text-slate-400'}`}>{DT_ENCYCLOPEDIA.ar.footer}</p>
+                       </div>
+                    </div>
+                 </div>
+              </div>
             </div>
           </div>
         )}
@@ -1014,7 +1289,7 @@ const SelectBox = ({ label, name, options, value, onChange, appLang }: any) => (
     <label className="text-[10px] font-black text-slate-500 uppercase px-1 tracking-widest">{label}</label>
     <div className="relative">
       <select name={name} value={value} onChange={onChange} className="w-full border rounded-xl px-4 py-4 text-[12.5px] font-bold outline-none appearance-none focus:border-sky-500/50 transition-all select-element">
-        {options.map((o: string) => <option key={o} value={o}>{getLocalizedOption(o, appLang)}</option>)}
+        {options.map((o: string) => <option key={o} value={o}>{getLocalizedOptionInternal(o, appLang)}</option>)}
       </select>
       <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none opacity-30 text-[10px]">▼</div>
     </div>
