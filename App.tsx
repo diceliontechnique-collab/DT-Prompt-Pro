@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { 
-  ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, SEED_DATA, TEMPLATES, AI_MODELS, PRO_CODE_DATABASE, PRO_ULTRA_DB, getMillionthNeuralPrompt 
+  ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, SEED_DATA, TEMPLATES, AI_MODELS, PRO_CODE_DATABASE, PRO_ULTRA_DB, getMillionthNeuralPrompt, WISDOM_QUOTES 
 } from './constants';
 import { PromptFormData, SavedPrompt } from './types';
 
@@ -213,6 +213,69 @@ const getLocalizedOption = (val: string, lang: string) => {
     tr: { '1:1': '1:1 (Kare)', '9:16': '9:16 (Dikey)', '16:9': '16:9 (Geniş)', 'العربية': 'Arapça' }
   };
   return dictionary[lang]?.[val] || enFallback || val;
+};
+
+// مكون البطاقة الذكية للحكم (Smart Wisdom Card Component)
+const WisdomCard: React.FC<{ appLang: string, isSunlight: boolean }> = ({ appLang, isSunlight }) => {
+  const [index, setIndex] = useState(0);
+  const [phase, setPhase] = useState<'hidden' | 'visible' | 'initial'>('initial');
+
+  useEffect(() => {
+    // الانتظار دقيقة واحدة قبل الظهور الأول
+    const initialDelay = setTimeout(() => {
+      setPhase('visible');
+    }, 60000);
+
+    return () => clearTimeout(initialDelay);
+  }, []);
+
+  useEffect(() => {
+    if (phase === 'initial') return;
+
+    if (phase === 'visible') {
+      const timer = setTimeout(() => {
+        setPhase('hidden');
+      }, 60000); // تظل دقيقة
+      return () => clearTimeout(timer);
+    } else if (phase === 'hidden') {
+      const timer = setTimeout(() => {
+        setIndex((prev) => (prev + 1) % WISDOM_QUOTES.length);
+        setPhase('visible');
+      }, 10000); // تختفي 10 ثواني
+      return () => clearTimeout(timer);
+    }
+  }, [phase]);
+
+  if (phase === 'initial' || phase === 'hidden') return <div className="h-24 w-full" />; // مساحة محجوزة للحفاظ على استقرار الهيكل
+
+  return (
+    <div className={`w-full overflow-hidden transition-all duration-1000 transform animate-in zoom-in slide-in-from-top-4 ${phase === 'visible' ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+      <div className={`relative p-6 rounded-[2.5rem] border-2 shadow-2xl flex flex-col items-center justify-center text-center gap-2 overflow-hidden group min-h-[110px]
+        ${isSunlight 
+          ? 'bg-white border-sky-600 text-sky-900 shadow-sky-200' 
+          : 'bg-slate-900/80 border-sky-400 text-white shadow-[0_0_30px_rgba(56,189,248,0.2)]'}`}>
+        
+        {/* مؤثرات الخلفية القوية */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-sky-500/10 via-transparent to-blue-500/10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+        <div className="absolute -top-10 -right-10 w-24 h-24 bg-sky-400/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-10 -left-10 w-24 h-24 bg-blue-600/20 rounded-full blur-3xl animate-pulse"></div>
+
+        <span className={`text-[10px] font-black uppercase tracking-[0.3em] opacity-60 mb-1 ${isSunlight ? 'text-sky-700' : 'text-sky-300'}`}>
+          {appLang === 'ar' ? 'حكمة اليوم' : 'Daily Wisdom'}
+        </span>
+        
+        <p className={`text-[13.5px] font-black leading-relaxed px-2 transition-all duration-700 glow-text-shimmer ${isSunlight ? '!text-sky-900' : 'text-white'}`}>
+          {WISDOM_QUOTES[index]}
+        </p>
+
+        <div className="flex items-center gap-1.5 mt-2 opacity-40">
+           <div className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-ping"></div>
+           <div className="w-1 h-1 rounded-full bg-sky-500/50"></div>
+           <div className="w-1 h-1 rounded-full bg-sky-500/50"></div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 const App: React.FC = () => {
@@ -467,6 +530,15 @@ const App: React.FC = () => {
         .nav-btn-pro { transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; }
         .nav-btn-pro:active { transform: scale(0.85) !important; transition: all 0.1s !important; }
         .neon-glow-active { box-shadow: 0 0 35px rgba(56, 189, 248, 0.8) !important; }
+
+        /* NEW CUSTOM DROPDOWN LIST STYLES (Incremental Layer) */
+        .dropdown-list-container { background: #1e293b; border: 2px solid #38bdf8; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); width: 100%; max-width: 320px; position: relative; }
+        .dropdown-item { width: 100%; padding: 14px 20px; text-align: right; font-weight: 800; font-size: 12px; color: #fff; transition: all 0.2s; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: flex-end; gap: 12px; cursor: pointer; }
+        .dropdown-item:hover { background: rgba(56,189,248,0.15); color: #38bdf8; }
+        .dropdown-item.active { background: #38bdf8; color: #fff; }
+        .dropdown-scrollbar { scrollbar-width: thin; scrollbar-color: #38bdf8 transparent; }
+        .dropdown-scrollbar::-webkit-scrollbar { width: 4px; }
+        .dropdown-scrollbar::-webkit-scrollbar-thumb { background: #38bdf8; border-radius: 10px; }
       `}</style>
 
       {showAnnouncement && (
@@ -507,7 +579,7 @@ const App: React.FC = () => {
                 <NavIcon active={activeTab === 'library'} onClick={() => setActiveTab('library')} icon={<div className="flex flex-col leading-none"><span>مليون</span><span className="text-[6px] mt-0.5 opacity-80 tracking-tighter">Prompt</span></div>} label={t.tabs.library} isSunlight={isSunlightMode} />
                 <NavIcon active={activeTab === 'history'} onClick={() => setActiveTab('history')} icon={<div className="flex flex-col leading-none"><span>سجل</span><span className="text-[5px] mt-0.5 opacity-80">المحفوظات</span></div>} label={t.tabs.history} isSunlight={isSunlightMode} />
                 <NavIcon active={isSunlightMode} onClick={() => setIsSunlightMode(!isSunlightMode)} icon="سطوع" label={t.tabs.sunlight} isSunlight={isSunlightMode} />
-                <NavIcon active={showLangSelector} onClick={() => setShowLangSelector(true)} icon="لغة" label={t.tabs.appLang} isSunlight={isSunlightMode} />
+                <NavIcon active={showLangSelector} onClick={() => setShowLangSelector(true)} icon={<div className={`flex flex-col items-center justify-center w-full h-full p-1 rounded-xl transition-all border ${isSunlightMode ? 'bg-white border-slate-200' : 'bg-slate-800/40 border-white/5'}`}><span className="text-[12px]">{SUPPORTED_APP_LANGS.find(l=>l.id===appLang)?.flag}</span><div className="flex items-center gap-1 mt-0.5"><span className="text-[8px] font-black uppercase">{appLang}</span><span className="text-[7px] text-sky-400 animate-pulse">▼</span></div></div>} label={t.tabs.appLang} isSunlight={isSunlightMode} />
                 <NavIcon active={activeTab === 'guide'} onClick={() => setActiveTab('guide')} icon={<div className="flex flex-col leading-none"><span>دليل</span><span className="text-[5px] mt-0.5 opacity-80">المستخدم</span></div>} label={t.tabs.guide} isSunlight={isSunlightMode} />
                 <NavIcon active={activeTab === 'about'} onClick={() => setActiveTab('about')} icon={<div className="flex flex-col leading-none"><span>عن</span><span className="text-[5px] mt-0.5 opacity-80">المطور</span></div>} label={t.tabs.about} isSunlight={isSunlightMode} />
              </div>
@@ -535,6 +607,9 @@ const App: React.FC = () => {
                 <SelectBox label={t.labels.mood} name="mood" options={MOODS} value={formData.mood} onChange={(e:any) => setFormData(p=>({...p, mood: e.target.value}))} appLang={appLang} />
                 <SelectBox label={t.labels.aiTarget} name="targetModel" options={AI_MODELS} value={formData.targetModel} onChange={(e:any) => setFormData(p=>({...p, targetModel: e.target.value}))} appLang={appLang} />
                 <SelectBox label={t.labels.lang} name="language" options={LANGUAGES} value={formData.language} onChange={(e:any) => setFormData(p=>({...p, language: e.target.value}))} appLang={appLang} />
+                
+                {/* البطاقة الذكية للحكم تظهر هنا في نهاية العمود الأول */}
+                <WisdomCard appLang={appLang} isSunlight={isSunlightMode} />
               </div>
               <div className="glass-ui p-6 rounded-[2rem] space-y-6 w-full shadow-lg">
                 <SelectBox label={t.labels.bg} name="background" options={BACKGROUNDS} value={formData.background} onChange={(e:any) => setFormData(p=>({...p, background: e.target.value}))} appLang={appLang} />
@@ -772,16 +847,18 @@ const App: React.FC = () => {
       </main>
 
       {showLangSelector && (
-        <div className="fixed inset-0 z-[3000] flex items-end bg-black/70 backdrop-blur-md" onClick={() => setShowLangSelector(false)}>
-           <div className={`w-full rounded-t-[3rem] p-8 space-y-4 shadow-[0_-20px_60px_rgba(56,189,248,0.2)] animate-in slide-in-from-bottom duration-300 ${isSunlightMode ? 'bg-white' : 'bg-slate-900/95 border-t border-sky-500/30'}`} onClick={e => e.stopPropagation()}>
-              <h3 className={`text-lg font-black text-center mb-6 uppercase tracking-widest ${isSunlightMode ? 'text-slate-900' : 'text-white glow-text-shimmer'}`}>Select Language</h3>
-              <div className="grid grid-cols-1 gap-2 max-h-[60vh] overflow-y-auto no-scrollbar">
+        <div className="fixed inset-0 z-[3000] flex items-center justify-center bg-black/80 backdrop-blur-xl px-6" onClick={() => setShowLangSelector(false)}>
+           <div className="dropdown-list-container dropdown-scrollbar animate-in zoom-in duration-300" onClick={e => e.stopPropagation()}>
+              <h3 className={`text-sm font-black text-center py-6 border-b border-white/10 uppercase tracking-widest ${isSunlightMode ? 'text-slate-900 bg-white' : 'text-sky-400 bg-slate-900/50'}`}>Select App Language</h3>
+              <div className="max-h-[60vh] overflow-y-auto dropdown-scrollbar">
                 {SUPPORTED_APP_LANGS.map(l => (
-                  <button key={l.id} onClick={() => { setAppLang(l.id); setShowLangSelector(false); }} className={`w-full p-4.5 rounded-2xl flex items-center justify-between font-bold border transition-all ${appLang === l.id ? 'bg-sky-500/20 border-sky-500/40 text-sky-400' : isSunlightMode ? 'text-slate-600 border-slate-100 hover:bg-slate-50' : 'text-slate-400 border-transparent hover:bg-white/5'}`}>
-                    <span className="text-xl">{l.flag}</span><span>{l.name}</span>
+                  <button key={l.id} onClick={() => { setAppLang(l.id); setShowLangSelector(false); }} className={`dropdown-item ${appLang === l.id ? 'active' : ''} ${isSunlightMode && appLang !== l.id ? 'text-slate-800 bg-white' : ''}`}>
+                    <span>{l.name}</span>
+                    <span className="text-xl">{l.flag}</span>
                   </button>
                 ))}
               </div>
+              <button onClick={() => setShowLangSelector(false)} className={`w-full py-4 text-[10px] font-black uppercase opacity-40 hover:opacity-100 transition-opacity ${isSunlightMode ? 'text-slate-900' : 'text-white'}`}>Close Menu</button>
            </div>
         </div>
       )}
