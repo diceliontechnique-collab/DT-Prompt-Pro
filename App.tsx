@@ -239,6 +239,8 @@ const App: React.FC = () => {
   const [generatedPrompt, setGeneratedPrompt] = useState('');
   const [isEditable, setIsEditable] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('الكل');
+  // حالة "وضع القراءة تحت الشمس" (Sunlight Reading Mode)
+  const [isSunlightMode, setIsSunlightMode] = useState(false);
   
   const categoriesList = useMemo(() => ['الكل', 'تسويق', 'فلاحة', 'فضاء', 'اقتصاد', 'سياسة', 'طب', 'تكنولوجيا', 'فن', 'قانون', 'تعليم', 'صناعة', 'تخصصي', 'بزنس', 'تصميم', 'سينما', 'فيديو', 'منشورات', 'واقعي', 'صيانة', 'حرف', 'خدمات'], []);
 
@@ -377,12 +379,12 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className={`min-h-screen flex flex-col pt-24 pb-12 px-4 sm:px-6 ${t.dir} select-none overflow-x-hidden w-full max-w-full text-rendering-legibility`}>
+    <div className={`min-h-screen flex flex-col pt-24 pb-12 px-4 sm:px-6 ${t.dir} select-none overflow-x-hidden w-full max-w-full text-rendering-legibility ${isSunlightMode ? 'sunlight-theme' : ''}`}>
       <style>{`
         .text-rendering-legibility { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
         textarea, input { -webkit-user-select: text; user-select: text; word-break: break-word; overflow-wrap: break-word; }
         .tab-active { background: #38bdf8; color: #fff; box-shadow: 0 4px 15px rgba(56,189,248,0.3); }
-        .nav-fixed-top { position: fixed; top: 0; left: 0; width: 100%; z-index: 500; padding: 12px 16px; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(25px); border-bottom: 1px solid rgba(255,255,255,0.12); }
+        .nav-fixed-top { position: fixed; top: 0; left: 0; width: 100%; z-index: 500; padding: 12px 16px; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(25px); border-bottom: 1px solid rgba(255,255,255,0.12); transition: background 0.3s; }
         .glass-card { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); border-radius: 1.5rem; padding: 1.5rem; position: relative; overflow: hidden; }
         
         @keyframes shimmer-bg { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
@@ -404,6 +406,24 @@ const App: React.FC = () => {
         .category-pill { padding: 8px 18px; border-radius: 20px; font-size: 11px; font-weight: 800; white-space: nowrap; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.03); color: #94a3b8; }
         .category-pill.active { background: #38bdf8; color: #fff; border-color: #38bdf8; box-shadow: 0 5px 15px rgba(56,189,248,0.3); }
         .prompt-id-badge { background: rgba(56,189,248,0.15); color: #38bdf8; padding: 2px 8px; border-radius: 6px; font-size: 9px; font-weight: 900; border: 1px solid rgba(56,189,248,0.2); }
+
+        /* Sunlight Mode Professional Styles Layer (Incremental Layer) */
+        .sunlight-theme { background: #f8fafc !important; color: #0f172a !important; }
+        .sunlight-theme .nav-fixed-top { background: rgba(255, 255, 255, 0.95) !important; border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important; }
+        .sunlight-theme .glass-ui, .sunlight-theme .glass-card { background: #ffffff !important; border-color: #e2e8f0 !important; box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important; }
+        .sunlight-theme h1, .sunlight-theme h2, .sunlight-theme h3, .sunlight-theme h4, .sunlight-theme p, .sunlight-theme span { color: #0f172a !important; }
+        .sunlight-theme .pdf-reading-mode p { color: #1e293b !important; }
+        .sunlight-theme select, .sunlight-theme textarea, .sunlight-theme input { background: #f1f5f9 !important; border-color: #cbd5e1 !important; color: #0f172a !important; }
+        .sunlight-theme .library-item-card { background: #ffffff !important; border-color: #e2e8f0 !important; box-shadow: 0 4px 12px rgba(0,0,0,0.04) !important; }
+        .sunlight-theme .library-item-card p { color: #1e293b !important; }
+        .sunlight-theme .category-pill { background: #e2e8f0 !important; color: #475569 !important; border-color: #cbd5e1 !important; }
+        .sunlight-theme .category-pill.active { background: #0284c7 !important; color: #fff !important; border-color: #0284c7 !important; }
+        .sunlight-theme .prompt-id-badge { background: #e0f2fe !important; color: #0369a1 !important; border-color: #bae6fd !important; }
+        .sunlight-theme .ActionBtn { background: #f1f5f9 !important; color: #334155 !important; border-color: #cbd5e1 !important; }
+        .sunlight-theme .ActionBtn.primary { background: #0284c7 !important; color: #fff !important; }
+        .sunlight-theme .neon-accent { text-shadow: none !important; color: #0284c7 !important; }
+        .sunlight-theme .NavIcon { background: rgba(0,0,0,0.05) !important; color: #475569 !important; }
+        .sunlight-theme .NavIcon.active { background: #0284c7 !important; color: #fff !important; }
       `}</style>
 
       {showAnnouncement && (
@@ -439,28 +459,42 @@ const App: React.FC = () => {
 
       <nav className="nav-fixed-top">
         <div className="max-w-xl mx-auto flex items-center justify-between gap-1 w-full px-2">
-             <button onClick={() => setActiveTab('create')} className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-lg transition-all ${activeTab === 'create' ? 'bg-sky-500 text-white scale-110 shadow-[0_0_20px_rgba(56,189,248,0.5)]' : 'bg-white/10 text-white'}`}>🏠</button>
+             <button onClick={() => setActiveTab('create')} className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-lg transition-all ${activeTab === 'create' ? 'bg-sky-500 text-white scale-110 shadow-[0_0_20px_rgba(56,189,248,0.5)]' : isSunlightMode ? 'bg-slate-200 text-slate-600' : 'bg-white/10 text-white'}`}>🏠</button>
              <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 flex-1 justify-around">
-                <NavIcon active={activeTab === 'library'} onClick={() => setActiveTab('library')} icon="📚" />
-                <NavIcon active={activeTab === 'history'} onClick={() => setActiveTab('history')} icon="🕒" />
-                <NavIcon active={showLangSelector} onClick={() => setShowLangSelector(true)} icon="🌍" />
-                <NavIcon active={activeTab === 'guide'} onClick={() => setActiveTab('guide')} icon="📖" />
-                <NavIcon active={activeTab === 'about'} onClick={() => setActiveTab('about')} icon="ℹ️" />
+                <NavIcon active={activeTab === 'library'} onClick={() => setActiveTab('library')} icon="📚" isSunlight={isSunlightMode} />
+                <NavIcon active={activeTab === 'history'} onClick={() => setActiveTab('history')} icon="🕒" isSunlight={isSunlightMode} />
+                
+                {/* زر تبديل وضع القراءة تحت الشمس (الموقع المحدد في الصورة) */}
+                <button 
+                  onClick={() => setIsSunlightMode(!isSunlightMode)} 
+                  className={`w-12 h-12 flex items-center justify-center rounded-full transition-all duration-300 relative ${isSunlightMode ? 'bg-amber-500 text-white scale-125 shadow-[0_0_20px_rgba(245,158,11,0.7)]' : 'bg-white/10 text-white hover:bg-white/20'}`}
+                >
+                  <span className="text-2xl">{isSunlightMode ? '☀️' : '🔆'}</span>
+                  {isSunlightMode && (
+                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center border-2 border-white shadow-sm scale-110 animate-in zoom-in">
+                       <span className="text-[10px] font-black text-white">✓</span>
+                    </div>
+                  )}
+                </button>
+
+                <NavIcon active={showLangSelector} onClick={() => setShowLangSelector(true)} icon="🌍" isSunlight={isSunlightMode} />
+                <NavIcon active={activeTab === 'guide'} onClick={() => setActiveTab('guide')} icon="📖" isSunlight={isSunlightMode} />
+                <NavIcon active={activeTab === 'about'} onClick={() => setActiveTab('about')} icon="ℹ️" isSunlight={isSunlightMode} />
              </div>
         </div>
       </nav>
 
       <header className="pt-4 pb-8 text-center px-4 w-full">
-        <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tighter neon-accent">{t.title}</h1>
-        <p className="text-[10px] sm:text-[11px] font-bold text-sky-400 uppercase tracking-[0.2em] mt-2 leading-relaxed">{t.subtitle}</p>
+        <h1 className={`text-3xl sm:text-4xl font-black tracking-tighter ${isSunlightMode ? 'text-sky-700' : 'text-white neon-accent'}`}>{t.title}</h1>
+        <p className={`text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] mt-2 leading-relaxed ${isSunlightMode ? 'text-slate-500' : 'text-sky-400'}`}>{t.subtitle}</p>
       </header>
 
       <main className="flex-grow w-full max-w-4xl mx-auto space-y-8 px-0 sm:px-4">
         {activeTab === 'create' && (
           <div className="page-transition space-y-8 w-full animate-in fade-in duration-500">
-            <nav className="glass-ui p-1.5 rounded-2xl flex gap-1 w-full overflow-hidden shadow-2xl">
+            <nav className={`glass-ui p-1.5 rounded-2xl flex gap-1 w-full overflow-hidden shadow-2xl ${isSunlightMode ? 'bg-slate-100 !border-slate-300' : ''}`}>
               {['image', 'video', 'post'].map(m => (
-                <button key={m} onClick={() => setFormData(p => ({ ...p, promptMode: m as any }))} className={`flex-1 py-3.5 rounded-xl font-black text-[10px] uppercase transition-all ${formData.promptMode === m ? 'tab-active' : 'text-slate-500'}`}>
+                <button key={m} onClick={() => setFormData(p => ({ ...p, promptMode: m as any }))} className={`flex-1 py-3.5 rounded-xl font-black text-[10px] uppercase transition-all ${formData.promptMode === m ? 'tab-active' : isSunlightMode ? 'text-slate-400' : 'text-slate-500'}`}>
                   {(t.promptMode as any)[m]}
                 </button>
               ))}
@@ -476,11 +510,11 @@ const App: React.FC = () => {
                 <SelectBox label={t.labels.bg} name="background" options={BACKGROUNDS} value={formData.background} onChange={(e:any) => setFormData(p=>({...p, background: e.target.value}))} appLang={appLang} />
                 <SelectBox label={t.labels.tech} name="technical" options={TECHNICALS} value={formData.technical} onChange={(e:any) => setFormData(p=>({...p, technical: e.target.value}))} appLang={appLang} />
                 <div className="grid grid-cols-1 gap-4">
-                    <CheckboxItem label={t.labels.useRef} name="useReferenceImage" checked={formData.useReferenceImage} onChange={(e:any) => setFormData(p=>({...p, useReferenceImage: !p.useReferenceImage}))} activeColor="bg-pink-500/10 border-pink-500 text-pink-500" />
-                    <CheckboxItem label={t.labels.useImgSource} name="useImageAsMainSource" checked={formData.useImageAsMainSource} onChange={(e:any) => setFormData(p=>({...p, useImageAsMainSource: !p.useImageAsMainSource}))} activeColor="bg-sky-500/10 border-sky-500 text-sky-400" />
-                    <CheckboxItem label={t.labels.engOnly} name="forceEnglish" checked={formData.forceEnglish} onChange={(e:any) => setFormData(p=>({...p, forceEnglish: !p.forceEnglish}))} activeColor="bg-blue-500/10 border-blue-500 text-blue-400" />
+                    <CheckboxItem label={t.labels.useRef} checked={formData.useReferenceImage} onChange={() => setFormData(p=>({...p, useReferenceImage: !p.useReferenceImage}))} />
+                    <CheckboxItem label={t.labels.useImgSource} checked={formData.useImageAsMainSource} onChange={() => setFormData(p=>({...p, useImageAsMainSource: !p.useImageAsMainSource}))} />
+                    <CheckboxItem label={t.labels.engOnly} checked={formData.forceEnglish} onChange={() => setFormData(p=>({...p, forceEnglish: !p.forceEnglish}))} />
                     <div className="space-y-2">
-                        <CheckboxItem label={t.labels.visualEnglish} name="onlyEnglishVisuals" checked={formData.onlyEnglishVisuals} onChange={(e:any) => setFormData(p=>({...p, onlyEnglishVisuals: !p.onlyEnglishVisuals}))} activeColor="bg-purple-500/10 border-purple-500 text-purple-400" />
+                        <CheckboxItem label={t.labels.visualEnglish} checked={formData.onlyEnglishVisuals} onChange={() => setFormData(p=>({...p, onlyEnglishVisuals: !p.onlyEnglishVisuals}))} />
                         {formData.onlyEnglishVisuals && <p className="text-[9px] text-slate-500 px-4 leading-tight">{t.labels.visualEnglishDesc}</p>}
                     </div>
                 </div>
@@ -488,14 +522,14 @@ const App: React.FC = () => {
             </div>
             <div className="glass-ui p-6 rounded-[2.5rem] space-y-6 w-full shadow-xl">
               <InputArea label={t.labels.text} name="mainText" value={formData.mainText} onChange={(e:any) => setFormData(p=>({...p, mainText: e.target.value}))} placeholder={t.placeholders.text} />
-              <button onClick={generate} disabled={isGenerating} className="w-full py-5 bg-white text-slate-950 rounded-full font-black text-sm uppercase tracking-widest active:scale-95 transition-all shadow-xl hover:bg-sky-500 hover:text-white">
+              <button onClick={generate} disabled={isGenerating} className={`w-full py-5 rounded-full font-black text-sm uppercase tracking-widest active:scale-95 transition-all shadow-xl ${isSunlightMode ? 'bg-sky-700 text-white hover:bg-sky-800' : 'bg-white text-slate-950 hover:bg-sky-500 hover:text-white'}`}>
                  {isGenerating ? '⏳ Processing' : '✨ ' + t.generateBtn}
               </button>
             </div>
             {generatedPrompt && (
               <section id="result-view" className="glass-ui p-8 rounded-[2.5rem] border-sky-500/20 w-full space-y-6 relative overflow-hidden">
                 <div className="flex flex-wrap justify-between items-center gap-4 border-b border-white/5 pb-4">
-                  <h3 className="text-[10px] font-black text-sky-400 uppercase tracking-widest">{t.editLabel}</h3>
+                  <h3 className={`text-[10px] font-black uppercase tracking-widest ${isSunlightMode ? 'text-sky-700' : 'text-sky-400'}`}>{t.editLabel}</h3>
                   <div className="flex flex-wrap items-center gap-2">
                     <ActionBtn icon="📝" label={t.resultActions.edit} onClick={() => setIsEditable(!isEditable)} active={isEditable} />
                     <ActionBtn icon="📋" label={t.resultActions.copy} onClick={() => { navigator.clipboard.writeText(generatedPrompt); alert(t.copied); }} primary />
@@ -503,7 +537,7 @@ const App: React.FC = () => {
                     <ActionBtn icon="🔗" label={t.resultActions.share} onClick={() => shareContent(generatedPrompt)} />
                   </div>
                 </div>
-                <textarea value={generatedPrompt} onChange={(e) => setGeneratedPrompt(e.target.value)} readOnly={!isEditable} className={`w-full p-6 bg-black/40 rounded-2xl text-[12px] font-mono min-h-[200px] text-slate-300 no-scrollbar border ${isEditable ? 'border-sky-500/40' : 'border-transparent'}`} />
+                <textarea value={generatedPrompt} onChange={(e) => setGeneratedPrompt(e.target.value)} readOnly={!isEditable} className={`w-full p-6 rounded-2xl text-[12px] font-mono min-h-[200px] no-scrollbar border transition-all ${isSunlightMode ? 'bg-slate-50 border-slate-300 text-slate-900' : 'bg-black/40 border-transparent text-slate-300'} ${isEditable ? 'border-sky-500/40' : ''}`} />
               </section>
             )}
           </div>
@@ -512,7 +546,7 @@ const App: React.FC = () => {
         {activeTab === 'history' && (
           <div className="page-transition space-y-8 pb-32 w-full animate-in slide-in-from-bottom duration-500">
             <div className="text-center">
-              <h2 className="text-2xl font-black text-white uppercase tracking-tighter">{t.tabs.history}</h2>
+              <h2 className="text-2xl font-black uppercase tracking-tighter">{t.tabs.history}</h2>
               <p className="text-slate-500 text-[10px] uppercase font-bold mt-2">{savedPrompts.length} Saved Entries</p>
             </div>
             {savedPrompts.length === 0 ? (
@@ -526,12 +560,12 @@ const App: React.FC = () => {
                   <div key={prompt.id} className="glass-ui p-6 rounded-[2.5rem] space-y-4 hover:border-sky-500/30 transition-all group">
                     <div className="flex justify-between items-start">
                       <div className="space-y-1">
-                        <h4 className="text-white font-black text-sm">{prompt.summary}</h4>
+                        <h4 className="font-black text-sm">{prompt.summary}</h4>
                         <span className="text-[9px] text-slate-500 font-bold">{prompt.date}</span>
                       </div>
                       <button onClick={() => deleteFromArchive(prompt.id)} className="w-8 h-8 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all">🗑️</button>
                     </div>
-                    <p className="text-[11px] text-slate-400 font-mono bg-black/30 p-4 rounded-xl line-clamp-2">{prompt.fullPrompt}</p>
+                    <p className={`text-[11px] font-mono p-4 rounded-xl line-clamp-2 ${isSunlightMode ? 'bg-slate-100 text-slate-600' : 'bg-black/30 text-slate-400'}`}>{prompt.fullPrompt}</p>
                     <div className="flex flex-wrap gap-2 pt-2">
                        <ActionBtn icon="📋" label={t.resultActions.copy} onClick={() => { navigator.clipboard.writeText(prompt.fullPrompt); alert(t.copied); }} />
                        <ActionBtn icon="📝" label={t.resultActions.edit} onClick={() => editFromArchive(prompt)} />
@@ -547,58 +581,58 @@ const App: React.FC = () => {
         {activeTab === 'guide' && (
           <div className="page-transition pb-32 w-full pdf-reading-mode animate-in fade-in duration-500">
             <div className="text-center space-y-4 mb-16">
-              <div className="floating-icon inline-block mb-2"><span className="text-6xl drop-shadow-[0_0_20px_rgba(56,189,248,0.5)]">🏛️</span></div>
-              <h2 className="font-black glow-text-shimmer uppercase tracking-tighter">{t.guide.title}</h2>
-              <p className="text-sky-400 text-[11px] font-black uppercase tracking-[0.4em] opacity-80">{t.guide.subtitle}</p>
+              <div className="floating-icon inline-block mb-2"><span className={`text-6xl ${isSunlightMode ? 'filter grayscale brightness-50' : 'drop-shadow-[0_0_20px_rgba(56,189,248,0.5)]'}`}>🏛️</span></div>
+              <h2 className={`font-black uppercase tracking-tighter ${isSunlightMode ? 'text-slate-900' : 'glow-text-shimmer'}`}>{t.guide.title}</h2>
+              <p className={`text-[11px] font-black uppercase tracking-[0.4em] opacity-80 ${isSunlightMode ? 'text-sky-700' : 'text-sky-400'}`}>{t.guide.subtitle}</p>
             </div>
             
             <div className="glass-card space-y-16 magical-glow p-12">
-              <div className="relative p-8 rounded-[2rem] bg-sky-500/5 border border-sky-500/10 backdrop-blur-xl">
-                <p className="text-white font-bold leading-relaxed text-center italic">"{t.guide.intro}"</p>
+              <div className={`relative p-8 rounded-[2rem] border backdrop-blur-xl ${isSunlightMode ? 'bg-slate-50 border-slate-200' : 'bg-sky-500/5 border-sky-500/10'}`}>
+                <p className={`font-bold leading-relaxed text-center italic ${isSunlightMode ? 'text-slate-800' : 'text-white'}`}>"{t.guide.intro}"</p>
               </div>
 
               <section className="space-y-8">
-                 <h3 className="font-black uppercase tracking-widest text-sky-400 border-b border-sky-500/20 pb-2">{t.guide.infographicTitle}</h3>
+                 <h3 className={`font-black uppercase tracking-widest border-b pb-2 ${isSunlightMode ? 'text-sky-800 border-sky-200' : 'text-sky-400 border-sky-500/20'}`}>{t.guide.infographicTitle}</h3>
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {t.guide.interfaceItems.map((item: any) => (
-                      <div key={item.id} className="p-6 rounded-3xl flex items-start gap-5 group border border-white/5 bg-slate-900/40">
+                      <div key={item.id} className={`p-6 rounded-3xl flex items-start gap-5 group border ${isSunlightMode ? 'bg-slate-50 border-slate-200' : 'bg-slate-900/40 border-white/5'}`}>
                          <div className="w-10 h-10 rounded-xl bg-sky-500 text-white flex items-center justify-center font-black text-sm flex-shrink-0 shadow-lg">{item.id}</div>
                          <div className="flex-1 space-y-2">
-                            <h4 className="text-white text-sm font-black uppercase">{item.title}</h4>
-                            <p className="text-slate-300 text-[12px] font-bold leading-relaxed">{item.desc}</p>
+                            <h4 className={`text-sm font-black uppercase ${isSunlightMode ? 'text-slate-900' : 'text-white'}`}>{item.title}</h4>
+                            <p className={`text-[12px] font-bold leading-relaxed ${isSunlightMode ? 'text-slate-600' : 'text-slate-300'}`}>{item.desc}</p>
                          </div>
                       </div>
                     ))}
                  </div>
               </section>
 
-              <section className="p-8 rounded-[2rem] bg-slate-950/40 border border-sky-500/20 space-y-6">
-                 <h3 className="text-white flex items-center gap-3 font-black uppercase"><span className="text-2xl">🔬</span> {t.guide.scientificAnalysisTitle}</h3>
-                 <p className="text-slate-200 text-[14px] font-bold leading-loose whitespace-pre-line">{t.guide.scientificAnalysisContent}</p>
+              <section className={`p-8 rounded-[2rem] border space-y-6 ${isSunlightMode ? 'bg-slate-100 border-slate-200' : 'bg-slate-950/40 border-sky-500/20'}`}>
+                 <h3 className={`flex items-center gap-3 font-black uppercase ${isSunlightMode ? 'text-slate-900' : 'text-white'}`}><span className="text-2xl">🔬</span> {t.guide.scientificAnalysisTitle}</h3>
+                 <p className={`text-[14px] font-bold leading-loose whitespace-pre-line ${isSunlightMode ? 'text-slate-700' : 'text-slate-200'}`}>{t.guide.scientificAnalysisContent}</p>
               </section>
 
-              <div className="space-y-12 border-t border-white/5 pt-12">
+              <div className={`space-y-12 border-t pt-12 ${isSunlightMode ? 'border-slate-200' : 'border-white/5'}`}>
                 {t.guide.sections.map((sec:any, i:number) => (
                   <div key={i} className="space-y-4">
                     <div className="flex items-center gap-4">
-                      <span className="w-10 h-10 rounded-xl bg-slate-800 text-sky-400 flex items-center justify-center text-sm font-black border border-sky-500/20">✓</span>
-                      <h4 className="text-xl font-black text-white uppercase tracking-wide">{sec.title}</h4>
+                      <span className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-black border ${isSunlightMode ? 'bg-slate-200 text-sky-700 border-slate-300' : 'bg-slate-800 text-sky-400 border-sky-500/20'}`}>✓</span>
+                      <h4 className={`text-xl font-black uppercase tracking-wide ${isSunlightMode ? 'text-slate-900' : 'text-white'}`}>{sec.title}</h4>
                     </div>
-                    <p className="text-slate-200 text-[14px] leading-relaxed font-bold bg-black/20 p-6 rounded-2xl border border-white/5">{sec.content}</p>
+                    <p className={`text-[14px] leading-relaxed font-bold p-6 rounded-2xl border ${isSunlightMode ? 'bg-white border-slate-200 text-slate-700' : 'bg-black/20 border-white/5 text-slate-200'}`}>{sec.content}</p>
                   </div>
                 ))}
               </div>
 
-              <div className="bg-gradient-to-br from-sky-600/20 to-sky-900/40 border border-sky-500/30 p-10 rounded-[4rem] space-y-8 shadow-2xl relative overflow-hidden">
+              <div className={`p-10 rounded-[4rem] space-y-8 shadow-2xl relative overflow-hidden border ${isSunlightMode ? 'bg-sky-50 border-sky-200' : 'bg-gradient-to-br from-sky-600/20 to-sky-900/40 border-sky-500/30'}`}>
                 <h4 className="text-center uppercase relative z-10 flex items-center justify-center gap-4">
                    <span className="animate-spin-slow text-xl">✨</span>
-                   <span className="neon-snake-flow text-lg font-black">{t.guide.steps.title}</span>
+                   <span className={`text-lg font-black ${isSunlightMode ? 'text-sky-800' : 'neon-snake-flow'}`}>{t.guide.steps.title}</span>
                    <span className="animate-spin-slow text-xl">✨</span>
                 </h4>
                 <div className="grid grid-cols-1 gap-4 relative z-10">
                   {[t.guide.steps.s1, t.guide.steps.s2, t.guide.steps.s3, t.guide.steps.s4].map((step: any, idx: number) => (
-                    <div key={idx} className="p-5 rounded-2xl bg-black/30 border-l-4 border-sky-500">
-                      <p className="text-[14px] text-white font-black tracking-tight">{step}</p>
+                    <div key={idx} className={`p-5 rounded-2xl border-l-4 ${isSunlightMode ? 'bg-white border-sky-500 shadow-sm' : 'bg-black/30 border-sky-500'}`}>
+                      <p className={`text-[14px] font-black tracking-tight ${isSunlightMode ? 'text-slate-800' : 'text-white'}`}>{step}</p>
                     </div>
                   ))}
                 </div>
@@ -609,56 +643,56 @@ const App: React.FC = () => {
 
         {activeTab === 'about' && (
           <div className="page-transition pb-32 w-full pdf-reading-mode animate-in fade-in duration-500">
-             <div className="glass-card p-12 magical-glow shadow-2xl border-sky-500/30 rounded-[4rem]">
+             <div className="glass-card p-12 magical-glow shadow-2xl rounded-[4rem] border-sky-500/30">
                <div className="mx-auto flex flex-col items-center gap-8 relative z-10 mb-12">
                  <div className="dt-logo-container floating-icon">
                     DT<span className="absolute -bottom-2 -right-2 text-3xl filter drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]">🌌</span>
                  </div>
                  <div className="text-center space-y-3">
-                   <h2 className="font-black text-white glow-text-shimmer tracking-tighter uppercase leading-tight">{t.about.title}</h2>
-                   <div className="inline-block py-1.5 px-5 bg-sky-500/10 border border-sky-500/30 rounded-full">
-                     <p className="text-sky-400 text-[9px] font-black uppercase tracking-[0.4em] m-0">{t.about.subtitle}</p>
+                   <h2 className={`font-black tracking-tighter uppercase leading-tight ${isSunlightMode ? 'text-slate-900' : 'text-white glow-text-shimmer'}`}>{t.about.title}</h2>
+                   <div className={`inline-block py-1.5 px-5 border rounded-full ${isSunlightMode ? 'bg-sky-100 border-sky-300' : 'bg-sky-500/10 border-sky-500/30'}`}>
+                     <p className={`text-[9px] font-black uppercase tracking-[0.4em] m-0 ${isSunlightMode ? 'text-sky-800' : 'text-sky-400'}`}>{t.about.subtitle}</p>
                    </div>
                  </div>
                </div>
 
                <div className="space-y-12 relative z-10">
-                 <div className="relative p-10 rounded-[3rem] border border-white/5 bg-slate-950/40 shadow-inner overflow-hidden">
-                   <p className="text-white text-[15px] leading-relaxed font-bold text-center italic m-0">"{t.about.promoText}"</p>
+                 <div className={`relative p-10 rounded-[3rem] border shadow-inner overflow-hidden ${isSunlightMode ? 'bg-slate-50 border-slate-200' : 'bg-slate-950/40 border-white/5'}`}>
+                   <p className={`text-[15px] leading-relaxed font-bold text-center italic m-0 ${isSunlightMode ? 'text-slate-800' : 'text-white'}`}>"{t.about.promoText}"</p>
                  </div>
                  
                  <div className="flex justify-center">
-                    <div className="bg-sky-500/20 py-3 px-8 rounded-full border border-sky-500/40 animate-bounce-slow">
-                        <span className="text-white text-[11px] font-black uppercase tracking-[0.2em]">{t.about.experience}</span>
+                    <div className={`py-3 px-8 rounded-full border animate-bounce-slow ${isSunlightMode ? 'bg-sky-600 text-white border-sky-700' : 'bg-sky-500/20 border-sky-500/40 text-white'}`}>
+                        <span className="text-[11px] font-black uppercase tracking-[0.2em]">{t.about.experience}</span>
                     </div>
                  </div>
 
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-start">
                    {t.about.features.map((f:string, i:number) => (
-                     <div key={i} className="p-6 rounded-[2rem] flex items-start gap-4 border border-white/5 bg-slate-900/30 hover:border-sky-500/30 transition-all">
-                       <span className="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl flex-shrink-0">✦</span>
-                       <span className="text-[13px] text-slate-100 font-black leading-tight mt-1">{f}</span>
+                     <div key={i} className={`p-6 rounded-[2rem] flex items-start gap-4 border transition-all ${isSunlightMode ? 'bg-white border-slate-200 shadow-sm' : 'bg-slate-900/30 border-white/5'}`}>
+                       <span className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0 ${isSunlightMode ? 'bg-sky-100 text-sky-700' : 'bg-sky-500/10 text-sky-400'}`}>✦</span>
+                       <span className={`text-[13px] font-black leading-tight mt-1 ${isSunlightMode ? 'text-slate-800' : 'text-slate-100'}`}>{f}</span>
                      </div>
                    ))}
                  </div>
 
-                 <div className="pt-10 border-t border-white/5 space-y-8">
-                   <h4 className="text-white text-lg font-black uppercase tracking-[0.3em] text-center">{appLang === 'ar' ? 'قنوات التواصل الاستراتيجي' : 'Strategic Channels'}</h4>
+                 <div className={`pt-10 border-t space-y-8 ${isSunlightMode ? 'border-slate-200' : 'border-white/5'}`}>
+                   <h4 className={`text-lg font-black uppercase tracking-[0.3em] text-center ${isSunlightMode ? 'text-slate-900' : 'text-white'}`}>{appLang === 'ar' ? 'قنوات التواصل الاستراتيجي' : 'Strategic Channels'}</h4>
                    <div className="flex flex-wrap justify-center gap-4">
-                      <SocialBtn href="https://wa.me/212717118180" icon="📱" label={t.about.contacts.whatsapp} color="bg-emerald-600/10 text-emerald-400 border-emerald-500/30 hover:bg-emerald-600" />
-                      <SocialBtn href="tel:+212521177000" icon="📞" label={t.about.contacts.call} color="bg-blue-600/10 text-blue-400 border-blue-500/30 hover:bg-blue-600" />
-                      <SocialBtn href="mailto:diceliontechnique@gmail.com" icon="✉️" label={t.about.contacts.email} color="bg-white/5 text-slate-300 border-white/10 hover:bg-white/15" />
+                      <SocialBtn href="https://wa.me/212717118180" icon="📱" label={t.about.contacts.whatsapp} color={isSunlightMode ? "bg-emerald-600 text-white" : "bg-emerald-600/10 text-emerald-400 border-emerald-500/30 hover:bg-emerald-600"} />
+                      <SocialBtn href="tel:+212521177000" icon="📞" label={t.about.contacts.call} color={isSunlightMode ? "bg-blue-600 text-white" : "bg-blue-600/10 text-blue-400 border-blue-500/30 hover:bg-blue-600"} />
+                      <SocialBtn href="mailto:diceliontechnique@gmail.com" icon="✉️" label={t.about.contacts.email} color={isSunlightMode ? "bg-slate-800 text-white" : "bg-white/5 text-slate-300 border-white/10 hover:bg-white/15"} />
                    </div>
                  </div>
 
-                 <div className="bg-slate-950/80 p-10 rounded-[4rem] border border-sky-500/20 space-y-6 text-center mx-2">
-                   <h5 className="text-sky-400 text-lg font-black uppercase tracking-widest">{t.about.suggestion.title}</h5>
-                   <p className="text-slate-200 text-[13px] font-bold leading-relaxed max-w-xl mx-auto">{t.about.suggestion.desc}</p>
-                   <a href="mailto:diceliontechnique@gmail.com?subject=Strategic Feedback: DT-Prompt" className="inline-block py-3 px-10 bg-sky-500/10 rounded-full text-white text-[10px] font-black border border-sky-500/30 hover:bg-sky-500 transition-all"> {appLang === 'ar' ? 'أرسل رؤيتك الفنية الآن 📬' : 'Submit your vision now 📬'} </a>
+                 <div className={`p-10 rounded-[4rem] border space-y-6 text-center mx-2 ${isSunlightMode ? 'bg-slate-100 border-slate-300' : 'bg-slate-950/80 border-sky-500/20'}`}>
+                   <h5 className={`text-lg font-black uppercase tracking-widest ${isSunlightMode ? 'text-sky-900' : 'text-sky-400'}`}>{t.about.suggestion.title}</h5>
+                   <p className={`text-[13px] font-bold leading-relaxed max-w-xl mx-auto ${isSunlightMode ? 'text-slate-600' : 'text-slate-200'}`}>{t.about.suggestion.desc}</p>
+                   <a href="mailto:diceliontechnique@gmail.com?subject=Strategic Feedback: DT-Prompt" className={`inline-block py-3 px-10 rounded-full text-[10px] font-black border transition-all ${isSunlightMode ? 'bg-sky-600 text-white border-sky-700 hover:bg-sky-700' : 'bg-sky-500/10 text-white border-sky-500/30 hover:bg-sky-500'}`}> {appLang === 'ar' ? 'أرسل رؤيتك الفنية الآن 📬' : 'Submit your vision now 📬'} </a>
                  </div>
 
                  <div className="pt-8">
-                  <button onClick={() => window.open('https://web.facebook.com/alktrwalwfa', '_blank')} className="w-full py-6 bg-gradient-to-r from-blue-800 to-blue-600 text-white rounded-[2.5rem] font-black uppercase text-sm shadow-xl active:scale-95 border border-white/10 tracking-widest"> {t.about.followBtn} </button>
+                  <button onClick={() => window.open('https://web.facebook.com/alktrwalwfa', '_blank')} className={`w-full py-6 rounded-[2.5rem] font-black uppercase text-sm shadow-xl active:scale-95 border tracking-widest transition-all ${isSunlightMode ? 'bg-blue-700 text-white border-blue-800 hover:bg-blue-800' : 'bg-gradient-to-r from-blue-800 to-blue-600 text-white border-white/10'}`}> {t.about.followBtn} </button>
                  </div>
                </div>
              </div>
@@ -668,9 +702,9 @@ const App: React.FC = () => {
         {activeTab === 'library' && (
           <div className="page-transition space-y-6 pb-32 w-full animate-in fade-in zoom-in duration-500">
             <div className="space-y-4">
-                <div className="glass-ui h-16 rounded-full flex items-center px-8 bg-slate-900/60 w-full border border-sky-500/20 shadow-[0_0_20px_rgba(56,189,248,0.1)]">
+                <div className={`glass-ui h-16 rounded-full flex items-center px-8 w-full border shadow-[0_0_20px_rgba(56,189,248,0.1)] ${isSunlightMode ? 'bg-white border-slate-300' : 'bg-slate-900/60 border-sky-500/20'}`}>
                 <span className="mr-4 text-slate-500">🔍</span>
-                <input type="text" placeholder={t.placeholders.search} className="flex-1 bg-transparent py-2 text-sm font-bold outline-none text-white w-full" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+                <input type="text" placeholder={t.placeholders.search} className={`flex-1 bg-transparent py-2 text-sm font-bold outline-none w-full ${isSunlightMode ? 'text-slate-900' : 'text-white'}`} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
                 </div>
                 <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-2">
                     {categoriesList.map(cat => (
@@ -684,12 +718,12 @@ const App: React.FC = () => {
                 <div key={s.id} className="library-item-card p-8 group relative overflow-hidden">
                   <div className="absolute top-4 left-4"><span className="prompt-id-badge">#{s.id}</span></div>
                   <div className="flex-grow space-y-3 mt-4">
-                    <span className="text-[9px] font-black text-sky-400/60 uppercase tracking-widest">{s.cat}</span>
-                    <p className="text-[14px] font-black text-white leading-tight group-hover:text-sky-400 transition-colors">{appLang === 'ar' ? s.ar : s.en}</p>
+                    <span className={`text-[9px] font-black uppercase tracking-widest ${isSunlightMode ? 'text-sky-600' : 'text-sky-400/60'}`}>{s.cat}</span>
+                    <p className={`text-[14px] font-black leading-tight transition-colors ${isSunlightMode ? 'text-slate-800' : 'text-white group-hover:text-sky-400'}`}>{appLang === 'ar' ? s.ar : s.en}</p>
                   </div>
                   <div className="mt-8 flex flex-col gap-2">
-                    <button onClick={() => handleQuickCopyTrigger(s)} className="w-full py-3 bg-white/5 hover:bg-sky-500/20 text-[11px] font-black text-white border border-white/5 rounded-2xl transition-all active:scale-95 flex items-center justify-center gap-2"><span>📋</span> {t.quickCopy}</button>
-                    <button onClick={() => handleEditTrigger(s)} className="w-full py-3 bg-white text-slate-950 hover:bg-sky-500 hover:text-white rounded-2xl text-[11px] font-black transition-all active:scale-95">{t.editInStudio}</button>
+                    <button onClick={() => handleQuickCopyTrigger(s)} className={`w-full py-3 text-[11px] font-black border rounded-2xl transition-all active:scale-95 flex items-center justify-center gap-2 ${isSunlightMode ? 'bg-slate-100 text-slate-700 border-slate-200' : 'bg-white/5 text-white border-white/5 hover:bg-sky-500/20'}`}><span>📋</span> {t.quickCopy}</button>
+                    <button onClick={() => handleEditTrigger(s)} className={`w-full py-3 rounded-2xl text-[11px] font-black transition-all active:scale-95 ${isSunlightMode ? 'bg-sky-600 text-white shadow-sm' : 'bg-white text-slate-950 hover:bg-sky-500 hover:text-white'}`}>{t.editInStudio}</button>
                   </div>
                 </div>
               ))}
@@ -700,11 +734,11 @@ const App: React.FC = () => {
 
       {showLangSelector && (
         <div className="fixed inset-0 z-[1000] flex items-end bg-black/70 backdrop-blur-md" onClick={() => setShowLangSelector(false)}>
-           <div className="w-full bg-slate-900/95 rounded-t-[3rem] p-8 space-y-4 border-t border-sky-500/30 shadow-[0_-20px_60px_rgba(56,189,248,0.2)] animate-in slide-in-from-bottom duration-300" onClick={e => e.stopPropagation()}>
-              <h3 className="text-lg font-black text-white text-center mb-6 uppercase tracking-widest glow-text-shimmer">Select Language</h3>
+           <div className={`w-full rounded-t-[3rem] p-8 space-y-4 shadow-[0_-20px_60px_rgba(56,189,248,0.2)] animate-in slide-in-from-bottom duration-300 ${isSunlightMode ? 'bg-white' : 'bg-slate-900/95 border-t border-sky-500/30'}`} onClick={e => e.stopPropagation()}>
+              <h3 className={`text-lg font-black text-center mb-6 uppercase tracking-widest ${isSunlightMode ? 'text-slate-900' : 'text-white glow-text-shimmer'}`}>Select Language</h3>
               <div className="grid grid-cols-1 gap-2 max-h-[60vh] overflow-y-auto no-scrollbar">
                 {SUPPORTED_APP_LANGS.map(l => (
-                  <button key={l.id} onClick={() => { setAppLang(l.id); setShowLangSelector(false); }} className={`w-full p-4.5 rounded-2xl flex items-center justify-between font-bold border transition-all ${appLang === l.id ? 'bg-sky-500/20 border-sky-500/40 text-sky-400' : 'text-slate-400 border-transparent hover:bg-white/5'}`}>
+                  <button key={l.id} onClick={() => { setAppLang(l.id); setShowLangSelector(false); }} className={`w-full p-4.5 rounded-2xl flex items-center justify-between font-bold border transition-all ${appLang === l.id ? 'bg-sky-500/20 border-sky-500/40 text-sky-400' : isSunlightMode ? 'text-slate-600 border-slate-100 hover:bg-slate-50' : 'text-slate-400 border-transparent hover:bg-white/5'}`}>
                     <span className="text-xl">{l.flag}</span><span>{l.name}</span>
                   </button>
                 ))}
@@ -723,13 +757,13 @@ const SocialBtn = ({ href, icon, label, color, target = "_blank" }: any) => (
 );
 
 const ActionBtn = ({ icon, label, onClick, primary, active }: any) => (
-  <button onClick={onClick} className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-black text-[9px] uppercase transition-all ${primary ? 'bg-sky-500 text-white shadow-[0_0_15px_rgba(56,189,248,0.3)]' : active ? 'bg-sky-500/20 text-sky-400 border border-sky-500/20' : 'bg-white/5 text-slate-300 border border-white/5'}`}>
+  <button onClick={onClick} className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-black text-[9px] uppercase transition-all ActionBtn ${primary ? 'bg-sky-500 text-white shadow-[0_0_15px_rgba(56,189,248,0.3)] primary' : active ? 'bg-sky-500/20 text-sky-400 border border-sky-500/20' : 'bg-white/5 text-slate-300 border border-white/5'}`}>
     <span className="text-xs">{icon}</span><span className="hidden sm:inline">{label}</span>
   </button>
 );
 
-const NavIcon = ({ active, icon, onClick }: any) => (
-  <button onClick={onClick} className={`w-12 h-12 flex items-center justify-center rounded-full transition-all duration-300 ${active ? 'bg-sky-500 text-white scale-125 shadow-[0_0_20px_rgba(56,189,248,0.7)] border border-white/20' : 'bg-white/10 text-white hover:bg-white/20 hover:scale-110 shadow-lg'}`}><span className="text-2xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">{icon}</span></button>
+const NavIcon = ({ active, icon, onClick, isSunlight }: any) => (
+  <button onClick={onClick} className={`w-12 h-12 flex items-center justify-center rounded-full transition-all duration-300 NavIcon ${active ? 'bg-sky-500 text-white scale-125 shadow-[0_0_20px_rgba(56,189,248,0.7)] border border-white/20 active' : isSunlight ? 'bg-slate-200 text-slate-600 hover:bg-slate-300' : 'bg-white/10 text-white hover:bg-white/20 hover:scale-110 shadow-lg'}`}><span className="text-2xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">{icon}</span></button>
 );
 
 const CheckboxItem = ({ label, checked, onChange }: any) => (
@@ -745,7 +779,7 @@ const SelectBox = ({ label, name, options, value, onChange, appLang }: any) => (
   <div className="space-y-2 w-full px-1">
     <label className="text-[10px] font-black text-slate-500 uppercase px-1 tracking-widest">{label}</label>
     <div className="relative">
-      <select name={name} value={value} onChange={onChange} className="w-full bg-slate-950/70 border border-white/8 rounded-xl px-4 py-4 text-[12.5px] font-bold text-white outline-none appearance-none focus:border-sky-500/50 transition-all">
+      <select name={name} value={value} onChange={onChange} className="w-full border rounded-xl px-4 py-4 text-[12.5px] font-bold outline-none appearance-none focus:border-sky-500/50 transition-all select-element">
         {options.map((o: string) => <option key={o} value={o}>{getLocalizedOption(o, appLang)}</option>)}
       </select>
       <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none opacity-30 text-[10px]">▼</div>
@@ -756,10 +790,11 @@ const SelectBox = ({ label, name, options, value, onChange, appLang }: any) => (
 const InputArea = ({ label, value, onChange, placeholder }: any) => (
   <div className="space-y-2 w-full px-1">
     <label className="text-[10px] font-black text-slate-500 uppercase px-1 tracking-widest">{label}</label>
-    <textarea value={value} onChange={onChange} placeholder={placeholder} className="w-full bg-slate-950/70 border border-white/8 rounded-[2.5rem] px-8 py-8 text-[13.5px] font-bold text-white outline-none min-h-[160px] focus:border-sky-500/50 transition-all" />
+    <textarea value={value} onChange={onChange} placeholder={placeholder} className="w-full border rounded-[2.5rem] px-8 py-8 text-[13.5px] font-bold outline-none min-h-[160px] focus:border-sky-500/50 transition-all textarea-element" />
   </div>
 );
 
 const getT = (lang: string) => UI_TRANSLATIONS[lang] || UI_TRANSLATIONS.ar;
 
 export default App;
+
