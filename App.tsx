@@ -407,8 +407,8 @@ const App: React.FC = () => {
       <style>{`
         .text-rendering-legibility { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
         textarea, input { -webkit-user-select: text; user-select: text; word-break: break-word; overflow-wrap: break-word; }
-        .tab-active { background: #38bdf8; color: #fff; box-shadow: 0 4px 15px rgba(56,189,248,0.3); }
-        .nav-fixed-top { position: fixed; top: 0; left: 0; width: 100%; z-index: 500; padding: 12px 16px; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(25px); border-bottom: 1px solid rgba(255,255,255,0.12); transition: background 0.3s; pointer-events: none; }
+        .tab-active { background: #38bdf8 !important; color: #fff !important; box-shadow: 0 4px 15px rgba(56,189,248,0.3) !important; }
+        .nav-fixed-top { position: fixed; top: 0; left: 0; width: 100%; z-index: 500; padding: 12px 16px; background: #0f172a; border-bottom: 1px solid rgba(255,255,255,0.12); transition: background 0.3s; pointer-events: none; min-height: 110px !important; }
         .nav-fixed-top > * { pointer-events: auto; }
         .glass-card { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); border-radius: 1.5rem; padding: 1.5rem; position: relative; overflow: hidden; }
         
@@ -435,27 +435,31 @@ const App: React.FC = () => {
         .category-pill.active { background: #38bdf8; color: #fff; border-color: #38bdf8; box-shadow: 0 5px 15px rgba(56,189,248,0.3); }
         .prompt-id-badge { background: rgba(56,189,248,0.15); color: #38bdf8; padding: 2px 8px; border-radius: 6px; font-size: 9px; font-weight: 900; border: 1px solid rgba(56,189,248,0.2); }
 
-        .sunlight-theme { background: #f8fafc !important; color: #0f172a !important; }
-        .sunlight-theme .nav-fixed-top { background: rgba(255, 255, 255, 0.95) !important; border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important; }
-        .sunlight-theme .glass-ui, .sunlight-theme .glass-card { background: #ffffff !important; border-color: #e2e8f0 !important; box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important; }
-        .sunlight-theme h1, .sunlight-theme h2, .sunlight-theme h3, .sunlight-theme h4, .sunlight-theme p, .sunlight-theme span { color: #0f172a !important; }
-        .sunlight-theme .library-item-card { background: #ffffff !important; border-color: #e2e8f0 !important; box-shadow: 0 4px 12px rgba(0,0,0,0.04) !important; }
-        .sunlight-theme .library-dropdown { background-color: #ffffff !important; border-color: #cbd5e1 !important; color: #0f172a !important; }
+        /* DARK THEME EXPLICIT FIXES (Default State) */
+        .select-element { background-color: #1e293b !important; color: #ffffff !important; border-color: rgba(255,255,255,0.1) !important; }
+        .textarea-element { background-color: #1e293b !important; color: #ffffff !important; border-color: rgba(255,255,255,0.1) !important; }
+        .textarea-element::placeholder { color: rgba(255,255,255,0.4) !important; }
 
-        .sunlight-theme .select-element { background-color: #ffffff !important; border-color: #cbd5e1 !important; color: #0f172a !important; }
-        .sunlight-theme .select-element option { background-color: #ffffff !important; color: #0f172a !important; }
-        .sunlight-theme .textarea-element { background-color: #ffffff !important; border-color: #cbd5e1 !important; color: #0f172a !important; }
+        /* SUNLIGHT THEME (Refined for zero distortion) */
+        .sunlight-theme { background: #fdfdfd !important; color: #000000 !important; }
+        .sunlight-theme .nav-fixed-top { background: #ffffff !important; border-bottom: 1px solid #e2e8f0 !important; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important; }
+        .sunlight-theme .glass-ui, .sunlight-theme .glass-card { background: #ffffff !important; border: 2px solid #cbd5e1 !important; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1) !important; }
+        .sunlight-theme h1, .sunlight-theme h2, .sunlight-theme h3, .sunlight-theme h4, .sunlight-theme p, .sunlight-theme span { color: #000000 !important; }
+        .sunlight-theme .library-item-card { background: #f8fafc !important; border: 2px solid #e2e8f0 !important; }
+        .sunlight-theme .select-element { background-color: #ffffff !important; border-color: #94a3b8 !important; color: #000000 !important; border-width: 2px !important; }
+        .sunlight-theme .textarea-element { background-color: #ffffff !important; border-color: #94a3b8 !important; color: #000000 !important; border-width: 2px !important; }
+        .sunlight-theme .library-dropdown { background-color: #ffffff !important; border: 2px solid #94a3b8 !important; color: #000000 !important; }
+        .sunlight-theme .tab-active { background: #0284c7 !important; color: #ffffff !important; }
 
-        .library-dropdown { width: 100%; border-radius: 1.25rem; padding: 1.15rem 1.5rem; font-size: 0.9rem; font-weight: 800; appearance: none; outline: none; transition: all 0.3s; border: 1.5px solid rgba(255,255,255,0.1); background-color: rgba(15, 23, 42, 0.8); color: #fff; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2338bdf8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: left 1rem center; background-size: 1.25rem; }
-        .library-dropdown:hover { border-color: #38bdf8; }
-        .library-dropdown option { background-color: #0f172a; color: #fff; padding: 10px; }
-
-        /* NAV LAYER UPGRADE: Force visibility and clickability on Android 7-16 */
-        .nav-fixed-top { min-height: 100px !important; padding-bottom: 35px !important; background-color: #0f172a !important; pointer-events: none !important; }
-        .nav-fixed-top > div { pointer-events: auto !important; height: 100% !important; display: flex !important; align-items: center !important; }
+        .library-dropdown { width: 100%; border-radius: 1.25rem; padding: 1.15rem 1.5rem; font-size: 0.9rem; font-weight: 800; appearance: none; outline: none; transition: all 0.3s; border: 1.5px solid rgba(255,255,255,0.1); background-color: #1e293b; color: #fff; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2338bdf8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: left 1rem center; background-size: 1.25rem; }
+        
         .no-scrollbar { overflow-x: auto !important; overflow-y: visible !important; display: flex !important; gap: 18px !important; padding: 10px !important; pointer-events: auto !important; -webkit-overflow-scrolling: touch !important; position: relative !important; z-index: 600 !important; }
         .NavIcon + div { opacity: 1 !important; visibility: visible !important; transform: none !important; bottom: -32px !important; pointer-events: none !important; }
         .NavIcon + div span { background: #0ea5e9 !important; font-weight: 900 !important; text-shadow: 0 1px 2px rgba(0,0,0,0.5) !important; border: 1px solid rgba(255,255,255,0.1) !important; }
+
+        /* BUILD SAFETY LAYER */
+        .page-transition { min-height: 80vh; display: block !important; visibility: visible !important; }
+        .search-bar-container { position: sticky; top: 120px; z-index: 400; background: inherit; padding-top: 10px; padding-bottom: 10px; }
       `}</style>
 
       {showAnnouncement && (
@@ -556,7 +560,7 @@ const App: React.FC = () => {
                     <ActionBtn icon="🔗" label={t.resultActions.share} onClick={() => shareContent(generatedPrompt)} />
                   </div>
                 </div>
-                <textarea value={generatedPrompt} onChange={(e) => setGeneratedPrompt(e.target.value)} readOnly={!isEditable} className={`w-full p-6 rounded-2xl text-[12px] font-mono min-h-[200px] no-scrollbar border transition-all ${isSunlightMode ? 'bg-slate-50 border-slate-300 text-slate-900' : 'bg-black/40 border-transparent text-slate-300'} ${isEditable ? 'border-sky-500/40' : ''}`} />
+                <textarea value={generatedPrompt} onChange={(e) => setGeneratedPrompt(e.target.value)} readOnly={!isEditable} className={`w-full p-6 rounded-2xl text-[12px] font-mono min-h-[200px] no-scrollbar border transition-all ${isSunlightMode ? 'bg-white border-slate-300 text-slate-900' : 'bg-black/40 border-transparent text-slate-300'} ${isEditable ? 'border-sky-500/40' : ''} textarea-element`} />
               </section>
             )}
           </div>
@@ -719,11 +723,11 @@ const App: React.FC = () => {
         )}
 
         {activeTab === 'library' && (
-          <div className="page-transition space-y-6 pb-32 w-full animate-in fade-in zoom-in duration-500">
-            <div className="space-y-4">
+          <div className="page-transition space-y-6 pb-32 w-full animate-in fade-in duration-500">
+            <div className="search-bar-container space-y-4">
                 <div className={`glass-ui h-16 rounded-full flex items-center px-8 w-full border shadow-[0_0_20px_rgba(56,189,248,0.1)] ${isSunlightMode ? 'bg-white border-slate-300' : 'bg-slate-900/60 border-sky-500/20'}`}>
                 <span className="mr-4 text-slate-500">🔍</span>
-                <input type="text" placeholder={t.placeholders.search} className={`flex-1 bg-transparent py-2 text-sm font-bold outline-none w-full ${isSunlightMode ? 'text-slate-900' : 'text-white'}`} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+                <input type="text" placeholder={t.placeholders.search} className={`flex-1 bg-transparent py-2 text-sm font-bold outline-none w-full ${isSunlightMode ? 'text-black' : 'text-white'}`} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
                 </div>
                 
                 <div className="w-full">
@@ -739,20 +743,22 @@ const App: React.FC = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-              {filteredSubjects.map((s) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full pt-4">
+              {filteredSubjects.length > 0 ? filteredSubjects.map((s) => (
                 <div key={s.id} className="library-item-card p-8 group relative overflow-hidden">
                   <div className="absolute top-4 left-4"><span className="prompt-id-badge">#{s.id}</span></div>
                   <div className="flex-grow space-y-3 mt-4">
                     <span className={`text-[9px] font-black uppercase tracking-widest ${isSunlightMode ? 'text-sky-600' : 'text-sky-400/60'}`}>{s.cat}</span>
-                    <p className={`text-[14px] font-black leading-tight transition-colors ${isSunlightMode ? 'text-slate-800' : 'text-white group-hover:text-sky-400'}`}>{appLang === 'ar' ? s.ar : s.en}</p>
+                    <p className={`text-[14px] font-black leading-tight transition-colors ${isSunlightMode ? 'text-black' : 'text-white group-hover:text-sky-400'}`}>{appLang === 'ar' ? s.ar : s.en}</p>
                   </div>
                   <div className="mt-8 flex flex-col gap-2">
                     <button onClick={() => handleQuickCopyTrigger(s)} className={`w-full py-3 text-[11px] font-black border rounded-2xl transition-all active:scale-95 flex items-center justify-center gap-2 ${isSunlightMode ? 'bg-slate-100 text-slate-700 border-slate-200' : 'bg-white/5 text-white border-white/5 hover:bg-sky-500/20'}`}><span>📋</span> {t.quickCopy}</button>
                     <button onClick={() => handleEditTrigger(s)} className={`w-full py-3 rounded-2xl text-[11px] font-black transition-all active:scale-95 ${isSunlightMode ? 'bg-sky-600 text-white shadow-sm' : 'bg-white text-slate-950 hover:bg-sky-500 hover:text-white'}`}>{t.editInStudio}</button>
                   </div>
                 </div>
-              ))}
+              )) : (
+                <div className="col-span-full text-center py-20 opacity-50 font-bold">No results found</div>
+              )}
             </div>
           </div>
         )}
@@ -796,7 +802,7 @@ const NavIcon = ({ active, icon, onClick, isSunlight, label }: any) => (
         ${active 
           ? 'bg-gradient-to-tr from-sky-400 to-blue-600 text-white scale-125 shadow-[0_0_25px_rgba(56,189,248,0.6)] border-2 border-white/30 active' 
           : isSunlight 
-            ? 'bg-slate-200 text-slate-600 hover:bg-slate-300 hover:scale-110 shadow-lg border border-slate-300' 
+            ? 'bg-slate-100 text-slate-800 hover:bg-slate-200 hover:scale-110 shadow-lg border border-slate-300' 
             : 'bg-white/10 text-white hover:bg-white/20 hover:scale-110 shadow-xl border border-white/10'}`}
     >
       <span className={`text-2xl transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]`}>
