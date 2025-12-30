@@ -35,7 +35,7 @@ const UI_TRANSLATIONS: any = {
     saved: 'تمت الأرشفة بنجاح في الذاكرة!',
     promptMode: { image: 'توليد الصور', video: 'إنتاج الفيديو', post: 'نص إحترافي' },
     placeholders: { text: 'عنوان الحملة أو الموضوع الرئيسي...', search: 'بحث سريع...' },
-    labels: { lang: 'محرك اللغة', ratio: 'أبعاد المخرج', mood: 'نبرة الصوت والأسلوب', bg: 'سياق المحتوى والبيئة (100+)', tech: 'قالب الهيكلة الاحترافي', text: 'الموضوع الأساسي', details: 'تفاصيل الحملة', useRef: 'تحليل سيكولوجي حصري ل Dicelion-Technique 🧠', engOnly: 'تصدير إنجليزي (نص البرومبت) 🇺🇸', aiTarget: 'منصة الذكاء المستهدفة', useImgSource: 'تحليل مشهد الصورة المرفقة 🖼️', visualEnglish: 'حروف إنجليزية حصراً داخل الصورة 🔠', visualEnglishDesc: 'لضمان دقة النصوص البصرية؛ أغلب الأدوات لا تدعم العربية باستثناء Nanobanana.' },
+    labels: { lang: 'محرك اللغة', ratio: 'أبعاد المخرج', mood: 'نبرة الصوت والأسلوب', bg: 'سياق المحتوى والبيئة (100+)', tech: 'قالب الهيكلة الاحترافي', text: 'الموضوع الأساسي', details: 'تفاصيل الحملة', useRef: 'توليد Prompt بتقنية سيكولوجي حصري ل DT-Prompt', engOnly: 'توليد نص Prompt بالإنجليزية فقط', aiTarget: 'منصة الذكاء المستهدفة', useImgSource: 'توليد Prompt مرفق بالصورة', visualEnglish: 'توليد Prompt لمنصة لا تدعم العربية', visualEnglishDesc: 'لضمان دقة النصوص البصرية؛ أغلب الأدوات لا تدعم العربية باستثناء Nanobanana.' },
     announcement: { 
       title: 'إشعار Dicelion-Technique 🚀', 
       skip: 'تخطي', 
@@ -123,7 +123,7 @@ const UI_TRANSLATIONS: any = {
     saved: 'Archived successfully!',
     promptMode: { image: 'Image Gen', video: 'Video Gen', post: 'Pro Text' },
     placeholders: { text: 'Campaign title...', search: 'Quick search...' },
-    labels: { lang: 'Language', ratio: 'Ratio', mood: 'Tone & Style', bg: 'Context & Environment (100+)', tech: 'Structure', text: 'Subject', details: 'Details', useRef: 'Dicelion-Technique Exclusive Psych Analysis 🧠', engOnly: 'Export English (Prompt Text) 🇺🇸', aiTarget: 'Target AI Platform', useImgSource: 'Analyze Ref Image Scene 🖼️', visualEnglish: 'English Only Visual Text 🔠', visualEnglishDesc: 'For text accuracy; most tools only support English visuals (except Nanobanana).' },
+    labels: { lang: 'Language', ratio: 'Ratio', mood: 'Tone & Style', bg: 'Context & Environment (100+)', tech: 'Structure', text: 'Subject', details: 'Details', useRef: 'Exclusive Psych DT-Prompt Tech', engOnly: 'Generate English Prompt Only', aiTarget: 'Target AI Platform', useImgSource: 'Generate Prompt with Image', visualEnglish: 'Generate Prompt for non-Arabic platforms', visualEnglishDesc: 'For text accuracy; most tools only support English visuals (except Nanobanana).' },
     announcement: { 
       title: 'Dicelion-Technique Notice 🚀', 
       skip: 'Skip', 
@@ -380,11 +380,11 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className={`min-h-screen flex flex-col pb-40 px-4 sm:px-6 ${t.dir} select-none overflow-x-hidden w-full max-w-full`}>
+    <div className={`min-h-screen flex flex-col pt-24 pb-12 px-4 sm:px-6 ${t.dir} select-none overflow-x-hidden w-full max-w-full`}>
       <style>{`
         textarea, input { -webkit-user-select: text; user-select: text; word-break: break-word; overflow-wrap: break-word; }
         .tab-active { background: #38bdf8; color: #fff; box-shadow: 0 4px 15px rgba(56,189,248,0.3); }
-        .nav-fixed-bottom { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 500; padding: 12px 16px; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(25px); border-top: 1px solid rgba(255,255,255,0.12); }
+        .nav-fixed-top { position: fixed; top: 0; left: 0; width: 100%; z-index: 500; padding: 12px 16px; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(25px); border-bottom: 1px solid rgba(255,255,255,0.12); }
         .glass-card { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); border-radius: 1.5rem; padding: 1.5rem; position: relative; overflow: hidden; }
         .guide-step { position: relative; padding-inline-start: 1rem; border-inline-start: 4px solid rgba(56,189,248,0.4); }
         
@@ -493,7 +493,21 @@ const App: React.FC = () => {
         </div>
       )}
 
-      <header className="pt-12 pb-8 text-center px-4 w-full">
+      {/* شريط التنقل العلوي المحسن */}
+      <nav className="nav-fixed-top">
+        <div className="max-w-xl mx-auto flex items-center justify-between gap-1 w-full px-2">
+             <button onClick={() => setActiveTab('create')} className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-lg transition-all ${activeTab === 'create' ? 'bg-sky-500 text-white scale-110 shadow-[0_0_20px_rgba(56,189,248,0.5)]' : 'bg-white/5 text-slate-500'}`}>🏠</button>
+             <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 flex-1 justify-around">
+                <NavIcon active={activeTab === 'library'} onClick={() => setActiveTab('library')} icon="📚" />
+                <NavIcon active={activeTab === 'history'} onClick={() => setActiveTab('history')} icon="🕒" />
+                <NavIcon active={showLangSelector} onClick={() => setShowLangSelector(true)} icon="🌍" />
+                <NavIcon active={activeTab === 'guide'} onClick={() => setActiveTab('guide')} icon="📖" />
+                <NavIcon active={activeTab === 'about'} onClick={() => setActiveTab('about')} icon="ℹ️" />
+             </div>
+        </div>
+      </nav>
+
+      <header className="pt-4 pb-8 text-center px-4 w-full">
         <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tighter neon-accent">{t.title}</h1>
         <p className="text-[10px] sm:text-[11px] font-bold text-sky-400 uppercase tracking-[0.2em] mt-2 leading-relaxed">{t.subtitle}</p>
       </header>
@@ -776,19 +790,6 @@ const App: React.FC = () => {
         )}
       </main>
 
-      <nav className="nav-fixed-bottom">
-        <div className="max-w-xl mx-auto flex items-center justify-between gap-1 w-full px-2">
-             <button onClick={() => setActiveTab('create')} className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-lg transition-all ${activeTab === 'create' ? 'bg-sky-500 text-white scale-110 shadow-[0_0_20px_rgba(56,189,248,0.5)]' : 'bg-white/5 text-slate-500'}`}>🏠</button>
-             <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 flex-1 justify-around">
-                <NavIcon active={activeTab === 'library'} onClick={() => setActiveTab('library')} icon="📚" />
-                <NavIcon active={activeTab === 'history'} onClick={() => setActiveTab('history')} icon="🕒" />
-                <NavIcon active={showLangSelector} onClick={() => setShowLangSelector(true)} icon="🌍" />
-                <NavIcon active={activeTab === 'guide'} onClick={() => setActiveTab('guide')} icon="📖" />
-                <NavIcon active={activeTab === 'about'} onClick={() => setActiveTab('about')} icon="ℹ️" />
-             </div>
-        </div>
-      </nav>
-
       {showLangSelector && (
         <div className="fixed inset-0 z-[1000] flex items-end bg-black/70 backdrop-blur-md" onClick={() => setShowLangSelector(false)}>
            <div className="w-full bg-slate-900/95 rounded-t-[3rem] p-8 space-y-4 border-t border-sky-500/30 shadow-[0_-20px_60px_rgba(56,189,248,0.2)]" onClick={e => e.stopPropagation()}>
@@ -820,9 +821,17 @@ const NavIcon = ({ active, icon, onClick }: any) => (
 );
 
 const CheckboxItem = ({ label, checked, onChange, activeColor }: any) => (
-  <div className={`p-4 rounded-2xl border flex items-center justify-between cursor-pointer transition-all ${checked ? activeColor : 'border-white/5 bg-slate-900/40'}`} onClick={onChange}>
+  <div className={`p-4 rounded-2xl border flex items-center justify-between cursor-pointer transition-all ${checked ? 'border-green-500/30 bg-green-500/5' : 'border-white/5 bg-slate-900/40'}`} onClick={onChange}>
     <span className="text-[11px] font-black">{label}</span>
-    <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${checked ? 'bg-current text-white shadow-[0_0_10px_currentColor]' : 'border-2 border-white/10'}`}>{checked && <span className="text-[12px]">✓</span>}</div>
+    <div className={`w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 relative overflow-hidden ${checked ? 'scale-110 shadow-[0_0_25px_rgba(34,197,94,0.6)]' : 'border-2 border-white/10 bg-white/5'}`}>
+      {checked ? (
+        <div className="w-full h-full bg-[#10b981] flex items-center justify-center border-[3px] border-[#065f46] shadow-inner">
+            {/* Glossy reflection Layer */}
+            <div className="absolute top-1 left-1/2 -translate-x-1/2 w-[80%] h-[40%] bg-white/30 rounded-full blur-[1px]"></div>
+            <span className="text-white text-2xl font-black drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] relative z-10 select-none">✓</span>
+        </div>
+      ) : null}
+    </div>
   </div>
 );
 

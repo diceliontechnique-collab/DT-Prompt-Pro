@@ -99,6 +99,7 @@ export const SEED_DATA = {
     { ar: 'ثلاثي أبعاد إعلاني (C4D)', en: 'Premium 3D render, Cinema 4D style, smooth glossy surfaces, colorful lighting' }
   ],
   backgrounds: [
+    { ar: 'بدون (يدوي)', en: 'None/Manual: No specific background, follow manual subject input only' },
     { ar: 'مختبر إصلاح ميكروسكوبي للهواتف', en: 'High-tech smartphone repair lab, microscopic soldering station, precision tools' },
     { ar: 'معرض بيع هواتف ذكية Premium', en: 'Luxury smartphone showroom, minimalist glass displays, Apple-style interior' },
     { ar: 'متجر إكسسوارات هواتف عصرية', en: 'Trendy mobile accessories wall, colorful cases, aesthetic shelf lighting' },
@@ -170,7 +171,7 @@ export const SEED_DATA = {
     { ar: 'جناح فندقي 7 نجوم', en: '7-star hotel suite, premium amenities, panoramic city view' },
     { ar: 'نادي غولف أخضر شاسع', en: 'Vast green golf club, elite sports atmosphere, perfect grass' },
     { ar: 'غابة استوائية ضبابية', en: 'Mist-covered tropical jungle, sunbeams through trees, exotic' },
-    { ar: 'قمة جبل ثلجي (Epic)', en: 'Epic snowy mountain peak, blue sky, vast winter landscape' },
+    { ar: 'قمة جبل ثلجي (Epic)', en: 'Epic snowy mountain peak, blue sky, wide winter landscape' },
     { ar: 'صحراء رملية وقت الغروب', en: 'Sand desert at sunset, golden dunes, dramatic shadows' },
     { ar: 'شلال مياه وسط طبيعة', en: 'Nature waterfall, lush greenery, refreshing misty atmosphere' },
     { ar: 'شاطئ استوائي مياه فيروزية', en: 'Tropical beach, turquoise water, white sand, palm trees' },
@@ -202,6 +203,7 @@ export const SEED_DATA = {
     { ar: 'غرفة خياطة وتصميم أزياء', en: 'Fashion design and sewing room, silk rolls, mannequins' }
   ],
   moods: [
+    { ar: 'بدون (يدوي)', en: 'None/Manual: No preset mood, follow manual subject input only' },
     { ar: 'جذب انتباه تسويقي (Hook)', en: 'High-energy marketing hook, vibrant colors, bold lighting' },
     { ar: 'إثارة بصرية (Viral)', en: 'Viral-ready visual impact, attention-grabbing, high contrast' },
     { ar: 'فخامة مؤسسية (Corporate)', en: 'Prestige corporate mood, trustworthy, clean professional' },
@@ -304,6 +306,7 @@ export const SEED_DATA = {
     { ar: 'جمالية لو-فاي', en: 'Lo-fi chill aesthetic, nostalgic blur' }
   ],
   technicals: [
+    { ar: 'بدون (يدوي)', en: 'None/Manual: No preset structure, follow manual subject input only' },
     { ar: 'رندر أوكتان احترافي (Octane)', en: 'Professional Octane Render, 8K resolution, physically based rendering (PBR), raytraced global illumination, volumetric lighting' },
     { ar: 'محرك أنريل 5 (UE5)', en: 'Unreal Engine 5 style, Lumen global illumination, Nanite detail, photorealistic textures, cinematic post-processing' },
     { ar: 'واقعية فوتوغرافية قصوى (RAW)', en: 'Hyper-realistic raw photo, f/1.8 lens, sharp focus, ISO 100, professional studio lighting, detailed pores and textures' },
