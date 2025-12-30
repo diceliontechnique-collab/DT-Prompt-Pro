@@ -87,7 +87,7 @@ export const SEED_DATA = {
     { ar: 'خبير أحجار كريمة وألماس', en: 'Gemologist, inspecting diamond, loupe, sparkling jewels', cat: 'حرف' },
     { ar: 'مربي خيول عربية أصيلة', en: 'Arabian horse trainer, stables, sunrise, dust particles', cat: 'حرف' },
     { ar: 'مدير مشاريع إنشائية', en: 'Construction project manager, safety helmet, site map', cat: 'بناء' },
-    { ar: 'طبيب بيطري لحيوانات أليفة', en: 'Veterinarian, animal clinic, caring for a kitten, soft light', cat: 'طب' },
+    { ar: 'طبيب بيطري לحيوانات أليفة', en: 'Veterinarian, animal clinic, caring for a kitten, soft light', cat: 'طب' },
     { ar: 'خبير ذكاء أعمال (BI)', en: 'Business Intelligence analyst, data charts, corporate office', cat: 'بزنس' },
     { ar: 'صانع محتوى تيك توك ترند', en: 'TikTok influencer, viral challenge, ring light, colorful room', cat: 'ترفيه' },
     { ar: 'خبير تغذية علاجية', en: 'Dietitian, office, organic food visuals, health focus', cat: 'طب' },
@@ -339,8 +339,21 @@ export const PRO_CODE_DATABASE = [
   { id: '8', title: 'نظام حماية البيانات التشفيري', lang: 'C++', category: 'Security', code: '#include <iostream>\n#include <string>\n\nstd::string encrypt(std::string data) {\n    for(char &c : data) c += 3; \n    return data;\n}', complexity: 'Expert' }
 ];
 
+// إضافة بذور متخصصة للغاية للميادين المطلوبة (Nucleus Seeds)
+export const SPECIALIZED_ULTRA_SEEDS = [
+    { ar: 'استراتيجية تنويع المحاصيل الزراعية', en: 'Precision agriculture crop rotation strategy, soil health analysis, irrigation optimization, sustainable farming yield forecasting', cat: 'فلاحة' },
+    { ar: 'تصميم مركبة استكشاف فضائي (Rover)', en: 'Mars rover design concept, autonomous navigation sensors, geological sampling drill, radiation shielding, high-gain antenna, NASA aesthetic', cat: 'فضاء' },
+    { ar: 'تحليل اقتصاديات "بلوك تشين"', en: 'Macroeconomic impact analysis of blockchain adoption, decentralized finance (DeFi) regulatory framework, tokenomics design, global trade efficiency', cat: 'اقتصاد' },
+    { ar: 'سياسة دولية: توازن القوى النووي', en: 'International relations geopolitical analysis of nuclear deterrence, multilateral treaty negotiations, strategic stability framework, academic tone', cat: 'سياسة' },
+    { ar: 'هندسة مفاعلات "الاندماج النووي"', en: 'Nuclear fusion reactor engineering blueprint, magnetic confinement tokamak design, plasma stability controls, clean energy infrastructure', cat: 'تكنولوجيا' },
+    { ar: 'خطة تشجير مدن "الصفر كربون"', en: 'Urban afforestation master plan for carbon-neutral cities, native species selection, heat island mitigation, IoT water management', cat: 'بيئة' },
+    { ar: 'نظام قضائي "ذكاء اصطناعي"', en: 'AI-driven judicial decision support system, case law database integration, legal precedent analysis, ethical bias mitigation, professional law style', cat: 'قانون' },
+    { ar: 'استراتيجية تسويق "المنتجات العضوية"', en: 'Holistic marketing plan for premium organic food brands, consumer trust building, farm-to-table storytelling, visual eco-branding', cat: 'تسويق' }
+];
+
 export const PRO_PROMPT_DATABASE = [
   ...SEED_DATA.subjects,
+  ...SPECIALIZED_ULTRA_SEEDS,
   { ar: 'تصميم شعار (Logo) لشركة طيران مستقبلية', en: 'Minimalist futuristic airline logo design, vector art, sleek gradients, symbolic wings', cat: 'تصميم' },
   { ar: 'بوستر فيلم رعب في غابة مهجورة', en: 'Horror movie poster, abandoned foggy forest, mysterious silhouette, dark red lighting', cat: 'سينما' },
   { ar: 'فيديو ترويجي لسيارة تسلا الرياضية', en: 'Cinematic car commercial, Tesla sports car drifting on neon highway, high speed motion blur', cat: 'فيديو' },
@@ -358,45 +371,69 @@ export const PRO_PROMPT_DATABASE = [
 // طبقة الأرشيف المليونية الجديدة (PRO_ULTRA_DB) - تغذية ضخمة للتخصصات المطلوبة
 export const PRO_ULTRA_DB = [
     ...PRO_PROMPT_DATABASE,
+    // ميادين التسويق والأعمال (Marketing & Business)
+    { ar: 'استراتيجية تسويق محتوى (Content Plan)', en: 'Expert digital marketing content plan, customer journey mapping, viral hooks, SEO keywords, high conversion CTA, professional business tone', cat: 'تسويق' },
+    { ar: 'تحليل سوات (SWOT Analysis) لشركة ناشئة', en: 'Detailed SWOT analysis for a tech startup, identifying strengths, weaknesses, opportunities, and threats, strategic recommendations, corporate style', cat: 'بزنس' },
+    { ar: 'إعلان فيسبوك (Facebook Ads) لمنتج تجميل', en: 'High-converting Facebook ad copy for a luxury beauty product, attention-grabbing headline, benefit-driven body, social proof, strong call-to-action', cat: 'تسويق' },
+    { ar: 'بريد إلكتروني بيعي (Cold Email) لشركات B2B', en: 'Professional cold email for B2B sales, personalized approach, pain point identification, value proposition, clear follow-up request', cat: 'تسويق' },
+    { ar: 'منشور لينكد إن (LinkedIn) قيادي', en: 'Thought leadership LinkedIn post, professional storytelling about career growth, industry insights, engagement triggers, sleek formatting', cat: 'تسويق' },
+    { ar: 'سكريبت فيديو ترويجي (Script) لمنتج تقني', en: 'Promotional video script for a SaaS product, problem-solution framework, fast-paced dialogue, visual scene descriptions, upbeat tone', cat: 'تسويق' },
+    { ar: 'خطة إعلانية لسلسلة مطاعم عالمية', en: 'Strategic advertising plan for a global restaurant chain, multi-channel approach, seasonal campaign ideas, budget allocation, brand consistency', cat: 'بزنس' },
+    { ar: 'تصميم تجربة مستخدم (UX Case Study)', en: 'Detailed UX case study report, user research findings, wireframe explanations, interactive prototype description, professional design terminology', cat: 'تقنية' },
+    
+    // الفن والسينما (Art & Cinema)
+    { ar: 'بوستر فيلم "خيال علمي" ملحمي (Epic)', en: 'Epic sci-fi movie poster, massive spaceship over a futuristic desert city, cosmic nebula, cinematic lighting, teal and orange palette, high-resolution', cat: 'سينما' },
+    { ar: 'رسم رقمي (Digital Painting) لشخصية فانتزي', en: 'Masterful digital painting of a fantasy warrior, ornate golden armor, glowing sword, ethereal forest background, sharp focus, vibrant magical particles', cat: 'فن' },
+    { ar: 'لوحة زيتية (Oil Painting) لمنظر طبيعي', en: 'Classic oil painting style, Italian lakeside villa, lush gardens, sunlight reflecting on water, thick brushstrokes, warm Mediterranean colors', cat: 'فن' },
+    { ar: 'تصميم خلفية (Concept Art) لغابة مسحورة', en: 'Concept art of an enchanted bioluminescent forest, giant glowing mushrooms, mysterious mist, soft cool lighting, immersive atmosphere', cat: 'فن' },
+    { ar: 'بوستر فيلم "رعب نفسي" (Psychological)', en: 'Psychological horror movie poster, distorted mirror reflections, dark shadows, pale face, high contrast noir lighting, unsettling mood', cat: 'سينما' },
+    { ar: 'شخصية أنمي (Anime Style) محاربة سيافة', en: 'High-quality anime character design, female samurai, dynamic pose, cherry blossom petals, vibrant cel-shaded style, detailed background', cat: 'فن' },
+    { ar: 'تصميم شعار (Logo) لبراند ملابس ستريت', en: 'Minimalist street-wear brand logo, vector art, bold typography, symbolic urban icon, sleek and modern', cat: 'فن' },
+    
+    // الطب والعلوم (Medicine & Science)
+    { ar: 'تقرير طبي (Medical Report) عن حالة نادرة', en: 'Professional medical case study report, clinical terminology, diagnostic findings, treatment protocol, research-based tone', cat: 'طب' },
+    { ar: 'خوارزمية تشخيص أمراض (AI Diagnosis)', en: 'Technical explanation of an AI diagnostic algorithm, neural network architecture, data training parameters, accuracy metrics, expert tech style', cat: 'طب' },
+    { ar: 'مقالة علمية عن "تعديل الجينات"', en: 'Scientific article about CRISPR gene editing, ethical considerations, breakthrough research summary, academic tone, detailed references', cat: 'علوم' },
+    { ar: 'نظام رعاية صحية ذكي (Smart Health)', en: 'Design concept for a smart healthcare monitoring system, IoT integration, real-time data visualization, patient-centric UI', cat: 'طب' },
+    { ar: 'بحث في الصيدلة السريرية', en: 'Clinical pharmacy research paper, drug interaction analysis, patient outcomes, statistical methodology, professional academic writing', cat: 'طب' },
+    
+    // المهن والحرف (Professions & Crafts)
+    { ar: 'فني تكييف وتبريد (HVAC) في موقع صناعي', en: 'HVAC technician working on a massive industrial cooling system, professional safety gear, industrial environment, sparks, realistic lighting', cat: 'صيانة' },
+    { ar: 'نجار مبدع يصمم أثاث مودرن', en: 'Creative carpenter in a modern workshop, hand-crafting a minimalist oak table, wood shavings, natural window light, artisanal vibe', cat: 'حرف' },
+    { ar: 'كهربائي أنظمة ذكية (Smart Home)', en: 'Smart home electrician installing a complex control panel, high-tech devices, glowing LEDs, precise workmanship, modern home background', cat: 'صيانة' },
+    { ar: 'خياط ملكي (Bespoke Tailor)', en: 'Bespoke tailor measuring a luxury silk suit, prestigious workshop interior, rolls of fine fabric, sewing machine, warm professional light', cat: 'حرف' },
+    { ar: 'سباك محترف في مشروع ضخم', en: 'Professional plumber installing industrial pipe systems, technical blueprints background, professional tools, sharp focus, gritty realism', cat: 'صيانة' },
+    
+    // الأفلام والإنتاج (Movies & Production)
+    { ar: 'موقع تصوير (Set) لفيلم تاريخي', en: 'Cinema set of an ancient Roman street, authentic costumes, massive stone structures, cinematic lighting rigs, professional cameras, epic scale', cat: 'فيديو' },
+    { ar: 'سكريبت فيلم "غموض وتشويق"', en: 'Short scene script for a mystery thriller, intense dialogue, suspenseful stage directions, psychological character depth', cat: 'سينما' },
+    { ar: 'تصميم شخصية (CGI) لشرير خارق', en: 'Hyper-detailed CGI character of a powerful villain, obsidian armor, glowing red eyes, dark atmospheric smoke, Octane render, master composition', cat: 'فن' },
+    
+    // الإسلاميات والدعوة (Islamic & Dawah)
+    { ar: 'بوستر دعوي "فضل الصلاة"', en: 'Beautiful Islamic dawah poster about the virtue of prayer, soft heavenly light, mosque silhouette, elegant calligraphy, peaceful atmosphere', cat: 'دعوي' },
+    { ar: 'منشور "أذكار الصباح" بتصميم عصري', en: 'Modern morning Athkar social media post, minimalist geometric patterns, soft teal and gold palette, professional typography', cat: 'دعوي' },
+    { ar: 'تصميم "حكمة إسلامية" عن الصبر', en: 'Spiritual wisdom post about patience, Arabic calligraphy style, desert oasis background at sunrise, warm divine lighting', cat: 'دعوي' },
+    
+    // المناسبات والاجتماعيات (Social & Events)
     { ar: 'بطاقة دعوة زفاف ملكية فاخرة', en: 'Luxury royal wedding invitation card, gold filigree ornaments, velvet texture, elegant Arabic calligraphy, warm cinematic lighting', cat: 'مناسبات' },
-    { ar: 'بوستر دعوي "بر الوالدين" مؤثر', en: 'Poignant Islamic poster about honoring parents, soft divine lighting, emotional atmosphere, high resolution details', cat: 'دعوي' },
-    { ar: 'تصميم منشور "حب وغرام" لزوجين', en: 'Halal love and romance post, young couple in a scenic garden at sunset, warm aesthetic, hyper-realistic, bokeh background', cat: 'مشاعر' },
+    { ar: 'منشور "حب وغرام" لزوجين (Halal)', en: 'Halal love and romance post, young couple in a scenic garden at sunset, warm aesthetic, hyper-realistic, bokeh background', cat: 'مشاعر' },
     { ar: 'بطاقة تهنئة خطوبة باللون الروز', en: 'Elegant engagement greeting card, rose gold palette, sparkling rings, silk fabric background, 8k render', cat: 'مناسبات' },
-    { ar: 'منشور إعلاني لشركة عقارات كبرى', en: 'Professional corporate real estate post, modern skyscraper architecture, clean minimalist layout, high contrast blue tones', cat: 'شركات' },
-    { ar: 'تصميم حكم وأقوال مأثورة (Zen Style)', en: 'Zen style wisdom quote post, stone balancing, misty waterfall, professional typography, peaceful atmosphere', cat: 'حكم' },
-    { ar: 'فيديو "صلة الرحم" والإخوة', en: 'Cinematic video scene of siblings laughing together, natural indoor light, nostalgic film grain, professional color grading', cat: 'دعوي' },
-    { ar: 'هوية بصرية كاملة لبراند عطور', en: 'Complete visual identity for a luxury perfume brand, glass bottles, smoke of oud, elegant lighting, professional branding', cat: 'شركات' },
-    { ar: 'بطاقة "جمعة مباركة" بزخارف ثلث', en: 'Professional Jummah Mubarak card, intricate Thuluth calligraphy, mosque architecture silhouette, golden highlights', cat: 'دعوي' },
     { ar: 'تصميم "صداقة وفاء" بأسلوب أنمي', en: 'Meaningful friendship post in high-end anime style, vibrant sky, expressive characters, detailed scenery', cat: 'مشاعر' },
+    { ar: 'بطاقة "جمعة مباركة" بزخارف ثلث', en: 'Professional Jummah Mubarak card, intricate Thuluth calligraphy, mosque architecture silhouette, golden highlights', cat: 'دعوي' },
+    
+    // الشركات والإدارة (Corporate & Management)
+    { ar: 'منشور إعلاني لشركة عقارات كبرى', en: 'Professional corporate real estate post, modern skyscraper architecture, clean minimalist layout, high contrast blue tones', cat: 'شركات' },
     { ar: 'إعلان تسويقي لشركة برمجيات (Cyber)', en: 'High-tech cybersecurity company marketing post, matrix falling code, glowing locks, professional blue and green aesthetic', cat: 'شركات' },
-    { ar: 'بطاقة تهنئة زواج كلاسيكية', en: 'Traditional elegant marriage greeting card, cream paper texture, gold ink, floral borders, soft focus', cat: 'مناسبات' },
-    { ar: 'بوستر دعوي "القرآن ربيع قلوبنا"', en: 'Peaceful Islamic poster, Quran on a wooden stand, sunlight through window, dust particles, heavenly rays', cat: 'دعوي' },
-    { ar: 'حكمة عن الصبر والنجاح', en: 'Philosophical quote design, growing plant in desert, wide lens, sunrise, cinematic lighting, sharp focus', cat: 'حكم' },
-    { ar: 'منشور "أحبك يا أمي" دافئ', en: 'Heartwarming mother and child embrace, warm sunset glow, emotional brush strokes, artistic oil painting style', cat: 'مشاعر' },
-    { ar: 'بطاقة دعوة خطوبة مودرن', en: 'Modern engagement invitation, minimalist rose gold, geometric lines, marble texture, luxury fashion vibe', cat: 'مناسبات' },
     { ar: 'إعلان مطعم فاخر (Steakhouse)', en: 'Professional steakhouse food commercial post, juicy steak, fire flames background, dark moody lighting', cat: 'شركات' },
-    { ar: 'موعظة عن حسن الخلق', en: 'Islamic moral guidance post, blooming tree in the heart, soft colors, spiritual peace', cat: 'دعوي' },
-    { ar: 'منشور عن "صداقة الطفولة"', en: 'Two young friends playing together, nostalgic sepia tone, vintage film look, high emotional impact', cat: 'مشاعر' },
-    { ar: 'حكمة مأثورة عن الوقت', en: 'Old pocket watch in a library, dark academia aesthetic, candles, wisdom quote about time', cat: 'حكم' },
     { ar: 'إعلان فيديو "تسويق عقاري" دروني', en: 'Dynamic drone cinematic real estate video, smooth transitions, high production value, sunset architectural lighting', cat: 'شركات' },
-    { ar: 'بطاقة "ذكرى زواج" سعيدة برتقالية', en: 'Warm orange happy anniversary card, candle light, roses, high resolution 3D render, luxury atmosphere', cat: 'مناسبات' },
-    { ar: 'تصميم "حكمة اليوم" بأسلوب نيون', en: 'Neon style wisdom of the day post, cyberpunk calligraphy, glowing letters, dark tech background', cat: 'حكم' },
-    { ar: 'بوستر دعوي "الصدقة تطفئ الخطيئة"', en: 'Powerful Islamic charity poster, giving hand, light beam from sky, heart glowing, soft peaceful background', cat: 'دعوي' },
-    { ar: 'تصميم "حب الوالدين" كرتوني لطيف', en: 'Cute cartoon style parents love post, vibrant colors, expressive characters, happy home atmosphere', cat: 'مشاعر' },
     { ar: 'تصميم لاند سكيب ذكي للفيلات', en: 'High-end landscape architecture for a luxury villa, infinity pool, fire pits, professional greenery design, golden hour lighting', cat: 'هندسة' },
+    { ar: 'هوية بصرية كاملة لبراند عطور', en: 'Complete visual identity for a luxury perfume brand, glass bottles, smoke of oud, elegant lighting, professional branding', cat: 'شركات' },
+    
+    // الحكم والتعليم (Wisdom & Education)
+    { ar: 'تصميم حكم وأقوال مأثورة (Zen Style)', en: 'Zen style wisdom quote post, stone balancing, misty waterfall, professional typography, peaceful atmosphere', cat: 'حكم' },
+    { ar: 'حكمة مأثورة عن الوقت', en: 'Old pocket watch in a library, dark academia aesthetic, candles, wisdom quote about time', cat: 'حكم' },
     { ar: 'بوستر توعوي "حماية البيئة"', en: 'Environmental awareness poster, earth in a glass bulb, vibrant green plants growing inside, clean clinical lighting, 8k resolution', cat: 'دعوي' },
     { ar: 'غلاف مجلة تقنية (Future Tech)', en: 'Tech magazine cover design, holographic interfaces, futuristic cyborg portrait, sleek typography, neon accents', cat: 'محتوى' },
     { ar: 'منشور "بر الوالدين" للأطفال', en: 'Kid-friendly Islamic educational post about parents, bright cartoon style, simple icons, high saturation', cat: 'تعليم' },
-    { ar: 'تصميم داخلي لمحل "ستاربكس" ستايل', en: 'Modern coffee shop interior design, industrial cozy vibe, dark wood, warm pendant lights, professional photography look', cat: 'تجارة' },
-    { ar: 'بوستر فيلم "خيال علمي" ملحمي', en: 'Epic sci-fi movie poster, spaceship entering a wormhole, cosmic nebula, cinematic scale, high contrast lighting', cat: 'سينما' },
-    { ar: 'إعلان "نظارات شمسية" فاخرة', en: 'High-end sunglasses commercial post, male model on a yacht, sharp focus on lenses, reflections of the sea, summer mood', cat: 'تجارة' },
-    { ar: 'تصميم لـ "العمل الجماعي" للشركات', en: 'Corporate teamwork concept, diverse team around a table, blurred office background, professional bright lighting', cat: 'شركات' },
-    { ar: 'منشور "أذكار الصباح" هادئ', en: 'Peaceful morning Athkar post, dewdrops on a leaf, early sunrise light, elegant Arabic font', cat: 'دعوي' },
-    { ar: 'بوستر "العودة للمدرسة" مرح', en: 'Joyful back-to-school poster, 3D school supplies floating, vibrant yellow background, high energy', cat: 'تعليم' },
-    { ar: 'تصميم لمحل "ألعاب أطفال" ذكي', en: 'Modern futuristic kids toy store, neon displays, interactive floor, bright saturated colors', cat: 'تجارة' },
-    { ar: 'خلفية فيديو "تأمل" (Lofi Zen)', en: 'Zen lofi meditation loop background, traditional Japanese room, sliding doors, garden with cherry blossoms', cat: 'فيديو' },
-    { ar: 'إعلان "ساعة ذكية" رياضية', en: 'Action-packed smartwatch commercial post, athlete running at night, glowing watch screen, motion blur, tech aesthetic', cat: 'تجارة' },
-    { ar: 'تصميم لـ "المستقبل الرقمي" للتعليم', en: 'Digital future of education, students wearing VR headsets in class, holographic globe, futuristic blue light', cat: 'تعليم' },
-    { ar: 'منشور "عيد مبارك" عصري', en: 'Modern Eid Mubarak social media post, minimalist crescent, marble background, gold typography', cat: 'مناسبات' },
     { ar: 'بوستر لـ "برمجيات الذكاء الاصطناعي"', en: 'AI software promotional poster, neural brain network, glowing circuits, sleek futuristic dark palette', cat: 'تقنية' }
 ];

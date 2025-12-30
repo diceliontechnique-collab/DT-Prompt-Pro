@@ -1,8 +1,8 @@
 {
-  "name": "DT-Prompt Pro",
-  "short_name": "DT-Prompt Pro",
+  "name": "DT-Prompt",
+  "short_name": "DT-Prompt",
   "description": "المحرك الهندسي المتقدم لتوليد الأوامر - DicelionTechnique",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "icons": [
     {
       "src": "icon.svg",
