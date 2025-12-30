@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { 
   ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, SEED_DATA, TEMPLATES, AI_MODELS, PRO_CODE_DATABASE, PRO_ULTRA_DB, getMillionthNeuralPrompt, WISDOM_QUOTES 
@@ -484,7 +483,26 @@ const App: React.FC = () => {
         @keyframes pulse-fast { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
         .animate-pulse-fast { animation: pulse-fast 0.8s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
 
-        .dt-logo-container { position: relative; width: 90px; height: 90px; border-radius: 24px; background: linear-gradient(135deg, #38bdf8, #1e40af); display: flex; align-items: center; justify-content: center; font-family: 'Cairo', sans-serif; font-weight: 900; color: white; font-size: 32px; box-shadow: 0 0 30px rgba(56, 189, 248, 0.4); border: 2px solid rgba(255,255,255,0.2); }
+        .dt-logo-container { 
+          position: relative; width: 90px; height: 90px; border-radius: 28px; 
+          background: linear-gradient(145deg, #021526, #03346E, #0ea5e9); 
+          display: flex; align-items: center; justify-content: center; 
+          font-family: 'Cairo', sans-serif; font-weight: 900; color: white; 
+          font-size: 38px; box-shadow: 0 10px 40px rgba(14, 165, 233, 0.5); 
+          border: 1.5px solid rgba(255,255,255,0.15); 
+          overflow: hidden;
+        }
+        .dt-logo-chip {
+          position: absolute; bottom: 0; right: 0; width: 35px; height: 35px;
+          background: #021526; border-top-left-radius: 12px;
+          display: flex; align-items: center; justify-content: center;
+          border-left: 1px solid rgba(56, 189, 248, 0.3);
+          border-top: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .dt-logo-chip span {
+          color: #38bdf8; font-size: 8px; font-weight: 900; letter-spacing: 0.5px;
+        }
+
         .library-item-card { background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 2rem; display: flex; flex-direction: column; height: 100%; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); z-index: 3000; display: flex; align-items: center; justify-content: center; padding: 20px; }
@@ -790,7 +808,8 @@ const App: React.FC = () => {
              <div className="glass-card p-12 magical-glow shadow-2xl rounded-[4rem] border-sky-500/30">
                <div className="mx-auto flex flex-col items-center gap-8 relative z-10 mb-12">
                  <div className="dt-logo-container floating-icon">
-                    DT<span className="absolute -bottom-2 -right-2 text-3xl filter drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]">🌌</span>
+                    <span className="filter drop-shadow-[0_0_12px_rgba(255,255,255,0.4)]">DT</span>
+                    <div className="dt-logo-chip"><span>AI</span></div>
                  </div>
                  <div className="text-center space-y-3">
                    <h2 className={`font-black tracking-tighter uppercase leading-tight ${isSunlightMode ? 'text-slate-900' : 'text-white glow-text-shimmer'}`}>{t.about.title}</h2>
