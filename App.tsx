@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { 
   ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, SEED_DATA, TEMPLATES, AI_MODELS, PRO_CODE_DATABASE, PRO_ULTRA_DB, getMillionthNeuralPrompt, WISDOM_QUOTES 
@@ -362,7 +363,7 @@ const App: React.FC = () => {
 
     // 2. البحث النصي والفرز حسب القسم (Category Filtering)
     if (selectedCategory !== 'الكل') {
-        const catOffset = categoriesList.indexOf(selectedCategory);
+        const catOffset = Math.max(0, categoriesList.indexOf(selectedCategory));
         const results = [];
         // توليد أول 100 برومبت لهذا القسم المحدد بأسماء وصفية حقيقية
         for (let i = 1; i <= 100; i++) {
@@ -596,7 +597,33 @@ const App: React.FC = () => {
         @media (max-width: 480px) {
             .library-grid-spacer { margin-top: 8.5rem !important; }
         }
+
+        /* WEBVIEW APK COMPATIBILITY: Force display for hidden navigation elements */
+        .nav-fixed-top .no-scrollbar {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            min-height: 80px !important;
+        }
+        .NavIcon {
+            flex-shrink: 0 !important;
+            min-width: 50px !important;
+        }
+        .library-tab-wrapper {
+            display: block !important;
+            width: 100% !important;
+            min-height: 500px !important;
+        }
+        .db-status-badge {
+            position: fixed; bottom: 80px; right: 20px; z-index: 999;
+            background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4);
+            padding: 4px 12px; rounded: 20px; color: #10b981; font-size: 8px; font-weight: 900;
+            backdrop-blur: 10px; pointer-events: none;
+        }
       `}</style>
+
+      {/* مؤشر جاهزية قاعدة البيانات الأوفلاين */}
+      <div className="db-status-badge">NEURAL_DB_STATUS: READY_OFFLINE</div>
 
       {showAnnouncement && (
         <div className="fixed inset-0 z-[5000] flex items-center justify-center bg-black/95 backdrop-blur-2xl p-6 animate-in fade-in duration-500">
@@ -863,7 +890,7 @@ const App: React.FC = () => {
         )}
 
         {activeTab === 'library' && (
-          <div className="page-transition space-y-6 pb-32 w-full animate-in fade-in duration-500">
+          <div className="library-tab-wrapper page-transition space-y-6 pb-32 w-full animate-in fade-in duration-500">
             <div className="search-bar-container space-y-4">
                 <div className={`glass-ui h-16 rounded-full flex items-center px-8 w-full border shadow-[0_0_20px_rgba(56,189,248,0.1)] ${isSunlightMode ? 'bg-white border-slate-300' : 'bg-slate-900/60 border-sky-500/20'}`}>
                 <span className="mr-4 text-slate-500">🔍</span>

@@ -99,15 +99,15 @@ const ACTION_MATRICES: any = {
   ],
   'طفل': [
     'طفل يلعب في حديقة خضراء واسعة تحت الشمس',
-    'طفلة تدرس بتركيز عالٍ أمام حاسوب شفاف',
+    'طفيلاً تدرس بتركيز عالٍ أمام حاسوب شفاف',
     'أطفال يرسمون لوحة فنية عملاقة على الجدار',
-    'طفل يركب دراجة هوائية في مضمار حديث',
-    'طفلة تأكل وجبة صحية بابتسامة مشرقة',
+    'طفيلاً يركب دراجة هوائية في مضمار حديث',
+    'طفيلاً تأكل وجبة صحية بابتسامة مشرقة',
     'أطفال في مدرسة مستقبلية يتعلمون بالواقع المعزز',
-    'طفل نائم بسلام في غرفة نوم بتصميم سحابي',
-    'طفلة تلعب مع قطة في غرفة مشمسة',
+    'طفيلاً نائم بسلام في غرفة نوم بتصميم سحابي',
+    'طفيلاً تلعب مع قطة في غرفة مشمسة',
     'أطفال في رحلة تخييم يشاهدون النجوم',
-    'طفل عبقري يفكك روبوتاً صغيراً بذكاء'
+    'طفيلاً عبقري يفكك روبوتاً صغيراً بذكاء'
   ],
   'إنفوجرافيك': [
     'مخطط انسيابي لنمو شركات الذكاء الاصطناعي 2026',
@@ -545,15 +545,16 @@ export const PRO_ULTRA_DB = [
 // محرك الـ مليون برومبت النوروني المطور (Neural Mapping Engine v4.0)
 export const getMillionthNeuralPrompt = (id: number, category: string) => {
     const factory = NEURAL_FACTORY_ASSETS;
-    const style = factory.styles[id % factory.styles.length];
-    const tech = factory.techs[(id + 7) % factory.techs.length];
-    const mood = factory.moods[(id + 13) % factory.moods.length];
+    const safeId = Math.abs(id); // ضمان العمل مع أرقام موجبة لتفادي كراش المصفوفات
+    const style = factory.styles[safeId % factory.styles.length];
+    const tech = factory.techs[(safeId + 7) % factory.techs.length];
+    const mood = factory.moods[(safeId + 13) % factory.moods.length];
     const spec = (factory.categorySpecifics as any)[category] || 'Professional execution with extreme attention to material detail, atmospheric depth, and perfect composition.';
 
     // استخراج الفعل الوصفي بناءً على القسم
     let descriptiveTitle = '';
     const actions = ACTION_MATRICES[category] || ACTION_MATRICES[category.includes('طفل') ? 'طفل' : ''] || GENERAL_ACTIONS;
-    descriptiveTitle = actions[id % actions.length];
+    descriptiveTitle = actions[safeId % actions.length];
 
     const arTitle = `برومبت #${id} - ${descriptiveTitle}`;
     const enPrompt = `[DT_PROMPT_ENGINE_LOG: ID_${id}] 
