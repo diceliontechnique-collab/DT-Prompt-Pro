@@ -14,14 +14,55 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary-color: #38bdf8; --bg-deep: #020617; }
-        body { font-family: 'Cairo', sans-serif; background-color: var(--bg-deep); color: #fff; margin: 0; overflow-x: hidden; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
+        :root { 
+            --primary-color: #38bdf8; 
+            --bg-deep: #020617; 
+            --safe-top: env(safe-area-inset-top);
+            --safe-bottom: env(safe-area-inset-bottom);
+        }
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background-color: var(--bg-deep); 
+            color: #fff; 
+            margin: 0; 
+            overflow-x: hidden; 
+            -webkit-tap-highlight-color: transparent; 
+            overscroll-behavior-y: none;
+            min-height: 100vh;
+            /* دعم الأجهزة القديمة أندرويد 7 */
+            display: flex;
+            flex-direction: column;
+        }
         .glass-ui { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); }
         .neon-accent { text-shadow: 0 0 10px rgba(56, 189, 248, 0.3); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
+        
+        /* طبقة الإصلاح الهندسي العالمية - Global Fix Layer */
+        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        html { scroll-behavior: smooth; }
+        
+        /* معالجة تداخل التخطيط في الشاشات الصغيرة جداً */
+        @media (max-width: 360px) {
+            .nav-fixed-top { padding: 8px 4px !important; min-height: 90px !important; }
+            .NavIcon { transform: scale(0.85); }
+            h1 { font-size: 1.25rem !important; }
+        }
+
+        /* منع ضغط الواجهة عند ظهور لوحة المفاتيح في أندرويد */
+        @media screen and (max-height: 450px) {
+            .nav-fixed-top { position: relative !important; }
+            body { padding-top: 0 !important; }
+        }
+
+        /* تحسين التمرير لجميع الإصدارات */
+        main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        
+        /* معالجة تداخل العناصر - Layout Overlap Shield */
+        .glass-ui, .glass-card { z-index: 10; position: relative; }
+        .nav-fixed-top { z-index: 1000 !important; }
+
         @media (max-width: 768px) {
-            .glass-ui { padding: 1rem !important; }
-            h1 { font-size: 1.5rem !important; }
+            .glass-ui { padding: 1.25rem !important; }
             textarea, input, select { font-size: 16px !important; }
             * { word-wrap: break-word !important; overflow-wrap: break-word !important; }
         }

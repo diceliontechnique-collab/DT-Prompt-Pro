@@ -10,7 +10,7 @@ const SUPPORTED_APP_LANGS = [
   { id: 'ar', name: 'العربية', flag: '🇲🇦', dir: 'rtl' },
   { id: 'en', name: 'English', flag: '🇺🇸', dir: 'ltr' },
   { id: 'es', name: 'Español', flag: '🇪🇸', dir: 'ltr' },
-  { id: 'fr', name: 'Français', flag: '🇫🇷', dir: 'F' },
+  { id: 'fr', name: 'Français', flag: '🇫🇷', dir: 'ltr' },
   { id: 'tr', name: 'Türkçe', flag: '🇹🇷', dir: 'ltr' },
   { id: 'fa', name: 'فارسی', flag: '🇮🇷', dir: 'rtl' },
   { id: 'ku', name: 'Kurdî', flag: '☀️', dir: 'rtl' },
@@ -539,6 +539,9 @@ const App: React.FC = () => {
         .dropdown-scrollbar { scrollbar-width: thin; scrollbar-color: #38bdf8 transparent; }
         .dropdown-scrollbar::-webkit-scrollbar { width: 4px; }
         .dropdown-scrollbar::-webkit-scrollbar-thumb { background: #38bdf8; border-radius: 10px; }
+
+        /* Compatibility Fix for older WebViews */
+        .NavIcon > * { display: flex; align-items: center; justify-content: center; }
       `}</style>
 
       {showAnnouncement && (
