@@ -517,9 +517,7 @@ const App: React.FC = () => {
         .library-dropdown { width: 100%; border-radius: 1.25rem; padding: 1.15rem 1.5rem; font-size: 0.9rem; font-weight: 800; appearance: none; outline: none; transition: all 0.3s; border: 1.5px solid rgba(255,255,255,0.1); background-color: #1e293b; color: #fff; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2338bdf8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: left 1rem center; background-size: 1.25rem; }
         
         .no-scrollbar { overflow-x: auto !important; overflow-y: visible !important; display: flex !important; gap: 18px !important; padding: 10px !important; pointer-events: auto !important; -webkit-overflow-scrolling: touch !important; position: relative !important; z-index: 600 !important; }
-        .NavIcon + div { opacity: 1 !important; visibility: visible !important; transform: none !important; bottom: -32px !important; pointer-events: none !important; }
-        .NavIcon + div span { background: #0ea5e9 !important; font-weight: 900 !important; text-shadow: 0 1px 2px rgba(0,0,0,0.5) !important; border: 1px solid rgba(255,255,255,0.1) !important; }
-
+        
         /* BUILD SAFETY LAYER */
         .page-transition { min-height: 80vh; display: block !important; visibility: visible !important; }
         .search-bar-container { position: sticky; top: 120px; z-index: 400; background: inherit; padding-top: 10px; padding-bottom: 10px; }
@@ -542,6 +540,9 @@ const App: React.FC = () => {
 
         /* Compatibility Fix for older WebViews */
         .NavIcon > * { display: flex; align-items: center; justify-content: center; }
+
+        /* INCREMENTAL SHIELD LAYER: Permanently hide the specific Nav Labels as per user instruction without deleting code */
+        .NavIcon + div { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; height: 0 !important; width: 0 !important; overflow: hidden !important; }
       `}</style>
 
       {showAnnouncement && (
