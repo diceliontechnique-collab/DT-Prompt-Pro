@@ -1,8 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <!-- طبقة الحماية الأمنية ضد الاختراق والعبث -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: 'unsafe-inline' 'unsafe-eval' data:; img-src 'self' data: https:; font-src 'self' https: data:;">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -19,7 +22,6 @@
             --bg-deep: #020617; 
             --safe-top: env(safe-area-inset-top);
             --safe-bottom: env(safe-area-inset-bottom);
-            /* ألوان النيون الأزرق الملكي المضافة حديثاً */
             --neon-blue: #38bdf8;
             --neon-glow: rgba(56, 189, 248, 0.4);
         }
@@ -32,7 +34,6 @@
             -webkit-tap-highlight-color: transparent; 
             overscroll-behavior-y: none;
             min-height: 100vh;
-            /* دعم الأجهزة القديمة أندرويد 7 */
             display: -webkit-box;
             display: -webkit-flex;
             display: -ms-flexbox;
@@ -43,37 +44,31 @@
             -ms-flex-direction: column;
             flex-direction: column;
         }
-        .glass-ui { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); }
+        .glass-ui { background: rgba(15, 23, 42, 0.85); -webkit-backdrop-filter: blur(15px); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); }
         .neon-accent { text-shadow: 0 0 10px rgba(56, 189, 248, 0.3); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        /* طبقة الإصلاح الهندسي العالمية - Global Fix Layer */
-        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-        html { scroll-behavior: smooth; }
+        * { -webkit-box-sizing: border-box; box-sizing: border-box; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
         
-        /* معالجة تخطيط الشاشات المتوسطة والكبيرة */
         @media (min-width: 769px) {
             .app-content-wrapper { padding-top: 140px !important; }
             main { max-width: 1200px !important; margin: 0 auto !important; }
         }
 
-        /* معالجة تداخل التخطيط في الشاشات الصغيرة جداً */
         @media (max-width: 360px) {
             .nav-fixed-top { padding: 8px 4px !important; min-height: 90px !important; }
-            .NavIcon { transform: scale(0.85); }
+            .NavIcon { -webkit-transform: scale(0.85); transform: scale(0.85); }
             h1 { font-size: 1.25rem !important; }
         }
 
-        /* منع ضغط الواجهة عند ظهور لوحة المفاتيح في أندرويد */
         @media screen and (max-height: 450px) {
             .nav-fixed-top { position: relative !important; }
             body { padding-top: 0 !important; }
         }
 
-        /* تحسين التمرير لجميع الإصدارات */
         main { -webkit-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
         
-        /* معالجة تداخل العناصر - Layout Overlap Shield */
         .glass-ui, .glass-card { z-index: 10; position: relative; }
         .nav-fixed-top { z-index: 1000 !important; }
 
@@ -83,26 +78,23 @@
             * { word-wrap: break-word !important; overflow-wrap: break-word !important; }
         }
 
-        /* إصلاح جذري لقص العناوين - Vertical Clearance Fix */
-        /* زيادة الهامش العلوي لضمان عدم القص تحت شريط التنقل */
         .app-content-wrapper { padding-top: 160px !important; }
         @media (max-width: 480px) { .app-content-wrapper { padding-top: 175px !important; } }
 
-        /* طبقة حماية الوضع الساطع النهائية - Ultimate Sunlight Armor */
         .sunlight-theme { background: #fdfdfd !important; }
         .sunlight-theme body { background-color: #fdfdfd !important; }
         .sunlight-theme .nav-fixed-top { background: #ffffff !important; border-bottom: 2px solid #f1f5f9 !important; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05) !important; }
         
-        /* طبقة التوافقية الأوفلاين الشاملة لملفات APK */
         img, svg { max-width: 100%; height: auto; }
         .main-app-container { opacity: 1 !important; visibility: visible !important; }
 
-        /* حقن أضواء النيون الزرقاء في كافة المكونات (Blue Neon Global Injection) */
         .glass-ui, .glass-card, .library-item-card, .ActionBtn, .nav-btn-pro, select, input, textarea {
+            -webkit-box-shadow: 0 0 12px var(--neon-glow), inset 0 0 8px rgba(56, 189, 248, 0.05) !important;
             box-shadow: 0 0 12px var(--neon-glow), inset 0 0 8px rgba(56, 189, 248, 0.05) !important;
             border-color: rgba(56, 189, 248, 0.3) !important;
         }
         select:focus, input:focus, textarea:focus {
+            -webkit-box-shadow: 0 0 20px rgba(56, 189, 248, 0.5) !important;
             box-shadow: 0 0 20px rgba(56, 189, 248, 0.5) !important;
             border-color: var(--neon-blue) !important;
         }
@@ -111,10 +103,15 @@
             text-shadow: 0 0 8px var(--neon-glow) !important;
         }
 
-        /* تصحيح خطأ المزامنة عبر تعريف التدرج اللوني الملكي المفقود (Neural Background Fix) */
         .bg-pro-gradient {
+            background: -webkit-linear-gradient(315deg, #020617 0%, #03346E 50%, #0ea5e9 100%) !important;
             background: linear-gradient(135deg, #020617 0%, #03346E 50%, #0ea5e9 100%) !important;
             background-attachment: fixed !important;
+        }
+
+        /* إصلاحات أندرويد 7-9 لضمان ثبات الخطوط والأيقونات */
+        @supports not (backdrop-filter: blur(15px)) {
+            .glass-ui { background: rgba(15, 23, 42, 0.95) !important; }
         }
     </style>
 <script type="importmap">
@@ -129,5 +126,18 @@
 </head>
 <body class="bg-pro-gradient app-content-wrapper">
     <div id="root"></div>
+    <script>
+        // سكربت منع تشوه الواجهة عند ظهور لوحة المفاتيح
+        const originalHeight = window.innerHeight;
+        window.addEventListener('resize', () => {
+            if (window.innerHeight < originalHeight * 0.7) {
+                document.body.classList.add('keyboard-open');
+            } else {
+                document.body.classList.remove('keyboard-open');
+            }
+        });
+        // حماية ضد التطفل البسيط
+        window.addEventListener('contextmenu', e => e.preventDefault());
+    </script>
 </body>
 </html>

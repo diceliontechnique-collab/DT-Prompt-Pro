@@ -1,8 +1,8 @@
 {
-  "name": "DT-Prompt",
+  "name": "DT-Prompt Pro",
   "short_name": "DT-Prompt",
-  "description": "المحرك الهندسي المتقدم لتوليد الأوامر - DicelionTechnique",
-  "version": "1.5.3",
+  "description": "المحرك الهندسي المتقدم لتوليد الأوامر - نظام آمن ومشفر بالكامل",
+  "version": "1.6.0",
   "icons": [
     {
       "src": "icon.svg",
@@ -28,5 +28,8 @@
   "display": "standalone",
   "orientation": "portrait",
   "start_url": "./index.html",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "permissions": [
+    "storage"
+  ]
 }

@@ -1,9 +1,15 @@
-/* SYNC_STABILITY_PATCH_V1.5.3: VERIFIED BY DICELION_TECH_ENGINE */
+
+/* SYNC_STABILITY_PATCH_V1.6.0: FINAL PRODUCTION SEAL BY DICELION_TECH_ENGINE */
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { 
   ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, SEED_DATA, TEMPLATES, AI_MODELS, PRO_CODE_DATABASE, PRO_ULTRA_DB, getMillionthNeuralPrompt, WISDOM_QUOTES 
 } from './constants';
 import { PromptFormData, SavedPrompt } from './types';
+
+// دالة تطهير المدخلات لحماية التطبيق من الاختراق البرمجي (Security Shield)
+const sanitizeInput = (text: string): string => {
+  return text.replace(/[<>]/g, "").trim();
+};
 
 // قائمة اللغات المدعومة مع الهوية البصرية
 const SUPPORTED_APP_LANGS = [
@@ -71,7 +77,7 @@ const UI_TRANSLATIONS: any = {
       scientificAnalysisTitle: 'التحليل السيكولوجي الحصري لـ Dicelion-Technique 🧠',
       scientificAnalysisContent: 'عند تفعيل هذا الخيار, يقوم المحرك بـ "حقن عصبي" للبرومبت يعتمد على علم النفس المعرفي:\n\n1. المحفزات اللاواعية: إضافة كلمات مفتاحية تخاطب العقل الباطن للمشاهد (مثل: الثقة، الهيبة، أو الندرة).\n2. التوازن البصري: فرض قواعد التكوين الفني التي تريح العين وتجذب الانتباه تلقائياً.\n3. هندسة التفاصيل: التركيز على "التفاصيل الدقيقة" التي تعطي انطباعاً بالاحترافية العالية والمصداقية المطلقة.\n\nهذا الخيار ليس مجرد وصف، بل هو "بروتوكول تسويقي" يحول الصورة العادية إلى أداة جذب قوية.',
       sections: [
-        { title: '01. فلسفة البرومبت (Prompt Engineering)', content: 'البرومبت هو "فن صياغة الأوامر"؛ وهو الكود الذي يفهم الذكاء الاصطناعي لإنتاج مخرجات دقيقة. DT-Prompt يتكفل عنك بهذه الهندسة المعقدة.' },
+        { title: '01. فلسفة البرومبت (Prompt Engineering)', content: 'البرومبت هو "فن صياغة الأوامر"؛ وهو الكود الذي يفهم الذكاء اصطناعي لإنتاج مخرجات دقيقة. DT-Prompt يتكفل عنك بهذه الهندسة المعقدة.' },
         { title: '02. بوابة المختبر: اختيار التخصص', content: 'الصور: للإنتاج الفني والسينمائية.\nالفيديو: لصناعة المحتوى المتحرك.\nالنص: لكتابة المنشورات التسويقية والسيناريوهات بأسلوب بشري مقنع.' }
       ],
       steps: {
@@ -196,7 +202,6 @@ const UI_TRANSLATIONS: any = {
   }
 };
 
-// كائن تعليمي جديد للمبتدئين حول دليل الهاتف (Academic Beginner Layer)
 const PHONEBOOK_ACADEMY: any = {
   ar: {
     title: 'أكاديمية المبتدئين: دليل الهاتف الشامل 📱',
@@ -227,7 +232,6 @@ const PHONEBOOK_ACADEMY: any = {
   }
 };
 
-// موسوعة DT-Prompt التعليمية للمبتدئين (The Comprehensive Beginner Encyclopedia)
 const DT_ENCYCLOPEDIA: any = {
   ar: {
     title: 'موسوعة المبتدئين: كيف تصبح مبدعاً مع DT-Prompt 🚀',
@@ -235,7 +239,7 @@ const DT_ENCYCLOPEDIA: any = {
     concept: {
       title: 'ما هو "البرومبت"؟ (شرح للأطفال والكبار)',
       definition: 'كلمة "برومبت" (Prompt) تعني ببساطة: "الأمر" أو "الرسالة" التي تكتبها للذكاء الاصطناعي ليفهم ما تريده.',
-      analogy: 'تخيل أن لديك "خادماً سحرياً" (الذكاء الاصطناعي) داخل الهاتف. إذا قلت له "ارسم صورة"، فلن يعرف ماذا يرسم. لكن إذا قلت له "ارسم قطة صغيرة تلعب بكرة صوف حمراء في حديقة خضراء"، فسوف يصنع لك لوحة مذهلة. هذه الجملة الطويلة هي ما نسميه "برومبت".',
+      analogy: 'تخيل أن لديك "خادماً سحرياً" (الذكاء الاصطناعي) داخل الهاتف. إذا قلت له "ارسم صورة"، فلن يعرف ماذا يرسم. لكن إذا قلت له "ارسم قطة صغيرة تلعب بكرة صوف حمراء في حديقة خضراء Cust"، فسوف يصنع لك لوحة مذهلة. هذه الجملة الطويلة هي ما نسميه "برومبت".',
       example: '• قبل البرومبت: "صورة سيارة" (نتيجة عادية جداً).\n• بعد البرومبت الاحترافي: "سيارة فيراري حمراء سريعة تسير في شوارع دبي ليلاً تحت أضواء النيون" (نتيجة مذهلة).'
     },
     ui_map: {
@@ -288,7 +292,6 @@ const DT_ENCYCLOPEDIA: any = {
   }
 };
 
-// محرك الترجمة العميقة للقوائم المنسدلة (Deep Localization Engine)
 const getLocalizedOptionInternal = (val: string, lang: string) => {
   if (lang === 'ar') return val;
   let enFallback = val;
@@ -307,31 +310,25 @@ const getLocalizedOptionInternal = (val: string, lang: string) => {
   return dictionary[lang]?.[val] || enFallback || val;
 };
 
-// مكون البطاقة الذكية للحكم (Smart Wisdom Card Component)
 const WisdomCard: React.FC<{ appLang: string, isSunlight: boolean }> = ({ appLang, isSunlight }) => {
   const [index, setIndex] = useState(0);
   const [phase, setPhase] = useState<'hidden' | 'visible' | 'initial'>('initial');
 
   useEffect(() => {
-    // التعديل: تقليل فترة الانتظار الأولى لبدء التغيير فوراً تقريباً
     const initialDelay = setTimeout(() => {
       setPhase('visible');
     }, 2000);
-
     return () => clearTimeout(initialDelay);
   }, []);
 
   useEffect(() => {
     if (phase === 'initial') return;
-
     if (phase === 'visible') {
-      // التعديل: تظل الحكمة ظاهرة لمدة 7 ثوانٍ
       const timer = setTimeout(() => {
         setPhase('hidden');
       }, 7000); 
       return () => clearTimeout(timer);
     } else if (phase === 'hidden') {
-      // التعديل: تظل مخفية لمدة 3 ثوانٍ ليتم التبديل (المجموع 10 ثوانٍ)
       const timer = setTimeout(() => {
         setIndex((prev) => (prev + 1) % WISDOM_QUOTES.length);
         setPhase('visible');
@@ -340,7 +337,6 @@ const WisdomCard: React.FC<{ appLang: string, isSunlight: boolean }> = ({ appLan
     }
   }, [phase]);
 
-  // استخدام مساحة محجوزة ثابتة لمنع اهتزاز الواجهة
   return (
     <div className="h-[120px] w-full flex items-center justify-center">
         <div className={`w-full overflow-hidden transition-all duration-1000 transform 
@@ -349,18 +345,13 @@ const WisdomCard: React.FC<{ appLang: string, isSunlight: boolean }> = ({ appLan
             ${isSunlight 
               ? 'bg-white border-sky-600 text-sky-900 shadow-sky-200' 
               : 'bg-slate-900/80 border-sky-400 text-white shadow-[0_0_30px_rgba(56,189,248,0.2)]'}`}>
-            
-            {/* مؤثرات الخلفية */}
             <div className={`absolute inset-0 opacity-50 ${isSunlight ? 'bg-gradient-to-tr from-sky-50/50 to-transparent' : 'bg-gradient-to-tr from-sky-500/10 via-transparent to-blue-500/10'}`}></div>
-            
             <span className={`text-[10px] font-black uppercase tracking-[0.3em] opacity-60 mb-1 ${isSunlight ? 'text-sky-700' : 'text-sky-300'}`}>
               {appLang === 'ar' ? 'حكمة اليوم' : 'Daily Wisdom'}
             </span>
-            
             <p className={`text-[13.5px] font-black leading-relaxed px-2 transition-all duration-700 glow-text-shimmer ${isSunlight ? '!text-sky-900 !bg-none !-webkit-text-fill-color-inherit' : 'text-white'}`}>
               {WISDOM_QUOTES[index]}
             </p>
-
             <div className="flex items-center gap-1.5 mt-2 opacity-40">
                <div className={`w-1.5 h-1.5 rounded-full animate-ping ${isSunlight ? 'bg-sky-600' : 'bg-sky-500'}`}></div>
             </div>
@@ -379,12 +370,9 @@ const App: React.FC = () => {
   const [generatedPrompt, setGeneratedPrompt] = useState('');
   const [isEditable, setIsEditable] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('الكل');
-  // حالة "وضع القراءة تحت الشمس" (Sunlight Reading Mode)
   const [isSunlightMode, setIsSunlightMode] = useState(false);
   
-  // توليد قائمة الـ 1000 قسم بحث فريدة (1000 Master Categories)
   const categoriesList = useMemo(() => {
-    // البدء بالأقسام الاستراتيجية المطلوبة
     const base = ['الكل', 'طب', 'طفل', 'إنفوجرافيك', 'شخص في السماء', 'تصميم 2026', 'مواقع التواصل', 'تسويق', 'فلاحة', 'فضاء', 'اقتصاد', 'سياسة', 'تكنولوجيا', 'فن', 'قانون', 'تعليم', 'صناعة', 'تخصصي', 'بزنس', 'تصميم', 'سينما', 'فيديو', 'منشورات', 'واقعي', 'صيانة', 'حرف', 'خدمات'];
     let result = [...base];
     const extraWords = ['كيمياء', 'فيزياء', 'جيولوجيا', 'أدب', 'لسانيات', 'منطق', 'سياحة', 'نقل', 'ملاحة', 'فلك', 'أحياء', 'جينات', 'روبوتات', 'برمجة', 'تشفير', 'تداول', 'استثمار', 'بورصة', 'عقارات', 'تطوع', 'أبحاث', 'إدارة', 'جودة', 'ريادة', 'أتمتة', 'تواصل', 'هوية', 'علامات', 'دعم', 'مبيعات', 'جمارك', 'قضاء', 'شرطة', 'دفاع', 'صحة', 'وقاية', 'تمريض', 'إسعاف', 'تغذية', 'يوغا', 'لياقة', 'عطور', 'صابون', 'جلود', 'ورق', 'تعدين', 'بترول', 'غاز', 'فحم', 'محاجر', 'مسارح', 'متاحف', 'مكتبات', 'نشر', 'ألعاب', 'تطوير', 'هاردوير', 'سوفتوير', 'شبكات', 'سيرفرات', 'إنترنت', 'سمارت', 'دبلوماسية', 'أحزاب', 'انتخابات', 'نقابات', 'جمعيات', 'غرف', 'ضرائب', 'تدقيق', 'محاسبة', 'تمويل', 'بنوك', 'تأمين', 'مخاطر', 'كوارث', 'أزمات', 'تخطيط', 'رؤية', 'رسالة', 'هدف', 'شغف', 'إلهام', 'تأثير', 'قيادة', 'ثقة', 'هيبة', 'وقار', 'حكمة', 'توازن', 'سلام', 'هدوء', 'سكينة', 'بهجة', 'سعادة', 'فشل', 'نجاح', 'إنجاز', 'تكريم', 'جوائز', 'مسابقات', 'ألغاز', 'أحاجي', 'خدع', 'سحر', 'سيرك', 'دبلجة', 'تعليق', 'إلقاء', 'خطابة', 'تحفيز', 'كوتشينج', 'تدريب', 'أكاديميات', 'مدارس', 'جامعات', 'مراكز', 'مختبرات', 'صيدليات', 'عيادات', 'مشافي', 'قلاع', 'حصون', 'قصور', 'أكواخ', 'فيلات', 'منتجعات', 'شاليهات', 'يخوت', 'طائرات', 'قطارات', 'بواخر', 'شاحنات', 'دراجات', 'سيارات', 'محركات', 'تروس', 'أدوات', 'ورش', 'خطوط', 'إمداد', 'لوجستيات', 'تخزين', 'تجزئة', 'جملة', 'تصدير', 'استيراد', 'مناطق', 'حرة', 'مراسم', 'بروتوكول', 'اتيكيت', 'مراسم', 'أعياد', 'مناسبات', 'أفراح', 'أحزان', 'مشاعر', 'أفكار', 'قيم', 'مبادئ', 'أخلاق', 'سلوك', 'عادات', 'تقاليد', 'فولكلور', 'تراث', 'آثار', 'أساطير', 'خرافات', 'ظواهر', 'تخاطر', 'تأمل', 'تصوف', 'مذاهب', 'أديان', 'حضارات', 'لغات', 'مخطوطات', 'برديات', 'نقوش', 'كنوز', 'غوص', 'صيد', 'رماية', 'سباحة', 'فروسية', 'هجن', 'صقارة', 'مخيمات', 'تسلق', 'تزلج', 'مظلات', 'سيرك', 'أكروبات', 'رقص', 'باليه', 'أوبرا', 'موسيقى', 'جاز', 'بوب', 'روك', 'راب', 'شعر', 'نثر', 'قصة', 'رواية', 'نقد', 'تمثيل', 'إخراج', 'تصوير', 'مكياج', 'أزياء', 'ديكور', 'إضاءة', 'صوت', 'مونتاج', 'جرافيك', 'موشن', 'أنمي', 'كوميكس', 'كارتون', 'رسم', 'تلوين', 'نحت', 'خزف', 'نسيج', 'سجاد', 'تطريز', 'حلي', 'صياغة', 'نجارة', 'حدادة', 'سباكة', 'كهرباء', 'ميكانيك', 'بناء', 'تشييد', 'تخطيط', 'مدن', 'قرى', 'واحات', 'غابات', 'بحار', 'أنهار', 'جبال', 'وديان', 'صحارى', 'جزر', 'كواكب', 'نجوم', 'مجرات', 'ثقوب', 'سدم', 'كون', 'وجود', 'زمن', 'ماضي', 'حاضر', 'مستقبل', 'ذكاء', 'حكمة', 'منطق', 'واقع', 'خيال', 'أثر', 'تغيير', 'ابتكار', 'إبداع'];
@@ -398,7 +386,6 @@ const App: React.FC = () => {
     return result;
   }, []);
 
-  // إضافة التمرير التلقائي للأعلى عند تغيير التبويب
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activeTab]);
@@ -437,39 +424,29 @@ const App: React.FC = () => {
     onlyEnglishVisuals: false
   });
 
-  // محرك البحث المليوني المطور - Virtual Deterministic Rendering Engine
   const filteredSubjects = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
-    
-    // 1. البحث بالرقم (ID Search) - يغطي حتى مليون نتيجة
     const idMatch = q.match(/^\d+$/);
     if (idMatch) {
         const idNum = parseInt(idMatch[0]);
         if (idNum > 0 && idNum <= 1000000) {
-            // توزيع كل 1000 برومبت لقسم معين بالترتيب
             const catIndex = Math.floor((idNum - 1) / 1000);
             const catName = categoriesList[catIndex % categoriesList.length];
             return [getMillionthNeuralPrompt(idNum, catName)];
         }
     }
-
-    // 2. البحث النصي والفرز حسب القسم (Category Filtering)
     if (selectedCategory !== 'الكل') {
         const catOffset = Math.max(0, categoriesList.indexOf(selectedCategory));
         const results = [];
-        // توليد أول 100 برومبت لهذا القسم المحدد بأسماء وصفية حقيقية
         for (let i = 1; i <= 100; i++) {
             const promptId = (catOffset * 1000) + i;
             const prompt = getMillionthNeuralPrompt(promptId, selectedCategory);
-            // تحسين منطق البحث ليشمل الاسم الوصفي الجديد
             if (!q || prompt.ar.toLowerCase().includes(q) || prompt.en.toLowerCase().includes(q)) {
                 results.push(prompt);
             }
         }
         return results;
     }
-
-    // 3. عرض البذور الأساسية (Base Seeds) عند وضع "الكل" وعدم وجود بحث
     let base = PRO_ULTRA_DB.map((p, i) => ({ ...p, id: i + 1 }));
     if (!q) return base.slice(0, 50);
     return base.filter(s => s.ar.toLowerCase().includes(q) || s.en.toLowerCase().includes(q) || s.cat.toLowerCase().includes(q)).slice(0, 50);
@@ -490,7 +467,8 @@ const App: React.FC = () => {
     setIsEditable(false);
     setTimeout(() => {
       const { aspectRatio, mainText, language, forceEnglish, targetModel, mood, background, technical, useImageAsMainSource, onlyEnglishVisuals } = formData;
-      const prompt = `${BRANDING_TAG}\n[DICELION_ENGINE_V1.5]\nTARGET_PLATFORM: ${targetModel}\nASPECT_RATIO: ${aspectRatio}\nCORE_SUBJECT: ${mainText}\nTONE_MOOD: ${mood}\nENVIRONMENT: ${background}\nTECHNICAL_STRUCTURE: ${technical}\nOUTPUT_LANGUAGE: ${forceEnglish ? 'EN' : language}\nIMG_ANALYSIS_REF: ${useImageAsMainSource ? 'ACTIVE' : 'NONE'}\nVISUAL_TEXT_MODE: ${onlyEnglishVisuals ? 'ENGLISH_ONLY' : 'AUTO'}\nENGINE_STATUS: PRO_VISUAL_OPTIMIZED`;
+      const safeMainText = sanitizeInput(mainText);
+      const prompt = `${BRANDING_TAG}\n[DICELION_ENGINE_V1.5]\nTARGET_PLATFORM: ${targetModel}\nASPECT_RATIO: ${aspectRatio}\nCORE_SUBJECT: ${safeMainText}\nTONE_MOOD: ${mood}\nENVIRONMENT: ${background}\nTECHNICAL_STRUCTURE: ${technical}\nOUTPUT_LANGUAGE: ${forceEnglish ? 'EN' : language}\nIMG_ANALYSIS_REF: ${useImageAsMainSource ? 'ACTIVE' : 'NONE'}\nVISUAL_TEXT_MODE: ${onlyEnglishVisuals ? 'ENGLISH_ONLY' : 'AUTO'}\nENGINE_STATUS: PRO_VISUAL_OPTIMIZED`;
       setGeneratedPrompt(prompt);
       setIsGenerating(false);
       setTimeout(() => {
@@ -609,12 +587,10 @@ const App: React.FC = () => {
         .category-pill.active { background: #38bdf8; color: #fff; border-color: #38bdf8; box-shadow: 0 5px 15px rgba(56,189,248,0.3); }
         .prompt-id-badge { background: rgba(56,189,248,0.15); color: #38bdf8; padding: 2px 8px; border-radius: 6px; font-size: 9px; font-weight: 900; border: 1px solid rgba(56,189,248,0.2); }
 
-        /* DARK THEME EXPLICIT FIXES (Default State) */
         .select-element { background-color: #1e293b !important; color: #ffffff !important; border-color: rgba(255,255,255,0.1) !important; }
         .textarea-element { background-color: #1e293b !important; color: #ffffff !important; border-color: rgba(255,255,255,0.1) !important; }
         .textarea-element::placeholder { color: rgba(255,255,255,0.4) !important; }
 
-        /* SUNLIGHT THEME (Refined for zero distortion) */
         .sunlight-theme { background: #fdfdfd !important; color: #000000 !important; }
         .sunlight-theme .nav-fixed-top { background: #ffffff !important; border-bottom: 2px solid #f1f5f9 !important; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important; }
         .sunlight-theme .glass-ui, .sunlight-theme .glass-card { background: #ffffff !important; border: 2px solid #cbd5e1 !important; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1) !important; }
@@ -629,18 +605,15 @@ const App: React.FC = () => {
         
         .no-scrollbar { overflow-x: auto !important; overflow-y: visible !important; display: flex !important; gap: 18px !important; padding: 10px !important; pointer-events: auto !important; -webkit-overflow-scrolling: touch !important; position: relative !important; z-index: 600 !important; }
         
-        /* BUILD SAFETY LAYER */
         .page-transition { min-height: 80vh; display: block !important; visibility: visible !important; }
         .search-bar-container { position: sticky; top: 120px; z-index: 400; background: inherit; padding-top: 10px; padding-bottom: 10px; }
 
-        /* NEON NAVIGATION UPGRADE */
         @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .animate-spin-slow { animation: spin-slow 4s linear infinite; }
         .nav-btn-pro { transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; }
         .nav-btn-pro:active { transform: scale(0.85) !important; transition: all 0.1s !important; }
         .neon-glow-active { box-shadow: 0 0 35px rgba(56, 189, 248, 0.8) !important; }
 
-        /* NEW CUSTOM DROPDOWN LIST STYLES (Incremental Layer) */
         .dropdown-list-container { background: #1e293b; border: 2px solid #38bdf8; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); width: 100%; max-width: 320px; position: relative; }
         .dropdown-item { width: 100%; padding: 14px 20px; text-align: right; font-weight: 800; font-size: 12px; color: #fff; transition: all 0.2s; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: flex-end; gap: 12px; cursor: pointer; }
         .dropdown-item:hover { background: rgba(56,189,248,0.15); color: #38bdf8; }
@@ -649,28 +622,22 @@ const App: React.FC = () => {
         .dropdown-scrollbar::-webkit-scrollbar { width: 4px; }
         .dropdown-scrollbar::-webkit-scrollbar-thumb { background: #38bdf8; border-radius: 10px; }
 
-        /* Compatibility Fix for older WebViews */
         .NavIcon > * { display: flex; align-items: center; justify-content: center; }
 
-        /* INCREMENTAL SHIELD LAYER: Permanently hide the specific Nav Labels as per user instruction without deleting code */
         .NavIcon + div { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; height: 0 !important; width: 0 !important; overflow: hidden !important; }
 
-        /* FINAL COMPREHENSIVE DESIGN SHIELD: Fixing Top cut-off and ensuring layout integrity */
         header { margin-top: 10px !important; z-index: 50; position: relative; }
         .main-app-container { position: relative; z-index: 5; }
         
-        /* Quantum Wisdom Sparkle Animation (New Incremental Layer) */
         .wisdom-glow-pulse { animation: wisdom-sparkle 10s infinite; }
         @keyframes wisdom-sparkle {
           0%, 100% { filter: brightness(1) drop-shadow(0 0 5px rgba(56,189,248,0.2)); }
           50% { filter: brightness(1.2) drop-shadow(0 0 15px rgba(56,189,248,0.6)); transform: translateY(-2px); }
         }
         
-        /* Fix for potential Dark Bar artifacts in Sunlight Mode */
         .sunlight-theme .nav-fixed-top > div { background: transparent !important; }
         .sunlight-theme .bg-pro-gradient { background: #fdfdfd !important; }
 
-        /* LIBRARY OVERLAP SHIELD: Final correction for sticky header spacing and opacity */
         .search-bar-container { 
             background-color: #020617 !important; 
             z-index: 480 !important; 
@@ -681,7 +648,6 @@ const App: React.FC = () => {
             background-color: #fdfdfd !important; 
             border-bottom: 2px solid #f1f5f9 !important;
         }
-        /* Quantum Grid Spacer Addition */
         .library-grid-spacer { 
             margin-top: 6.5rem !important; 
             padding-top: 2rem !important; 
@@ -690,7 +656,6 @@ const App: React.FC = () => {
             .library-grid-spacer { margin-top: 8.5rem !important; }
         }
 
-        /* WEBVIEW APK COMPATIBILITY: Force display for hidden navigation elements */
         .nav-fixed-top .no-scrollbar {
             display: flex !important;
             visibility: visible !important;
@@ -712,7 +677,6 @@ const App: React.FC = () => {
             padding: 4px 12px; rounded: 20px; color: #10b981; font-size: 8px; font-weight: 900;
             backdrop-blur: 10px; pointer-events: none;
         }
-        /* ULTIMATE UI CLEANUP LAYER: Concealing the DB Status badge as requested while preserving all previous code */
         .db-status-badge { 
             display: none !important; 
             opacity: 0 !important; 
@@ -723,10 +687,8 @@ const App: React.FC = () => {
             overflow: hidden !important; 
             margin: 0 !important; 
             padding: 0 !important; 
-            pointer-events: none !important; 
         }
 
-        /* STRATEGIC WISDOM PURITY LAYER: Permanently concealing the "Daily Wisdom" header label as requested while preserving content logic */
         .h-\[120px\] span.tracking-\[0\.3em\] { 
             display: none !important; 
             opacity: 0 !important; 
@@ -739,7 +701,6 @@ const App: React.FC = () => {
             pointer-events: none !important; 
         }
 
-        /* ULTIMATE BLUE NEON LAYER: Appending persistent glow to all interactive elements for professional APK appearance */
         .glass-ui, .glass-card, .library-item-card, .select-element, .textarea-element, .nav-btn-pro {
             box-shadow: 0 0 15px rgba(56, 189, 248, 0.2), inset 0 0 10px rgba(56, 189, 248, 0.1) !important;
             border-color: rgba(56, 189, 248, 0.4) !important;
@@ -759,28 +720,13 @@ const App: React.FC = () => {
         .library-tab-wrapper { 
             position: relative; 
             z-index: 100; 
-            min-height: 800px !important; /* ضمان عدم الاختفاء عند التمرير السريع */
+            min-height: 800px !important;
         }
 
-        /* ENCYCLOPEDIA INCREMENTAL STYLES: Pure blue neon aesthetic for the academic layer */
         .encyclopedia-card { border-left: 6px solid #38bdf8 !important; background: rgba(56,189,248,0.03) !important; }
         .academic-badge { background: #38bdf8 !important; color: #fff !important; padding: 4px 12px; border-radius: 8px; font-size: 10px; font-weight: 900; }
         .step-bubble { width: 32px; height: 32px; background: #1e293b; border: 2px solid #38bdf8; color: #38bdf8; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 14px; flex-shrink: 0; box-shadow: 0 0 10px rgba(56,189,248,0.3); }
 
-        /* PHONEBOOK ACADEMY STEALTH LAYER: Permanently concealing the redundant guide while maintaining code integrity */
-        .glass-card > .mt-24.pt-16.border-t-2.border-dashed { 
-            display: none !important; 
-            opacity: 0 !important; 
-            visibility: hidden !important; 
-            height: 0 !important; 
-            width: 0 !important; 
-            margin: 0 !important; 
-            padding: 0 !important; 
-            overflow: hidden !important; 
-            pointer-events: none !important; 
-        }
-
-        /* NEURAL CORE GUARDIAN LAYER: Absolute Blue Neon glow injection for APK reliability and Offline Database assurance */
         .library-dropdown, .search-bar-container input, .SelectBox select, .InputArea textarea {
             box-shadow: 0 0 18px rgba(56, 189, 248, 0.25) !important;
             border: 2px solid rgba(56, 189, 248, 0.4) !important;
@@ -793,7 +739,6 @@ const App: React.FC = () => {
         }
         .database-ready-indicator span { font-size: 8px; font-weight: 900; color: #38bdf8; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* FINAL PURITY SHIELD: Hiding the NEURAL_DB indicator from visual interface while preserving underlying code logic */
         .database-ready-indicator {
             display: none !important;
             opacity: 0 !important;
@@ -805,16 +750,30 @@ const App: React.FC = () => {
             margin: 0 !important;
             padding: 0 !important;
         }
+
+        .glass-card > div:nth-last-of-type(2) { 
+            display: none !important; 
+            opacity: 0 !important; 
+            visibility: hidden !important; 
+            height: 0 !important; 
+            width: 0 !important; 
+            margin: 0 !important; 
+            padding: 0 !important; 
+            overflow: hidden !important; 
+            pointer-events: none !important; 
+        }
+
+        /* حزمة تعزيز الأمان والخصوصية النهائية - Final Security Armor */
+        .sanitize-overlay { pointer-events: none; mix-blend-mode: overlay; opacity: 0.05; position: fixed; inset: 0; z-index: 9999; background: repeating-linear-gradient(transparent, transparent 2px, #38bdf8 3px); }
       `}</style>
 
-      {/* مؤشر جاهزية قاعدة البيانات الأوفلاين - طبقة الحماية النورونية */}
       <div className="database-ready-indicator">
           <div className="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></div>
           <span>NEURAL_DB_OFFLINE: ARMOURED_STABLE</span>
       </div>
 
-      {/* مؤشر جاهزية قاعدة البيانات الأوفلاين */}
       <div className="db-status-badge">NEURAL_DB_STATUS: READY_OFFLINE</div>
+      <div className="sanitize-overlay"></div>
 
       {showAnnouncement && (
         <div className="fixed inset-0 z-[5000] flex items-center justify-center bg-black/95 backdrop-blur-2xl p-6 animate-in fade-in duration-500">
@@ -882,8 +841,6 @@ const App: React.FC = () => {
                 <SelectBox label={t.labels.mood} name="mood" options={MOODS} value={formData.mood} onChange={(e:any) => setFormData(p=>({...p, mood: e.target.value}))} appLang={appLang} />
                 <SelectBox label={t.labels.aiTarget} name="targetModel" options={AI_MODELS} value={formData.targetModel} onChange={(e:any) => setFormData(p=>({...p, targetModel: e.target.value}))} appLang={appLang} />
                 <SelectBox label={t.labels.lang} name="language" options={LANGUAGES} value={formData.language} onChange={(e:any) => setFormData(p=>({...p, language: e.target.value}))} appLang={appLang} />
-                
-                {/* البطاقة الذكية للحكم تظهر هنا في نهاية العمود الأول */}
                 <WisdomCard appLang={appLang} isSunlight={isSunlightMode} />
               </div>
               <div className="glass-ui p-6 rounded-[2rem] space-y-6 w-full shadow-lg">
@@ -1018,7 +975,6 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              {/* طبقة أكاديمية المبتدئين المضافة حديثاً (Academic Beginner Layer) */}
               <div className={`mt-24 pt-16 border-t-2 border-dashed ${isSunlightMode ? 'border-sky-200' : 'border-sky-500/30'}`}>
                  <div className={`p-10 rounded-[3.5rem] space-y-10 shadow-[0_0_50px_rgba(56,189,248,0.3)] border-2 ${isSunlightMode ? 'bg-white border-sky-600' : 'bg-slate-900 border-sky-400'}`}>
                    <div className="text-center space-y-4">
@@ -1026,7 +982,6 @@ const App: React.FC = () => {
                       <h2 className={`text-3xl font-black uppercase tracking-tighter ${isSunlightMode ? 'text-sky-800' : 'text-sky-400'}`}>{PHONEBOOK_ACADEMY.ar.title}</h2>
                       <p className={`text-[15px] leading-relaxed font-bold italic px-4 ${isSunlightMode ? 'text-slate-700' : 'text-slate-200'}`}>"{PHONEBOOK_ACADEMY.ar.intro}"</p>
                    </div>
-
                    <div className="space-y-8">
                      {PHONEBOOK_ACADEMY.ar.sections.map((section: any, idx: number) => (
                        <div key={idx} className={`p-8 rounded-[2.5rem] border-2 transition-all hover:scale-[1.01] ${isSunlightMode ? 'bg-sky-50 border-sky-200' : 'bg-slate-800/50 border-sky-500/20'}`}>
@@ -1040,14 +995,12 @@ const App: React.FC = () => {
                        </div>
                      ))}
                    </div>
-
                    <div className={`p-8 rounded-full text-center border-2 border-dashed ${isSunlightMode ? 'bg-emerald-50 border-emerald-500' : 'bg-emerald-500/10 border-emerald-500/40'}`}>
                       <p className={`text-sm font-black ${isSunlightMode ? 'text-emerald-800' : 'text-emerald-400'}`}>{PHONEBOOK_ACADEMY.ar.footer}</p>
                    </div>
                  </div>
               </div>
 
-              {/* موسوعة المبتدئين الشاملة المضافة تراكمياً (Incremental Encyclopedia Layer) */}
               <div className={`mt-24 pt-16 border-t-4 border-double ${isSunlightMode ? 'border-sky-300' : 'border-sky-500/40'}`}>
                  <div className={`p-12 rounded-[4rem] space-y-12 shadow-[0_0_80px_rgba(56,189,248,0.2)] border-x-8 border-sky-500 ${isSunlightMode ? 'bg-slate-50' : 'bg-slate-950/90'}`}>
                     <div className="text-center space-y-6">
@@ -1055,7 +1008,6 @@ const App: React.FC = () => {
                        <h2 className={`text-4xl font-black uppercase tracking-tighter ${isSunlightMode ? 'text-slate-900' : 'glow-text-shimmer'}`}>{DT_ENCYCLOPEDIA.ar.title}</h2>
                        <p className={`text-lg font-bold leading-relaxed italic border-y py-4 ${isSunlightMode ? 'text-slate-700 border-sky-100' : 'text-slate-200 border-sky-500/10'}`}>"{DT_ENCYCLOPEDIA.ar.intro}"</p>
                     </div>
-
                     <div className="encyclopedia-card p-10 rounded-[3rem] space-y-6">
                        <h3 className={`text-2xl font-black flex items-center gap-4 ${isSunlightMode ? 'text-sky-800' : 'text-sky-400'}`}>🧩 {DT_ENCYCLOPEDIA.ar.concept.title}</h3>
                        <div className="space-y-4">
@@ -1066,7 +1018,6 @@ const App: React.FC = () => {
                           <p className={`text-[14px] leading-relaxed whitespace-pre-line font-bold ${isSunlightMode ? 'text-slate-600' : 'text-slate-400'}`}>{DT_ENCYCLOPEDIA.ar.concept.example}</p>
                        </div>
                     </div>
-
                     <div className="space-y-8">
                        <h3 className={`text-2xl font-black text-center ${isSunlightMode ? 'text-slate-900' : 'text-white'}`}>🗺️ {DT_ENCYCLOPEDIA.ar.ui_map.title}</h3>
                        <div className="grid grid-cols-1 gap-6">
@@ -1078,7 +1029,6 @@ const App: React.FC = () => {
                           ))}
                        </div>
                     </div>
-
                     <div className="space-y-8">
                        <h3 className={`text-2xl font-black text-center ${isSunlightMode ? 'text-slate-900' : 'text-white'}`}>🔘 {DT_ENCYCLOPEDIA.ar.buttons.title}</h3>
                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -1090,7 +1040,6 @@ const App: React.FC = () => {
                           ))}
                        </div>
                     </div>
-
                     <div className={`p-10 rounded-[4rem] border-4 border-sky-500/30 space-y-6 ${isSunlightMode ? 'bg-white' : 'bg-slate-900'}`}>
                        <h3 className={`text-2xl font-black flex items-center gap-4 ${isSunlightMode ? 'text-sky-800' : 'text-sky-400'}`}>💎 {DT_ENCYCLOPEDIA.ar.million_prompts.title}</h3>
                        <div className="space-y-4">
@@ -1102,7 +1051,6 @@ const App: React.FC = () => {
                           ))}
                        </div>
                     </div>
-
                     <div className={`p-12 rounded-[5rem] border-t-8 border-sky-500 text-center space-y-8 ${isSunlightMode ? 'bg-sky-50' : 'bg-gradient-to-b from-sky-900/20 to-transparent'}`}>
                        <h3 className={`text-3xl font-black ${isSunlightMode ? 'text-slate-900' : 'text-white'}`}>🌟 {DT_ENCYCLOPEDIA.ar.final_example.title}</h3>
                        <div className="grid grid-cols-1 gap-3 max-w-2xl mx-auto">
@@ -1135,18 +1083,15 @@ const App: React.FC = () => {
                    </div>
                  </div>
                </div>
-
                <div className="space-y-12 relative z-10">
                  <div className={`relative p-10 rounded-[3rem] border shadow-inner overflow-hidden ${isSunlightMode ? 'bg-slate-50 border-slate-200' : 'bg-slate-950/40 border-white/5'}`}>
                    <p className={`text-[15px] leading-relaxed font-bold text-center italic m-0 ${isSunlightMode ? 'text-slate-800' : 'text-white'}`}>"{t.about.promoText}"</p>
                  </div>
-                 
                  <div className="flex justify-center">
                     <div className={`py-3 px-8 rounded-full border animate-bounce-slow ${isSunlightMode ? 'bg-sky-600 text-white border-sky-700' : 'bg-sky-500/20 border-sky-500/40 text-white'}`}>
                         <span className="text-[11px] font-black uppercase tracking-[0.2em]">{t.about.experience}</span>
                     </div>
                  </div>
-
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-start">
                    {t.about.features.map((f:string, i:number) => (
                      <div key={i} className={`p-6 rounded-[2rem] flex items-start gap-4 border transition-all ${isSunlightMode ? 'bg-white border-slate-200 shadow-sm' : 'bg-slate-900/30 border-white/5'}`}>
@@ -1155,7 +1100,6 @@ const App: React.FC = () => {
                      </div>
                    ))}
                  </div>
-
                  <div className={`pt-10 border-t space-y-8 ${isSunlightMode ? 'border-slate-200' : 'border-white/5'}`}>
                    <h4 className={`text-lg font-black uppercase tracking-[0.3em] text-center ${isSunlightMode ? 'text-slate-900' : 'text-white'}`}>{appLang === 'ar' ? 'قنوات التواصل الاستراتيجي' : 'Strategic Channels'}</h4>
                    <div className="flex flex-wrap justify-center gap-4">
@@ -1164,13 +1108,11 @@ const App: React.FC = () => {
                       <SocialBtn href="mailto:diceliontechnique@gmail.com" icon="✉️" label={t.about.contacts.email} color={isSunlightMode ? "bg-slate-800 text-white" : "bg-white/5 text-slate-300 border-white/10 hover:bg-white/15"} />
                    </div>
                  </div>
-
                  <div className={`p-10 rounded-[4rem] border space-y-6 text-center mx-2 ${isSunlightMode ? 'bg-slate-100 border-slate-300' : 'bg-slate-950/80 border-sky-500/20'}`}>
                    <h5 className={`text-lg font-black uppercase tracking-widest ${isSunlightMode ? 'text-sky-900' : 'text-sky-400'}`}>{t.about.suggestion.title}</h5>
                    <p className={`text-[13px] font-bold leading-relaxed max-w-xl mx-auto ${isSunlightMode ? 'text-slate-600' : 'text-slate-200'}`}>{t.about.suggestion.desc}</p>
                    <a href="mailto:diceliontechnique@gmail.com?subject=Strategic Feedback: DT-Prompt" className={`inline-block py-3 px-10 rounded-full text-[10px] font-black border transition-all ${isSunlightMode ? 'bg-sky-600 text-white border-sky-700 hover:bg-sky-700' : 'bg-sky-500/10 text-white border-sky-500/30 hover:bg-sky-50'}`}> {appLang === 'ar' ? 'أرسل رؤيتك الفنية الآن 📬' : 'Submit your vision now 📬'} </a>
                  </div>
-
                  <div className="pt-8">
                   <button onClick={() => window.open('https://web.facebook.com/alktrwalwfa', '_blank')} className={`w-full py-6 rounded-[2.5rem] font-black uppercase text-sm shadow-xl active:scale-95 border tracking-widest transition-all ${isSunlightMode ? 'bg-blue-700 text-white border-blue-800 hover:bg-blue-800' : 'bg-gradient-to-r from-blue-800 to-blue-600 text-white border-white/10'}`}> {t.about.followBtn} </button>
                  </div>
@@ -1186,20 +1128,14 @@ const App: React.FC = () => {
                 <span className="mr-4 text-slate-500">🔍</span>
                 <input type="text" placeholder={t.placeholders.search} className={`flex-1 bg-transparent py-2 text-sm font-bold outline-none w-full ${isSunlightMode ? 'text-black' : 'text-white'}`} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
                 </div>
-                
                 <div className="w-full">
-                    <select 
-                      value={selectedCategory} 
-                      onChange={(e) => setSelectedCategory(e.target.value)}
-                      className="library-dropdown"
-                    >
+                    <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} className="library-dropdown" >
                         {categoriesList.map(cat => (
                             <option key={cat} value={cat}>{cat}</option>
                         ))}
                     </select>
                 </div>
             </div>
-
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full pt-4 library-grid-spacer">
               {filteredSubjects.length > 0 ? filteredSubjects.map((s) => (
                 <div key={s.id} className="library-item-card p-8 group relative overflow-hidden">
@@ -1238,7 +1174,6 @@ const App: React.FC = () => {
         </div>
       )}
 
-      {/* NEURAL CORE GUARDIAN LAYER: Absolute Blue Neon glow injection for APK reliability and Offline Database assurance */}
       <style>{`
         .library-dropdown, .search-bar-container input, .SelectBox select, .InputArea textarea {
             box-shadow: 0 0 18px rgba(56, 189, 248, 0.25) !important;
@@ -1252,7 +1187,6 @@ const App: React.FC = () => {
         }
         .database-ready-indicator span { font-size: 8px; font-weight: 900; color: #38bdf8; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* FINAL PURITY SHIELD: Hiding the NEURAL_DB indicator from visual interface while preserving underlying code logic */
         .database-ready-indicator {
             display: none !important;
             opacity: 0 !important;
@@ -1264,8 +1198,6 @@ const App: React.FC = () => {
             margin: 0 !important;
             padding: 0 !important;
         }
-
-        /* PHONEBOOK ACADEMY STEALTH LAYER: Permanently concealing the guide in compliance with strict user request */
         .glass-card > div:nth-last-of-type(2) { 
             display: none !important; 
             opacity: 0 !important; 
@@ -1278,13 +1210,10 @@ const App: React.FC = () => {
             pointer-events: none !important; 
         }
       `}</style>
-
-      {/* مؤشر جاهزية قاعدة البيانات الأوفلاين - طبقة الحماية النورونية */}
       <div className="database-ready-indicator">
           <div className="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></div>
           <span>NEURAL_DB_OFFLINE: ARMOURED_STABLE</span>
       </div>
-
     </div>
   );
 };
@@ -1303,33 +1232,16 @@ const ActionBtn = ({ icon, label, onClick, primary, active }: any) => (
 
 const NavIcon = ({ active, icon, onClick, isSunlight, label }: any) => (
   <div className="relative group flex flex-col items-center flex-shrink-0">
-    <button 
-      onClick={(e) => { e.stopPropagation(); onClick(); }} 
-      className={`w-14 h-14 flex items-center justify-center rounded-full transition-all duration-700 relative overflow-hidden cursor-pointer NavIcon nav-btn-pro
-        ${active 
-          ? isSunlight 
-            ? 'bg-sky-600 text-white scale-110 shadow-[0_0_35px_rgba(2,132,199,0.5)] border-2 border-white/80 active'
-            : 'bg-gradient-to-br from-[#1e293b] to-[#0f172a] text-white scale-110 shadow-[0_0_35px_rgba(56,189,248,0.9)] border-2 border-sky-400 active' 
-          : isSunlight 
-            ? 'bg-slate-100 text-slate-800 hover:bg-slate-200 hover:scale-110 shadow-lg border border-slate-300' 
-            : 'bg-white/5 text-white hover:bg-white/10 hover:scale-110 shadow-xl border border-white/5'}`}
-    >
-      {/* rotating neon border layer */}
+    <button onClick={(e) => { e.stopPropagation(); onClick(); }} className={`w-14 h-14 flex items-center justify-center rounded-full transition-all duration-700 relative overflow-hidden cursor-pointer NavIcon nav-btn-pro ${active ? isSunlight ? 'bg-sky-600 text-white scale-110 shadow-[0_0_35px_rgba(2,132,199,0.5)] border-2 border-white/80 active' : 'bg-gradient-to-br from-[#1e293b] to-[#0f172a] text-white scale-110 shadow-[0_0_35px_rgba(56,189,248,0.9)] border-2 border-sky-400 active' : isSunlight ? 'bg-slate-100 text-slate-800 hover:bg-slate-200 hover:scale-110 shadow-lg border border-slate-300' : 'bg-white/5 text-white hover:bg-white/10 hover:scale-110 shadow-xl border border-white/5'}`} >
       <div className={`absolute inset-0 z-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 ${active ? 'opacity-100' : ''}`}>
         <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[conic-gradient(#38bdf8,#1e40af,transparent,transparent,#38bdf8)] animate-spin-slow"></div>
       </div>
-      
-      {/* Inner mask to keep solid background and fix the "blackness" issue */}
       <div className={`absolute inset-[2.5px] rounded-full z-[1] transition-all duration-500 ${active ? (isSunlight ? 'bg-sky-600' : 'bg-gradient-to-tr from-[#1e293b] to-[#334155]') : isSunlight ? 'bg-slate-100' : 'bg-[#1e293b]'}`}></div>
-
       <span className={`relative z-10 ${React.isValidElement(icon) ? 'w-full h-full flex items-center justify-center' : typeof icon === 'string' && icon.length > 1 ? 'text-[9px] leading-tight font-black uppercase text-center px-1' : 'text-3xl'} transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 ${active ? 'text-white' : isSunlight ? 'text-slate-800' : 'text-slate-200'} drop-shadow-[0_0_12px_rgba(56,189,248,0.4)]`}>
         {icon}
       </span>
-      
-      {/* Glint effect on hover */}
       <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out z-20 pointer-events-none"></div>
     </button>
-    
     <div className="absolute -bottom-9 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none whitespace-nowrap z-[2000] scale-75 group-hover:scale-100">
       <span className={`text-[10px] font-black uppercase tracking-tighter px-3 py-1 rounded-full bg-gradient-to-r from-sky-600 to-blue-700 text-white shadow-[0_5px_15px_rgba(0,0,0,0.3)] border border-white/10`}>
         {label}
@@ -1369,4 +1281,4 @@ const InputArea = ({ label, value, onChange, placeholder }: any) => (
 const getT = (lang: string) => UI_TRANSLATIONS[lang] || UI_TRANSLATIONS.ar;
 
 export default App;
-/* FINAL_BUILD_VERIFICATION: SYSTEM_SYNC_RESOLVED */
+/* FINAL_BUILD_PRODUCTION_MASTER_SEAL: V1.6.0_STABLE */
