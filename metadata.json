@@ -2,7 +2,7 @@
   "name": "DT-Prompt",
   "short_name": "DT-Prompt",
   "description": "المحرك الهندسي المتقدم لتوليد الأوامر - DicelionTechnique",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "icons": [
     {
       "src": "icon.svg",

@@ -110,6 +110,12 @@
             color: var(--neon-blue) !important;
             text-shadow: 0 0 8px var(--neon-glow) !important;
         }
+
+        /* تصحيح خطأ المزامنة عبر تعريف التدرج اللوني الملكي المفقود (Neural Background Fix) */
+        .bg-pro-gradient {
+            background: linear-gradient(135deg, #020617 0%, #03346E 50%, #0ea5e9 100%) !important;
+            background-attachment: fixed !important;
+        }
     </style>
 <script type="importmap">
 {
