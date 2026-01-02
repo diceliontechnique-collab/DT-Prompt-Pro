@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=no, viewport-fit=cover">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: 'unsafe-inline' 'unsafe-eval' data:; img-src 'self' data: https:; font-src 'self' https: data:;">
     <meta name="theme-color" content="#020617">
     <link rel="manifest" href="metadata.json">
@@ -23,6 +23,8 @@
             --input-border: rgba(56, 189, 248, 0.3);
             --nav-bg: rgba(2, 6, 23, 0.98);
             --modal-overlay: rgba(0, 0, 0, 0.85);
+            --safe-top: env(safe-area-inset-top);
+            --safe-bottom: env(safe-area-inset-bottom);
         }
 
         [data-theme="light"] { 
@@ -48,6 +50,8 @@
             display: flex;
             flex-direction: column;
             transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+            padding-bottom: var(--safe-bottom);
         }
         
         #root { display: flex; flex-direction: column; min-height: 100vh; width: 100%; }
@@ -60,8 +64,15 @@
             box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
         }
 
-        .app-content-wrapper { padding-top: 130px; }
-        @media (max-width: 480px) { .app-content-wrapper { padding-top: 150px; } }
+        .app-content-wrapper { padding-top: calc(130px + var(--safe-top)); }
+        @media (max-width: 480px) { .app-content-wrapper { padding-top: calc(150px + var(--safe-top)); } }
+
+        /* Landscape Optimization */
+        @media (orientation: landscape) {
+            .nav-fixed-top { height: 80px; }
+            .app-content-wrapper { padding-top: calc(90px + var(--safe-top)); }
+            header { display: none; }
+        }
 
         main { flex: 1; width: 100%; max-width: 1024px; margin: 0 auto; padding: 0 1rem; position: relative; z-index: 1; }
 
@@ -73,6 +84,7 @@
             background: var(--nav-bg); 
             border-bottom: 2px solid var(--card-border); 
             display: flex; align-items: center; justify-content: center;
+            padding-top: var(--safe-top);
         }
 
         .select-element { 
@@ -99,21 +111,18 @@
         }
         #dt-master-svg { animation: drift 5s infinite ease-in-out; }
 
-        /* Hacker Matrix Animation - Vertical */
         @keyframes matrix-scroll {
             0% { transform: translateY(-50%); }
             100% { transform: translateY(0%); }
         }
         .matrix-column-anim { animation: matrix-scroll linear infinite; }
 
-        /* Hacker Matrix Animation - Horizontal (V19.0 Update) */
         @keyframes matrix-horizontal {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
         .matrix-row-anim { animation: matrix-horizontal linear infinite; }
 
-        /* Technical Text Vibration (V20.0 Update) */
         @keyframes text-vibrate {
             0% { transform: translate(0); }
             25% { transform: translate(-0.3px, 0.3px); }
@@ -123,22 +132,20 @@
         }
         .vibrate-text { animation: text-vibrate 0.15s linear infinite; }
 
-        /* Sunlight mode semi-dark editor background override (V21.5 Update) */
         .dt-editor-dark-layer {
             transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease;
         }
 
         [data-theme="light"] .dt-editor-dark-layer.is-viewing {
-            background-color: #f1f5f9 !important; /* Semi-white for light viewing */
+            background-color: #f1f5f9 !important;
             border-color: rgba(0, 0, 0, 0.05) !important;
         }
 
         [data-theme="light"] .dt-editor-dark-layer.is-editing {
-            background-color: #020617 !important; /* Deep dark for light editing */
+            background-color: #020617 !important;
             border-color: rgba(56, 189, 248, 0.4) !important;
         }
 
-        /* Dark theme always dark */
         [data-theme="dark"] .dt-editor-dark-layer {
             background-color: rgba(15, 23, 42, 0.95) !important;
             border-color: rgba(56, 189, 248, 0.2) !important;

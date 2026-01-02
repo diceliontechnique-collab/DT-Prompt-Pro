@@ -1,5 +1,5 @@
 
-/* SYNC_STABILITY_PATCH_V23.0_MASTER_PRO_ULTRA: EXCLUSIVE PSYCHOLOGY BRANDING UPDATE */
+/* SYNC_STABILITY_PATCH_V25.1_MASTER_PRO_ULTRA: EXTENDED OPTIONS & UI SYNC */
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { 
   ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, TEMPLATES, AI_MODELS, PRO_ULTRA_DB, WISDOM_QUOTES, getMillionthNeuralPrompt
@@ -31,7 +31,7 @@ const UI_TRANSLATIONS: any = {
     saveBtn: 'أرشفة المشروع',
     editBtn: 'تعديل النص',
     copyPromptBtn: 'نسخ البرومبت',
-    editLabel: 'محرر الأوامر الذكي (V23.0 PRO)',
+    editLabel: 'محرر الأوامر الذكي (V25.1 PRO)',
     resultActions: { copy: 'نسخ', save: 'حفظ' },
     copyOptions: { ar: '🇸🇦 نسخ بالعربية', en: '🇬🇧 Copy in English', all: '🌍 نسخ الكل (عربي + إنجليزي)' },
     history: { empty: 'السجل فارغ حالياً.. ابدأ بصناعة إبداعك الأول!', title: 'سجل محفوظات DT-Prompt' },
@@ -40,7 +40,7 @@ const UI_TRANSLATIONS: any = {
     promptMode: { image: 'توليد الصور', video: 'إنتاج الفيديو', post: 'نصوص احترافية' },
     placeholders: { text: 'عنوان الحملة أو الموضوع الرئيسي الذي تريد تحويله لبرومبت احترافي...', search: 'ابحث في مليون برومبت جاهز بالرقم أو بالحرف', dropdownSearch: 'اختر تخصصاً من 1000 خيار...' },
     labels: { 
-      ratio: 'أبعاد المخرج (Ratio)', mood: 'نبرة الصوت والأسلوب الفني', bg: 'سياق المحتوى والبيئة المحيطة', tech: 'قالب الهيكلة الاحترافي (100 خيار)', text: 'الموضوع الأساسي (Main Subject)', quickSearch: 'تصفح التخصصات الذكية (1000 خيار)',
+      ratio: 'أبعاد المخرج (Ratio)', mood: 'نبرة الصوت والأسلوب الفني', bg: 'سياق المحتوى والبيئة المحيطة (100 خيار)', tech: 'قالب الهيكلة الاحترافي (100 خيار)', text: 'الموضوع الأساسي (Main Subject)', quickSearch: 'تصفح التخصصات الذكية (1000 خيار)',
       exclusivePsychology: "برومبت سيكولوجي حصري لـ Dicelion-Technique",
       analyzeImage: "برومبت مع صورة مرجعية مرفقة",
       exportEnglish: "تصدير البرومبت باللغة الإنجليزية (لنتائج أدق)",
@@ -49,13 +49,19 @@ const UI_TRANSLATIONS: any = {
       model: "محرك الذكاء الاصطناعي المستهدف",
       elements: "العناصر والجماليات (100 خيار)"
     },
+    followModal: { 
+      title: 'عائلة DicelionTechnique', 
+      message: 'نحن في DicelionTechnique لا نقدّم أدوات فقط،\nبل نسعى ـ بفضل الله ـ إلى بناء حلول رقمية نافعة، صادقة،\nتُسهّل عملك، وتقرّبك من الإتقان، وتخدمك بأمانة واحترام.\n\nمتابعتك لصفحتنا تساعدنا على الاستمرار،\nوتمنحك الوصول إلى باقي تطبيقاتنا وابتكاراتنا الاحترافية القادمة، بإذن الله.', 
+      follow: 'متابعة الصفحة', 
+      skip: 'تخطي' 
+    },
     toolbar: { highlight: 'تمييز', copySel: 'نسخ المحدد', reset: 'استعادة الأصلي' },
     modalityModal: { title: 'اختر نوع المحتوى المطلوب لتوليده', cancel: 'إلغاء' },
     quickCopy: 'نسخ سريع',
     editInStudio: 'تعديل في المختبر',
     guide: { 
-      title: 'موسوعة DT-Prompt الشاملة (V23.0 PRO)', 
-      intro: 'مرحباً بك في المحرك الهندسي الأكثر تقدماً. DT-Prompt ليس مجرد تطبيق، بل هو جسر تقني يربط خيالك بأقوى محركات الذكاء الاصطناعي العالمية. يهدف التطبيق إلى تحويل أفكارك البسيطة إلى "أوامر برمجية" (Prompts) دقيقة ومعقدة تضمن لك مخرجات احترافية بنسبة 100%.',
+      title: 'موسوعة DT-Prompt الشاملة (V25.1 PRO)', 
+      intro: 'مرحباً بك في المحرك الهندسي الأكثر تقدماً. DT-Prompt ليس مجرد تطبيق، بل هو جسر تقني يربط خيالك بأقوى محركات الذكاء الاصطناعي العالمية. يهدف التطبيق إلى تحويل أفكارك البسيطة إلى "أوامر برمجية" (Prompts) دقيقة ومعقدة تضمن لك مخرجات احترافية بنسبة 100% وبدون الحاجة للإنترنت.',
       masterSections: [
         { 
           id: 'NAV', title: '1. شريط التنقل (الأركان السبعة)', icon: '🏛️', 
@@ -92,23 +98,11 @@ const UI_TRANSLATIONS: any = {
           ] 
         },
         { 
-          id: 'EDITOR', title: '4. المحرر الذكي ونظام الألوان (الابتكار الثوري)', icon: '🎨', 
+          id: 'SYSTEM', title: '4. الأنظمة الذكية المستقلة', icon: '🤖',
           points: [
-            { label: '🔴 النص الأحمر (المحمي)', content: 'بنية البرومبت الأساسية التي تضمن الجودة؛ غير قابلة للتعديل لضمان عدم كسر البرومبت.' },
-            { label: '🟢 النص الأخضر (المتغيرات)', content: 'هنا يكمن سحرك؛ هذه الكلمات بين الأقواس [مثل السعر، الاسم] هي القابلة للتخصيص.' },
-            { label: '🔵 النص الأزرق (الحقوق)', content: 'بيانات تقنية وحقوق المطور، تضمن أصالة المحتوى وجودته.' },
-            { label: 'زر تعديل النص', content: 'عند الضغط عليه، تتحول الخلفية للون الداكن (في وضع السطوع) لراحة عينيك أثناء الكتابة.' },
-            { label: 'شريط التحرير (Toolbar)', content: 'أدوات سريعة لتمييز النص أو إعادة البرومبت لحالته الأصلية إذا حدث خطأ.' },
-            { label: 'نسخ البرومبت المتعدد', content: 'زر ذكي يفتح قائمة فرعية للنسخ بـ (العربية فقط، الإنجليزية فقط، أو كلاهما).' }
-          ] 
-        },
-        { 
-          id: 'EXAMPLES', title: '5. أمثلة عملية (كيف تستخدم التطبيق؟)', icon: '💡', 
-          points: [
-            { label: 'مثال تسويقي', content: 'اكتب "مطعم برجر". اختر قالب "Luxurious". فعل "Psychology Exclusive to Dicelion-Technique". ستحصل على برومبت يصف البرجر كأنه تحفة فنية تجذب الجائعين فوراً.' },
-            { label: 'تعديل البيانات', content: 'بعد التوليد، اضغط "تعديل النص"، اذهب للكلمة الخضراء [Price] واستبدلها بـ "50 ريال"، ثم اضغط "حفظ".' },
-            { label: 'البحث في المليون', content: 'في صفحة المكتبة، ابحث عن "محامي". اختر أي نتيجة واضغط "تعديل في المختبر" لإضافة اسم مكتبك الخاص.' }
-          ] 
+            { label: 'نظام المتابعة الدوري (15 يوماً)', content: 'يحتوي التطبيق على نظام ذكي مدمج يذكر المستخدم بأهمية متابعة منصات Dicelion-Technique الرسمية. يظهر التذكير عند أول استخدام، ثم يختفي تلقائياً بمجرد التفاعل، ولا يظهر مجدداً إلا بعد مرور 15 يوماً كاملة من آخر تفاعل، لضمان تجربة مستخدم سلسلة وغير مزعجة.' },
+            { label: 'محرك الأوفلاين 100%', content: 'يتميز التطبيق بقدرته على معالجة وهندسة الأوامر حتى عند انقطاع الإنترنت بالكامل، حيث يعتمد على خوارزمية Neural Factory المحلية المدمجة.' }
+          ]
         }
       ],
       footer: 'DT-Prompt | التقنية أمانة، والعمل إتقان - DicelionTechnique © 2024-2026'
@@ -139,7 +133,7 @@ const UI_TRANSLATIONS: any = {
     editBtn: 'Edit Text',
     copyPromptBtn: 'Copy Prompt',
     copyOptions: { ar: '🇸🇦 Copy Arabic', en: '🇬🇧 Copy English', all: '🌍 Copy All (Ar + En)' },
-    editLabel: 'Smart Prompt Editor (V23.0 PRO)',
+    editLabel: 'Smart Prompt Editor (V25.1 PRO)',
     resultActions: { copy: 'Copy', save: 'Save' },
     history: { empty: 'History is empty.. start creating!', title: 'DT-Prompt Archive' },
     copied: 'Copied successfully!',
@@ -147,7 +141,7 @@ const UI_TRANSLATIONS: any = {
     promptMode: { image: 'Image Gen', video: 'Video Gen', post: 'Pro Text' },
     placeholders: { text: 'Core concept for your prompt...', search: 'Search 1M prompts...', dropdownSearch: 'Choose from 1000 categories...' },
     labels: { 
-      ratio: 'Output Ratio', mood: 'Tone & Style', bg: 'Context', tech: 'Pro Template (100 Opts)', text: 'Core Subject', quickSearch: 'Browse 1000 Categories',
+      ratio: 'Output Ratio', mood: 'Tone & Style', bg: 'Context (100 Opts)', tech: 'Pro Template (100 Opts)', text: 'Core Subject', quickSearch: 'Browse 1000 Categories',
       exclusivePsychology: "Psychology Exclusive to Dicelion-Technique",
       analyzeImage: "With Reference Image",
       exportEnglish: "English Export (High Precision)",
@@ -156,13 +150,19 @@ const UI_TRANSLATIONS: any = {
       model: "Target AI Model",
       elements: "Visual Elements (100 Opts)"
     },
+    followModal: { 
+      title: 'DicelionTechnique Family', 
+      message: 'At DicelionTechnique, we don’t just offer tools;\nwe strive – with God’s grace – to build digital solutions that are beneficial and honest.', 
+      follow: 'Follow Page', 
+      skip: 'Skip' 
+    },
     toolbar: { highlight: 'Highlight', copySel: 'Copy Selection', reset: 'Reset to Original' },
     modalityModal: { title: 'Choose Content Type', cancel: 'Cancel' },
     quickCopy: 'Quick Copy',
     editInStudio: 'Edit in Lab',
     guide: { 
-      title: 'DT-Prompt Encyclopedia (V23.0 PRO)', 
-      intro: 'DT-Prompt is not just an app; it is a professional engineering engine designed to bridge the gap between human imagination and the world’s most powerful AI models. It ensures your ideas are transformed into high-fidelity "Prompts" that guarantee 100% professional results.',
+      title: 'DT-Prompt Encyclopedia (V25.1 PRO)', 
+      intro: 'DT-Prompt is not just an app; it is a professional engineering engine designed to bridge the gap between human imagination and the world’s most powerful AI models.',
       masterSections: [
         { 
           id: 'NAV_E', title: '1. Navigation Bar', icon: '🏛️', 
@@ -178,13 +178,10 @@ const UI_TRANSLATIONS: any = {
     about: { 
       title: 'DicelionTechnique Services', 
       subtitle: 'Smart Software Engineering & Digital Solutions', 
-      promoText: 'At DicelionTechnique, we work with quiet dedication and humility. We seek blessings in every step to make our work beneficial for everyone.\n\nWe do not see ourselves as superior, but strive to facilitate the lives of those who trust us, believing that technology is a trust and every line of code is a responsibility we are held accountable for before it is an achievement to boast about.\n\nWe strive to develop modern digital solutions with honesty and mastery, aiming to benefit humanity with a professional conscience, asking Allah for guidance in all that is good.', 
+      promoText: 'At DicelionTechnique, we work with quiet dedication and humility...', 
       features: [
-        'Certified Instructor & Trainer at Private Technical Institutes', 
-        'Expert in Mobile & Desktop Software Systems', 
-        'AI Prompt Engineering Specialist',
-        'Innovator of Psychology-based Digital Systems',
-        'Full-stack Mobile & PC Application Developer'
+        'Certified Instructor & Trainer', 
+        'AI Prompt Engineering Specialist'
       ], 
       contacts: { 
         whatsapp: 'Direct WhatsApp Support', 
@@ -194,6 +191,9 @@ const UI_TRANSLATIONS: any = {
     }
   }
 };
+
+const LAST_FOLLOW_KEY = 'dt_last_follow_interaction';
+const FIFTEEN_DAYS_MS = 15 * 24 * 60 * 60 * 1000;
 
 const WisdomBox = ({ isSunlight, label }: { isSunlight: boolean, label: string }) => {
   const [quote, setQuote] = useState('');
@@ -244,7 +244,6 @@ const Unified3DLogo = ({ isSunlight = false }: { isSunlight?: boolean }) => {
           </linearGradient>
         </defs>
 
-        {/* Brain Layer with Pulse Animation */}
         <g id="brain-layer" transform="translate(256, 256) scale(1.1)" opacity="0.35">
           <path d="M-10 -110 C-70 -110 -120 -60 -120 0 C-120 40 -100 70 -70 90 C-100 110 -120 140 -120 180 C-120 240 -60 270 0 270 C60 270 120 240 120 180 C120 140 100 110 70 90 C100 70 120 40 120 0 C120 -60 70 -110 10 -110 Z" fill="none" stroke="#38bdf8" strokeWidth="2" />
           <path d="M0 -110 V270 M-120 0 H120 M-80 180 H80" fill="none" stroke="#38bdf8" strokeWidth="1" opacity="0.5" />
@@ -253,7 +252,6 @@ const Unified3DLogo = ({ isSunlight = false }: { isSunlight?: boolean }) => {
           </circle>
         </g>
 
-        {/* Orbits with Motion Animation */}
         <g id="orbits">
           <circle cx="256" cy="256" r="230" fill="none" stroke="#38bdf8" strokeWidth="0.5" strokeDasharray="10 20" opacity="0.15" />
           <circle r="10" fill="#38bdf8" filter="url(#neon_glow_blue)">
@@ -264,7 +262,6 @@ const Unified3DLogo = ({ isSunlight = false }: { isSunlight?: boolean }) => {
           </circle>
         </g>
 
-        {/* Central DT Letters */}
         <g transform="translate(256, 256)">
           <path d="M-180 -100 V100 H-80 C-10 100 30 60 30 0 C30 -60 -10 -100 -80 -100 H-180 Z" fill="url(#dt_depth_grad)" transform="translate(10, 10)" />
           <path d="M-180 -100 V100 H-80 C-10 100 30 60 30 0 C30 -60 -10 -100 -80 -100 H-180 Z" fill="url(#dt_face_grad)" />
@@ -281,10 +278,9 @@ const Unified3DLogo = ({ isSunlight = false }: { isSunlight?: boolean }) => {
   );
 };
 
-/* HACKER ANALYZER LOADER COMPONENT - UPDATED TO BRIGHT WHITE VIBRATING TEXT (V20.0 PRO) */
+/* HACKER ANALYZER LOADER COMPONENT */
 const HackerAnalyzerLoader = ({ isSunlight }: { isSunlight: boolean }) => {
   const binaryRows = useMemo(() => {
-    // Creating 8 rows of horizontal fast-moving data
     return Array.from({ length: 8 }).map((_, i) => ({
       id: i,
       delay: `${Math.random() * -10}s`,
@@ -295,7 +291,6 @@ const HackerAnalyzerLoader = ({ isSunlight }: { isSunlight: boolean }) => {
 
   return (
     <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden bg-black">
-      {/* Background Matrix Layer - Horizontal Right to Left */}
       <div className="absolute inset-0 flex flex-col justify-around opacity-40 overflow-hidden py-1">
         {binaryRows.map(row => (
           <div 
@@ -308,7 +303,6 @@ const HackerAnalyzerLoader = ({ isSunlight }: { isSunlight: boolean }) => {
           </div>
         ))}
       </div>
-      {/* Foreground System Status Text - Bright White VIBRATING (V20.0) */}
       <div className="relative z-20 flex flex-col items-center justify-center w-full h-full">
         <span className="text-[14px] font-mono font-black tracking-widest text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] vibrate-text text-center px-6">
           جاري تحليل الأكواد البرمجية
@@ -325,6 +319,7 @@ const App: React.FC = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isCopyMenuOpen, setIsCopyMenuOpen] = useState(false);
+  const [showFollowModal, setShowFollowModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [generatedPrompt, setGeneratedPrompt] = useState('');
   const [originalPrompt, setOriginalPrompt] = useState('');
@@ -341,6 +336,22 @@ const App: React.FC = () => {
     document.documentElement.setAttribute('dir', t.dir);
   }, [isSunlightMode, appLang, t.dir]);
 
+  useEffect(() => {
+    const lastShown = localStorage.getItem(LAST_FOLLOW_KEY);
+    const now = Date.now();
+    if (!lastShown || (now - Number(lastShown) >= FIFTEEN_DAYS_MS)) {
+      setShowFollowModal(true);
+    }
+  }, []);
+
+  const closeFollowModal = (followed: boolean) => {
+    localStorage.setItem(LAST_FOLLOW_KEY, Date.now().toString());
+    setShowFollowModal(false);
+    if (followed) {
+      window.open('https://dicelion-technique.com', '_blank');
+    }
+  };
+
   const [formData, setFormData] = useState<PromptFormData>({
     promptMode: 'image', template: TEMPLATES[0].id, designType: '', aspectRatio: ASPECT_RATIOS[0], purpose: '',
     style: '', font: '', palette: '', background: BACKGROUNDS[0], mood: MOODS[0],
@@ -350,37 +361,43 @@ const App: React.FC = () => {
     onlyEnglishVisuals: false, exclusivePsychology: false
   });
 
+  // SMART OFFLINE GENERATION LOGIC (V25.0)
   const generate = async () => {
     if (!formData.mainText) return;
     setIsGenerating(true);
     setGeneratedPrompt("");
     setIsEditing(false);
+
+    // Simulated Delay for Neural Engine Feeling
+    await new Promise(r => setTimeout(r, 1500));
+
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      const systemInstruction = `You are a World-Class AI Prompt Engineering Architect. 
-Your output MUST be linguistically flawless in both Arabic and English, with zero spelling or grammatical errors.
-CRITICAL OUTPUT RULES:
-1. Standard Text: RED COLOR (Protected).
-2. Customizable Variables: wrap in square brackets like [Price], [Name], [Location]. These will be GREEN and EDITABLE.
-3. Developer Rights/Technical metadata: start with "/*" or "DicelionTechnique:". These will be BLUE and Protected.
+      // Priority 1: Check Online Status & API Key
+      if (navigator.onLine && process.env.API_KEY) {
+        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+        const systemInstruction = `You are a World-Class AI Prompt Engineering Architect. 
+        Your output MUST be linguistically flawless in both Arabic and English.
+        Standard Text: RED. Variables: [GREEN]. Metadata: /*BLUE*/.`;
 
-Structure the response clearly into an Arabic section and an English section. Ensure maximum linguistic precision in both languages.`;
+        const response = await ai.models.generateContent({
+          model: 'gemini-3-flash-preview',
+          contents: `Mode: ${formData.promptMode}. Topic: ${formData.mainText}. Tech: ${formData.technical}. Generate a complex prompt with placeholders in [BRACKETS].`,
+          config: { systemInstruction, temperature: 0.9 }
+        });
 
-      const response = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
-        contents: `Mode: ${formData.promptMode}. Topic: ${formData.mainText}. Tech: ${formData.technical}. Generate a complex prompt with placeholders in [BRACKETS]. Include separate Arabic and English blocks.`,
-        config: {
-          systemInstruction,
-          temperature: 0.9,
-        }
-      });
-
-      const text = response.text || "Neural Engine failed to respond.";
-      setOriginalPrompt(text);
-      setGeneratedPrompt(text);
+        const text = response.text || "Neural Engine failed to respond.";
+        setOriginalPrompt(text);
+        setGeneratedPrompt(text);
+      } else {
+        // Priority 2: OFFLINE ENGINE (Fallback)
+        throw new Error("Offline Mode Triggered");
+      }
     } catch (err) {
-      console.error("Neural Error:", err);
-      setGeneratedPrompt("/* CRITICAL SYSTEM ERROR IN NEURAL ENGINE */\nPlease verify API connectivity and try again.");
+      // OFFLINE FACTORY GENERATION
+      const neural = getMillionthNeuralPrompt(Math.floor(Math.random() * 1000000), formData.mainText);
+      const offlineResult = `${neural.en}\n\n/* OFFLINE NEURAL ENGINE v25.0 ACTIVE */\nDicelionTechnique: [PRO-ULTRA-RESULT]`;
+      setOriginalPrompt(offlineResult);
+      setGeneratedPrompt(offlineResult);
     } finally {
       setIsGenerating(false);
     }
@@ -389,7 +406,6 @@ Structure the response clearly into an Arabic section and an English section. En
   const copyPromptByLang = (mode: 'ar' | 'en' | 'all') => {
     const text = editorRef.current?.innerText || generatedPrompt;
     if (!text) return;
-
     let textToCopy = text;
     if (mode === 'ar') {
       const arRegex = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
@@ -400,7 +416,6 @@ Structure the response clearly into an Arabic section and an English section. En
       const lines = text.split('\n');
       textToCopy = lines.filter(line => !arRegex.test(line)).join('\n');
     }
-
     navigator.clipboard.writeText(textToCopy);
     alert(t.copied);
     setIsCopyMenuOpen(false);
@@ -423,31 +438,17 @@ Structure the response clearly into an Arabic section and an English section. En
 
   const parsePromptToJSX = (text: string, editMode: boolean) => {
     if (!text) return null;
-
     const regex = /(\[.*?\])|(\/\*.*?\*\/|DicelionTechnique:.*)/g;
     const parts = text.split(regex);
-    
     return parts.map((part, i) => {
       if (!part) return null;
       if (part.startsWith('[') && part.endsWith(']')) {
-        return (
-          <span key={i} contentEditable={editMode} suppressContentEditableWarning className="text-emerald-500 font-black cursor-text mx-1 border-b border-emerald-500/30 bg-emerald-500/5 px-1 rounded">
-            {part}
-          </span>
-        );
+        return <span key={i} contentEditable={editMode} suppressContentEditableWarning className="text-emerald-500 font-black cursor-text mx-1 border-b border-emerald-500/30 bg-emerald-500/5 px-1 rounded">{part}</span>;
       }
       if (part.startsWith('/*') || part.includes('DicelionTechnique:')) {
-        return (
-          <span key={i} contentEditable={false} className="text-sky-400 font-mono italic opacity-80">
-            {part}
-          </span>
-        );
+        return <span key={i} contentEditable={false} className="text-sky-400 font-mono italic opacity-80">{part}</span>;
       }
-      return (
-        <span key={i} contentEditable={false} className="text-rose-500 font-bold leading-relaxed">
-          {part}
-        </span>
-      );
+      return <span key={i} contentEditable={false} className="text-rose-500 font-bold leading-relaxed">{part}</span>;
     });
   };
 
@@ -567,7 +568,6 @@ Structure the response clearly into an Arabic section and an English section. En
           <div className="space-y-6 pb-12 animate-in fade-in">
             <div className="glass-ui p-6 rounded-[2.5rem] shadow-md border-sky-500/10">
               <SelectBox label={t.labels.quickSearch} options={["", ...PRO_ULTRA_DB.map(s => s.ar).slice(0, 1000)]} value={searchQuery} onChange={(e:any) => setSearchQuery(e.target.value)} />
-              <p className="text-[9px] font-bold opacity-50 mt-3 px-2">✨ تصفح 1000 تخصص ذكي من اختيارك للحصول على نتائج فورية</p>
             </div>
             <div className="glass-ui h-14 rounded-full flex items-center px-6 shadow-sm">
               <span className="mr-2 opacity-50">🔍</span>
@@ -650,7 +650,7 @@ Structure the response clearly into an Arabic section and an English section. En
                       <button className="sm:col-span-2 py-4 rounded-2xl glass-ui border-sky-500/20 text-sky-400 font-black text-xs uppercase shadow-md hover:bg-white/5 transition-all flex items-center justify-center gap-3"><span className="text-lg">📧</span> {t.about.contacts.email}</button>
                     </div>
                 </div>
-                <p className="text-[10px] font-black uppercase opacity-30 tracking-[0.5em] mt-8">DICELION TECHNIQUE v23.0 PRO</p>
+                <p className="text-[10px] font-black uppercase opacity-30 tracking-[0.5em] mt-8">DICELION TECHNIQUE v25.1 PRO</p>
              </div>
           </div>
         )}
@@ -669,6 +669,28 @@ Structure the response clearly into an Arabic section and an English section. En
           </div>
         )}
       </main>
+
+      {showFollowModal && (
+        <div className="fixed inset-0 z-[20000] flex items-center justify-center bg-[var(--modal-overlay)] backdrop-blur-xl px-6 animate-in fade-in">
+          <div className="glass-ui p-10 rounded-[3.5rem] max-w-sm w-full text-center space-y-6 shadow-2xl border-sky-500/40 animate-in zoom-in slide-in-from-bottom-10 duration-500">
+            <div className="flex flex-col items-center">
+              <div className="scale-[0.35] h-24 w-full flex items-center justify-center -mb-8 -mt-12 overflow-visible">
+                <Unified3DLogo isSunlight={isSunlightMode} />
+              </div>
+              <h3 className="text-xl font-black text-sky-500 uppercase tracking-widest">{t.followModal.title}</h3>
+            </div>
+            <p className="text-[13px] font-bold leading-relaxed opacity-90 px-2 whitespace-pre-line text-center">
+              {t.followModal.message}
+            </p>
+            <div className="flex flex-col gap-3 pt-2">
+              <button onClick={() => closeFollowModal(true)} className="w-full py-5 bg-sky-600 text-white rounded-2xl font-black text-xs uppercase shadow-xl hover:bg-sky-500 scale-[1.02] transition-all">{t.followModal.follow}</button>
+              <button onClick={() => closeFollowModal(false)} className="w-full py-4 glass-ui text-slate-400 rounded-2xl font-black text-[10px] uppercase hover:bg-white/5 transition-all">{t.followModal.skip}</button>
+            </div>
+            <p className="text-[9px] font-black opacity-30 uppercase tracking-[0.2em]">DICELION TECHNIQUE SYSTEM</p>
+          </div>
+        </div>
+      )}
+
       {modalityModal.show && (
         <div className="fixed inset-0 z-[11000] flex items-center justify-center bg-[var(--modal-overlay)] backdrop-blur-md px-6">
             <div className="glass-ui p-8 rounded-[3.5rem] max-w-sm w-full text-center space-y-6 animate-in zoom-in">
