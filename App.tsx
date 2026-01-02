@@ -1,6 +1,6 @@
 
-/* SYNC_STABILITY_PATCH_V18.0_MASTER_PRO_ULTRA: RESTORING THE ANIMATED SOUL OF DT-PROMPT */
-import React, { useState, useEffect, useMemo } from 'react';
+/* SYNC_STABILITY_PATCH_V21.5_MASTER_PRO_ULTRA: SMART EDITABLE PROMPT ENGINE WITH VISUAL COMFORT */
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { 
   ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, TEMPLATES, AI_MODELS, PRO_ULTRA_DB, WISDOM_QUOTES, getMillionthNeuralPrompt
 } from './constants';
@@ -29,23 +29,25 @@ const UI_TRANSLATIONS: any = {
     tabs: { create: 'المختبر', library: 'مليون برومبت', history: 'سجل المحفوظات', appLang: 'اللغة', guide: 'دليل', about: 'عن المطور', home: 'الرئيسية', sunlight: 'سطوع' },
     generateBtn: 'معالجة الأمر ✨',
     saveBtn: 'أرشفة المشروع',
-    editLabel: 'محرر الأوامر الذكي (V18.0 PRO)',
+    editBtn: 'تعديل النص',
+    editLabel: 'محرر الأوامر الذكي (V21.5 PRO)',
     resultActions: { copy: 'نسخ', save: 'حفظ' },
     history: { empty: 'السجل فارغ حالياً.. ابدأ بصناعة إبداعك الأول!', title: 'سجل محفوظات DT-Prompt' },
     copied: 'تم نسخ النص بنجاح!',
     saved: 'تمت الأرشفة بنجاح!',
-    promptMode: { image: 'توليد الصور', video: 'إنتاج الفيديو', post: 'نصوص إحترافية' },
+    promptMode: { image: 'توليد الصور', video: 'إنتاج الفيديو', post: 'نصوص احترافية' },
     placeholders: { text: 'عنوان الحملة أو الموضوع الرئيسي الذي تريد تحويله لبرومبت احترافي...', search: 'ابحث في مليون برومبت جاهز بالرقم أو بالحرف', dropdownSearch: 'اختر تخصصاً من 1000 خيار...' },
     labels: { 
       ratio: 'أبعاد المخرج (Ratio)', mood: 'نبرة الصوت والأسلوب الفني', bg: 'سياق المحتوى والبيئة المحيطة', tech: 'قالب الهيكلة الاحترافي (100 خيار)', text: 'الموضوع الأساسي (Main Subject)', quickSearch: 'تصفح التخصصات الذكية (1000 خيار)',
       exclusivePsychology: "برومبت سيكولوجي حصري لـ DT-Prompt",
       analyzeImage: "برومبت مع صورة مرجعية مرفقة",
       exportEnglish: "تصدير البرومبت باللغة الإنجليزية (لنتائج أدق)",
-      englishLetters: "برومبت للمنصّات التي لا تدعم اللغة العربية",
+      englishLetters: "برومبت للمنصات التي لا تدعم اللغة العربية",
       wisdomLabel: "حكمة اليوم للمبدع الرقمي",
       model: "محرك الذكاء الاصطناعي المستهدف",
       elements: "العناصر والجماليات (100 خيار)"
     },
+    toolbar: { highlight: 'تمييز', copySel: 'نسخ المحدد', reset: 'استعادة الأصلي' },
     modalityModal: { title: 'اختر نوع المحتوى المطلوب لتوليده', cancel: 'إلغاء' },
     quickCopy: 'نسخ سريع',
     editInStudio: 'تعديل في المختبر',
@@ -60,43 +62,7 @@ const UI_TRANSLATIONS: any = {
             { label: 'الكنز (مليون برومبت) 💎', content: 'مكتبة كونية تضم مليون إمكانية. ابحث عن أي مهنة أو نشاط، وستجد "المسودة الذهبية" جاهزة لك.' },
             { label: 'السطوع ☀️', content: 'تبديل بين "سكون الليل" للتركيز، و"إشراق النهار" للوضوح. زر واحد يغير حال التطبيق ليناسب راحتك.' },
             { label: 'اللغة 🌐', content: 'يتحدث التطبيق 8 لغات ليكون جسراً بينك وبين العالم، اختر اللغة التي يفهمها قلبك.' },
-            { label: 'الأرشيف 📜', content: 'ذاكرة لا تنسى. كل برومبت قمت بصناعته وحفظه يبقى هنا، محميّاً من الضياع.' }
-          ] 
-        },
-        { 
-          id: 'S2', title: '2. هندسة الأوامر (داخل المختبر)', icon: '🧪', 
-          points: [
-            { label: 'نوع المحتوى', content: 'التبديل بين وضع الصور، الفيديو، أو النصوص الاحترافية لضبط خوارزمية التوليد العصبية.' },
-            { label: 'أبعاد المخرج', content: 'اختيار القياس المناسب للمنصة (1:1، 9:16، 16:9) لضمان عدم تشوه النتيجة.' },
-            { label: 'نبرة الصوت والأسلوب', content: 'تحديد التأثير النفسي والدرامي للبرومبت (فخم، درامي، مستقبلي، هادئ).' },
-            { label: 'قالب الهيكلة (100 خيار)', content: 'دمج تقنيات الرندرة العالمية (Unreal Engine 5, Octane, HDR) بـ 100 خيار تقني جديد.' },
-            { label: 'العناصر الإضافية (100 خيار)', content: 'إضافة لمسات بصرية فريدة من قائمة ضخمة تضم 100 عنصر جمالي لتعزيز جودة المخرج.' },
-            { label: 'الموضوع الأساسي', content: 'المكان الذي تضع فيه جوهر فكرتك ليقوم المحرك العصبي بتطويرها هندسياً لبرومبت طويل ومفصل.' }
-          ] 
-        },
-        { 
-          id: 'S3', title: '3. التخصيص الذكي (إضافة بياناتك الخاصة)', icon: '✍️', 
-          points: [
-            { label: 'كيفية التعديل؟', content: 'بعد توليد البرومبت، ستجده في "محرر الأوامر". ابحث عن الكلمات العامة واستبدلها ببياناتك.' },
-            { label: 'إضافة أرقام التواصل', content: 'استبدل عبارات مثل [Contact Info] برقم هاتفك المباشر (مثلاً: 050XXXXXXX).' },
-            { label: 'وسائل التواصل والأسماء', content: 'ضع اسمك أو علامتك التجارية بدلاً من الكلمات الافتراضية. مثال: "Presented by Dicelion Technique".' },
-            { label: 'الموقع والنشاط', content: 'حدد مدينتك ونوع الخدمة بدقة في نص البرومبت (مثلاً: "مطعم في قلب مراكش" بدلاً من "مطعم").' }
-          ] 
-        },
-        { 
-          id: 'S4', title: '4. أمثلة حقيقية (من الفكرة إلى الواقع)', icon: '🌟', 
-          points: [
-            { label: 'مثال تسويقي (هاتف)', content: 'الفكرة: "هاتف حديث". التعديل: "احصل على هاتف DT-S24 من متجر (أحمد) بخصم 20%، تواصل عبر الواتساب: [رقمك]".' },
-            { label: 'مثال مهني (محاماة)', content: 'الفكرة: "مكتب محاماة". التعديل: "مكتب الأستاذ (عمر) للمحاماة، خبرة 20 عاماً في قضايا العقارات، زورونا في [العنوان]".' },
-            { label: 'مثال خدمي (طبخ)', content: 'الفكرة: "بيتزا إيطالية". التعديل: "بيتزا (ليون) الأصلية، طعم إيطالي بأيادٍ مغربية، للطلب: [رابط الموقع]".' }
-          ] 
-        },
-        { 
-          id: 'S5', title: '5. ميزات القوة (المفاتيح الأربعة)', icon: '🔑', 
-          points: [
-            { label: 'سيكولوجي حصري', content: 'يضيف محفزات عاطفية خفية تجذب القارئ وتؤثر في لاوعيه (ثوري وحصري لنا).' },
-            { label: 'تصدير إنجليزي', content: 'الذكاء الاصطناعي يبدع أكثر بالإنجليزية. هذه الميزة تترجم تقنياً ما كتبت للحصول على جودة 100%.' },
-            { label: 'المنصات اللاتينية', content: 'استخدم هذا الخيار إذا كنت ستنشر المحتوى في مواقع لا تدعم العربية (مثل بعض أدوات التصميم).' }
+            { label: 'الأرشيف 📜', content: 'ذاكرة لا تنسى. كل برومبت قمت بصناعته وحفظه يبقى هنا، محمياً من الضياع.' }
           ] 
         }
       ],
@@ -108,7 +74,7 @@ const UI_TRANSLATIONS: any = {
       promoText: 'نحن في DicelionTechnique نعمل بهدوء واجتهاد وتواضع طلابنا هم أساتذتي،\nونسأل الله في كل خطوة أن يبارك في عملنا وأن يجعل ما نقدّمه نافعًا للناس.\n\nلا نرى أنفسنا أفضل من غيرنا،\nبل نسعى أن نكون سببًا في تسهيل حياة من يثق بنا،\nمؤمنين بأن التقنية أمانة،\nوأن كل سطر برمجي نكتبه مسؤولية نحاسب عليها قبل أن تكون إنجازًا نفاخر به.\n\nنجتهد في تطوير حلول رقمية حديثة،\nنقصد بها الصدق في العمل، والإتقان في التنفيذ،\nوتقديم ما ينفع الإنسان بروح الضمير المهني،\nسائلين الله أن يوفقنا لما فيه الخير،\nوأن يكون عملنا خالصًا لوجهه الكريم قبل كل شيء.', 
       features: [
         'أستاذ ومدرّب معتمد لدى معاهد مهنية خاصة', 
-        'خبير في برمجيات وتطبيقات الهواتف الذكية بونظام الحواسيب وبرامجها', 
+        'خبير في برمجيات وتطبيقات الهواتف الذكية ونظام الحواسيب وبرامجها', 
         'مطور هندسة أوامر الذكاء الاصطناعي (Prompt Engineering Specialist)',
         'مبتكر أنظمة رقمية تقوم على مبادئ السيكولوجيا الإيجابية',
         'مطوّر تطبيقات الحواسيب والهواتف الذكية باستخدام أحدث التقنيات المتاحة'
@@ -125,7 +91,8 @@ const UI_TRANSLATIONS: any = {
     tabs: { create: 'Lab', library: '1M Prompts', history: 'History', appLang: 'Language', guide: 'Guide', about: 'Developer', home: 'Home', sunlight: 'Sunlight' },
     generateBtn: 'Process Command ✨',
     saveBtn: 'Archive Project',
-    editLabel: 'Smart Prompt Editor (V18.0 PRO)',
+    editBtn: 'Edit Text',
+    editLabel: 'Smart Prompt Editor (V21.5 PRO)',
     resultActions: { copy: 'Copy', save: 'Save' },
     history: { empty: 'History is empty.. start creating!', title: 'DT-Prompt Archive' },
     copied: 'Copied successfully!',
@@ -142,18 +109,10 @@ const UI_TRANSLATIONS: any = {
       model: "Target AI Model",
       elements: "Visual Elements (100 Opts)"
     },
+    toolbar: { highlight: 'Highlight', copySel: 'Copy Selection', reset: 'Reset to Original' },
     modalityModal: { title: 'Choose Content Type', cancel: 'Cancel' },
     quickCopy: 'Quick Copy',
     editInStudio: 'Edit in Lab',
-    guide: { 
-      title: 'DT-Prompt Grand Encyclopedia', 
-      intro: 'Welcome. This is your spiritual and technical guide to mastering DT-Prompt.', 
-      masterSections: [
-        { id: 'E1', title: '1. Navigation', icon: '🏛️', points: [{ label: 'Lab', content: 'Where ideas are forged.' }] },
-        { id: 'E2', title: '2. Customization', icon: '✍️', points: [{ label: 'Personal Data', content: 'Replace placeholders with your phone, social media, and business names.' }] }
-      ], 
-      footer: 'DT-Prompt | Engineering with Honesty © 2024' 
-    },
     about: { 
       title: 'DicelionTechnique Services', 
       subtitle: 'Smart Software Engineering & Digital Solutions', 
@@ -260,15 +219,55 @@ const Unified3DLogo = ({ isSunlight = false }: { isSunlight?: boolean }) => {
   );
 };
 
+/* HACKER ANALYZER LOADER COMPONENT - UPDATED TO BRIGHT WHITE VIBRATING TEXT (V20.0 PRO) */
+const HackerAnalyzerLoader = ({ isSunlight }: { isSunlight: boolean }) => {
+  const binaryRows = useMemo(() => {
+    // Creating 8 rows of horizontal fast-moving data
+    return Array.from({ length: 8 }).map((_, i) => ({
+      id: i,
+      delay: `${Math.random() * -10}s`,
+      speed: `${0.8 + Math.random() * 0.4}s`,
+      content: "010011010101101010110101011010011011010101011011010101001101101".split("").sort(() => Math.random() - 0.5).join("")
+    }));
+  }, []);
+
+  return (
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden bg-black">
+      {/* Background Matrix Layer - Horizontal Right to Left */}
+      <div className="absolute inset-0 flex flex-col justify-around opacity-40 overflow-hidden py-1">
+        {binaryRows.map(row => (
+          <div 
+            key={row.id} 
+            className="flex whitespace-nowrap text-[12px] font-mono leading-none matrix-row-anim text-[#00ff41] drop-shadow-[0_0_2px_#00ff41]" 
+            style={{ animationDelay: row.delay, animationDuration: row.speed }}
+          >
+            <span className="px-4">{row.content} {row.content} {row.content}</span>
+            <span className="px-4">{row.content} {row.content} {row.content}</span>
+          </div>
+        ))}
+      </div>
+      {/* Foreground System Status Text - Bright White VIBRATING (V20.0) */}
+      <div className="relative z-20 flex flex-col items-center justify-center w-full h-full">
+        <span className="text-[14px] font-mono font-black tracking-widest text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] vibrate-text text-center px-6">
+          جاري تحليل الأكواد البرمجية
+        </span>
+      </div>
+    </div>
+  );
+};
+
 const App: React.FC = () => {
   const [appLang, setAppLang] = useState(() => safeGetItem('dt_lang', 'ar'));
   const [activeTab, setActiveTab] = useState<'create' | 'library' | 'history' | 'about' | 'guide' | 'language'>('create');
   const [isSunlightMode, setIsSunlightMode] = useState(() => safeGetItem('dt_sunlight', 'true') === 'true');
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [generatedPrompt, setGeneratedPrompt] = useState('');
+  const [originalPrompt, setOriginalPrompt] = useState('');
   const [history, setHistory] = useState<SavedPrompt[]>(() => JSON.parse(safeGetItem('dt_history', '[]')));
   const [modalityModal, setModalityModal] = useState<{show: boolean, subject: any, type: 'copy'|'edit'}>({show: false, subject: null, type: 'copy'});
+  const editorRef = useRef<HTMLDivElement>(null);
 
   const t = useMemo(() => UI_TRANSLATIONS[appLang] || UI_TRANSLATIONS.ar, [appLang]);
 
@@ -291,31 +290,31 @@ const App: React.FC = () => {
   const generate = async () => {
     if (!formData.mainText) return;
     setIsGenerating(true);
+    setGeneratedPrompt("");
+    setIsEditing(false);
     try {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      const systemInstruction = `You are an elite AI Prompt Engineer. 
-Your goal is to transform user ideas into highly descriptive and effective prompts for AI models like Midjourney, Stable Diffusion, or LLMs.
-Context: 
-- Mode: ${formData.promptMode}
-- Technical Style: ${formData.technical}
-- Aspect Ratio: ${formData.aspectRatio}
-- Mood: ${formData.mood}
-- Elements: ${formData.elements}
-- Target: ${formData.targetModel}
-- Psychology: ${formData.exclusivePsychology ? "Inject psychological triggers" : "Normal"}
-- Format: ${formData.forceEnglish ? "English only" : "Bilingual Ar/En"}
-Produce a masterpiece prompt with cinematic structure.`;
+      const systemInstruction = `You are a World-Class AI Prompt Engineering Architect. 
+Your output MUST be linguistically flawless in both Arabic and English, with zero spelling or grammatical errors.
+CRITICAL OUTPUT RULES:
+1. Standard Text: RED COLOR (Protected).
+2. Customizable Variables: wrap in square brackets like [Price], [Name], [Location]. These will be GREEN and EDITABLE.
+3. Developer Rights/Technical metadata: start with "/*" or "DicelionTechnique:". These will be BLUE and Protected.
+
+Format your response as a professional production-ready script. Ensure maximum linguistic precision in both languages.`;
 
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
-        contents: `Topic: ${formData.mainText}. Environment: ${formData.background}. Create the ultimate prompt.`,
+        contents: `Mode: ${formData.promptMode}. Topic: ${formData.mainText}. Tech: ${formData.technical}. Generate a complex prompt with placeholders in [BRACKETS].`,
         config: {
           systemInstruction,
-          temperature: 1,
+          temperature: 0.9,
         }
       });
 
-      setGeneratedPrompt(response.text || "Neural Engine failed to respond.");
+      const text = response.text || "Neural Engine failed to respond.";
+      setOriginalPrompt(text);
+      setGeneratedPrompt(text);
     } catch (err) {
       console.error("Neural Error:", err);
       setGeneratedPrompt("/* CRITICAL SYSTEM ERROR IN NEURAL ENGINE */\nPlease verify API connectivity and try again.");
@@ -325,17 +324,55 @@ Produce a masterpiece prompt with cinematic structure.`;
   };
 
   const saveToHistory = () => {
-    if (!generatedPrompt) return;
+    const currentText = editorRef.current?.innerText || generatedPrompt;
+    if (!currentText) return;
     const newItem: SavedPrompt = {
         id: Date.now().toString(),
         date: new Date().toLocaleString(),
-        fullPrompt: generatedPrompt,
+        fullPrompt: currentText,
         summary: formData.mainText.substring(0, 40) + "..."
     };
     const newHist = [newItem, ...history];
     setHistory(newHist);
     localStorage.setItem('dt_history', JSON.stringify(newHist));
     alert(t.saved);
+  };
+
+  const parsePromptToJSX = (text: string, editMode: boolean) => {
+    if (!text) return null;
+
+    // Pattern for variables [TEXT]
+    const regex = /(\[.*?\])|(\/\*.*?\*\/|DicelionTechnique:.*)/g;
+    const parts = text.split(regex);
+    
+    return parts.map((part, i) => {
+      if (!part) return null;
+      
+      // Is it a Variable (GREEN)
+      if (part.startsWith('[') && part.endsWith(']')) {
+        return (
+          <span key={i} contentEditable={editMode} suppressContentEditableWarning className="text-emerald-500 font-black cursor-text mx-1 border-b border-emerald-500/30 bg-emerald-500/5 px-1 rounded">
+            {part}
+          </span>
+        );
+      }
+      
+      // Is it Developer Info (BLUE)
+      if (part.startsWith('/*') || part.includes('DicelionTechnique:')) {
+        return (
+          <span key={i} contentEditable={false} className="text-sky-400 font-mono italic opacity-80">
+            {part}
+          </span>
+        );
+      }
+      
+      // Core Prompt (RED)
+      return (
+        <span key={i} contentEditable={false} className="text-rose-500 font-bold leading-relaxed">
+          {part}
+        </span>
+      );
+    });
   };
 
   const executeAction = (mode: 'image' | 'video' | 'post') => {
@@ -414,16 +451,46 @@ Produce a masterpiece prompt with cinematic structure.`;
             </div>
             <div className="glass-ui p-6 rounded-[3rem] space-y-4 shadow-md">
               <InputArea label={t.labels.text} value={formData.mainText} onChange={(e:any) => setFormData(p=>({...p, mainText: e.target.value}))} placeholder={t.placeholders.text} />
-              <button onClick={generate} disabled={isGenerating} className={`w-full py-5 rounded-full font-black uppercase shadow-xl transition-all ${isGenerating ? 'bg-slate-700' : 'bg-sky-600 text-white hover:bg-sky-500 scale-[1.01]'}`}>
-                {isGenerating ? 'جاري التحليل الهندسي...' : t.generateBtn}
+              <button 
+                onClick={generate} 
+                disabled={isGenerating} 
+                className={`relative overflow-hidden w-full py-5 rounded-full font-black uppercase shadow-xl transition-all ${
+                  isGenerating 
+                    ? 'bg-black' 
+                    : 'bg-sky-600 text-white hover:bg-sky-500 scale-[1.01]'
+                }`}
+              >
+                {isGenerating ? (
+                  <HackerAnalyzerLoader isSunlight={isSunlightMode} />
+                ) : (
+                  t.generateBtn
+                )}
               </button>
             </div>
             {generatedPrompt && (
               <div className="glass-ui p-8 rounded-[3rem] space-y-4 animate-in slide-in-from-bottom shadow-2xl border-sky-500/20">
-                 <h4 className="text-xs font-black text-sky-500 uppercase">{t.editLabel}</h4>
-                 <pre className="p-6 bg-black/40 rounded-3xl text-[12px] font-mono leading-relaxed whitespace-pre-wrap overflow-x-hidden border border-white/5">{generatedPrompt}</pre>
+                 <div className="flex justify-between items-center mb-2 px-2">
+                    <h4 className="text-[10px] font-black text-sky-500 uppercase">{t.editLabel}</h4>
+                    {/* EDIT TOOLBAR */}
+                    <div className="flex gap-2">
+                        <button onClick={() => { if(window.getSelection()) { alert("Highlight Applied Internally"); } }} className="text-[8px] font-black uppercase text-sky-300 hover:text-white transition-colors">{t.toolbar.highlight}</button>
+                        <button onClick={() => setGeneratedPrompt(originalPrompt)} className="text-[8px] font-black uppercase text-rose-400 hover:text-white transition-colors">{t.toolbar.reset}</button>
+                    </div>
+                 </div>
+                 
+                 {/* SMART EDITOR WITH SEMI-DARK BACKGROUND OVERRIDE (V21.5) */}
+                 <div 
+                   ref={editorRef}
+                   className={`p-7 bg-black/40 dt-editor-dark-layer rounded-[2rem] text-[13px] font-mono leading-relaxed whitespace-pre-wrap overflow-hidden border border-white/5 shadow-inner min-h-[150px] outline-none transition-all ${isEditing ? 'ring-2 ring-sky-500/50 scale-[1.01]' : ''}`}
+                 >
+                   {parsePromptToJSX(generatedPrompt, isEditing)}
+                 </div>
+
                  <div className="flex gap-2">
-                    <button onClick={() => { navigator.clipboard.writeText(generatedPrompt); alert(t.copied); }} className="flex-1 py-4 bg-sky-600 text-white rounded-2xl font-black text-xs uppercase shadow-lg hover:bg-sky-500 transition-all">{t.resultActions.copy}</button>
+                    <button onClick={() => { navigator.clipboard.writeText(editorRef.current?.innerText || generatedPrompt); alert(t.copied); }} className="flex-1 py-4 bg-sky-600 text-white rounded-2xl font-black text-xs uppercase shadow-lg hover:bg-sky-500 transition-all">{t.resultActions.copy}</button>
+                    <button onClick={() => setIsEditing(!isEditing)} className={`flex-1 py-4 rounded-2xl font-black text-xs uppercase shadow-lg transition-all ${isEditing ? 'bg-emerald-600 text-white' : 'glass-ui text-sky-400 border-sky-500/30'}`}>
+                        {isEditing ? '✓ إنهاء التعديل' : t.editBtn}
+                    </button>
                     <button onClick={saveToHistory} className="flex-1 py-4 glass-ui rounded-2xl font-black text-xs uppercase text-sky-400 hover:bg-white/5 transition-all">{t.saveBtn}</button>
                  </div>
               </div>
@@ -529,7 +596,7 @@ Produce a masterpiece prompt with cinematic structure.`;
                       </button>
                     </div>
                 </div>
-                <p className="text-[10px] font-black uppercase opacity-30 tracking-[0.5em] mt-8">DICELION TECHNIQUE v18.0 PRO</p>
+                <p className="text-[10px] font-black uppercase opacity-30 tracking-[0.5em] mt-8">DICELION TECHNIQUE v21.5 PRO</p>
              </div>
           </div>
         )}

@@ -98,6 +98,36 @@
             50% { transform: translateY(-5px); }
         }
         #dt-master-svg { animation: drift 5s infinite ease-in-out; }
+
+        /* Hacker Matrix Animation - Vertical */
+        @keyframes matrix-scroll {
+            0% { transform: translateY(-50%); }
+            100% { transform: translateY(0%); }
+        }
+        .matrix-column-anim { animation: matrix-scroll linear infinite; }
+
+        /* Hacker Matrix Animation - Horizontal (V19.0 Update) */
+        @keyframes matrix-horizontal {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .matrix-row-anim { animation: matrix-horizontal linear infinite; }
+
+        /* Technical Text Vibration (V20.0 Update) */
+        @keyframes text-vibrate {
+            0% { transform: translate(0); }
+            25% { transform: translate(-0.3px, 0.3px); }
+            50% { transform: translate(0.3px, -0.3px); }
+            75% { transform: translate(-0.3px, -0.3px); }
+            100% { transform: translate(0); }
+        }
+        .vibrate-text { animation: text-vibrate 0.15s linear infinite; }
+
+        /* Sunlight mode semi-dark editor background override (V21.5 Update) */
+        [data-theme="light"] .dt-editor-dark-layer {
+            background-color: rgba(15, 23, 42, 0.95) !important;
+            border-color: rgba(56, 189, 248, 0.4) !important;
+        }
     </style>
 <script type="importmap">
 {
