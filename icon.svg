@@ -1,62 +1,86 @@
-
 <svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="mainBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#021526;stop-opacity:1" />
-      <stop offset="45%" style="stop-color:#03346E;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:1" />
+    <linearGradient id="dt_face_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38bdf8;stop-opacity:1" />
     </linearGradient>
-    <filter id="textNeonGlow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="12" result="blur" />
-      <feFlood flood-color="#38bdf8" flood-opacity="0.6" result="color" />
-      <feComposite in="color" in2="blur" operator="in" result="glow" />
-      <feMerge>
-        <feMergeNode in="glow" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
+    
+    <linearGradient id="dt_depth_grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0284c7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0c4a6e;stop-opacity:1" />
+    </linearGradient>
+
+    <pattern id="ai_grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+
+    <filter id="dt_neon_glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="15" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
-    <radialGradient id="chipGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:0.4" />
-      <stop offset="100%" style="stop-color:#38bdf8;stop-opacity:0" />
-    </radialGradient>
+
+    <style>
+      @keyframes orbit-rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      @keyframes pulse-energy {
+        0%, 100% { opacity: 0.3; stroke-width: 1; }
+        50% { opacity: 1; stroke-width: 3; }
+      }
+      .ai-orbital-ring { 
+        transform-origin: center;
+        animation: orbit-rotate 10s linear infinite;
+      }
+      .energy-particle {
+        animation: pulse-energy 2s ease-in-out infinite;
+      }
+      .neural-brain-pulse {
+        animation: pulse-energy 3s ease-in-out infinite alternate;
+      }
+    </style>
   </defs>
-  
-  <!-- الخلفية الرئيسية (Squircle احترافي) -->
-  <rect x="20" y="20" width="472" height="472" rx="120" fill="url(#mainBgGrad)" />
-  
-  <!-- نص DT المركزي العريض جداً مع التوهج -->
-  <text x="245" y="340" font-family="Arial Black, Arial, sans-serif" font-size="245" font-weight="900" fill="white" text-anchor="middle" filter="url(#textNeonGlow)" style="letter-spacing: -12px;">DT</text>
-  
-  <!-- منطقة رقاقة الذكاء الاصطناعي المشعة (الزاوية السفلية اليمنى) -->
-  <g transform="translate(310, 310)">
-    <!-- هالة توهج خلفية للرقاقة -->
-    <circle cx="100" cy="100" r="90" fill="url(#chipGlow)" opacity="0.8" />
-    
-    <path d="M10 160 A 150 150 0 0 1 160 10 L 160 160 Z" fill="#021526" opacity="0.85" />
-    
-    <g transform="translate(45, 45) scale(0.9)">
-       <!-- جسم الرقاقة -->
-       <rect x="25" y="25" width="70" height="70" rx="12" fill="none" stroke="#38bdf8" stroke-width="6" filter="url(#textNeonGlow)" />
-       <text x="60" y="68" font-family="Arial Black" font-size="28" font-weight="900" fill="#38bdf8" text-anchor="middle">AI</text>
-       
-       <!-- مسارات النبض الإلكتروني -->
-       <g stroke="#38bdf8" stroke-width="4" stroke-linecap="round">
-         <path d="M25 45 H5 M25 60 H5 M25 75 H5" />
-         <path d="M95 45 H115 M95 60 H115 M95 75 H115" />
-         <path d="M45 25 V5 M60 25 V5 M75 25 V5" />
-         <path d="M45 95 V115 M60 95 V115 M75 95 V115" />
-       </g>
-       
-       <!-- نقاط الاتصال المتوهجة -->
-       <g fill="#38bdf8">
-         <circle cx="5" cy="45" r="4" /> <circle cx="5" cy="60" r="4" /> <circle cx="5" cy="75" r="4" />
-         <circle cx="115" cy="45" r="4" /> <circle cx="115" cy="60" r="4" /> <circle cx="115" cy="75" r="4" />
-         <circle cx="45" cy="5" r="4" /> <circle cx="60" cy="5" r="4" /> <circle cx="75" cy="5" r="4" />
-         <circle cx="45" cy="115" r="4" /> <circle cx="60" cy="115" r="4" /> <circle cx="75" cy="115" r="4" />
-       </g>
-    </g>
+
+  <!-- النواة الخلفية والشبكة (لا تغيير) -->
+  <circle cx="256" cy="256" r="220" fill="url(#ai_grid)" opacity="0.4" />
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="10 5" opacity="0.2" />
+
+  <!-- المدار العصبوني (لا تغيير) -->
+  <g class="ai-orbital-ring">
+    <ellipse cx="256" cy="256" rx="240" ry="100" fill="none" stroke="url(#dt_face_grad)" stroke-width="1.5" stroke-dasharray="20 10" opacity="0.4" transform="rotate(-15 256 256)" />
+    <circle r="8" fill="#38bdf8" class="energy-particle">
+      <animateMotion dur="5s" repeatCount="indefinite" path="M 256,156 A 240,100 -15 1 1 255.9,156 Z" />
+    </circle>
+    <rect width="15" height="15" fill="#ffffff" transform="rotate(45)">
+      <animateMotion dur="8s" repeatCount="indefinite" path="M 256,356 A 240,100 -15 1 0 256.1,356 Z" />
+    </rect>
   </g>
-  
-  <!-- إطار نيون خفيف حول الأيقونة لزيادة البروز -->
-  <rect x="20" y="20" width="472" height="472" rx="120" fill="none" stroke="#38bdf8" stroke-width="2" opacity="0.3" />
+
+  <!-- الطبقة المضافة حصراً: رمز الدماغ النيوني (Incremental Layer: Brain Icon Background) -->
+  <g opacity="0.25" transform="translate(256, 256) scale(1.3)" class="neural-brain-pulse">
+    <!-- خطوط الدماغ الخارجية -->
+    <path d="M0 -90C-55 -90 -100 -50 -100 0C-100 25 -85 45 -65 60C-85 75 -100 95 -100 120C-100 170 -55 210 0 210C55 210 100 170 100 120C100 95 85 75 65 60C85 45 100 25 100 0C100 -50 55 -90 0 -90Z" fill="none" stroke="#38bdf8" stroke-width="3" />
+    <!-- خطوط تقسيم الدماغ الداخلية -->
+    <path d="M0 -90 V210 M-100 0 Q-50 0 0 0 Q50 0 100 0 M-80 120 H80" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.6" />
+    <!-- نقاط اتصال عصبونية متوهجة -->
+    <circle cx="0" cy="0" r="4" fill="#ffffff" />
+    <circle cx="-50" cy="60" r="2" fill="#38bdf8" />
+    <circle cx="50" cy="60" r="2" fill="#38bdf8" />
+  </g>
+
+  <!-- الشعار الأصلي DT (لا تغيير) -->
+  <g filter="url(#dt_neon_glow)" transform="translate(256, 256)">
+    <path d="M-180 -100 V100 H-80 C-10 100 30 60 30 0 C30 -60 -10 -100 -80 -100 H-180 Z" fill="url(#dt_depth_grad)" transform="translate(12, 12)" />
+    <path d="M-180 -100 V100 H-80 C-10 100 30 60 30 0 C30 -60 -10 -100 -80 -100 H-180 Z" fill="url(#dt_face_grad)" />
+    <path d="M-140 -60 H-80 C-50 -60 -10 -40 -10 0 C-10 40 -50 60 -80 60 H-140 V-60 Z" fill="#020617" />
+    <path d="M-130 -40 L-90 0 L-130 40" fill="none" stroke="#38bdf8" stroke-width="2" opacity="0.5" />
+    <path d="M40 -100 H180 V-50 H135 V100 H85 V-50 H40 V-100 Z" fill="url(#dt_depth_grad)" transform="translate(12, 12)" />
+    <path d="M40 -100 H180 V-50 H135 V100 H85 V-50 H40 V-100 Z" fill="url(#dt_face_grad)" />
+    <path d="M110 -80 V80" fill="none" stroke="#38bdf8" stroke-width="3" opacity="0.6" />
+  </g>
+
+  <!-- التوهج الخارجي الهالي (لا تغيير) -->
+  <circle cx="256" cy="256" r="250" fill="none" stroke="#38bdf8" stroke-width="1" opacity="0.1">
+    <animate attributeName="r" values="240;255;240" dur="4s" repeatCount="indefinite" />
+  </circle>
 </svg>

@@ -1,8 +1,8 @@
 {
-  "name": "DT-Prompt Pro",
+  "name": "DT-Prompt",
   "short_name": "DT-Prompt",
   "description": "المحرك الهندسي المتقدم لتوليد الأوامر - نظام آمن ومشفر بالكامل",
-  "version": "1.6.0",
+  "version": "2.0.0",
   "icons": [
     {
       "src": "icon.svg",

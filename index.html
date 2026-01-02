@@ -34,84 +34,415 @@
             -webkit-tap-highlight-color: transparent; 
             overscroll-behavior-y: none;
             min-height: 100vh;
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
             display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -webkit-flex-direction: column;
-            -ms-flex-direction: column;
             flex-direction: column;
         }
         .glass-ui { background: rgba(15, 23, 42, 0.85); -webkit-backdrop-filter: blur(15px); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08); }
         .neon-accent { text-shadow: 0 0 10px rgba(56, 189, 248, 0.3); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        * { -webkit-box-sizing: border-box; box-sizing: border-box; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        /* ضبط المساحة العلوية لاسترجاع التصميم الأصلي */
+        .app-content-wrapper { padding-top: 140px !important; }
         
         @media (min-width: 769px) {
-            .app-content-wrapper { padding-top: 140px !important; }
+            .app-content-wrapper { padding-top: 150px !important; }
             main { max-width: 1200px !important; margin: 0 auto !important; }
         }
 
+        @media (max-width: 480px) {
+            .app-content-wrapper { padding-top: 165px !important; }
+            .NavIcon { transform: scale(0.9); }
+        }
+
         @media (max-width: 360px) {
-            .nav-fixed-top { padding: 8px 4px !important; min-height: 90px !important; }
-            .NavIcon { -webkit-transform: scale(0.85); transform: scale(0.85); }
-            h1 { font-size: 1.25rem !important; }
+            .nav-fixed-top { padding: 4px 2px !important; min-height: 80px !important; }
+            .NavIcon { transform: scale(0.75); }
         }
 
-        @media screen and (max-height: 450px) {
-            .nav-fixed-top { position: relative !important; }
-            body { padding-top: 0 !important; }
-        }
-
-        main { -webkit-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
         
         .glass-ui, .glass-card { z-index: 10; position: relative; }
-        .nav-fixed-top { z-index: 1000 !important; }
-
-        @media (max-width: 768px) {
-            .glass-ui { padding: 1.25rem !important; }
-            textarea, input, select { font-size: 16px !important; }
-            * { word-wrap: break-word !important; overflow-wrap: break-word !important; }
-        }
-
-        .app-content-wrapper { padding-top: 160px !important; }
-        @media (max-width: 480px) { .app-content-wrapper { padding-top: 175px !important; } }
+        .nav-fixed-top { z-index: 3000 !important; background: rgba(2, 6, 23, 0.95) !important; border-bottom: 1px solid rgba(56, 189, 248, 0.2) !important; }
 
         .sunlight-theme { background: #fdfdfd !important; }
         .sunlight-theme body { background-color: #fdfdfd !important; }
-        .sunlight-theme .nav-fixed-top { background: #ffffff !important; border-bottom: 2px solid #f1f5f9 !important; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05) !important; }
+        .sunlight-theme .nav-fixed-top { background: #ffffff !important; border-bottom: 2px solid #f1f5f9 !important; }
         
-        img, svg { max-width: 100%; height: auto; }
-        .main-app-container { opacity: 1 !important; visibility: visible !important; }
-
-        .glass-ui, .glass-card, .library-item-card, .ActionBtn, .nav-btn-pro, select, input, textarea {
-            -webkit-box-shadow: 0 0 12px var(--neon-glow), inset 0 0 8px rgba(56, 189, 248, 0.05) !important;
-            box-shadow: 0 0 12px var(--neon-glow), inset 0 0 8px rgba(56, 189, 248, 0.05) !important;
-            border-color: rgba(56, 189, 248, 0.3) !important;
-        }
-        select:focus, input:focus, textarea:focus {
-            -webkit-box-shadow: 0 0 20px rgba(56, 189, 248, 0.5) !important;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.5) !important;
-            border-color: var(--neon-blue) !important;
-        }
-        label {
-            color: var(--neon-blue) !important;
-            text-shadow: 0 0 8px var(--neon-glow) !important;
-        }
-
         .bg-pro-gradient {
-            background: -webkit-linear-gradient(315deg, #020617 0%, #03346E 50%, #0ea5e9 100%) !important;
-            background: linear-gradient(135deg, #020617 0%, #03346E 50%, #0ea5e9 100%) !important;
-            background-attachment: fixed !important;
+            background: #020617 !important; /* تحييد الخلفية العامة لمنع التسرب */
+            background-image: none !important;
         }
 
-        /* إصلاحات أندرويد 7-9 لضمان ثبات الخطوط والأيقونات */
-        @supports not (backdrop-filter: blur(15px)) {
-            .glass-ui { background: rgba(15, 23, 42, 0.95) !important; }
+        /* حماية الظهور القسري للمحتوى V1.6.4 */
+        .guide-content-wrapper { 
+            display: block !important; 
+            opacity: 1 !important; 
+            visibility: visible !important; 
+            height: auto !important;
+        }
+
+        /* سحق التنبيهات الزائدة */
+        .db-status-badge, .database-ready-indicator { display: none !important; opacity: 0 !important; }
+
+        /* ========================================================
+           طبقة الترميم الهيكلي العليا V1.6.5 (Restoration Layer)
+           ======================================================== */
+        .nav-fixed-top {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            height: 120px !important; /* ضمان ارتفاع كافٍ */
+            min-height: 120px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            overflow: visible !important; /* منع القص البصري للأيقونات */
+            z-index: 9999 !important; /* الطبقة الأسمى */
+            padding-top: var(--safe-top) !important;
+        }
+
+        .nav-fixed-top > div {
+            overflow: visible !important;
+        }
+
+        .app-content-wrapper {
+            padding-top: 180px !important; /* دفع المحتوى للأسفل لمنع التداخل مع الهيدر المرمم */
+        }
+
+        .NavIcon {
+            overflow: visible !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+        }
+
+        header {
+            position: relative !important;
+            z-index: 50 !important;
+            margin-top: 20px !important;
+        }
+
+        @media (max-width: 640px) {
+            .nav-fixed-top { height: 110px !important; }
+            .app-content-wrapper { padding-top: 170px !important; }
+        }
+
+        /* ========================================================
+           V1.6.6 INCREMENTAL REPAIR LAYER - التصحيح التراكمي النهائي
+           ======================================================== */
+        
+        /* 1. إصلاح القوائم المنسدلة السوداء */
+        .select-element {
+            background: rgba(15, 23, 42, 0.9) !important;
+            backdrop-filter: blur(10px) !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(56, 189, 248, 0.3) !important;
+            appearance: none !important;
+            -webkit-appearance: none !important;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2338bdf8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
+            background-repeat: no-repeat !important;
+            background-position: left 1rem center !important;
+            background-size: 1.25rem !important;
+        }
+
+        .sunlight-theme .select-element {
+            background: #ffffff !important;
+            color: #0f172a !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        /* 2. إصلاح انفجار الأيقونات وتداخل التوهج */
+        .NavIcon button {
+            mask-image: radial-gradient(circle, white 100%, transparent 100%) !important;
+            -webkit-mask-image: radial-gradient(circle, white 100%, transparent 100%) !important;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2) !important;
+        }
+
+        .NavIcon button div[class*="conic-gradient"] {
+            display: none !important; /* إلغاء تدوير المربعات التي تسبب الشكل المربع */
+        }
+
+        .NavIcon button.active {
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.6) !important;
+            border: 2px solid #38bdf8 !important;
+        }
+
+        /* 3. إصلاح محدد اللغة */
+        .lang-selector-nav {
+            min-width: 60px !important;
+            height: 56px !important;
+        }
+
+        /* 4. دفع الهيدر لمنع التصادم */
+        header.relative.z-20 {
+            margin-top: 40px !important;
+        }
+
+        /* 5. إصلاح صناديق الإدخال (Textarea) */
+        .textarea-element {
+            background: rgba(15, 23, 42, 0.8) !important;
+            border: 1px solid rgba(56, 189, 248, 0.2) !important;
+            color: white !important;
+        }
+
+        /* ========================================================
+           V1.6.7 DIGITAL PURGE - تطهير مخلفات الواجهة (RESIDUE KILLER)
+           ======================================================== */
+        
+        /* 1. سحق المربعات الزرقاء نهائياً ومنع تسربها */
+        .NavIcon button div {
+            border-radius: 50% !important; /* فرض الدائرة على كل الحاويات الداخلية */
+            overflow: hidden !important;
+        }
+
+        /* 2. ضمان التلاشي اللحظي عند الخروج (Zero Ghosting) */
+        .NavIcon button .absolute.inset-0.z-0 {
+            transition: opacity 0.1s ease-out !important; /* سرعة استجابة فائقة للإخفاء */
+            pointer-events: none !important;
+        }
+
+        /* 3. منع التوهج من الالتصاق (Residue Prevention) */
+        .NavIcon:not(:hover) button div[class*="conic-gradient"],
+        .NavIcon:not(.active) button div[class*="conic-gradient"] {
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+
+        /* 4. تحسين Clipping للأيقونات النشطة وغير النشطة */
+        button.NavIcon {
+            clip-path: circle(50%) !important;
+            -webkit-clip-path: circle(50%) !important;
+        }
+
+        /* 5. إلغاء أي تأثيرات Hover تبقى عالقة */
+        .NavIcon button:not(:hover) {
+            transform: scale(1) !important;
+        }
+
+        /* ========================================================
+           V1.6.8 LAYOUT INTEGRITY - ترميم محاذاة الفجوات (GAP REPAIR)
+           ======================================================== */
+        
+        /* 1. سحق الشريط الأزرق العريض عبر إغلاق الفجوة العلوية بذكاء */
+        .nav-fixed-top {
+            background: rgba(2, 6, 23, 1) !important; /* زيادة التعتيم لإخفاء ما وراءها */
+            box-shadow: 0 40px 100px -10px rgba(0,0,0,0.8) !important; /* ظل خلفي يغطي منطقة "النزيف" */
+        }
+
+        /* 2. إعادة توازن الهيدر - سد الفراغ البصري (Bridging the Gap) */
+        header.relative.z-20 {
+            margin-top: -10px !important; /* سحب الهيدر للأعلى قليلاً لسد الفجوة */
+            padding-bottom: 20px !important;
+        }
+
+        /* 3. إصلاح صناديق الإدخال البيضاء المتنافرة (White Box Sync) */
+        .sunlight-theme .select-element,
+        .sunlight-theme .textarea-element,
+        .sunlight-theme .glass-ui {
+            border: 2px solid #e2e8f0 !important;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05) !important;
+        }
+
+        /* 4. معالجة الـ Bleeding البصري في التبويبات */
+        main.main-app-container {
+            position: relative !important;
+            overflow: visible !important;
+            margin-top: 0 !important;
+        }
+
+        /* 5. توحيد خلفية التبويبات لمنع ظهور ألوان عشوائية أثناء الانتقال */
+        .page-transition {
+            background: transparent !important;
+            z-index: 100 !important;
+        }
+
+        /* 6. إصلاح تداخل شريط المهام في Sunlight Mode */
+        .sunlight-theme .nav-fixed-top {
+            background: #ffffff !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+        }
+
+        /* ========================================================
+           V1.6.9 THEME ISOLATION - عزل الثيمات ومنع التداخل (THEME KILLER)
+           ======================================================== */
+        
+        /* 1. تطهير البطاقات من اللون الداكن في وضع السطوع */
+        .sunlight-theme .glass-ui, 
+        .sunlight-theme .glass-card,
+        .sunlight-theme .bg-slate-900\/40,
+        .sunlight-theme .bg-slate-900\/60,
+        .sunlight-theme .bg-black\/40 {
+            background: #ffffff !important;
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            border: 1px solid #e2e8f0 !important;
+        }
+
+        /* 2. تصحيح نصوص العناوين والفقرات في وضع السطوع */
+        .sunlight-theme h1, 
+        .sunlight-theme h2, 
+        .sunlight-theme h3, 
+        .sunlight-theme h4, 
+        .sunlight-theme p, 
+        .sunlight-theme span:not(.NavIcon span) {
+            color: #0f172a !important;
+        }
+
+        /* 3. إصلاح خيارات التفعيل (Checkboxes) المظلمة */
+        .sunlight-theme div.cursor-pointer.bg-slate-900\/40 {
+            background: #f8fafc !important;
+            border-color: #e2e8f0 !important;
+        }
+
+        .sunlight-theme div.cursor-pointer.bg-slate-900\/40 span {
+            color: #334155 !important;
+        }
+
+        /* 4. تطهير حقول الإدخال */
+        .sunlight-theme textarea.textarea-element {
+            background: #ffffff !important;
+            color: #0f172a !important;
+            border: 2px solid #cbd5e1 !important;
+        }
+
+        .sunlight-theme textarea::placeholder {
+            color: #94a3b8 !important;
+        }
+
+        /* 5. تعديل شريط التنقل العلوي في وضع السطوع */
+        .sunlight-theme .nav-fixed-top {
+            background: #ffffff !important;
+            border-bottom: 2px solid #f1f5f9 !important;
+        }
+
+        /* 6. إصلاح تدرج الخلفية في وضع السطوع لمنع "النزيف الأزرق" */
+        .sunlight-theme.bg-pro-gradient {
+            background: #f8fafc !important;
+            background-image: none !important;
+        }
+
+        /* ========================================================
+           V1.7.0 DYNAMIC BACKGROUND MASTER - إصلاح نزيف الخلفية (LEAK KILLER)
+           ======================================================== */
+        
+        /* 1. تعريف عنصر الخلفية النوروني المخصص للرئيسية فقط */
+        .active-gradient-layer {
+            position: fixed !important; /* ثابت بالنسبة للنافذة */
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            height: 380px !important; /* ارتفاع محدد بدقة لمنع التسرب للسفل */
+            background: linear-gradient(180deg, #03346E 0%, rgba(2, 6, 23, 0) 100%) !important;
+            z-index: 0 !important; /* تحت المحتوى */
+            pointer-events: none !important;
+            overflow: hidden !important;
+            opacity: 0.8 !important;
+        }
+
+        .sunlight-theme .active-gradient-layer {
+            display: none !important; /* إخفاء تماماً في وضع السطوع */
+        }
+
+        /* 2. تأكيد حصر الخلفية في الصفحة الرئيسية */
+        main {
+            position: relative !important;
+            z-index: 10 !important; /* فوق طبقة الجرادينت */
+        }
+
+        /* 3. ضمان ثبات الألوان في الأقسام الأخرى */
+        .page-transition {
+            background-color: transparent !important;
+        }
+
+        /* ========================================================
+           V1.7.1 WISDOM CONTENT CLEANUP - تصفية محتوى الحكم (SENTENCE PURGE)
+           ======================================================== */
+        
+        /* حجب العناوين التعريفية داخل بطاقة الحكمة نهائياً */
+        span[class*="tracking-[0.3em]"][class*="opacity-60"].mb-1,
+        .sunlight-theme span[class*="tracking-[0.3em]"][class*="opacity-60"].mb-1 {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            position: absolute !important;
+            pointer-events: none !important;
+        }
+
+        /* تحسين التوازن البصري لمركز الحكمة بعد الحذف */
+        .glow-text-shimmer.text-\[13\.5px\] {
+            margin-top: -10px !important;
+            padding-bottom: 5px !important;
+        }
+
+        /* منع تأثر العنوان في قسم 'عن المطور' */
+        .spiritual-about-container span[class*="tracking-[0.3em]"] {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            position: relative !important;
+        }
+
+        /* ========================================================
+           V1.7.2 GUIDE CONTENT PURGE - تصفية محتوى الدليل (SUBTITLE PURGE)
+           ======================================================== */
+        
+        /* 1. حذف الجملة الفرعية في هيدر الدليل نهائياً (رقم 1 في طلبك) */
+        .guide-content-wrapper p[class*="tracking-[0.4em]"] {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            margin: 0 !important;
+            pointer-events: none !important;
+        }
+
+        /* 2. تحسين تباعد فقرة الإنترو بعد الحذف لزيادة الجاذبية */
+        .guide-content-wrapper .book-shadow .text-center.max-w-2xl {
+            margin-top: -20px !important;
+        }
+
+        /* ========================================================
+           V1.8.0 NEON MASTER ANIMATION - محرك الأنيميشن للوجو الجديد
+           ======================================================== */
+        @keyframes neon-master-pulse {
+            0% { filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.4)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 25px rgba(56, 189, 248, 0.8)); transform: scale(1.02); }
+            100% { filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.4)); transform: scale(1); }
+        }
+
+        @keyframes micro-3d-rotation {
+            0% { transform: perspective(1000px) rotateY(-5deg); }
+            50% { transform: perspective(1000px) rotateY(5deg); }
+            100% { transform: perspective(1000px) rotateY(-5deg); }
+        }
+
+        .neon-logo-animated {
+            animation: neon-master-pulse 3s infinite ease-in-out, micro-3d-rotation 6s infinite ease-in-out !important;
+            will-change: transform, filter;
+        }
+
+        .sunlight-theme .neon-logo-animated {
+            animation: none !important;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)) !important;
+        }
+
+        /* ========================================================
+           V1.8.1 ATMOSPHERIC MAGIC - هالة الإضاءة المضافة (DAZZLE LAYER)
+           ======================================================== */
+        .magical-orbital-glow {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(56, 189, 248, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            filter: blur(20px);
+            animation: neon-master-pulse 4s infinite alternate;
         }
     </style>
 <script type="importmap">
@@ -126,18 +457,5 @@
 </head>
 <body class="bg-pro-gradient app-content-wrapper">
     <div id="root"></div>
-    <script>
-        // سكربت منع تشوه الواجهة عند ظهور لوحة المفاتيح
-        const originalHeight = window.innerHeight;
-        window.addEventListener('resize', () => {
-            if (window.innerHeight < originalHeight * 0.7) {
-                document.body.classList.add('keyboard-open');
-            } else {
-                document.body.classList.remove('keyboard-open');
-            }
-        });
-        // حماية ضد التطفل البسيط
-        window.addEventListener('contextmenu', e => e.preventDefault());
-    </script>
 </body>
 </html>
