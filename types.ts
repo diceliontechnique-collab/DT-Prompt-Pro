@@ -25,6 +25,7 @@ export interface PromptFormData {
   targetModel: string;
   useImageAsMainSource: boolean;
   onlyEnglishVisuals: boolean;
+  exclusivePsychology: boolean;
 }
 
 export interface SavedPrompt {
