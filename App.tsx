@@ -1,5 +1,5 @@
 
-/* SYNC_STABILITY_PATCH_V21.5_MASTER_PRO_ULTRA: SMART EDITABLE PROMPT ENGINE WITH VISUAL COMFORT */
+/* SYNC_STABILITY_PATCH_V23.0_MASTER_PRO_ULTRA: EXCLUSIVE PSYCHOLOGY BRANDING UPDATE */
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { 
   ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, TEMPLATES, AI_MODELS, PRO_ULTRA_DB, WISDOM_QUOTES, getMillionthNeuralPrompt
@@ -30,8 +30,10 @@ const UI_TRANSLATIONS: any = {
     generateBtn: 'معالجة الأمر ✨',
     saveBtn: 'أرشفة المشروع',
     editBtn: 'تعديل النص',
-    editLabel: 'محرر الأوامر الذكي (V21.5 PRO)',
+    copyPromptBtn: 'نسخ البرومبت',
+    editLabel: 'محرر الأوامر الذكي (V23.0 PRO)',
     resultActions: { copy: 'نسخ', save: 'حفظ' },
+    copyOptions: { ar: '🇸🇦 نسخ بالعربية', en: '🇬🇧 Copy in English', all: '🌍 نسخ الكل (عربي + إنجليزي)' },
     history: { empty: 'السجل فارغ حالياً.. ابدأ بصناعة إبداعك الأول!', title: 'سجل محفوظات DT-Prompt' },
     copied: 'تم نسخ النص بنجاح!',
     saved: 'تمت الأرشفة بنجاح!',
@@ -39,7 +41,7 @@ const UI_TRANSLATIONS: any = {
     placeholders: { text: 'عنوان الحملة أو الموضوع الرئيسي الذي تريد تحويله لبرومبت احترافي...', search: 'ابحث في مليون برومبت جاهز بالرقم أو بالحرف', dropdownSearch: 'اختر تخصصاً من 1000 خيار...' },
     labels: { 
       ratio: 'أبعاد المخرج (Ratio)', mood: 'نبرة الصوت والأسلوب الفني', bg: 'سياق المحتوى والبيئة المحيطة', tech: 'قالب الهيكلة الاحترافي (100 خيار)', text: 'الموضوع الأساسي (Main Subject)', quickSearch: 'تصفح التخصصات الذكية (1000 خيار)',
-      exclusivePsychology: "برومبت سيكولوجي حصري لـ DT-Prompt",
+      exclusivePsychology: "برومبت سيكولوجي حصري لـ Dicelion-Technique",
       analyzeImage: "برومبت مع صورة مرجعية مرفقة",
       exportEnglish: "تصدير البرومبت باللغة الإنجليزية (لنتائج أدق)",
       englishLetters: "برومبت للمنصات التي لا تدعم اللغة العربية",
@@ -52,21 +54,64 @@ const UI_TRANSLATIONS: any = {
     quickCopy: 'نسخ سريع',
     editInStudio: 'تعديل في المختبر',
     guide: { 
-      title: 'موسوعة DT-Prompt الشاملة (دليلك الروحي والتقني)', 
-      intro: 'أهلاً بك يا رفيق الإبداع. هذا ليس مجرد دليل، بل هو رحلة في قلب "DT-Prompt" لتتعلم كيف تدمج روحك وهويتك مع ذكاء الآلة لإنتاج واقع بصري ونصي يفوق الخيال.',
+      title: 'موسوعة DT-Prompt الشاملة (V23.0 PRO)', 
+      intro: 'مرحباً بك في المحرك الهندسي الأكثر تقدماً. DT-Prompt ليس مجرد تطبيق، بل هو جسر تقني يربط خيالك بأقوى محركات الذكاء الاصطناعي العالمية. يهدف التطبيق إلى تحويل أفكارك البسيطة إلى "أوامر برمجية" (Prompts) دقيقة ومعقدة تضمن لك مخرجات احترافية بنسبة 100%.',
       masterSections: [
         { 
-          id: 'S1', title: '1. أركان النظام (شريط التنقل العلوي)', icon: '🏛️', 
+          id: 'NAV', title: '1. شريط التنقل (الأركان السبعة)', icon: '🏛️', 
           points: [
-            { label: 'المختبر 🏠', content: 'المكان الذي تُصهر فيه الأفكار. هنا تختار "المادة الخام" لفكرتك وتحدد قالبها الهندسي.' },
-            { label: 'الكنز (مليون برومبت) 💎', content: 'مكتبة كونية تضم مليون إمكانية. ابحث عن أي مهنة أو نشاط، وستجد "المسودة الذهبية" جاهزة لك.' },
-            { label: 'السطوع ☀️', content: 'تبديل بين "سكون الليل" للتركيز، و"إشراق النهار" للوضوح. زر واحد يغير حال التطبيق ليناسب راحتك.' },
-            { label: 'اللغة 🌐', content: 'يتحدث التطبيق 8 لغات ليكون جسراً بينك وبين العالم، اختر اللغة التي يفهمها قلبك.' },
-            { label: 'الأرشيف 📜', content: 'ذاكرة لا تنسى. كل برومبت قمت بصناعته وحفظه يبقى هنا، محمياً من الضياع.' }
+            { label: 'الرئيسية (🏠)', content: 'نقلك إلى "المختبر الهندسي" حيث تبدأ عملية التصميم من الصفر.' },
+            { label: 'مليون برومبت (💎)', content: 'مكتبة سحابية ضخمة تضم مليون فكرة جاهزة وقابلة للتطوير فوراً.' },
+            { label: 'السطوع (☀️)', content: 'زر التحول اللوني؛ يحمي عينيك بالوضع الداكن أو يوفر وضوحاً فائقاً بالوضع الساطع.' },
+            { label: 'اللغة (🌐)', content: 'دعم كامل لـ 8 لغات عالمية لضمان وصول رسالتك لكل منصات التوليد.' },
+            { label: 'الدليل (📖)', content: 'هذه الموسوعة التي تقرأها الآن لتصبح خبيراً في هندسة الأوامر.' },
+            { label: 'المحفوظات (📜)', content: 'أرشيفك الشخصي؛ كل مشروع حفظته تجده هنا منظماً بالتاريخ والوقت.' },
+            { label: 'عن المطور (👤)', content: 'نافذة التواصل مع DicelionTechnique والتعرف على خدماتنا البرمجية.' }
+          ] 
+        },
+        { 
+          id: 'LAB', title: '2. المختبر الهندسي (خانات التحكم)', icon: '🧪', 
+          points: [
+            { label: 'نوع المحتوى (Modality)', content: 'أيقونات علوية تحدد إذا كنت تريد برومبت لـ (صورة، فيديو، أو منشور إعلاني نثري).' },
+            { label: 'أبعاد المخرج (Ratio)', content: 'تحديد القياسات العالمية؛ مثل 9:16 للتيك توك، 1:1 للإنستقرام، أو 16:9 لليوتيوب.' },
+            { label: 'نبرة الصوت والأسلوب', content: 'قائمة Moods؛ تحدد الجو العام للبرومبت (فخم، سينمائي، مستقبلي، أو درامي).' },
+            { label: 'سياق المحتوى (Background)', content: 'اختيار البيئة المحيطة بالعنصر الأساسي (مختبر، فضاء، استوديو، غابة).' },
+            { label: 'قالب الهيكلة (100 خيار تقني)', content: 'سر الجودة العالية؛ دمج محركات مثل Unreal Engine 5 أو Octane Render برمجياً.' },
+            { label: 'المحرك المستهدف (Model)', content: 'توجيه البرومبت ليكون متوافقاً مع (Midjourney, Gemini, ChatGPT, Sora) وغيرها.' },
+            { label: 'العناصر والجماليات (100 خيار)', content: 'إضافة لمسات بصرية مثل "تأثيرات نيون"، "جسيمات متطايرة"، أو "إضاءة كوموريبي".' },
+            { label: 'الموضوع الأساسي (Input Area)', content: 'هنا تضع مادة فكرتك الخام؛ مثال: "رجل يقرأ في المستقبل" وسيقوم النظام بهندستها.' }
+          ] 
+        },
+        { 
+          id: 'POWER', title: '3. ميزات القوة والذكاء (الأدوات السرية)', icon: '⚡', 
+          points: [
+            { label: 'برومبت سيكولوجي حصري لـ Dicelion-Technique', content: 'هذه التقنية هي ابتكار حصري ومنفرد لـ Dicelion-Technique؛ حيث تعتمد على خوارزميات سيكولوجية متقدمة تقوم بحقن محفزات عاطفية وكلمات مفتاحية عصبية داخل هيكل البرومبت. تهدف هذه المحفزات إلى استهداف العقل الباطن للمشاهد لإثارة استجابات فورية مثل الثقة أو الانبهار، مما يرفع من جودة التأثير البصري والنصي للمحتوى المنتج بشكل ثوري وغير مسبوق عالمياً.' },
+            { label: 'صورة مرجعية', content: 'إضافة تعليمات تطلب من الذكاء الاصطناعي الالتزام بصورة يرفعها المستخدم لاحقاً.' },
+            { label: 'تصدير إنجليزي فائق', content: 'ترجمة تقنية وليست حرفية؛ تحول وصفك العربي إلى برومبت إنجليزي احترافي جداً.' },
+            { label: 'المنصات اللاتينية', content: 'خيار يضمن عدم ظهور أحرف غريبة عند استخدام البرومبت في برامج لا تدعم العربية.' }
+          ] 
+        },
+        { 
+          id: 'EDITOR', title: '4. المحرر الذكي ونظام الألوان (الابتكار الثوري)', icon: '🎨', 
+          points: [
+            { label: '🔴 النص الأحمر (المحمي)', content: 'بنية البرومبت الأساسية التي تضمن الجودة؛ غير قابلة للتعديل لضمان عدم كسر البرومبت.' },
+            { label: '🟢 النص الأخضر (المتغيرات)', content: 'هنا يكمن سحرك؛ هذه الكلمات بين الأقواس [مثل السعر، الاسم] هي القابلة للتخصيص.' },
+            { label: '🔵 النص الأزرق (الحقوق)', content: 'بيانات تقنية وحقوق المطور، تضمن أصالة المحتوى وجودته.' },
+            { label: 'زر تعديل النص', content: 'عند الضغط عليه، تتحول الخلفية للون الداكن (في وضع السطوع) لراحة عينيك أثناء الكتابة.' },
+            { label: 'شريط التحرير (Toolbar)', content: 'أدوات سريعة لتمييز النص أو إعادة البرومبت لحالته الأصلية إذا حدث خطأ.' },
+            { label: 'نسخ البرومبت المتعدد', content: 'زر ذكي يفتح قائمة فرعية للنسخ بـ (العربية فقط، الإنجليزية فقط، أو كلاهما).' }
+          ] 
+        },
+        { 
+          id: 'EXAMPLES', title: '5. أمثلة عملية (كيف تستخدم التطبيق؟)', icon: '💡', 
+          points: [
+            { label: 'مثال تسويقي', content: 'اكتب "مطعم برجر". اختر قالب "Luxurious". فعل "Psychology Exclusive to Dicelion-Technique". ستحصل على برومبت يصف البرجر كأنه تحفة فنية تجذب الجائعين فوراً.' },
+            { label: 'تعديل البيانات', content: 'بعد التوليد، اضغط "تعديل النص"، اذهب للكلمة الخضراء [Price] واستبدلها بـ "50 ريال"، ثم اضغط "حفظ".' },
+            { label: 'البحث في المليون', content: 'في صفحة المكتبة، ابحث عن "محامي". اختر أي نتيجة واضغط "تعديل في المختبر" لإضافة اسم مكتبك الخاص.' }
           ] 
         }
       ],
-      footer: 'DT-Prompt | إبداع بصدق وأمانة - DicelionTechnique © 2024-2026'
+      footer: 'DT-Prompt | التقنية أمانة، والعمل إتقان - DicelionTechnique © 2024-2026'
     },
     about: { 
       title: 'DicelionTechnique Services', 
@@ -92,7 +137,9 @@ const UI_TRANSLATIONS: any = {
     generateBtn: 'Process Command ✨',
     saveBtn: 'Archive Project',
     editBtn: 'Edit Text',
-    editLabel: 'Smart Prompt Editor (V21.5 PRO)',
+    copyPromptBtn: 'Copy Prompt',
+    copyOptions: { ar: '🇸🇦 Copy Arabic', en: '🇬🇧 Copy English', all: '🌍 Copy All (Ar + En)' },
+    editLabel: 'Smart Prompt Editor (V23.0 PRO)',
     resultActions: { copy: 'Copy', save: 'Save' },
     history: { empty: 'History is empty.. start creating!', title: 'DT-Prompt Archive' },
     copied: 'Copied successfully!',
@@ -101,7 +148,7 @@ const UI_TRANSLATIONS: any = {
     placeholders: { text: 'Core concept for your prompt...', search: 'Search 1M prompts...', dropdownSearch: 'Choose from 1000 categories...' },
     labels: { 
       ratio: 'Output Ratio', mood: 'Tone & Style', bg: 'Context', tech: 'Pro Template (100 Opts)', text: 'Core Subject', quickSearch: 'Browse 1000 Categories',
-      exclusivePsychology: "DT-Prompt Exclusive Psychology",
+      exclusivePsychology: "Psychology Exclusive to Dicelion-Technique",
       analyzeImage: "With Reference Image",
       exportEnglish: "English Export (High Precision)",
       englishLetters: "Latin Only Platforms",
@@ -113,6 +160,21 @@ const UI_TRANSLATIONS: any = {
     modalityModal: { title: 'Choose Content Type', cancel: 'Cancel' },
     quickCopy: 'Quick Copy',
     editInStudio: 'Edit in Lab',
+    guide: { 
+      title: 'DT-Prompt Encyclopedia (V23.0 PRO)', 
+      intro: 'DT-Prompt is not just an app; it is a professional engineering engine designed to bridge the gap between human imagination and the world’s most powerful AI models. It ensures your ideas are transformed into high-fidelity "Prompts" that guarantee 100% professional results.',
+      masterSections: [
+        { 
+          id: 'NAV_E', title: '1. Navigation Bar', icon: '🏛️', 
+          points: [
+            { label: 'Lab (🏠)', content: 'The engineering workspace where design begins.' },
+            { label: '1M Prompts (💎)', content: 'A massive cloud library with 1M ready-to-use ideas.' },
+            { label: 'Sunlight (☀️)', content: 'Theme toggle for visual comfort.' }
+          ] 
+        }
+      ], 
+      footer: 'DT-Prompt | Engineering with Honesty © 2024' 
+    },
     about: { 
       title: 'DicelionTechnique Services', 
       subtitle: 'Smart Software Engineering & Digital Solutions', 
@@ -262,6 +324,7 @@ const App: React.FC = () => {
   const [isSunlightMode, setIsSunlightMode] = useState(() => safeGetItem('dt_sunlight', 'true') === 'true');
   const [isGenerating, setIsGenerating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [isCopyMenuOpen, setIsCopyMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [generatedPrompt, setGeneratedPrompt] = useState('');
   const [originalPrompt, setOriginalPrompt] = useState('');
@@ -301,11 +364,11 @@ CRITICAL OUTPUT RULES:
 2. Customizable Variables: wrap in square brackets like [Price], [Name], [Location]. These will be GREEN and EDITABLE.
 3. Developer Rights/Technical metadata: start with "/*" or "DicelionTechnique:". These will be BLUE and Protected.
 
-Format your response as a professional production-ready script. Ensure maximum linguistic precision in both languages.`;
+Structure the response clearly into an Arabic section and an English section. Ensure maximum linguistic precision in both languages.`;
 
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
-        contents: `Mode: ${formData.promptMode}. Topic: ${formData.mainText}. Tech: ${formData.technical}. Generate a complex prompt with placeholders in [BRACKETS].`,
+        contents: `Mode: ${formData.promptMode}. Topic: ${formData.mainText}. Tech: ${formData.technical}. Generate a complex prompt with placeholders in [BRACKETS]. Include separate Arabic and English blocks.`,
         config: {
           systemInstruction,
           temperature: 0.9,
@@ -321,6 +384,26 @@ Format your response as a professional production-ready script. Ensure maximum l
     } finally {
       setIsGenerating(false);
     }
+  };
+
+  const copyPromptByLang = (mode: 'ar' | 'en' | 'all') => {
+    const text = editorRef.current?.innerText || generatedPrompt;
+    if (!text) return;
+
+    let textToCopy = text;
+    if (mode === 'ar') {
+      const arRegex = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
+      const lines = text.split('\n');
+      textToCopy = lines.filter(line => arRegex.test(line)).join('\n');
+    } else if (mode === 'en') {
+      const arRegex = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
+      const lines = text.split('\n');
+      textToCopy = lines.filter(line => !arRegex.test(line)).join('\n');
+    }
+
+    navigator.clipboard.writeText(textToCopy);
+    alert(t.copied);
+    setIsCopyMenuOpen(false);
   };
 
   const saveToHistory = () => {
@@ -341,14 +424,11 @@ Format your response as a professional production-ready script. Ensure maximum l
   const parsePromptToJSX = (text: string, editMode: boolean) => {
     if (!text) return null;
 
-    // Pattern for variables [TEXT]
     const regex = /(\[.*?\])|(\/\*.*?\*\/|DicelionTechnique:.*)/g;
     const parts = text.split(regex);
     
     return parts.map((part, i) => {
       if (!part) return null;
-      
-      // Is it a Variable (GREEN)
       if (part.startsWith('[') && part.endsWith(']')) {
         return (
           <span key={i} contentEditable={editMode} suppressContentEditableWarning className="text-emerald-500 font-black cursor-text mx-1 border-b border-emerald-500/30 bg-emerald-500/5 px-1 rounded">
@@ -356,8 +436,6 @@ Format your response as a professional production-ready script. Ensure maximum l
           </span>
         );
       }
-      
-      // Is it Developer Info (BLUE)
       if (part.startsWith('/*') || part.includes('DicelionTechnique:')) {
         return (
           <span key={i} contentEditable={false} className="text-sky-400 font-mono italic opacity-80">
@@ -365,8 +443,6 @@ Format your response as a professional production-ready script. Ensure maximum l
           </span>
         );
       }
-      
-      // Core Prompt (RED)
       return (
         <span key={i} contentEditable={false} className="text-rose-500 font-bold leading-relaxed">
           {part}
@@ -391,11 +467,9 @@ Format your response as a professional production-ready script. Ensure maximum l
   const filteredLibrary = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     if (!q) return PRO_ULTRA_DB.slice(0, 100);
-    
     const baseMatches = PRO_ULTRA_DB.filter(s => 
       s.ar.toLowerCase().includes(q) || s.en.toLowerCase().includes(q) || s.cat.toLowerCase().includes(q) || s.id.toString().includes(q)
     );
-
     const results = [...baseMatches];
     if (results.length < 1000) {
         for (let i = results.length; i < 1000; i++) {
@@ -451,47 +525,39 @@ Format your response as a professional production-ready script. Ensure maximum l
             </div>
             <div className="glass-ui p-6 rounded-[3rem] space-y-4 shadow-md">
               <InputArea label={t.labels.text} value={formData.mainText} onChange={(e:any) => setFormData(p=>({...p, mainText: e.target.value}))} placeholder={t.placeholders.text} />
-              <button 
-                onClick={generate} 
-                disabled={isGenerating} 
-                className={`relative overflow-hidden w-full py-5 rounded-full font-black uppercase shadow-xl transition-all ${
-                  isGenerating 
-                    ? 'bg-black' 
-                    : 'bg-sky-600 text-white hover:bg-sky-500 scale-[1.01]'
-                }`}
-              >
-                {isGenerating ? (
-                  <HackerAnalyzerLoader isSunlight={isSunlightMode} />
-                ) : (
-                  t.generateBtn
-                )}
+              <button onClick={generate} disabled={isGenerating} className={`relative overflow-hidden w-full py-5 rounded-full font-black uppercase shadow-xl transition-all ${isGenerating ? 'bg-black' : 'bg-sky-600 text-white hover:bg-sky-500 scale-[1.01]'}`}>
+                {isGenerating ? <HackerAnalyzerLoader isSunlight={isSunlightMode} /> : t.generateBtn}
               </button>
             </div>
             {generatedPrompt && (
               <div className="glass-ui p-8 rounded-[3rem] space-y-4 animate-in slide-in-from-bottom shadow-2xl border-sky-500/20">
                  <div className="flex justify-between items-center mb-2 px-2">
                     <h4 className="text-[10px] font-black text-sky-500 uppercase">{t.editLabel}</h4>
-                    {/* EDIT TOOLBAR */}
                     <div className="flex gap-2">
                         <button onClick={() => { if(window.getSelection()) { alert("Highlight Applied Internally"); } }} className="text-[8px] font-black uppercase text-sky-300 hover:text-white transition-colors">{t.toolbar.highlight}</button>
                         <button onClick={() => setGeneratedPrompt(originalPrompt)} className="text-[8px] font-black uppercase text-rose-400 hover:text-white transition-colors">{t.toolbar.reset}</button>
                     </div>
                  </div>
-                 
-                 {/* SMART EDITOR WITH SEMI-DARK BACKGROUND OVERRIDE (V21.5) */}
-                 <div 
-                   ref={editorRef}
-                   className={`p-7 bg-black/40 dt-editor-dark-layer rounded-[2rem] text-[13px] font-mono leading-relaxed whitespace-pre-wrap overflow-hidden border border-white/5 shadow-inner min-h-[150px] outline-none transition-all ${isEditing ? 'ring-2 ring-sky-500/50 scale-[1.01]' : ''}`}
-                 >
+                 <div ref={editorRef} className={`p-7 dt-editor-dark-layer rounded-[2rem] text-[13px] font-mono leading-relaxed whitespace-pre-wrap overflow-hidden border shadow-inner min-h-[150px] outline-none transition-all ${isEditing ? 'is-editing ring-2 ring-sky-500/50 scale-[1.01]' : 'is-viewing border-white/5'}`}>
                    {parsePromptToJSX(generatedPrompt, isEditing)}
                  </div>
-
-                 <div className="flex gap-2">
-                    <button onClick={() => { navigator.clipboard.writeText(editorRef.current?.innerText || generatedPrompt); alert(t.copied); }} className="flex-1 py-4 bg-sky-600 text-white rounded-2xl font-black text-xs uppercase shadow-lg hover:bg-sky-500 transition-all">{t.resultActions.copy}</button>
-                    <button onClick={() => setIsEditing(!isEditing)} className={`flex-1 py-4 rounded-2xl font-black text-xs uppercase shadow-lg transition-all ${isEditing ? 'bg-emerald-600 text-white' : 'glass-ui text-sky-400 border-sky-500/30'}`}>
-                        {isEditing ? '✓ إنهاء التعديل' : t.editBtn}
+                 <div className="flex flex-wrap gap-2">
+                    <div className="relative flex-1 min-w-[120px]">
+                        <button onClick={() => setIsCopyMenuOpen(!isCopyMenuOpen)} className="w-full py-4 bg-sky-600 text-white rounded-2xl font-black text-xs uppercase shadow-lg hover:bg-sky-500 transition-all">{t.copyPromptBtn}</button>
+                        {isCopyMenuOpen && (
+                          <div className="absolute bottom-full mb-2 left-0 right-0 glass-ui rounded-2xl p-2 shadow-2xl border-sky-500/30 animate-in fade-in slide-in-from-bottom-2 z-50">
+                            {['ar', 'en', 'all'].map(m => (
+                              <button key={m} onClick={() => copyPromptByLang(m as any)} className="w-full text-start px-4 py-3 rounded-xl text-[10px] font-black hover:bg-sky-500/20 transition-all">
+                                {(t.copyOptions as any)[m]}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                    </div>
+                    <button onClick={() => setIsEditing(!isEditing)} className={`flex-1 min-w-[120px] py-4 rounded-2xl font-black text-xs uppercase shadow-lg transition-all ${isEditing ? 'bg-emerald-600 text-white' : 'glass-ui text-sky-400 border-sky-500/30'}`}>
+                        {isEditing ? '✓ حفظ التعديل' : t.editBtn}
                     </button>
-                    <button onClick={saveToHistory} className="flex-1 py-4 glass-ui rounded-2xl font-black text-xs uppercase text-sky-400 hover:bg-white/5 transition-all">{t.saveBtn}</button>
+                    <button onClick={saveToHistory} className="flex-1 min-w-[120px] py-4 glass-ui rounded-2xl font-black text-xs uppercase text-sky-400 hover:bg-white/5 transition-all">{t.saveBtn}</button>
                  </div>
               </div>
             )}
@@ -525,19 +591,13 @@ Format your response as a professional production-ready script. Ensure maximum l
           <div className="space-y-6 pb-12 animate-in fade-in">
             <div className="glass-ui p-8 rounded-[3rem] shadow-xl text-center space-y-6">
                 <h3 className="text-xl font-black text-sky-500 uppercase tracking-widest">{t.history.title}</h3>
-                {history.length === 0 ? (
-                  <p className="text-sm opacity-50 italic">{t.history.empty}</p>
-                ) : (
+                {history.length === 0 ? <p className="text-sm opacity-50 italic">{t.history.empty}</p> : (
                   <div className="space-y-4 text-start">
                     {history.map(item => (
                       <div key={item.id} className="p-6 rounded-[2rem] glass-ui border-sky-500/10 space-y-3">
                         <div className="flex justify-between items-center">
                           <span className="text-[10px] font-black text-sky-500">{item.date}</span>
-                          <button onClick={() => {
-                             const filtered = history.filter(h => h.id !== item.id);
-                             setHistory(filtered);
-                             localStorage.setItem('dt_history', JSON.stringify(filtered));
-                          }} className="text-[10px] text-red-500 font-bold">حذف من الأرشيف</button>
+                          <button onClick={() => { const filtered = history.filter(h => h.id !== item.id); setHistory(filtered); localStorage.setItem('dt_history', JSON.stringify(filtered)); }} className="text-[10px] text-red-500 font-bold">حذف من الأرشيف</button>
                         </div>
                         <p className="text-xs font-bold truncate">{item.summary}</p>
                         <button onClick={() => { navigator.clipboard.writeText(item.fullPrompt); alert(t.copied); }} className="w-full py-2 bg-sky-600/20 text-sky-400 rounded-xl text-[10px] font-black uppercase">نسخ البرومبت بالكامل</button>
@@ -585,18 +645,12 @@ Format your response as a professional production-ready script. Ensure maximum l
                       </div>
                     ))}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
-                      <button className="py-4 rounded-2xl bg-emerald-600 text-white font-black text-xs uppercase shadow-md hover:bg-emerald-500 transition-all flex items-center justify-center gap-3">
-                        <span className="text-lg">📱</span> {t.about.contacts.whatsapp}
-                      </button>
-                      <button className="py-4 rounded-2xl bg-blue-600 text-white font-black text-xs uppercase shadow-md hover:bg-blue-500 transition-all flex items-center justify-center gap-3">
-                        <span className="text-lg">📞</span> {t.about.contacts.call}
-                      </button>
-                      <button className="sm:col-span-2 py-4 rounded-2xl glass-ui border-sky-500/20 text-sky-400 font-black text-xs uppercase shadow-md hover:bg-white/5 transition-all flex items-center justify-center gap-3">
-                        <span className="text-lg">📧</span> {t.about.contacts.email}
-                      </button>
+                      <button className="py-4 rounded-2xl bg-emerald-600 text-white font-black text-xs uppercase shadow-md hover:bg-emerald-500 transition-all flex items-center justify-center gap-3"><span className="text-lg">📱</span> {t.about.contacts.whatsapp}</button>
+                      <button className="py-4 rounded-2xl bg-blue-600 text-white font-black text-xs uppercase shadow-md hover:bg-blue-500 transition-all flex items-center justify-center gap-3"><span className="text-lg">📞</span> {t.about.contacts.call}</button>
+                      <button className="sm:col-span-2 py-4 rounded-2xl glass-ui border-sky-500/20 text-sky-400 font-black text-xs uppercase shadow-md hover:bg-white/5 transition-all flex items-center justify-center gap-3"><span className="text-lg">📧</span> {t.about.contacts.email}</button>
                     </div>
                 </div>
-                <p className="text-[10px] font-black uppercase opacity-30 tracking-[0.5em] mt-8">DICELION TECHNIQUE v21.5 PRO</p>
+                <p className="text-[10px] font-black uppercase opacity-30 tracking-[0.5em] mt-8">DICELION TECHNIQUE v23.0 PRO</p>
              </div>
           </div>
         )}

@@ -124,9 +124,24 @@
         .vibrate-text { animation: text-vibrate 0.15s linear infinite; }
 
         /* Sunlight mode semi-dark editor background override (V21.5 Update) */
-        [data-theme="light"] .dt-editor-dark-layer {
-            background-color: rgba(15, 23, 42, 0.95) !important;
+        .dt-editor-dark-layer {
+            transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease;
+        }
+
+        [data-theme="light"] .dt-editor-dark-layer.is-viewing {
+            background-color: #f1f5f9 !important; /* Semi-white for light viewing */
+            border-color: rgba(0, 0, 0, 0.05) !important;
+        }
+
+        [data-theme="light"] .dt-editor-dark-layer.is-editing {
+            background-color: #020617 !important; /* Deep dark for light editing */
             border-color: rgba(56, 189, 248, 0.4) !important;
+        }
+
+        /* Dark theme always dark */
+        [data-theme="dark"] .dt-editor-dark-layer {
+            background-color: rgba(15, 23, 42, 0.95) !important;
+            border-color: rgba(56, 189, 248, 0.2) !important;
         }
     </style>
 <script type="importmap">
