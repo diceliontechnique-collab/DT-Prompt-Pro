@@ -26,6 +26,9 @@ export interface PromptFormData {
   useImageAsMainSource: boolean;
   onlyEnglishVisuals: boolean;
   exclusivePsychology: boolean;
+  disableAutoText: boolean;
+  visualText: string;
+  anatomyType: string;
 }
 
 export interface SavedPrompt {
