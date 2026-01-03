@@ -1,5 +1,5 @@
 
-/* SYNC_STABILITY_PATCH_V25.1_MASTER_PRO_ULTRA: EXTENDED OPTIONS & UI SYNC */
+/* SYNC_STABILITY_PATCH_V26.0_MASTER_PRO_ULTRA: SEMANTIC INTEGRITY TEMPLATE & SYSTEM CORE */
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { 
   ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, TEMPLATES, AI_MODELS, PRO_ULTRA_DB, WISDOM_QUOTES, getMillionthNeuralPrompt
@@ -31,7 +31,7 @@ const UI_TRANSLATIONS: any = {
     saveBtn: 'أرشفة المشروع',
     editBtn: 'تعديل النص',
     copyPromptBtn: 'نسخ البرومبت',
-    editLabel: 'محرر الأوامر الذكي (V25.1 PRO)',
+    editLabel: 'محرر الأوامر الذكي (V26.0 PRO)',
     resultActions: { copy: 'نسخ', save: 'حفظ' },
     copyOptions: { ar: '🇸🇦 نسخ بالعربية', en: '🇬🇧 Copy in English', all: '🌍 نسخ الكل (عربي + إنجليزي)' },
     history: { empty: 'السجل فارغ حالياً.. ابدأ بصناعة إبداعك الأول!', title: 'سجل محفوظات DT-Prompt' },
@@ -60,7 +60,7 @@ const UI_TRANSLATIONS: any = {
     quickCopy: 'نسخ سريع',
     editInStudio: 'تعديل في المختبر',
     guide: { 
-      title: 'موسوعة DT-Prompt الشاملة (V25.1 PRO)', 
+      title: 'موسوعة DT-Prompt الشاملة (V26.0 PRO)', 
       intro: 'مرحباً بك في المحرك الهندسي الأكثر تقدماً. DT-Prompt ليس مجرد تطبيق، بل هو جسر تقني يربط خيالك بأقوى محركات الذكاء الاصطناعي العالمية. يهدف التطبيق إلى تحويل أفكارك البسيطة إلى "أوامر برمجية" (Prompts) دقيقة ومعقدة تضمن لك مخرجات احترافية بنسبة 100% وبدون الحاجة للإنترنت.',
       masterSections: [
         { 
@@ -96,13 +96,6 @@ const UI_TRANSLATIONS: any = {
             { label: 'تصدير إنجليزي فائق', content: 'ترجمة تقنية وليست حرفية؛ تحول وصفك العربي إلى برومبت إنجليزي احترافي جداً.' },
             { label: 'المنصات اللاتينية', content: 'خيار يضمن عدم ظهور أحرف غريبة عند استخدام البرومبت في برامج لا تدعم العربية.' }
           ] 
-        },
-        { 
-          id: 'SYSTEM', title: '4. الأنظمة الذكية المستقلة', icon: '🤖',
-          points: [
-            { label: 'نظام المتابعة الدوري (15 يوماً)', content: 'يحتوي التطبيق على نظام ذكي مدمج يذكر المستخدم بأهمية متابعة منصات Dicelion-Technique الرسمية. يظهر التذكير عند أول استخدام، ثم يختفي تلقائياً بمجرد التفاعل، ولا يظهر مجدداً إلا بعد مرور 15 يوماً كاملة من آخر تفاعل، لضمان تجربة مستخدم سلسلة وغير مزعجة.' },
-            { label: 'محرك الأوفلاين 100%', content: 'يتميز التطبيق بقدرته على معالجة وهندسة الأوامر حتى عند انقطاع الإنترنت بالكامل، حيث يعتمد على خوارزمية Neural Factory المحلية المدمجة.' }
-          ]
         }
       ],
       footer: 'DT-Prompt | التقنية أمانة، والعمل إتقان - DicelionTechnique © 2024-2026'
@@ -133,7 +126,7 @@ const UI_TRANSLATIONS: any = {
     editBtn: 'Edit Text',
     copyPromptBtn: 'Copy Prompt',
     copyOptions: { ar: '🇸🇦 Copy Arabic', en: '🇬🇧 Copy English', all: '🌍 Copy All (Ar + En)' },
-    editLabel: 'Smart Prompt Editor (V25.1 PRO)',
+    editLabel: 'Smart Prompt Editor (V26.0 PRO)',
     resultActions: { copy: 'Copy', save: 'Save' },
     history: { empty: 'History is empty.. start creating!', title: 'DT-Prompt Archive' },
     copied: 'Copied successfully!',
@@ -161,7 +154,7 @@ const UI_TRANSLATIONS: any = {
     quickCopy: 'Quick Copy',
     editInStudio: 'Edit in Lab',
     guide: { 
-      title: 'DT-Prompt Encyclopedia (V25.1 PRO)', 
+      title: 'DT-Prompt Encyclopedia (V26.0 PRO)', 
       intro: 'DT-Prompt is not just an app; it is a professional engineering engine designed to bridge the gap between human imagination and the world’s most powerful AI models.',
       masterSections: [
         { 
@@ -361,41 +354,75 @@ const App: React.FC = () => {
     onlyEnglishVisuals: false, exclusivePsychology: false
   });
 
-  // SMART OFFLINE GENERATION LOGIC (V25.0)
+  // SMART OFFLINE GENERATION LOGIC (V26.0) WITH SEMANTIC INTEGRITY TEMPLATE
   const generate = async () => {
     if (!formData.mainText) return;
     setIsGenerating(true);
     setGeneratedPrompt("");
     setIsEditing(false);
 
-    // Simulated Delay for Neural Engine Feeling
     await new Promise(r => setTimeout(r, 1500));
 
+    const SEMANTIC_HEADER = `/* ARCHITECTURE METADATA */
+DicelionTechnique: TOPIC: ADVANCED SYNTHESIS
+DicelionTechnique: MODE: ${formData.promptMode.toUpperCase()}
+DicelionTechnique: TECH: ${formData.technical.toUpperCase()}
+DicelionTechnique: VERSION: 2.6.0
+/* SEMANTIC INTEGRITY LAYER LOADED */`;
+
+    const SEMANTIC_SECURITY = `======================
+SYSTEM / CORE SECURITY LAYER
+======================
+DicelionTechnique: DT-PROMPT
+DicelionTechnique: DT_CORE_KEY: DTC-AX9-ROOT
+
+======================
+INTELLECTUAL PROPERTY NOTICE
+======================
+DicelionTechnique: DicelionTechnique – DT-Prompt System
+DicelionTechnique: SEMANTIC INTEGRITY ACTIVE`;
+
+    const SEMANTIC_PERMISSION = `======================
+EDIT PERMISSION LOGIC
+======================
+DicelionTechnique: GREEN ZONE: [USER MODIFIABLE]
+DicelionTechnique: RED ZONE: [LOCKED SYSTEM CORE]
+DicelionTechnique: BLUE ZONE: [ATTRIBUTION LOGIC]`;
+
     try {
-      // Priority 1: Check Online Status & API Key
       if (navigator.onLine && process.env.API_KEY) {
         const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
         const systemInstruction = `You are a World-Class AI Prompt Engineering Architect. 
-        Your output MUST be linguistically flawless in both Arabic and English.
-        Standard Text: RED. Variables: [GREEN]. Metadata: /*BLUE*/.`;
+        Your output MUST strictly follow the DT Semantic Integrity Template.
+        
+        STRUCTURE:
+        - BLUE: Metadata wrap in /* COMMENT */ or start with "DicelionTechnique:".
+        - RED: Standard text.
+        - GREEN: Variables in [SQUARE BRACKETS].
+        
+        TEMPLATES (MUST USE):
+        English: Generate a hyper-realistic, cinematic masterpiece depicting a [CENTRAL SUBJECT] that seamlessly fuses with [SECONDARY ELEMENT/MATERIAL]. The overall composition must emphasize a [MOOD/ATMOSPHERE] vibe, utilizing [SPECIFIC ART STYLE] influences. The intricate details should highlight [TEXTURE DETAILS] reflecting under [LIGHTING CONDITIONS]. The environment in the background is a [SCENERY/SETTING] filled with [ATMOSPHERIC EFFECTS], rendered with [TECHNICAL SPECIFICATIONS/ENGINE].
+        
+        Arabic: **قم بإنشاء تحفة بصرية سينمائية واقعية للغاية تصور [الموضوع المركزي] والذي يندمج بسلاسة مع [العنصر/المادة الثانوية] . **يجب أن يؤكد التكوين العام على أجواء [المزاج/الطابع العام] ، **باستخدام تأثيرات من [نمط فني محدد] . **يجب أن تسلط التفاصيل المعقدة الضوء على [تفاصيل الأنسجة] **التي تنعكس تحت [ظروف الإضاءة] . **البيئة في الخلفية هي [المشهد/الإعداد] **مليئة بـ [التأثيرات الجوية] ، **تم تقديمها باستخدام [المواصفات الفنية/المحرك] .
+        
+        Always include headers like ====================== PROMPT CONSTRUCTION LAYER ====================== and use correct identifiers.`;
 
         const response = await ai.models.generateContent({
           model: 'gemini-3-flash-preview',
-          contents: `Mode: ${formData.promptMode}. Topic: ${formData.mainText}. Tech: ${formData.technical}. Generate a complex prompt with placeholders in [BRACKETS].`,
+          contents: `Mode: ${formData.promptMode}. Topic: ${formData.mainText}. Tech: ${formData.technical}.`,
           config: { systemInstruction, temperature: 0.9 }
         });
 
-        const text = response.text || "Neural Engine failed to respond.";
-        setOriginalPrompt(text);
-        setGeneratedPrompt(text);
+        const text = response.text || "Neural Engine failed.";
+        const finalOutput = `${SEMANTIC_HEADER}\n\n${SEMANTIC_SECURITY}\n\n======================\nPROMPT CONSTRUCTION LAYER\n======================\n${text}\n\n${SEMANTIC_PERMISSION}`;
+        setOriginalPrompt(finalOutput);
+        setGeneratedPrompt(finalOutput);
       } else {
-        // Priority 2: OFFLINE ENGINE (Fallback)
-        throw new Error("Offline Mode Triggered");
+        throw new Error("Offline Mode");
       }
     } catch (err) {
-      // OFFLINE FACTORY GENERATION
       const neural = getMillionthNeuralPrompt(Math.floor(Math.random() * 1000000), formData.mainText);
-      const offlineResult = `${neural.en}\n\n/* OFFLINE NEURAL ENGINE v25.0 ACTIVE */\nDicelionTechnique: [PRO-ULTRA-RESULT]`;
+      const offlineResult = `${SEMANTIC_HEADER}\n\n${SEMANTIC_SECURITY}\n\n======================\nPROMPT CONSTRUCTION LAYER\n======================\nGenerate a hyper-realistic masterpiece depicting a [${formData.mainText}] with [${formData.technical}].\n\n**قم بإنشاء تحفة بصرية تصور [${formData.mainText}] باستخدام [${formData.technical}].\n\n${SEMANTIC_PERMISSION}`;
       setOriginalPrompt(offlineResult);
       setGeneratedPrompt(offlineResult);
     } finally {
@@ -650,7 +677,7 @@ const App: React.FC = () => {
                       <button className="sm:col-span-2 py-4 rounded-2xl glass-ui border-sky-500/20 text-sky-400 font-black text-xs uppercase shadow-md hover:bg-white/5 transition-all flex items-center justify-center gap-3"><span className="text-lg">📧</span> {t.about.contacts.email}</button>
                     </div>
                 </div>
-                <p className="text-[10px] font-black uppercase opacity-30 tracking-[0.5em] mt-8">DICELION TECHNIQUE v25.1 PRO</p>
+                <p className="text-[10px] font-black uppercase opacity-30 tracking-[0.5em] mt-8">DICELION TECHNIQUE v26.0 PRO</p>
              </div>
           </div>
         )}
