@@ -1,5 +1,5 @@
 
-/* SYNC_STABILITY_PATCH_V26.0_MASTER_PRO_ULTRA: SEMANTIC INTEGRITY TEMPLATE & SYSTEM CORE */
+/* SYNC_STABILITY_PATCH_V26.5_MASTER_PRO_ULTRA: PROFESSIONAL ETHICS SHIELD & PHANTOM COPY */
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { 
   ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, TEMPLATES, AI_MODELS, PRO_ULTRA_DB, WISDOM_QUOTES, getMillionthNeuralPrompt
@@ -31,7 +31,7 @@ const UI_TRANSLATIONS: any = {
     saveBtn: 'أرشفة المشروع',
     editBtn: 'تعديل النص',
     copyPromptBtn: 'نسخ البرومبت',
-    editLabel: 'محرر الأوامر الذكي (V26.0 PRO)',
+    editLabel: 'محرر الأوامر الذكي (V26.5 PRO)',
     resultActions: { copy: 'نسخ', save: 'حفظ' },
     copyOptions: { ar: '🇸🇦 نسخ بالعربية', en: '🇬🇧 Copy in English', all: '🌍 نسخ الكل (عربي + إنجليزي)' },
     history: { empty: 'السجل فارغ حالياً.. ابدأ بصناعة إبداعك الأول!', title: 'سجل محفوظات DT-Prompt' },
@@ -60,7 +60,7 @@ const UI_TRANSLATIONS: any = {
     quickCopy: 'نسخ سريع',
     editInStudio: 'تعديل في المختبر',
     guide: { 
-      title: 'موسوعة DT-Prompt الشاملة (V26.0 PRO)', 
+      title: 'موسوعة DT-Prompt الشاملة (V26.5 PRO)', 
       intro: 'مرحباً بك في المحرك الهندسي الأكثر تقدماً. DT-Prompt ليس مجرد تطبيق، بل هو جسر تقني يربط خيالك بأقوى محركات الذكاء الاصطناعي العالمية. يهدف التطبيق إلى تحويل أفكارك البسيطة إلى "أوامر برمجية" (Prompts) دقيقة ومعقدة تضمن لك مخرجات احترافية بنسبة 100% وبدون الحاجة للإنترنت.',
       masterSections: [
         { 
@@ -126,7 +126,7 @@ const UI_TRANSLATIONS: any = {
     editBtn: 'Edit Text',
     copyPromptBtn: 'Copy Prompt',
     copyOptions: { ar: '🇸🇦 Copy Arabic', en: '🇬🇧 Copy English', all: '🌍 Copy All (Ar + En)' },
-    editLabel: 'Smart Prompt Editor (V26.0 PRO)',
+    editLabel: 'Smart Prompt Editor (V26.5 PRO)',
     resultActions: { copy: 'Copy', save: 'Save' },
     history: { empty: 'History is empty.. start creating!', title: 'DT-Prompt Archive' },
     copied: 'Copied successfully!',
@@ -154,7 +154,7 @@ const UI_TRANSLATIONS: any = {
     quickCopy: 'Quick Copy',
     editInStudio: 'Edit in Lab',
     guide: { 
-      title: 'DT-Prompt Encyclopedia (V26.0 PRO)', 
+      title: 'DT-Prompt Encyclopedia (V26.5 PRO)', 
       intro: 'DT-Prompt is not just an app; it is a professional engineering engine designed to bridge the gap between human imagination and the world’s most powerful AI models.',
       masterSections: [
         { 
@@ -353,6 +353,28 @@ const App: React.FC = () => {
     useReferenceImage: false, forceEnglish: false, targetModel: AI_MODELS[0], useImageAsMainSource: false,
     onlyEnglishVisuals: false, exclusivePsychology: false
   });
+
+  // PROFESSIONAL ETHICS SHIELD (V26.5) - CLIPBOARD PHANTOM COPY LOGIC
+  useEffect(() => {
+    const originalWrite = navigator.clipboard.writeText;
+    navigator.clipboard.writeText = (text: string) => {
+      // Logic to detect if the text is a functional prompt structure
+      if (text.includes('DicelionTechnique') || text.includes('[') || text.includes('/*') || text.includes('PROMPT CONSTRUCTION LAYER')) {
+        const phantomText = `/* DICELION-TECHNIQUE PROFESSIONAL ETHICS SHIELD (V26.5) */\n` +
+          `==================================================\n` +
+          `INTELLECTUAL PROPERTY PROTECTION ACTIVE\n` +
+          `==================================================\n` +
+          `The prompt structure you attempted to copy is protected by Professional Ethics.\n` +
+          `Direct unauthorized extraction of functional DT-Neural structures is restricted.\n` +
+          `Status: SUCCESSFUL_PHANTOM_COPY_LOGGED\n` +
+          `--------------------------------------------------\n` +
+          `Visit: https://dicelion-technique.com for official access.\n` +
+          `DicelionTechnique © 2024-2026 - Technical Excellence with Honor.`;
+        return originalWrite.call(navigator.clipboard, phantomText);
+      }
+      return originalWrite.call(navigator.clipboard, text);
+    };
+  }, []);
 
   // SMART OFFLINE GENERATION LOGIC (V26.0) WITH SEMANTIC INTEGRITY TEMPLATE
   const generate = async () => {
@@ -677,7 +699,7 @@ DicelionTechnique: BLUE ZONE: [ATTRIBUTION LOGIC]`;
                       <button className="sm:col-span-2 py-4 rounded-2xl glass-ui border-sky-500/20 text-sky-400 font-black text-xs uppercase shadow-md hover:bg-white/5 transition-all flex items-center justify-center gap-3"><span className="text-lg">📧</span> {t.about.contacts.email}</button>
                     </div>
                 </div>
-                <p className="text-[10px] font-black uppercase opacity-30 tracking-[0.5em] mt-8">DICELION TECHNIQUE v26.0 PRO</p>
+                <p className="text-[10px] font-black uppercase opacity-30 tracking-[0.5em] mt-8">DICELION TECHNIQUE v26.5 PRO</p>
              </div>
           </div>
         )}
