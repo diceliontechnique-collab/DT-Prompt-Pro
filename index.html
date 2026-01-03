@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="light">
 <head>
@@ -149,6 +150,47 @@
         [data-theme="dark"] .dt-editor-dark-layer {
             background-color: rgba(15, 23, 42, 0.95) !important;
             border-color: rgba(56, 189, 248, 0.2) !important;
+        }
+
+        /* ----------------------------------------------------------- */
+        /* V41.0 PRO: CRITICAL THEME CONTRAST LAYER - ADDITIONAL ONLY  */
+        /* ----------------------------------------------------------- */
+        
+        /* ضمان ظهور الخطوط في وضع الشمس (Light Mode) */
+        [data-theme="light"] .glass-ui p, 
+        [data-theme="light"] .glass-ui input,
+        [data-theme="light"] .glass-ui select,
+        [data-theme="light"] .glass-ui span:not([class*="text-sky"]):not([class*="text-emerald"]),
+        [data-theme="light"] .glass-ui button:not([class*="bg-sky"]):not([class*="bg-emerald"]) {
+            color: #0f172a !important;
+            opacity: 1 !important;
+            --tw-text-opacity: 1 !important;
+        }
+
+        /* تحسين تباين حقول البحث في الوضع الساطع */
+        [data-theme="light"] .glass-ui input::placeholder {
+            color: rgba(15, 23, 42, 0.5) !important;
+        }
+
+        /* تثبيت ظهور الخطوط في الوضع الداكن */
+        [data-theme="dark"] .glass-ui p, 
+        [data-theme="dark"] .glass-ui input,
+        [data-theme="dark"] .glass-ui span:not([class*="text-sky"]):not([class*="text-emerald"]),
+        [data-theme="dark"] .glass-ui button:not([class*="bg-sky"]):not([class*="bg-emerald"]) {
+            color: #ffffff !important;
+            opacity: 1 !important;
+            --tw-text-opacity: 1 !important;
+        }
+
+        /* معالجة أزرار النسخ السريع الشفافة */
+        .glass-ui button {
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* تحسين رؤية أيقونة البحث */
+        [data-theme="light"] .glass-ui .opacity-50 {
+            opacity: 0.8 !important;
+            color: #0284c7 !important;
         }
     </style>
 <script type="importmap">

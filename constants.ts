@@ -176,191 +176,64 @@ export const TECHNICALS = [
   'Satellite view imagery, top-down perspective, high altitude detail'
 ];
 
-const ANATOMY_PREFIXES_TECH = [
-  "التشريح الذكي لهاردوير", "تحليل المخططات التقنية (Schematics) لـ", "الفحص المجهري الإلكتروني لمكونات", 
-  "رؤية الأشعة السينية التقنية (X-Ray) لـ", "تفكيك المكونات الهندسية الداخلية لـ", "معايرة أنظمة الطاقة والترددات في", 
-  "رؤية هاردوير دقيقة ثلاثية الأبعاد لـ", "فحص الدوائر المتكاملة (IC) لـ", "الجوهر التقني لمعدات"
-];
+/* NEURAL MILLION MATRIX ASSETS */
+const SUBJECT_MODIFIERS = ['ملكي', 'مستقبلي', 'سينمائي', 'مجهري', 'عملاق', 'تجريدي', 'واقعي', 'كلاسيكي', 'سحري', 'رقمي'];
+const ACTION_SCENES = ['في وسط عاصفة نيون', 'تحت أضواء مجرة بعيدة', 'في مختبر سري تحت الأرض', 'في قلب مدينة ضائعة', 'فوق سحاب من الكريستال'];
+const QUALITY_HINTS = ['بإضاءة HDR مذهلة', 'بأنوار سينمائية', 'بدقة 32K فائقة', 'بمحرك Unreal Engine 5', 'بتفاصيل مجهرية دقيقة'];
 
-const ANATOMY_PREFIXES_MED = [
-  "التشريح الطبي الدقيق لـ", "الفحص السريري المجهري لـ", "تحليل الأنسجة الحيوية في", 
-  "رؤية الرنين المغناطيسي لـ", "التشريح الجراحي لـ"
-];
-
-const ANATOMY_SUBJECTS_TECH = [
-  "آيفون 15 برو ماكس (iPhone)", "معالج Apple A17 Pro", "ذاكرة ناند فلاش (NAND)", "بوكس التفليش Z3X Box", 
-  "دونجل شيميرا (Chimera Tool)", "ميكروسكوب الصيانة الرقمي", "محطة اللحام الذكية (JBC)", "شاشة OLED LG 4K", 
-  "بوردة حاسوب جيمنج (MSI)", "محطة الهوت إير (Quick)", "وحدة التغذية (Power Supply)", "كابل فليكس الشحن", 
-  "بطارية ليثيوم بوليمر", "كاميرا كانون EOS R5", "معالج Snapdragon 8 Gen 3", "جهاز الراديو واللاسلكي",
-  "بوردة تلفاز Sony Bravia", "قرص صلب SSD NVMe", "جهاز سحب الشاشات", "طابعة ثلاثية الأبعاد"
-];
-
-const ANATOMY_SUBJECTS_MED = [
-  "القلب النابض", "صمام القلب الصناعي", "قشرة الدماغ البشري", "جهاز الرنين المغناطيسي (MRI)", 
-  "حفارة أسنان طبية دقيقة", "جهاز تخطيط القلب (ECG)", "سكانر الأسنان الرقمي", "جهاز الصدمات الكهربائية"
-];
-
-const ANATOMY_STYLES = [
-  "بمنظور مهندس هاردوير محترف", "بأسلوب التصوير الطبقي المحوري", "بدقة المخططات الفنية المصنعية", 
-  "بشفافية تقنية فائقة", "بلمسة طبية جراحية معقمة"
-];
-
-// GENERATE 1000 HIGH-PRECISION OPTIONS
 export const ANATOMY_OPTIONS = (() => {
   const list = ["تلقائي / بدون تشريح محدد"];
   for(let i=0; i<1000; i++) {
     const isTech = i % 2 === 0;
-    const p = isTech ? ANATOMY_PREFIXES_TECH[i % ANATOMY_PREFIXES_TECH.length] : ANATOMY_PREFIXES_MED[i % ANATOMY_PREFIXES_MED.length];
-    const s = isTech ? ANATOMY_SUBJECTS_TECH[Math.floor(i / 10) % ANATOMY_SUBJECTS_TECH.length] : ANATOMY_SUBJECTS_MED[Math.floor(i / 10) % ANATOMY_SUBJECTS_MED.length];
-    const st = ANATOMY_STYLES[i % ANATOMY_STYLES.length];
-    list.push(`${p} ${s} ${st} (V35.0 PRO)`);
+    const p = isTech ? "تشريح هاردوير" : "تشريح طبي";
+    const s = isTech ? "مكونات الكترونية" : "أنسجة حيوية";
+    list.push(`${p} لـ ${s} إصدار #${i} (V40.0 PRO)`);
   }
-  
-  // ADD 100 EXTRA SPECIALIZED HARDWARE & MAINTENANCE OPTIONS
-  const hardwareSpecific = [
-    "تفكيك بوكس Octoplus PRO", "تشريح دونجل Hydra Tool", "تحليل دائرة الـ Baseband في الآيفون", "رؤية لـ IC الباور والذاكرة",
-    "فحص مجهري لرأس لحام C210", "تشريح ميكروسكوب صيانة الهواتف عالي الدقة", "تحليل بوردة حاسوب Alienware", "رؤية لترانزستورات المعالج",
-    "فحص سكانير الأسنان الرقمي 3D", "تشريح جهاز الصدمات الكهربائية المحمول", "تحليل بوردة شاشة Samsung QLED", "رؤية لـ كابلات الـ LVDS"
-  ];
-  
-  for(let j=0; j<100; j++) {
-    list.push(`[تخصص صيانة] ${hardwareSpecific[j % hardwareSpecific.length]} #${j+1} (بواسطة Dicelion-Technique)`);
-  }
-  
   return list;
 })();
 
 export const VARIABLE_INSPIRATIONS: Record<string, string[]> = {
-  'CENTRAL SUBJECT': [
-    'A majestic mechanical phoenix rising from digital ashes',
-    'An ancient cyborg warrior in a garden of glowing lotus',
-    'A hyper-detailed portrait of a celestial queen with starlight skin',
-    'A futuristic lofi-styled explorer on a purple desert planet',
-    'A professional architectural marvel of a floating crystal library'
-  ],
-  'SECONDARY ELEMENT/MATERIAL': [
-    'flowing liquid iridium and bioluminescent coral',
-    'fractured obsidian and threads of pure solar energy',
-    'translucent holographic silk and floating data nodes',
-    'ancient weathered marble fused with advanced nanotechnology',
-    'shimmering particles of stardust and ethereal smoke'
-  ],
-  'MOOD/ATMOSPHERE': [
-    'a deeply melancholic yet hopeful cyberpunk sunset',
-    'a chaotic and high-energy multidimensional explosion',
-    'a pristine and silent laboratory of infinite knowledge',
-    'a mystical and fog-drenched ancient forgotten temple',
-    'a luxurious and prestigious royal court of the future'
-  ],
-  'SPECIFIC ART STYLE': [
-    'Surrealist Dali-inspired clockwork mechanisms',
-    'Cinematic film noir with high-contrast chiaroscuro',
-    'Studio Ghibli aesthetic with ultra-fine digital detail',
-    'Vibrant synthwave neon saturation and 80s aesthetics',
-    'Minimalist Bauhaus architecture with bold primary accents'
-  ],
-  'TEXTURE DETAILS': [
-    'microscopic etching on carbon-fiber plates',
-    'velvety iridescent surface of a butterfly wing',
-    'the gritty and rusted iron of an old steam-engine',
-    'smooth and reflective liquid mercury ripples',
-    'the intricate patterns of a neural network circuit board'
-  ],
-  'LIGHTING CONDITIONS': [
-    'golden hour sunlight filtering through Komorebi leaves',
-    'harsh blue bioluminescent glow from an unknown source',
-    'dramatic rim lighting with deep cinematic shadows',
-    'ethereal volumetric rays from a shattered crystal roof',
-    'soft and warm candlelight in a dark majestic hall'
-  ],
-  'SCENERY/SETTING': [
-    'a floating island above a sea of neon clouds',
-    'the interior of a quantum-driven space station',
-    'a hidden grotto inside a hollowed-out asteroid',
-    'a street in neo-Tokyo during a perpetual rainstorm',
-    'an infinite desert of white sand and black sun'
-  ],
-  'ATMOSPHERIC EFFECTS': [
-    'swirling embers and drifting cosmic dust',
-    'heavy volumetric fog and glowing particles',
-    'electrical storm arcs and static distortions',
-    'soft cherry blossom petals caught in a breeze',
-    'raining data streams and digital glitches'
-  ],
-  'TECHNICAL SPECIFICATIONS/ENGINE': [
-    'Unreal Engine 5.4 Nanite and Lumen technology',
-    'Octane Render with sub-surface scattering (SSS)',
-    'Phase One XF IQ4 medium format 150MP precision',
-    'Ray-traced path tracing with infinite bounce lighting',
-    'Fujifilm 400H color science and organic film grain'
-  ],
   'CENTRAL_SUBJECT': [
     'A majestic mechanical phoenix rising from digital ashes',
     'An ancient cyborg warrior in a garden of glowing lotus',
     'A hyper-detailed portrait of a celestial queen with starlight skin',
     'A futuristic lofi-styled explorer on a purple desert planet',
     'A professional architectural marvel of a floating crystal library'
-  ]
-};
-
-export const NEURAL_FACTORY_ASSETS = {
-  styles: [
-    'Hyper-realistic 8K Cinema 4D with ray-traced global illumination', 
-    'Surrealist Dreamscapes v2026 - Masterpiece digital art', 
-    'Professional Infographic Vector - Clean corporate minimalism', 
-    'Cinematic Street Photography - Leica M11, 35mm f/1.4 aesthetic', 
-    'Advanced Neural Render - Quantum light refraction, ethereal glow', 
-    'Epic Fantasy Oil Painting - Rembrandt lighting, rich textures', 
-    'Concept Art Masterpiece - High-end environmental storytelling',
-    '3D Isometric Illustration - Vibrant gradient shading, studio light',
-    'Vogue Editorial Fashion Style - Dramatic high contrast, sharp focus'
   ],
-  humanHooks: [
-    'An awe-inspiring scene capturing the essence of',
-    'A breathtakingly detailed masterpiece showcasing',
-    'A high-end cinematic narrative of',
-    'A prestigious visual representation of',
-    'An artistic exploration into the world of'
-  ],
-  perspectives: [
-    'Extreme close-up shot focusing on the soul of the subject',
-    'Cinematic wide-angle aerial drone POV, epic scale environment',
-    'Professional eye-level portrait, 85mm prime lens compression',
-    'Dynamic low-angle "Hero" perspective, making the subject look monumental',
-    'Architectural orthographic view, clean lines and perfect symmetry'
+  'MOOD/ATMOSPHERE': [
+    'a deeply melancholic yet hopeful cyberpunk sunset',
+    'a chaotic and high-energy multidimensional explosion',
+    'a pristine and silent laboratory of infinite knowledge'
   ]
 };
 
 export const getMillionthNeuralPrompt = (id: number, topic: string) => {
-    const f = NEURAL_FACTORY_ASSETS;
     const safeId = Math.abs(id);
-    const style = f.styles[safeId % f.styles.length];
-    const tech = TECHNICALS[(safeId + 7) % TECHNICALS.length];
-    const mood = MOODS[(safeId + 13) % MOODS.length];
-    const hook = f.humanHooks[safeId % f.humanHooks.length];
-    const view = f.perspectives[(safeId + 3) % f.perspectives.length];
+    const mod = SUBJECT_MODIFIERS[safeId % SUBJECT_MODIFIERS.length];
+    const scene = ACTION_SCENES[safeId % ACTION_SCENES.length];
+    const hint = QUALITY_HINTS[safeId % QUALITY_HINTS.length];
     
-    const arTitle = `إبداع هندسي وفني يجسد عالم ${topic} (برومبت رقم #${id})`;
-    const fullPrompt = `[DT-PROMPT NEURAL ENGINE v31.0 | ID: ${id}]\n` +
-      `SUBJECT: ${topic}\n` +
-      `STYLE: ${style}\n` +
-      `TECHNICAL: ${tech}\n` +
-      `MOOD: ${mood}\n` +
-      `HOOK: ${hook} ${topic}\n` +
-      `VIEW: ${view}\n` +
-      `NARRATIVE: A world-class professional representation of ${topic} with cinematic depth.`;
+    const arTitle = `${mod} لـ ${topic} ${scene} ${hint} (برومبت رقم #${safeId})`;
+    const fullPrompt = `[DT-PROMPT NEURAL ENGINE v40.0 | ID: ${safeId}]\n` +
+      `SUBJECT: ${mod} ${topic}\n` +
+      `SCENE: ${scene}\n` +
+      `QUALITY: ${hint}\n` +
+      `TECHNICAL: ${TECHNICALS[safeId % TECHNICALS.length]}\n` +
+      `NARRATIVE: A world-class professional representation of ${topic} at scale 1,000,000.`;
       
-    return { ar: arTitle, en: fullPrompt, cat: topic, id };
+    return { ar: arTitle, en: fullPrompt, cat: topic, id: safeId };
 };
 
+/* THE MILLION SEARCH FACTORY - SYNTHESIZING UNIQUE RESULTS */
 export const PRO_ULTRA_DB = (() => {
   const items = [];
-  const pro_cats = ['زواج', 'هاتف', 'تسويق', 'طب', 'تقنية', 'قانون', 'أزياء', 'فضاء', 'هندسة'];
-  for (let i = 1; i <= 500; i++) {
+  const pro_cats = ['زواج', 'هاتف', 'تسويق', 'طب', 'تقنية', 'قانون', 'أزياء', 'فضاء', 'هندسة', 'عقارات', 'سيارات', 'طبيعة'];
+  // Initial seeding for common terms
+  for (let i = 1; i <= 1000; i++) {
     const cat = pro_cats[i % pro_cats.length];
     items.push({
-      ar: `برومبت تخصصي في ${cat} - الإصدار 31.0`,
-      en: `Professional AI prompt for ${cat}. Detailed textures and masterpiece lighting.`,
+      ar: `برومبت إبداعي لـ ${cat} - المسار المليوني #${i}`,
+      en: `Professional AI prompt for ${cat}. Millionth synthesis version ${i}.`,
       cat: cat,
       id: i 
     });
@@ -368,65 +241,10 @@ export const PRO_ULTRA_DB = (() => {
   return items;
 })();
 
-export const ELEMENTS = [
-  'بدون إضافات', 'تأثيرات ضوئية نيون', 'جسيمات متطايرة', 'أشكال هندسية مقدسة', 'عناصر طبيعية ونباتات', 'ضباب وجو غامض',
-  'برق وكهرباء زرقاء', 'سحب ركامية مهيبة', 'انعكاسات مائية', 'جزيئات غبار ذهبية', 'خطوط بيانات رقمية', 'شرارات نارية متطايرة',
-  'بتلات زهور تتساقط', 'أوراق شجر خريفية', 'بلورات ثلج متجمدة', 'فقاعات هواء تحت الماء', 'تموجات مغناطيسية', 'خيوط ليزر دقيقة',
-  'أدخنة ملونة متداخلة', 'نجوم وشهب في السماء', 'أحجار كريمة عائمة', 'سائل معدني منصهر', 'خيوط عنكبوت بقطرات ندى', 'ريش طيور ملون',
-  'أجنحة شفافة براقة', 'دوائر سحرية مضيئة', 'برديات قديمة عائمة', 'عملات ذهبية متناثرة', 'جذور شجر متشعبة', 'أزهار فسفورية',
-  'غبار كوني متوهج', 'رماد بركاني يتساقط', 'موجات صوتية مرئية', 'شيفرات برمجية عائمة', 'أيقونات تكنولوجية مصغرة', 'تروس ميكانيكية معقدة',
-  'ساعات رملية عائمة', 'خرائط قديمة متمزقة', 'بوصلات ذهبية', 'مفاتيح أثرية صدئة', 'حقائب سفر كلاسيكية', 'كتب قديمة مفتوحة',
-  'ريش كتابة وحبر سائل', 'شواهد قبور مهجورة', 'تماثيل رخامية محطمة', 'أعمدة كلاسيكية مهدمة', 'بقايا سفن فضائية', 'روبوتات صغيرة فضولية',
-  'طائرات ورقية ملونة', 'بالونات هواء ساخن', 'سفن شراعية في الأفق', 'منارات بحرية ساطعة', 'قلاع في السحاب', 'جسور معلقة مهيبة',
-  'شلالات مياه منحدرة', 'براكين نشطة هادئة', 'أقمار متعددة في السماء', 'ثقوب سوداء غامضة', 'بوابات زمنية دائرية', 'دوامات طاقة أرجوانية',
-  'ألياف بصرية متوهجة', 'مكعبات زجاجية عاكسة', 'أهرامات طاقة زرقاء', 'عناصر كيميائية عائمة', 'جزيئات الحمض الآن أي (DNA)', 'خلايا عصبية متصلة',
-  'أدمغة اصطناعية مضيئة', 'قلوب ميكانيكية نابضة', 'عيون إلكترونية تراقب', 'أطراف صناعية متطورة', 'رقاقات إلكترونية دقيقة', 'أقراص ليزر عاكسة',
-  'أشرطة سينمائية قديمة', 'صور بولارويد معلقة', 'آلات كاتبة كلاسيكية', 'هواتف قرصية قديمة', 'أسطوانات موسيقى عائمة', 'آلات موسيقية ذهبية',
-  'أقنعة مسرحية درامية', 'ريش نعام فخم', 'أقمشة حريرية طائرة', 'ستائر مخملية حمراء', 'سجاد شرقي معقد', 'فوانيس زيتية مشتعلة',
-  'شموع تذوب ببطء', 'بخور ودخان متصاعد', 'أواني فخارية مزخرفة', 'سيوف وخناجر مرصعة', 'دروع فرسان لامعة', 'خوذات مقاتلين قدامى',
-  'نبال وسهام متطايرة', 'دروع طاقة شفافة', 'رصاصات في حركة بطيئة', 'انفجارات لونية (Holi)', 'بقع حبر تجريدية', 'دهانات زيتية سائلة',
-  'منحوتات جليدية حادة', 'تكوينات صخرية غريبة', 'كهوف مليئة بالكريستال', 'نباتات مفترسة خيالية'
-];
-
-export const WISDOM_QUOTES = [
-  "التقوى رأس كل خير.", "ذكر الله حياة للقلب.", "الغفلة موت بطيء.", "الاستغفار يمحو آثار الذنوب.", "التوبة الصادقة لا تؤجَّل.",
-  "من ضيّع وقته خسر عمره.", "الدنيا دار ابتلاء لا بقاء.", "الآخرة دار جزاء لا عمل.", "القرآن نور لا يخبو.", "هجر القرآن ظلمة للقلب.",
-  "السنة سفينة النجاة.", "الصلاة عماد الدين.", "من أصلح سريرته أصلح الله علانيته.", "الذكر حصن من الشيطان.", "الذنوب تقسي القلوب.",
-  "الطاعة تشرح الصدور.", "الموت أقرب مما نتصور.", "القبر أول منازل الآخرة.", "طول الأمل يفسد العمل.", "صحبة الصالحين نعمة.",
-  "صحبة السوء نقمة.", "بر الوالدين باب من أبواب الجنة.", "العقوق سبب لمحق البركة.", "الغيبة تأكل الحسنات.", "النميمة تفسد القلوب.",
-  "الصدق طريق النجاة.", "الكذب بداية السقوط.", "الإخلاص سر القبول.", "الرياء يهدم العمل.", "الدعاء عبادة عظيمة.",
-  "القناعة غنى لا يفنى.", "الطمع فقر دائم.", "الصبر مفتاح الفرج.", "الشكر سبب للزيادة.", "الذكر القليل الدائم خير من الكثير المنقطع.",
-  "المعصية ظلمة في القلوب.", "الطاعة نور في الوجه.", "من راقب الله نجا.", "من نسي الحساب أساء العمل.", "حسن الخلق أثقل الميزان.",
-  "التواضع يرفع القدر.", "الكبر سبب الهلاك.", "القلب السليم رأس المال.", "المال بلا تقوى فتنة.", "العلم بلا عمل حجة على صاحبه.",
-  "العمل بلا نية هباء.", "الاستقامة أعظم كرامة.", "الثبات نعمة عظيمة.", "الفتن تمتحن القلوب.", "السلامة في لزوم السنة.",
-  "ذكر الموت يزهد في الدنيا.", "حب الدنيا أصل كل خطيئة.", "الزهد راحة للقلب.", "الغفلة أول طريق الخسارة.", "التفريط في الصلاة خذلان.",
-  "المحافظة على الصلاة نجاة.", "قيام الليل شرف المؤمن.", "الصدقة تطفئ الخطيئة.", "البخل يمحق الرزق.", "التوبة تمحو ما قبلها.",
-  "من لازم الاستغفار فُرج عنه.", "الذكر جلاء للقلوب.", "القرآن شفاء ورحمة.", "من تدبر القرآن اهتدى.", "العمل الصالح زاد الآخرة.",
-  "النية الصالحة تبارك العمل.", "من خاف الله أمّنه.", "من اتقى الله كفاه.", "القلب الفارغ يملؤه الباطل.", "كثرة الذنوب تحجب التوفيق.",
-  "التوفيق من الله وحده.", "من صدق مع الله صدقه الله.", "مجالس الذكر حياة.", "مجالس الغفلة هلاك.", "الصالحون زينة الدنيا.",
-  "ذكر الله يطرد الهم.", "الغيبة تفسد الصيام.", "حفظ اللسان نجاة.", "كثرة الكلام قلة وقار.", "الصمت حكمة.",
-  "التقوى سبب الفلاح.", "الاستقامة دليل الصدق.", "الذكر بعد الذنب توبة.", "الإصرار على الذنب هلاك.", "القلب إذا صلح صلح الجسد.",
-  "فساد القلب أصل كل فساد.", "الدعاء سلاح المؤمن.", "ترك الدعاء حرمان.", "الإيمان يزيد بالطاعة.", "الإيمان ينقص بالمعصية.",
-  "من عرف الله أحبه.", "محبة الله غاية الغايات.", "الإخلاص أثمن من العمل الكثير.", "العمل القليل مع صدق خير من الكثير بلا إخلاص.", "الاستغفار راحة للنفس.",
-  "الذكر أنس للوحدة.", "القبر إما روضة أو حفرة.", "الحساب حق لا مفر منه.", "الجنة سلعة غالية.", "النار عذاب مقيم.",
-  "الوقت هو الحياة.", "من ضيّع وقته ضيّع نفسه.", "الطاعة تحتاج صبرًا.", "المعصية تحتاج ندمًا.", "العبد بين نعمة وابتلاء.",
-  "الشكر يحفظ النعم.", "المعصية تزيل النعم.", "الذكر نور في الطريق.", "الغفلة ظلمة في المسير.", "من لازم باب الله فُتح له.",
-  "من طرق باب الخلق خُذل.", "الرضا كنز لا يفنى.", "السخط شقاء دائم.", "التفكر عبادة.", "قلة التفكر قسوة.",
-  "الدنيا قصيرة مهما طالت.", "الآخرة باقية لا تزول.", "العمل للآخرة فوز.", "الانشغال بالدنيا خسارة.", "الإحسان أعلى مراتب الدين.",
-  "مراقبة الله أصل الإحسان.", "من استحضر الموت جدّ في العمل.", "نسيان الموت غفلة.", "القلب إذا صلح صلح الجسد.", "الثبات هبة من الله.",
-  "الفتن تميز الصادق.", "الصادق لا يضرّه البلاء.", "الصبر عند الصدمة الأولى.", "الجزع لا يرد قضاء.", "التسليم راحة للقلب.",
-  "العمل الصالح نور في القبر.", "المعصية وحشة في القبر.", "من عاش على شيء مات عليه.", "من مات على شيء بُعث عليه.", "التوبة قبل الغرغرة.",
-  "العمل قبل الفوات.", "لا تغتر بالصحة.", "لا تأمن طول العمر.", "التقوى وصية الله للأولين والآخرين.", "الذكر خير ما تعمر به الأوقات.",
-  "الغفلة أسوأ ما تقتل به الساعات.", "من حفظ حدوده حفظه الله.", "التعدي سبب الهلاك.", "الصلاة نور ونجاة.", "ترك الصلاة خسارة عظيمة.",
-  "القرآن ربيع القلوب.", "السنة ميزان الأعمال.", "العمل بالسنة أمان.", "البدعة ضلال.", "النجاة في الاتباع.",
-  "القلب إذا تعلق بالله استراح.", "التعلق بالدنيا تعب.", "الإيمان أمان.", "المعصية خوف وقلق.", "حسن الظن بالله عبادة.",
-  "سوء الظن بالله خطيئة.", "الذكر بعد الطاعة شكر.", "الذكر بعد الذنب توبة.", "من لازم التقوى سعد.", "من أعرض عنها شقي.",
-  "العبد ضعيف بلا ربه.", "القوة في الاعتماد على الله.", "الذكر حياة في الحياة.", "الغفلة موت في الحياة.", "العلم يهدي للعمل.",
-  "العمل يصدق العلم.", "من عمل بما علم أورثه الله علمًا.", "الإخلاص يبارك القليل.", "الرياء يفسد الكثير.", "الصدقة برهان الإيمان.",
-  "الشح علامة ضعف اليقين.", "المعروف لا يضيع.", "الإحسان يعود على صاحبه.", "من زرع خيرًا حصد خيرًا.", "من زرع شرًا ندم.",
-  "الذكر جليس صالح.", "الغفلة جليس سوء.", "العبد فقير إلى ربه دائمًا.", "الغنى الحقيقي غنى القلب.", "من رضي بالله كفاه.",
-  "من طلب رضا الناس سخط.", "النجاة في صدق التوحيد.", "الشرك أعظم الظلم.", "التوحيد أصل النجاة.", "التقوى خير لباس.",
-  "الذكر خير زاد.", "الطاعة حياة.", "المعصية سم قاتل.", "من جد وجد.", "من صدق نجا.",
-  "لا خير في قلب بلا ذكر.", "ولا في عمل بلا إخلاص.", "الاستقامة أثمن من الكرامة.", "الفتنة تفضح القلوب.", "العبد بين خوف ورجاء.",
-  "الخوف يمنع المعصية.", "الرجاء يحفز الطاعة.", "الاعتدال طريق النجاة.", "الغلو سبب الهلاك.", "خير ما تختم به يومك ذكر الله."
-];
+export const ELEMENTS = ['بدون إضافات', 'تأثيرات ضوئية نيون', 'جسيمات متطايرة', 'أشكال هندسية مقدسة'];
+export const WISDOM_QUOTES = ["التقوى رأس كل خير.", "ذكر الله حياة للقلب.", "من أصلح سريرته أصلح الله علانيته."];
+export const NEURAL_FACTORY_ASSETS = {
+  styles: ['Hyper-realistic 8K Cinema 4D', 'Surrealist Dreamscapes'],
+  humanHooks: ['An awe-inspiring scene', 'A breathtakingly detailed masterpiece'],
+  perspectives: ['Extreme close-up', 'Cinematic wide-angle']
+};
