@@ -1,5 +1,5 @@
 
-/* SYNC_STABILITY_PATCH_V30.5_MASTER_PRO_ULTRA: OPEN EDIT GREEN ZONE & 1000 ANATOMY OPTIONS & COPYRIGHT LAYER */
+/* SYNC_STABILITY_PATCH_V31.0_MASTER_PRO_ULTRA: INSTANT RESPONSE PROTOCOL & NEURAL SEARCH EMPOWERMENT */
 import React, { useState, useEffect, useMemo, useRef, useLayoutEffect } from 'react';
 import { 
   ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, TEMPLATES, AI_MODELS, PRO_ULTRA_DB, WISDOM_QUOTES, getMillionthNeuralPrompt, VARIABLE_INSPIRATIONS, ANATOMY_OPTIONS
@@ -31,7 +31,7 @@ const UI_TRANSLATIONS: any = {
     saveBtn: 'أرشفة المشروع',
     editBtn: 'تعديل النص',
     copyPromptBtn: 'نسخ البرومبت',
-    editLabel: 'محرر الأوامر الذكي (V30.5 PRO)',
+    editLabel: 'محرر الأوامر الذكي (V31.0 PRO)',
     resultActions: { copy: 'نسخ', save: 'حفظ' },
     copyOptions: { ar: '🇸🇦 نسخ بالعربية', en: '🇬🇧 Copy in English', all: '🌍 نسخ الكل (عربي + إنجليزي)' },
     history: { empty: 'السجل فارغ حالياً.. ابدأ بصناعة إبداعك الأول!', title: 'سجل محفوظات DT-Prompt' },
@@ -67,7 +67,7 @@ const UI_TRANSLATIONS: any = {
       tip: 'اختر مقترحاً لتعلم أسرار هندسة الأوامر:'
     },
     guide: { 
-      title: 'موسوعة DT-Prompt الشاملة (V30.5 PRO)', 
+      title: 'موسوعة DT-Prompt الشاملة (V31.0 PRO)', 
       intro: 'مرحباً بك في المحرك الهندسي الأكثر تقدماً. DT-Prompt ليس مجرد تطبيق، بل هو جسر تقني يربط خيالك بأقوى محركات الذكاء الاصطناعي العالمية. يهدف التطبيق إلى تحويل أفكارك البسيطة إلى "أوامر برمجية" (Prompts) دقيقة ومعقدة تضمن لك مخرجات احترافية بنسبة 100% وبدون الحاجة للإنترنت.',
       masterSections: [
         { 
@@ -145,14 +145,14 @@ const HackerAnalyzerLoader = ({ isSunlight }: { isSunlight: boolean }) => {
     <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none bg-black/60 backdrop-blur-sm">
       <div className="flex flex-col items-center gap-4">
         <div className="w-12 h-12 border-4 border-sky-500 border-t-transparent rounded-full animate-spin"></div>
-        <span className="text-xs font-black text-white uppercase tracking-widest animate-pulse">جاري تحليل الأكواد البرمجية (V30.5)</span>
+        <span className="text-xs font-black text-white uppercase tracking-widest animate-pulse">جاري تحليل الأكواد البرمجية (V31.0)</span>
       </div>
     </div>
   );
 };
 
 const executeSystemCopy = (text: string): Promise<boolean> => {
-    let finalPayload = `/* DT-FUNCTIONAL-PAYLOAD v30.5 | MASTER_INTEGRITY_ACTIVE */\n` + text;
+    let finalPayload = `/* DICELION-TECHNIQUE MASTER PAYLOAD v31.0 | AUTHENTICATED_CORE */\n` + text;
     return new Promise((resolve) => {
         try {
             const textArea = document.createElement("textarea");
@@ -220,7 +220,7 @@ const App: React.FC = () => {
 
     await new Promise(r => setTimeout(r, 1500));
 
-    const finalOutput = `/* MASTER ARCHITECTURE | v30.5 */\nDicelionTechnique: TOPIC: ${formData.anatomyType !== ANATOMY_OPTIONS[0] ? formData.anatomyType : formData.mainText}\nDicelionTechnique: PRECISION: K64_ULTRADENSE\n\n======================\nPROMPT CONSTRUCTION LAYER\n======================\n[CENTRAL_SUBJECT]: { description: "${formData.mainText || formData.anatomyType}", technical: "${formData.technical}" }\n[VISUAL_CONTEXT]: { setting: "${formData.background}", mood: "${formData.mood}" }\n[RENDER_SPECS]: { resolution: "64K", engine: "${formData.technical}" }\n\n======================\nBy Dicelion-Technique\n======================`;
+    const finalOutput = `/* MASTER ARCHITECTURE | v31.0 | DICELION-TECHNIQUE */\nDicelionTechnique: TOPIC: ${formData.anatomyType !== ANATOMY_OPTIONS[0] ? formData.anatomyType : formData.mainText}\nDicelionTechnique: PRECISION: K64_ULTRADENSE\nDicelionTechnique: ETHICS_PROTOCOL: ACTIVE\n\n======================\nPROMPT CONSTRUCTION LAYER\n======================\n[CENTRAL_SUBJECT]: { core: "${formData.anatomyType !== ANATOMY_OPTIONS[0] ? formData.anatomyType : formData.mainText}", engineering: "${formData.technical}" }\n[ATMOSPHERIC_DATA]: { context: "${formData.background}", emotion: "${formData.mood}", lighting: "Cinematic God-Rays" }\n[RENDER_CORE]: { engine: "Unreal Engine 5.4 / Octane", resolution: "Ultra-High 64K", details: "${formData.elements}" }\n\n======================\nProfessional Engineering by Dicelion-Technique\n======================`;
     setOriginalPrompt(finalOutput);
     setGeneratedPrompt(finalOutput);
     setIsGenerating(false);
@@ -231,15 +231,38 @@ const App: React.FC = () => {
     if (success) alert(t.copied);
   };
 
-  const handleBracketInteraction = (e: React.PointerEvent, variableName: string, bracketId: number) => {
+  /* FIXED: INSTANT RESPONSE PROTOCOL - SINGLE TAP ACTIVATION (V31.0) */
+  const handleBracketInteraction = (e: React.PointerEvent | React.MouseEvent, variableName: string, bracketId: number) => {
     if (!isEditing) return;
-    // V30.5 FIX: Allow editing by only showing inspiration on double-tap or long-press, but we'll use a specific condition
-    if (e.detail === 2) { // Show on double click
-      e.preventDefault();
-      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-      setMenuPos({ top: rect.top + window.scrollY - 10, left: rect.left + window.scrollX });
-      setActiveBracket({ name: variableName, index: bracketId });
-    }
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const target = e.currentTarget as HTMLElement;
+    const rect = target.getBoundingClientRect();
+    
+    setMenuPos({ 
+        top: rect.top + window.scrollY - 10, 
+        left: Math.min(rect.left + window.scrollX, window.innerWidth - 300) 
+    });
+    
+    // Neural Toggle: If clicking same bracket, close it. Else open it.
+    setActiveBracket(prev => (prev?.index === bracketId ? null : { name: variableName, index: bracketId }));
+  };
+
+  const handleInspirationSelect = (suggestion: string) => {
+    if (!activeBracket || !generatedPrompt) return;
+    const regex = /(\[.*?\])/g;
+    let currentMatchIndex = 0;
+    const newPrompt = generatedPrompt.replace(regex, (match) => {
+        if (currentMatchIndex === activeBracket.index) {
+            currentMatchIndex++;
+            return `[${suggestion}]`;
+        }
+        currentMatchIndex++;
+        return match;
+    });
+    setGeneratedPrompt(newPrompt);
+    setActiveBracket(null);
   };
 
   const parsePromptToJSX = (text: string, editMode: boolean) => {
@@ -258,22 +281,33 @@ const App: React.FC = () => {
             key={i} 
             contentEditable={editMode} 
             suppressContentEditableWarning 
-            onPointerDown={(e) => handleBracketInteraction(e, variableName, currentId)}
-            className={`text-emerald-500 font-black mx-1 border-b border-emerald-500/20 bg-emerald-500/5 px-1 rounded transition-all outline-none focus:bg-emerald-500/10 focus:ring-1 focus:ring-emerald-500/40`}
+            onClick={(e) => handleBracketInteraction(e, variableName, currentId)}
+            className={`text-emerald-500 font-black mx-1 border-b-2 border-emerald-500/20 bg-emerald-500/5 px-1 rounded transition-all outline-none cursor-help hover:bg-emerald-500/20 active:scale-95`}
           >
             {part}
           </span>
         );
       }
       if (part.startsWith('/*') || part.includes('DicelionTechnique:')) {
-        return <span key={i} contentEditable={false} className="text-sky-400 font-mono italic opacity-60 text-[11px] block">{part}</span>;
+        return <span key={i} contentEditable={false} className="text-sky-400 font-mono italic opacity-60 text-[10px] block my-0.5">{part}</span>;
       }
       return <span key={i} contentEditable={false} className="text-rose-500 font-bold">{part}</span>;
     });
   };
 
+  const filteredLibrary = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return PRO_ULTRA_DB.slice(0, 50);
+    return PRO_ULTRA_DB.filter(s => 
+      s.ar.toLowerCase().includes(q) || s.en.toLowerCase().includes(q) || s.cat.toLowerCase().includes(q) || s.id.toString().includes(q)
+    ).slice(0, 100);
+  }, [searchQuery]);
+
   return (
     <div className={`min-h-screen flex flex-col w-full ${t.dir}`}>
+      {/* FOCAL DIMMING OVERLAY (V31.0) */}
+      {activeBracket && <div className="fixed inset-0 bg-black/20 z-[25000] backdrop-blur-[2px]" onClick={() => setActiveBracket(null)}></div>}
+      
       <nav className="nav-fixed-top glass-ui shadow-lg">
         <div className="max-w-xl mx-auto flex items-center justify-between w-full px-4">
              <NavIcon active={activeTab === 'create'} onClick={() => setActiveTab('create')} icon="🏠" label={t.tabs.home} />
@@ -288,18 +322,17 @@ const App: React.FC = () => {
         {activeTab === 'create' && (
           <div className="space-y-6 animate-in fade-in">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="glass-ui p-6 rounded-[2.5rem] space-y-4">
+              <div className="glass-ui p-6 rounded-[2.5rem] space-y-4 shadow-sm">
                   <SelectBox label={t.labels.ratio} options={ASPECT_RATIOS} value={formData.aspectRatio} onChange={(e:any) => setFormData(p=>({...p, aspectRatio: e.target.value}))} />
                   <SelectBox label={t.labels.bg} options={BACKGROUNDS} value={formData.background} onChange={(e:any) => setFormData(p=>({...p, background: e.target.value}))} />
                   <WisdomBox isSunlight={isSunlightMode} label={t.labels.wisdomLabel} />
               </div>
-              <div className="glass-ui p-6 rounded-[2.5rem] space-y-4">
+              <div className="glass-ui p-6 rounded-[2.5rem] space-y-4 shadow-sm">
                   <div className="space-y-1">
                       <label className="text-[9px] font-black text-sky-500 uppercase px-1">{t.labels.anatomy}</label>
                       <select value={formData.anatomyType} onChange={(e:any) => setFormData(p=>({...p, anatomyType: e.target.value}))} className="w-full select-element outline-none cursor-pointer">
                           {ANATOMY_OPTIONS.map((o, i) => <option key={i} value={o}>{o}</option>)}
                       </select>
-                      <span className="text-[8px] font-black opacity-30 uppercase block text-center mt-1">By Dicelion-Technique</span>
                   </div>
                   <SelectBox label={t.labels.tech} options={TECHNICALS} value={formData.technical} onChange={(e:any) => setFormData(p=>({...p, technical: e.target.value}))} />
                   <CheckBox label={t.labels.exclusivePsychology} checked={formData.exclusivePsychology} onChange={(e:any) => setFormData(p=>({...p, exclusivePsychology: e.target.checked}))} />
@@ -307,15 +340,46 @@ const App: React.FC = () => {
             </div>
             <div className="glass-ui p-6 rounded-[3rem] space-y-4 shadow-md">
               <InputArea label={t.labels.text} value={formData.mainText} onChange={(e:any) => setFormData(p=>({...p, mainText: e.target.value}))} placeholder={t.placeholders.text} />
-              <button onClick={generate} disabled={isGenerating} className={`relative overflow-hidden w-full py-5 rounded-full font-black uppercase transition-all bg-sky-600 text-white shadow-xl ${isGenerating ? 'bg-black' : 'hover:bg-sky-500 scale-[1.01]'}`}>
+              <button onClick={generate} disabled={isGenerating} className={`relative overflow-hidden w-full py-5 rounded-full font-black uppercase shadow-xl transition-all bg-sky-600 text-white ${isGenerating ? 'bg-black' : 'hover:bg-sky-500 scale-[1.01]'}`}>
                 {isGenerating ? <HackerAnalyzerLoader isSunlight={isSunlightMode} /> : t.generateBtn}
               </button>
             </div>
+            
+            {/* V31.0: NEURAL INSPIRATION CLOUD - ASCENDING PORTAL */}
+            {activeBracket && isEditing && (
+                <div 
+                    className="fixed z-[30000] max-w-[280px] w-full transform -translate-y-full animate-in zoom-in slide-in-from-bottom-5 duration-300"
+                    style={{ top: `${menuPos.top}px`, left: `${menuPos.left}px` }}
+                >
+                   <div className="glass-ui p-5 rounded-[2rem] border-emerald-500/60 shadow-2xl space-y-3">
+                       <div className="flex justify-between items-center border-b border-white/5 pb-2">
+                          <h4 className="text-[10px] font-black text-emerald-400 uppercase">{activeBracket.name}</h4>
+                          <button onClick={() => setActiveBracket(null)} className="text-[9px] font-bold text-rose-400">إغلاق</button>
+                       </div>
+                       <div className="flex flex-col gap-1.5">
+                          {(VARIABLE_INSPIRATIONS[activeBracket.name] || [
+                            'Luxury futuristic aesthetics with clean lines',
+                            'Highly detailed cybernetic textures',
+                            'Ethereal light beams from multiple sources'
+                          ]).slice(0, 5).map((suggestion, idx) => (
+                            <button 
+                                key={idx} 
+                                onClick={() => handleInspirationSelect(suggestion)}
+                                className="text-start p-3 glass-ui rounded-xl hover:bg-emerald-500/10 transition-all text-[10px] font-bold leading-tight"
+                            >
+                               ✦ {suggestion}
+                            </button>
+                          ))}
+                       </div>
+                   </div>
+                </div>
+            )}
+
             {generatedPrompt && (
               <div className="glass-ui p-8 rounded-[3rem] space-y-4 animate-in slide-in-from-bottom border-sky-500/20">
                  <div className="flex justify-between items-center px-2">
                     <h4 className="text-[10px] font-black text-sky-500 uppercase tracking-widest">{t.editLabel}</h4>
-                    <span className="text-[8px] font-black opacity-40 uppercase">By Dicelion-Technique</span>
+                    <span className="text-[8px] font-black opacity-40 uppercase">V31.0 MASTER CORE</span>
                  </div>
                  <div ref={editorRef} className={`p-7 dt-editor-dark-layer rounded-[2rem] text-[13px] font-mono leading-relaxed overflow-hidden border shadow-inner min-h-[150px] outline-none ${isEditing ? 'is-editing ring-2 ring-sky-500/50' : 'is-viewing border-white/5'}`}>
                    {parsePromptToJSX(generatedPrompt, isEditing)}
@@ -326,14 +390,31 @@ const App: React.FC = () => {
                         {isEditing ? '✓ حفظ التعديل' : t.editBtn}
                     </button>
                  </div>
-                 <div className="text-center pt-2"><span className="text-[8px] font-black opacity-30 uppercase tracking-[0.4em]">DicelionTechnique Engineering Layer v30.5 PRO</span></div>
+                 <div className="text-center pt-2"><span className="text-[8px] font-black opacity-30 uppercase tracking-[0.4em]">DicelionTechnique MASTER CORE v31.0</span></div>
               </div>
             )}
           </div>
         )}
+        {activeTab === 'library' && (
+          <div className="space-y-6 pb-12 animate-in fade-in">
+             <div className="glass-ui h-14 rounded-full flex items-center px-6 shadow-sm">
+                <span className="mr-2 opacity-50">🔍</span>
+                <input type="text" placeholder={t.placeholders.search} className="bg-transparent flex-1 outline-none font-bold text-sm" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+             </div>
+             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {filteredLibrary.map((s, idx) => (
+                   <div key={idx} className="p-6 glass-ui rounded-[2rem] flex flex-col shadow-sm border-sky-500/5 hover:border-sky-500/20 transition-all">
+                      <span className="text-[8px] font-black uppercase text-sky-500 mb-1">{s.cat} | #{s.id}</span>
+                      <p className="text-[12px] font-bold leading-tight flex-grow">{s.ar}</p>
+                      <button onClick={() => { setFormData(p => ({...p, mainText: s.en})); setActiveTab('create'); }} className="mt-4 py-2 bg-sky-600/10 text-sky-500 rounded-xl text-[10px] font-black uppercase">{t.editInStudio}</button>
+                   </div>
+                ))}
+             </div>
+          </div>
+        )}
       </main>
-      <footer className="fixed bottom-0 w-full glass-ui p-3 text-center border-t border-white/5 pointer-events-none">
-        <span className="text-[8px] font-black opacity-20 uppercase tracking-[0.5em]">DicelionTechnique Master Core System</span>
+      <footer className="fixed bottom-0 w-full glass-ui p-3 text-center border-t border-white/5 pointer-events-none z-[10000]">
+        <span className="text-[8px] font-black opacity-20 uppercase tracking-[0.5em]">DicelionTechnique Master Core System V31.0</span>
       </footer>
     </div>
   );

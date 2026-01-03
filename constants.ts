@@ -176,7 +176,6 @@ export const TECHNICALS = [
   'Satellite view imagery, top-down perspective, high altitude detail'
 ];
 
-/* EXPANDED MASTER ANATOMY LIST (1000 OPTIONS PROGRAMMATICALLY GENERATED) */
 const BASE_ANATOMY = [
   "تشريح قلب الإنسان (مقطع عرضي)", "الجهاز الهضمي للبقرة (تفكيكي)", "هيكل عظمي لطائر الجارح", "تشريح عين السمكة",
   "الجهاز العصبي للقط", "دماغ الإنسان (مناطق وظيفية)", "تشريح جلد الإنسان", "هيكل الحوت الأزرق", "محرك V8 انفجاري",
@@ -191,7 +190,6 @@ const MODS = ["تفكيكي انفجاري", "مقطع عرضي دقيق", "طب
 export const ANATOMY_OPTIONS = (() => {
   const list = ["تلقائي / بدون تشريح محدد"];
   list.push(...BASE_ANATOMY);
-  // Programmatic expansion to reach 1000 unique specialized variations
   for(let i=0; i<950; i++) {
     const cat = CATS[i % CATS.length];
     const mod = MODS[i % MODS.length];
@@ -263,8 +261,86 @@ export const VARIABLE_INSPIRATIONS: Record<string, string[]> = {
     'Phase One XF IQ4 medium format 150MP precision',
     'Ray-traced path tracing with infinite bounce lighting',
     'Fujifilm 400H color science and organic film grain'
+  ],
+  'CENTRAL_SUBJECT': [
+    'A majestic mechanical phoenix rising from digital ashes',
+    'An ancient cyborg warrior in a garden of glowing lotus',
+    'A hyper-detailed portrait of a celestial queen with starlight skin',
+    'A futuristic lofi-styled explorer on a purple desert planet',
+    'A professional architectural marvel of a floating crystal library'
   ]
 };
+
+export const NEURAL_FACTORY_ASSETS = {
+  styles: [
+    'Hyper-realistic 8K Cinema 4D with ray-traced global illumination', 
+    'Surrealist Dreamscapes v2026 - Masterpiece digital art', 
+    'Professional Infographic Vector - Clean corporate minimalism', 
+    'Cinematic Street Photography - Leica M11, 35mm f/1.4 aesthetic', 
+    'Advanced Neural Render - Quantum light refraction, ethereal glow', 
+    'Epic Fantasy Oil Painting - Rembrandt lighting, rich textures', 
+    'Concept Art Masterpiece - High-end environmental storytelling',
+    '3D Isometric Illustration - Vibrant gradient shading, studio light',
+    'Vogue Editorial Fashion Style - Dramatic high contrast, sharp focus'
+  ],
+  humanHooks: [
+    'An awe-inspiring scene capturing the essence of',
+    'A breathtakingly detailed masterpiece showcasing',
+    'A high-end cinematic narrative of',
+    'A prestigious visual representation of',
+    'An artistic exploration into the world of'
+  ],
+  perspectives: [
+    'Extreme close-up shot focusing on the soul of the subject',
+    'Cinematic wide-angle aerial drone POV, epic scale environment',
+    'Professional eye-level portrait, 85mm prime lens compression',
+    'Dynamic low-angle "Hero" perspective, making the subject look monumental',
+    'Architectural orthographic view, clean lines and perfect symmetry'
+  ]
+};
+
+const ACTION_MATRICES: any = {
+  'زواج': ['حفل زفاف ملكي فخم', 'أناقة العروس', 'هيبة العريس'],
+  'هاتف': ['هاتف مستقبلي شفاف', 'تصميم أيقوني', 'تكنولوجيا الغد'],
+  'طب': ['جراح الواقع المعزز', 'أيقونة الرعاية', 'معجزة العلم']
+};
+
+export const getMillionthNeuralPrompt = (id: number, topic: string) => {
+    const f = NEURAL_FACTORY_ASSETS;
+    const safeId = Math.abs(id);
+    const style = f.styles[safeId % f.styles.length];
+    const tech = TECHNICALS[(safeId + 7) % TECHNICALS.length];
+    const mood = MOODS[(safeId + 13) % MOODS.length];
+    const hook = f.humanHooks[safeId % f.humanHooks.length];
+    const view = f.perspectives[(safeId + 3) % f.perspectives.length];
+    
+    const arTitle = `إبداع هندسي وفني يجسد عالم ${topic} (برومبت رقم #${id})`;
+    const fullPrompt = `[DT-PROMPT NEURAL ENGINE v31.0 | ID: ${id}]\n` +
+      `SUBJECT: ${topic}\n` +
+      `STYLE: ${style}\n` +
+      `TECHNICAL: ${tech}\n` +
+      `MOOD: ${mood}\n` +
+      `HOOK: ${hook} ${topic}\n` +
+      `VIEW: ${view}\n` +
+      `NARRATIVE: A world-class professional representation of ${topic} with cinematic depth.`;
+      
+    return { ar: arTitle, en: fullPrompt, cat: topic, id };
+};
+
+export const PRO_ULTRA_DB = (() => {
+  const items = [];
+  const pro_cats = ['زواج', 'هاتف', 'تسويق', 'طب', 'تقنية', 'قانون', 'أزياء', 'فضاء', 'هندسة'];
+  for (let i = 1; i <= 500; i++) {
+    const cat = pro_cats[i % pro_cats.length];
+    items.push({
+      ar: `برومبت تخصصي في ${cat} - الإصدار 31.0`,
+      en: `Professional AI prompt for ${cat}. Detailed textures and masterpiece lighting.`,
+      cat: cat,
+      id: i 
+    });
+  }
+  return items;
+})();
 
 export const ELEMENTS = [
   'بدون إضافات', 'تأثيرات ضوئية نيون', 'جسيمات متطايرة', 'أشكال هندسية مقدسة', 'عناصر طبيعية ونباتات', 'ضباب وجو غامض',
@@ -298,7 +374,7 @@ export const WISDOM_QUOTES = [
   "التواضع يرفع القدر.", "الكبر سبب الهلاك.", "القلب السليم رأس المال.", "المال بلا تقوى فتنة.", "العلم بلا عمل حجة على صاحبه.",
   "العمل بلا نية هباء.", "الاستقامة أعظم كرامة.", "الثبات نعمة عظيمة.", "الفتن تمتحن القلوب.", "السلامة في لزوم السنة.",
   "ذكر الموت يزهد في الدنيا.", "حب الدنيا أصل كل خطيئة.", "الزهد راحة للقلب.", "الغفلة أول طريق الخسارة.", "التفريط في الصلاة خذلان.",
-  "المحافظة على الصلاة نجاة.", "قيام الليل شرف المؤمن.", "الصدقة تطفئ الخطيئة.", "البخل يمحق الرزق.", "التوبة تمحو ما قبلها.",
+  "المحافة على الصلاة نجاة.", "قيام الليل شرف المؤمن.", "الصدقة تطفئ الخطيئة.", "البخل يمحق الرزق.", "التوبة تمحو ما قبلها.",
   "من لازم الاستغفار فُرج عنه.", "الذكر جلاء للقلوب.", "القرآن شفاء ورحمة.", "من تدبر القرآن اهتدى.", "العمل الصالح زاد الآخرة.",
   "النية الصالحة تبارك العمل.", "من خاف الله أمّنه.", "من اتقى الله كفاه.", "القلب الفارغ يملؤه الباطل.", "كثرة الذنوب تحجب التوفيق.",
   "التوفيق من الله وحده.", "من صدق مع الله صدقه الله.", "مجالس الذكر حياة.", "مجالس الغفلة هلاك.", "الصالحون زينة الدنيا.",
@@ -328,6 +404,3 @@ export const WISDOM_QUOTES = [
   "لا خير في قلب بلا ذكر.", "ولا في عمل بلا إخلاص.", "الاستقامة أثمن من الكرامة.", "الفتنة تفضح القلوب.", "العبد بين خوف ورجاء.",
   "الخوف يمنع المعصية.", "الرجاء يحفز الطاعة.", "الاعتدال طريق النجاة.", "الغلو سبب الهلاك.", "خير ما تختم به يومك ذكر الله."
 ];
-
-export const PRO_ULTRA_DB = []; // Empty placeholder for logic in App.tsx
-export const getMillionthNeuralPrompt = (id: number, topic: string) => ({ ar: topic, en: topic, cat: 'General', id });
