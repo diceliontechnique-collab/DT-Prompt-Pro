@@ -26,6 +26,8 @@
             --modal-overlay: rgba(0, 0, 0, 0.85);
             --safe-top: env(safe-area-inset-top);
             --safe-bottom: env(safe-area-inset-bottom);
+            --neon-blue: #38bdf8;
+            --neon-green: #22c55e;
         }
 
         [data-theme="light"] { 
@@ -39,6 +41,8 @@
             --input-border: #64748b;
             --nav-bg: #ffffff;
             --modal-overlay: rgba(15, 23, 42, 0.5);
+            --neon-blue: #0284c7;
+            --neon-green: #15803d;
         }
 
         body { 
@@ -55,7 +59,7 @@
             padding-bottom: var(--safe-bottom);
         }
         
-        #root { display: flex; flex-direction: column; min-height: 100vh; width: 100%; }
+        #root { display: flex; flex-direction: column; min-height: 100vh; width: 100%; position: relative; z-index: 10; }
 
         .glass-ui { 
             background: var(--card-bg); 
@@ -68,14 +72,7 @@
         .app-content-wrapper { padding-top: calc(130px + var(--safe-top)); }
         @media (max-width: 480px) { .app-content-wrapper { padding-top: calc(150px + var(--safe-top)); } }
 
-        /* Landscape Optimization */
-        @media (orientation: landscape) {
-            .nav-fixed-top { height: 80px; }
-            .app-content-wrapper { padding-top: calc(90px + var(--safe-top)); }
-            header { display: none; }
-        }
-
-        main { flex: 1; width: 100%; max-width: 1024px; margin: 0 auto; padding: 0 1rem; position: relative; z-index: 1; }
+        main { flex: 1; width: 100%; max-width: 1024px; margin: 0 auto; padding: 0 1rem; position: relative; z-index: 20; }
 
         .nav-fixed-top { 
             z-index: 9999; 
@@ -106,91 +103,73 @@
             font-weight: 700;
         }
 
+        @keyframes float-around {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+            33% { transform: translate(60px, 40px) scale(1.1); opacity: 0.8; }
+            66% { transform: translate(-40px, 120px) scale(0.95); opacity: 0.5; }
+            100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+        }
+
+        .ai-orb {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            filter: blur(4px);
+            mix-blend-mode: screen;
+            transition: opacity 0.5s ease;
+        }
+
+        [data-theme="dark"] .ai-orb { box-shadow: 0 0 15px currentColor, 0 0 5px #fff; }
+
+        [data-theme="light"] .ai-orb { 
+            mix-blend-mode: multiply; 
+            filter: blur(6px); 
+            opacity: 0.25; 
+            box-shadow: 0 0 10px currentColor;
+        }
+
         @keyframes drift {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            0%, 100% { transform: translateY(0) scale(1); filter: brightness(1); }
+            50% { transform: translateY(-10px) scale(1.05); filter: brightness(1.2); }
         }
-        #dt-master-svg { animation: drift 5s infinite ease-in-out; }
+        #dt-master-svg { animation: drift 4s infinite ease-in-out; }
 
-        @keyframes matrix-scroll {
-            0% { transform: translateY(-50%); }
-            100% { transform: translateY(0%); }
+        @keyframes cyber-vibrate {
+            0% { transform: translate(0, 0); }
+            20% { transform: translate(-1px, 1px); }
+            40% { transform: translate(1px, -1px); }
+            60% { transform: translate(-1px, -1px); }
+            80% { transform: translate(1px, 1px); }
+            100% { transform: translate(0, 0); }
         }
-        .matrix-column-anim { animation: matrix-scroll linear infinite; }
+        .animate-cyber-shake { animation: cyber-vibrate 0.15s infinite linear; }
 
-        @keyframes matrix-horizontal {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+        @keyframes matrix-rtl-ultra-fast {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
-        .matrix-row-anim { animation: matrix-horizontal linear infinite; }
+        .animate-matrix-rtl-fast { animation: matrix-rtl-ultra-fast 0.3s linear infinite; }
 
-        @keyframes text-vibrate {
-            0% { transform: translate(0); }
-            25% { transform: translate(-0.3px, 0.3px); }
-            50% { transform: translate(0.3px, -0.3px); }
-            75% { transform: translate(-0.3px, -0.3px); }
-            100% { transform: translate(0); }
-        }
-        .vibrate-text { animation: text-vibrate 0.15s linear infinite; }
-
-        .dt-editor-dark-layer {
-            transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease;
+        .luxury-logo-font {
+            letter-spacing: -0.05em;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
         }
 
-        [data-theme="light"] .dt-editor-dark-layer.is-viewing {
-            background-color: #f1f5f9 !important;
-            border-color: rgba(0, 0, 0, 0.05) !important;
-        }
-
-        [data-theme="light"] .dt-editor-dark-layer.is-editing {
-            background-color: #020617 !important;
-            border-color: rgba(56, 189, 248, 0.4) !important;
-        }
-
-        [data-theme="dark"] .dt-editor-dark-layer {
-            background-color: rgba(15, 23, 42, 0.95) !important;
-            border-color: rgba(56, 189, 248, 0.2) !important;
-        }
-
-        /* ----------------------------------------------------------- */
-        /* V41.0 PRO: CRITICAL THEME CONTRAST LAYER - ADDITIONAL ONLY  */
-        /* ----------------------------------------------------------- */
-        
-        /* ضمان ظهور الخطوط في وضع الشمس (Light Mode) */
+        /* V61.0 PATCH: FIXED BUTTON TEXT VISIBILITY */
         [data-theme="light"] .glass-ui p, 
         [data-theme="light"] .glass-ui input,
         [data-theme="light"] .glass-ui select,
-        [data-theme="light"] .glass-ui span:not([class*="text-sky"]):not([class*="text-emerald"]),
-        [data-theme="light"] .glass-ui button:not([class*="bg-sky"]):not([class*="bg-emerald"]) {
+        [data-theme="light"] .glass-ui span:not([class*="text-sky"]):not([class*="text-emerald"]):not([class*="text-[#00ff41]"]):not([class*="text-white"]),
+        [data-theme="light"] .glass-ui button:not([class*="bg-sky"]):not([class*="bg-emerald"]):not([class*="text-sky"]):not([class*="text-white"]) {
             color: #0f172a !important;
-            opacity: 1 !important;
-            --tw-text-opacity: 1 !important;
         }
 
-        /* تحسين تباين حقول البحث في الوضع الساطع */
-        [data-theme="light"] .glass-ui input::placeholder {
-            color: rgba(15, 23, 42, 0.5) !important;
-        }
-
-        /* تثبيت ظهور الخطوط في الوضع الداكن */
         [data-theme="dark"] .glass-ui p, 
         [data-theme="dark"] .glass-ui input,
-        [data-theme="dark"] .glass-ui span:not([class*="text-sky"]):not([class*="text-emerald"]),
-        [data-theme="dark"] .glass-ui button:not([class*="bg-sky"]):not([class*="bg-emerald"]) {
+        [data-theme="dark"] .glass-ui span:not([class*="text-sky"]):not([class*="text-emerald"]):not([class*="text-[#00ff41]"]):not([class*="text-white"]),
+        [data-theme="dark"] .glass-ui button:not([class*="bg-sky"]):not([class*="bg-emerald"]):not([class*="text-sky"]):not([class*="text-white"]) {
             color: #ffffff !important;
-            opacity: 1 !important;
-            --tw-text-opacity: 1 !important;
-        }
-
-        /* معالجة أزرار النسخ السريع الشفافة */
-        .glass-ui button {
-            transition: color 0.3s ease, background-color 0.3s ease;
-        }
-
-        /* تحسين رؤية أيقونة البحث */
-        [data-theme="light"] .glass-ui .opacity-50 {
-            opacity: 0.8 !important;
-            color: #0284c7 !important;
         }
     </style>
 <script type="importmap">

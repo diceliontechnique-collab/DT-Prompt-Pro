@@ -1,5 +1,5 @@
 
-/* SYNC_STABILITY_PATCH_V40.0_MASTER_PRO_ULTRA: MILLION SEARCH SYNTHESIS & NEURAL FACTORY */
+/* SYNC_STABILITY_PATCH_V64.0_MASTER_PRO_ULTRA: HUMAN ANATOMY TITLES & UI STABILITY */
 import React, { useState, useEffect, useMemo, useRef, useLayoutEffect } from 'react';
 import { 
   ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, TEMPLATES, AI_MODELS, PRO_ULTRA_DB, WISDOM_QUOTES, getMillionthNeuralPrompt, VARIABLE_INSPIRATIONS, ANATOMY_OPTIONS
@@ -31,12 +31,14 @@ const UI_TRANSLATIONS: any = {
     saveBtn: 'أرشفة المشروع',
     editBtn: 'تعديل النص',
     copyPromptBtn: 'نسخ البرومبت',
-    editLabel: 'محرر الأوامر الذكي (V40.0 PRO)',
+    editLabel: 'محرر الأوامر الذكي (V64.0 PRO)',
     resultActions: { copy: 'نسخ', save: 'حفظ' },
     copyOptions: { ar: '🇸🇦 نسخ بالعربية', en: '🇬🇧 Copy in English', all: '🌍 نسخ الكل (عربي + إنجليزي)' },
     history: { empty: 'السجل فارغ حالياً.. ابدأ بصناعة إبداعك الأول!', title: 'سجل محفوظات DT-Prompt' },
     copied: 'تم نسخ البرومبت بنجاح!',
     saved: 'تمت الأرشفة بنجاح!',
+    quickCopy: 'نسخ سريع',
+    editInStudio: 'تعديل في المختبر',
     promptMode: { image: 'توليد الصور', video: 'إنتاج الفيديو', post: 'نصوص احترافية' },
     placeholders: { text: 'عنوان الحملة أو الموضوع الرئيسي الذي تريد تحويله لبرومبت احترافي...', search: 'ابحث في مليون برومبت جاهز بالرقم أو بالحرف (مثال: سيارة، طب، أو 5500)', dropdownSearch: 'اختر تخصصاً من 1000 خيار...', visualText: 'اكتب النص الذي تريده أن يظهر (أو اتركه فارغاً للصمت التام)' },
     labels: { 
@@ -47,9 +49,9 @@ const UI_TRANSLATIONS: any = {
       englishLetters: "برومبت للمنصات التي لا تدعم اللغة العربية",
       wisdomLabel: "حكمة اليوم للمبدع الرقمي",
       model: "محرك الذكاء الاصطناعي المستهدف",
-      elements: "العناصر والجماليات (100 خيار)",
+      elements: "العناصر والجماليات (100 خيار احترافي)",
       disableAutoText: "إلغاء النصوص التلقائية (Clean Visuals)",
-      visualTextLabel: "النص المخصص على الصورة/الفيديو",
+      visualTextLabel: "النص المخصص المكتوب (Visual Typography)",
       anatomy: "برومبت التشريح الذكي (هاردوير وتقنيات صيانة)"
     },
     inspiration: {
@@ -57,7 +59,7 @@ const UI_TRANSLATIONS: any = {
       tip: 'اختر مقترحاً لتعلم أسرار هندسة الأوامر:'
     },
     guide: { 
-      title: 'موسوعة DT-Prompt الشاملة (V40.0 PRO)', 
+      title: 'موسوعة DT-Prompt الشاملة (V64.0 PRO)', 
       intro: 'مرحباً بك في المحرك الهندسي الأكثر تقدماً. DT-Prompt ليس مجرد تطبيق، بل هو جسر تقني يربط خيالك بأقوى محركات الذكاء الاصطناعي العالمية. يهدف التطبيق إلى تحويل أفكارك البسيطة إلى "أوامر برمجية" (Prompts) دقيقة ومعقدة تضمن لك مخرجات احترافية بنسبة 100% وبدون الحاجة للإنترنت.',
       masterSections: [
         { 
@@ -65,7 +67,7 @@ const UI_TRANSLATIONS: any = {
           points: [
             { label: 'الرئيسية (🏠)', content: 'نقلك إلى "المختبر الهندسي" حيث تبدأ عملية التصميم من الصفر.' },
             { label: 'مليون برومبت (💎)', content: 'مكتبة سحابية ضخمة تضم مليون فكرة جاهزة وقابلة للتطوير فوراً.' },
-            { label: 'السطوع (☀️)', content: 'زر التحول اللوني؛ يحمي عينيك بالوضع الداكن أو يوفر وضوحاً فائقاً بالوضع الساطع.' }
+            { label: 'سطوع (☀️)', content: 'زر التحول اللوني؛ يحمي عينيك بالوضع الداكن أو يوفر وضوحاً فائقاً بالوضع الساطع.' }
           ] 
         }
       ],
@@ -94,8 +96,10 @@ const UI_TRANSLATIONS: any = {
     saveBtn: 'Archive Project',
     editBtn: 'Edit Text',
     copyPromptBtn: 'Copy Prompt',
-    editLabel: 'Smart Prompt Editor (V40.0 PRO)',
+    editLabel: 'Smart Prompt Editor (V64.0 PRO)',
     resultActions: { copy: 'Copy', save: 'Save' },
+    quickCopy: 'Quick Copy',
+    editInStudio: 'Edit in Lab',
     history: { empty: 'History is empty.. start creating!', title: 'DT-Prompt Archive' },
     copied: 'Copied successfully!',
     saved: 'Archived successfully!',
@@ -109,7 +113,7 @@ const UI_TRANSLATIONS: any = {
       englishLetters: "Latin Only Platforms",
       wisdomLabel: "Daily Wisdom",
       model: "Target AI Model",
-      elements: "Visual Elements",
+      elements: "Visual Elements (100 Options)",
       disableAutoText: "Disable Auto-Text",
       visualTextLabel: "Custom Visual Label",
       anatomy: "Smart Anatomy Prompt"
@@ -126,6 +130,44 @@ const UI_TRANSLATIONS: any = {
 
 const LAST_FOLLOW_KEY = 'dt_last_follow_interaction';
 const FIFTEEN_DAYS_MS = 15 * 24 * 60 * 60 * 1000;
+
+/* AI ORBS BACKGROUND COMPONENT */
+const AIGlobalParticles = ({ isSunlight }: { isSunlight: boolean }) => {
+  const orbs = useMemo(() => {
+    return Array.from({ length: 20 }).map((_, i) => ({
+      id: i,
+      x: `${Math.random() * 100}%`,
+      y: `${Math.random() * 100}%`,
+      size: `10px`,
+      color: i % 2 === 0 ? 'var(--neon-blue)' : 'var(--neon-green)',
+      delay: `${Math.random() * 10}s`,
+      duration: `${12 + Math.random() * 15}s`
+    }));
+  }, []);
+
+  return (
+    <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }}>
+      {orbs.map(orb => (
+        <div 
+          key={orb.id}
+          className="ai-orb"
+          style={{
+            left: orb.x,
+            top: orb.y,
+            width: orb.size,
+            height: orb.size,
+            backgroundColor: orb.color,
+            color: orb.color,
+            animation: `float-around ${orb.duration} infinite ease-in-out`,
+            animationDelay: orb.delay,
+            '--x': orb.x,
+            '--y': orb.y
+          } as any}
+        />
+      ))}
+    </div>
+  );
+};
 
 const WisdomBox = ({ isSunlight, label }: { isSunlight: boolean, label: string }) => {
   const [quote, setQuote] = useState('');
@@ -152,43 +194,96 @@ const WisdomBox = ({ isSunlight, label }: { isSunlight: boolean, label: string }
   );
 };
 
+/* ENHANCED: LIVING 5D LOGO WITH SHARP NEURAL BRAIN LAYER */
 const Unified3DLogo = ({ isSunlight = false }: { isSunlight?: boolean }) => {
   return (
     <div className="relative flex flex-col items-center justify-center select-none scale-90 sm:scale-100 transition-transform duration-500">
-      <svg width="320" height="320" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="dt-master-svg" className="drop-shadow-2xl">
+      <svg width="420" height="420" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="dt-master-svg" className="drop-shadow-2xl">
         <defs>
-          <linearGradient id="dt_face_grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style={{stopColor: isSunlight ? '#0f172a' : '#ffffff', stopOpacity: 1}} />
-            <stop offset="100%" style={{stopColor: '#38bdf8', stopOpacity: 1}} />
+          <filter id="neon_sharp_blue" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+          <filter id="d5_depth" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="8" dy="8" stdDeviation="4" floodOpacity="0.5" />
+            <feDropShadow dx="-2" dy="-2" stdDeviation="1" floodColor="#fff" floodOpacity="0.2" />
+          </filter>
+          <linearGradient id="d5_metal_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style={{stopColor: isSunlight ? '#1e293b' : '#ffffff', stopOpacity: 1}} />
+            <stop offset="50%" style={{stopColor: '#38bdf8', stopOpacity: 1}} />
+            <stop offset="100%" style={{stopColor: '#0c4a6e', stopOpacity: 1}} />
           </linearGradient>
         </defs>
-        <g transform="translate(256, 256)">
-          <path d="M-180 -100 V100 H-80 C-10 100 30 60 30 0 C30 -60 -10 -100 -80 -100 H-180 Z" fill="url(#dt_face_grad)" />
+
+        <g id="neural-brain-layer" opacity="0.6" filter="url(#neon_sharp_blue)" className="brain-wire">
+            <path d="M256,60 C180,60 120,120 100,180 C80,240 100,320 160,380 C120,420 120,460 180,480 C240,500 272,480 272,480 C272,480 304,500 364,480 C424,460 424,420 384,380 C444,320 464,240 444,180 C424,120 364,60 256,60 Z" 
+                  fill="none" stroke="var(--neon-blue)" strokeWidth="3" className="brain-outline" />
+            <path d="M256,60 V480 M180,100 Q256,150 332,100 M140,200 Q256,250 372,200 M160,320 Q256,380 352,320" 
+                  fill="none" stroke="var(--neon-blue)" strokeWidth="1" strokeDasharray="10 15" opacity="0.4" />
+        </g>
+
+        <g id="orbits">
+          <circle cx="256" cy="256" r="230" fill="none" stroke="#38bdf8" stroke-width="0.5" stroke-dasharray="10 20" opacity="0.15" />
+          <circle r="10" fill="#38bdf8" filter="url(#neon_sharp_blue)">
+            <animateMotion dur="8s" repeatCount="indefinite" path="M 256,46 A 210,210 0 1 1 255.9,46 Z" />
+          </circle>
+        </g>
+
+        <g transform="translate(256, 256)" filter="url(#d5_depth)" className="d5-glow-layer">
+          <path d="M-180 -100 V100 H-80 C-10 100 30 60 30 0 C30 -60 -10 -100 -80 -100 H-180 Z" fill="#020617" opacity="0.8" transform="translate(15, 15)" />
+          <path d="M-180 -100 V100 H-80 C-10 100 30 60 30 0 C30 -60 -10 -100 -80 -100 H-180 Z" fill="url(#d5_metal_grad)" stroke="var(--neon-blue)" strokeWidth="1" />
           <path d="M-140 -60 H-80 C-50 -60 -10 -40 -10 0 C-10 40 -50 60 -80 60 H-140 V-60 Z" fill={isSunlight ? '#f8fafc' : '#020617'} />
-          <path d="M40 -100 H180 V-50 H135 V100 H85 V-50 H40 V-100 Z" fill="url(#dt_face_grad)" />
+          
+          <path d="M40 -100 H180 V-50 H135 V100 H85 V-50 H40 V-100 Z" fill="#020617" opacity="0.8" transform="translate(15, 15)" />
+          <path d="M40 -100 H180 V-50 H135 V100 H85 V-50 H40 V-100 Z" fill="url(#d5_metal_grad)" stroke="var(--neon-blue)" strokeWidth="1" />
         </g>
       </svg>
-      <div className="mt-[-40px] flex flex-col items-center">
-        <span className="text-4xl font-black tracking-tighter" style={{ color: isSunlight ? '#0f172a' : '#ffffff' }}> DT-Prompt </span>
-        <div className="mt-[-5px]"><span className={`text-[11px] font-black uppercase tracking-[0.5em] ${isSunlight ? 'text-sky-900' : 'text-sky-300'}`}> PROFESSIONAL SYSTEM </span></div>
+      <div className="mt-[-60px] flex flex-col items-center">
+        <span className="text-5xl font-black tracking-tighter luxury-logo-font" 
+              style={{ color: isSunlight ? '#0f172a' : '#ffffff', fontFamily: '"Cairo", sans-serif' }}> 
+              DT-Prompt 
+        </span>
+        <div className="mt-1">
+            <span className={`text-[12px] font-black uppercase tracking-[0.6em] ${isSunlight ? 'text-sky-900' : 'text-sky-300'}`}> 
+                PROFESSIONAL D5 SYSTEM 
+            </span>
+        </div>
       </div>
     </div>
   );
 };
 
 const HackerAnalyzerLoader = ({ isSunlight }: { isSunlight: boolean }) => {
+  const [matrixContent, setMatrixContent] = useState("");
+  useEffect(() => {
+    const generateRandomRow = () => Array.from({ length: 450 }, () => Math.floor(Math.random() * 10)).join("");
+    setMatrixContent(generateRandomRow());
+    const intervalId = setInterval(() => setMatrixContent(generateRandomRow()), 40);
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none bg-black/60 backdrop-blur-sm">
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-12 h-12 border-4 border-sky-500 border-t-transparent rounded-full animate-spin"></div>
-        <span className="text-xs font-black text-white uppercase tracking-widest animate-pulse">جاري تخليق المليون برومبت (V40.0)</span>
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden bg-black rounded-full border border-white/10 shadow-[inset_0_0_60px_rgba(0,0,0,1)]">
+      <div className="absolute inset-0 z-0 opacity-80 flex flex-col justify-center items-center pointer-events-none overflow-hidden space-y-2">
+        <div className="flex whitespace-nowrap text-[41px] font-mono font-black tracking-[0.3em] leading-none animate-matrix-rtl-fast text-[#00ff41] px-2 w-[600%] drop-shadow-[0_0_25px_#00ff41]">
+          <span>{matrixContent}</span><span>{matrixContent}</span>
+        </div>
+        <div className="flex whitespace-nowrap text-[41px] font-mono font-black tracking-[0.2em] leading-none animate-matrix-rtl-fast text-[#00ff41] px-2 w-[600%] opacity-40 drop-shadow-[0_0_20px_#00ff41]" style={{ animationDelay: '-0.15s' }}>
+          <span>{matrixContent}</span><span>{matrixContent}</span>
+        </div>
+      </div>
+      <div className="absolute inset-0 z-10 bg-black/40 backdrop-blur-[0.5px]"></div>
+      <div className="relative z-20 flex items-center justify-center w-full h-full animate-cyber-shake">
+        <span className="text-[15.5px] font-black text-white text-center tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,1)] px-4">
+          جاري تحليل الأكواد البرمجية
+        </span>
       </div>
     </div>
   );
 };
 
 const executeSystemCopy = (text: string): Promise<boolean> => {
-    let finalPayload = `/* DICELION-TECHNIQUE MILLIONTH_FACTORY v40.0 | SECURE_CORE */\n` + text;
+    let finalPayload = `/* DICELION-TECHNIQUE MILLIONTH_FACTORY v64.0 | SECURE_CORE */\n` + text;
     return new Promise((resolve) => {
         try {
             const textArea = document.createElement("textarea");
@@ -250,18 +345,15 @@ const App: React.FC = () => {
     setGeneratedPrompt("");
     setIsEditing(false);
     setActiveBracket(null);
-
-    await new Promise(r => setTimeout(r, 1500));
-
+    await new Promise(r => setTimeout(r, 4000));
     const coreSubject = formData.anatomyType !== ANATOMY_OPTIONS[0] ? formData.anatomyType : formData.mainText;
-    const finalOutput = `/* MASTER ARCHITECTURE | v40.0 | DICELION-TECHNIQUE */\n` +
+    const finalOutput = `/* MASTER ARCHITECTURE | v64.0 PRO | DICELION-TECHNIQUE */\n` +
       `DicelionTechnique: TOPIC: ${coreSubject}\n` +
       `DicelionTechnique: SEARCH_FACTORY: MILLION_SYNTHESIS_ACTIVE\n\n` +
       `======================\nPROMPT CONSTRUCTION LAYER\n======================\n` +
       `[CENTRAL_SUBJECT]: { core: "${coreSubject}", engineering: "${formData.technical}" }\n` +
       `[ATMOSPHERIC_DATA]: { context: "${formData.background}", emotion: "${formData.mood}" }\n\n` +
       `======================\nProfessional Millionth Synthesis by Dicelion-Technique\n======================`;
-      
     setOriginalPrompt(finalOutput);
     setGeneratedPrompt(finalOutput);
     setIsGenerating(false);
@@ -277,7 +369,7 @@ const App: React.FC = () => {
     };
     setHistory([newSaved, ...history]);
     localStorage.setItem('dt_history', JSON.stringify([newSaved, ...history]));
-    alert(t.saved);
+    alert(t.copied);
   };
 
   const performRealCopy = async (text: string) => {
@@ -285,31 +377,27 @@ const App: React.FC = () => {
     if (success) alert(t.copied);
   };
 
-  /* NEW: MILLION SYNTHESIS ENGINE (INCREMENTAL LAYER) */
+  const SPECIALTIES_OPTIONS = useMemo(() => {
+    return PRO_ULTRA_DB.map(i => i.cat).filter((v, i, a) => a.indexOf(v) === i);
+  }, []);
+
   const filteredLibrary = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     if (!q) return PRO_ULTRA_DB.slice(0, 100);
-    
-    // Case 1: Searching for a specific ID
     const numId = parseInt(q);
     if (!isNaN(numId) && numId > 0 && numId <= 1000000) {
         const item = getMillionthNeuralPrompt(numId, "بحث رقمي");
         return [{ ar: item.ar, en: item.en, cat: 'بحث رقمي', id: numId }];
     }
-
-    // Case 2: Searching by Letter/Word - Dynamic Synthesis of 200 items
     const results = PRO_ULTRA_DB.filter(s => 
       s.ar.toLowerCase().includes(q) || s.en.toLowerCase().includes(q) || s.cat.toLowerCase().includes(q)
     );
-
-    // Ensure we always show 200+ unique results if user typed something
     if (q.length > 0) {
       for (let i = 0; i < 200; i++) {
         const item = getMillionthNeuralPrompt(Math.floor(Math.random() * 1000000), q);
         results.push({ ar: item.ar, en: item.en, cat: q, id: item.id });
       }
     }
-
     return results.slice(0, 1000);
   }, [searchQuery]);
 
@@ -319,22 +407,6 @@ const App: React.FC = () => {
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     setMenuPos({ top: rect.top + window.scrollY - 12, left: Math.min(rect.left + window.scrollX, window.innerWidth - 300) });
     setActiveBracket({ name: variableName, index: bracketId });
-  };
-
-  const handleInspirationSelect = (suggestion: string) => {
-    if (!activeBracket || !generatedPrompt) return;
-    const regex = /(\[.*?\])/g;
-    let currentMatchIndex = 0;
-    const newPrompt = generatedPrompt.replace(regex, (match) => {
-        if (currentMatchIndex === activeBracket.index) {
-            currentMatchIndex++;
-            return `[${suggestion}]`;
-        }
-        currentMatchIndex++;
-        return match;
-    });
-    setGeneratedPrompt(newPrompt);
-    setActiveBracket(null);
   };
 
   const parsePromptToJSX = (text: string, editMode: boolean) => {
@@ -355,6 +427,7 @@ const App: React.FC = () => {
 
   return (
     <div className={`min-h-screen flex flex-col w-full ${t.dir}`}>
+      <AIGlobalParticles isSunlight={isSunlightMode} />
       <nav className="nav-fixed-top glass-ui shadow-lg">
         <div className="max-w-xl mx-auto flex items-center justify-between w-full px-4">
              <NavIcon active={activeTab === 'create'} onClick={() => setActiveTab('create')} icon="🏠" label={t.tabs.home} />
@@ -376,12 +449,20 @@ const App: React.FC = () => {
                   <SelectBox label={t.labels.mood} options={MOODS} value={formData.mood} onChange={(e:any) => setFormData(p=>({...p, mood: e.target.value}))} />
                   <SelectBox label={t.labels.bg} options={BACKGROUNDS} value={formData.background} onChange={(e:any) => setFormData(p=>({...p, background: e.target.value}))} />
                   <WisdomBox isSunlight={isSunlightMode} label={t.labels.wisdomLabel} />
+                  <div className="pt-4 border-t border-white/5 space-y-3">
+                    <InputArea label={t.labels.visualTextLabel} value={formData.visualText} onChange={(e:any) => setFormData(p=>({...p, visualText: e.target.value}))} placeholder={t.placeholders.visualText} />
+                    <CheckBox label={t.labels.disableAutoText} checked={formData.disableAutoText} onChange={(e:any) => setFormData(p=>({...p, disableAutoText: e.target.checked}))} />
+                  </div>
               </div>
               <div className="glass-ui p-6 rounded-[2.5rem] space-y-4 shadow-sm">
                   <SelectBox label={t.labels.anatomy} options={ANATOMY_OPTIONS} value={formData.anatomyType} onChange={(e:any) => setFormData(p=>({...p, anatomyType: e.target.value}))} />
+                  <SelectBox label={t.labels.elements} options={ELEMENTS} value={formData.elements} onChange={(e:any) => setFormData(p=>({...p, elements: e.target.value}))} />
                   <SelectBox label={t.labels.tech} options={TECHNICALS} value={formData.technical} onChange={(e:any) => setFormData(p=>({...p, technical: e.target.value}))} />
                   <SelectBox label={t.labels.model} options={AI_MODELS} value={formData.targetModel} onChange={(e:any) => setFormData(p=>({...p, targetModel: e.target.value}))} />
-                  <CheckBox label={t.labels.exclusivePsychology} checked={formData.exclusivePsychology} onChange={(e:any) => setFormData(p=>({...p, exclusivePsychology: e.target.checked}))} />
+                  <div className="pt-2 grid grid-cols-1 gap-2">
+                    <CheckBox label={t.labels.exclusivePsychology} checked={formData.exclusivePsychology} onChange={(e:any) => setFormData(p=>({...p, exclusivePsychology: e.target.checked}))} />
+                    <CheckBox label={t.labels.analyzeImage} checked={formData.useReferenceImage} onChange={(e:any) => setFormData(p=>({...p, useReferenceImage: e.target.checked}))} />
+                  </div>
               </div>
             </div>
             <div className="glass-ui p-6 rounded-[3rem] space-y-4 shadow-md">
@@ -406,18 +487,21 @@ const App: React.FC = () => {
         )}
         {activeTab === 'library' && (
           <div className="space-y-6 pb-12 animate-in fade-in">
-             <div className="glass-ui h-14 rounded-full flex items-center px-6 shadow-sm border-sky-500/20">
-                <span className="mr-2 opacity-50">🔍</span>
-                <input type="text" placeholder={t.placeholders.search} className="bg-transparent flex-1 outline-none font-bold text-sm" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+             <div className="glass-ui p-6 rounded-[2.5rem] shadow-sm space-y-4">
+               <SelectBox label={t.labels.quickSearch} options={SPECIALTIES_OPTIONS} value={searchQuery} onChange={(e: any) => setSearchQuery(e.target.value)} />
+               <div className="h-14 rounded-full flex items-center px-6 border border-[var(--input-border)] bg-[var(--input-bg)]">
+                  <span className="mr-2 opacity-50">🔍</span>
+                  <input type="text" placeholder={t.placeholders.search} className="bg-transparent flex-1 outline-none font-bold text-sm text-[var(--input-text)]" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+               </div>
              </div>
              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {filteredLibrary.map((s, idx) => (
                    <div key={idx} className="p-7 glass-ui rounded-[2.5rem] flex flex-col shadow-sm border-sky-500/5 hover:border-sky-500/20 transition-all group animate-in slide-in-from-bottom-2">
                       <span className="text-[9px] font-black uppercase text-sky-500 mb-2 group-hover:tracking-widest transition-all">{s.cat} | #{s.id}</span>
-                      <p className="text-[13px] font-bold leading-tight flex-grow">{s.ar}</p>
-                      <div className="mt-6 flex gap-2">
-                        <button onClick={() => performRealCopy(s.en)} className="flex-1 py-3 text-[10px] font-black border border-[var(--card-border)] rounded-xl hover:bg-white/5 transition-all">{t.quickCopy}</button>
-                        <button onClick={() => { setFormData(p => ({...p, mainText: s.en})); setActiveTab('create'); }} className="flex-1 py-3 rounded-xl text-[10px] font-black bg-sky-600 text-white shadow-md hover:bg-sky-500 transition-all">{t.editInStudio}</button>
+                      <p className="text-[13px] font-bold leading-tight flex-grow text-[var(--text-main)] mb-6 overflow-hidden line-clamp-2">{s.ar}</p>
+                      <div className="mt-auto flex gap-2">
+                        <button onClick={() => performRealCopy(s.en)} className="flex-1 py-3 text-[11px] font-black border border-sky-500/50 rounded-xl hover:bg-white/5 transition-all text-sky-500 !opacity-100 flex items-center justify-center min-h-[45px] z-30">{t.quickCopy}</button>
+                        <button onClick={() => { setFormData(p => ({...p, mainText: s.en})); setActiveTab('create'); }} className="flex-1 py-3 rounded-xl text-[11px] font-black bg-sky-600 text-white shadow-md hover:bg-sky-500 transition-all !opacity-100 flex items-center justify-center min-h-[45px] z-30">{t.editInStudio}</button>
                       </div>
                    </div>
                 ))}
@@ -431,7 +515,7 @@ const App: React.FC = () => {
                 {history.map(item => (
                   <div key={item.id} className="p-6 rounded-[2rem] glass-ui border-sky-500/10 text-start">
                     <span className="text-[10px] font-black text-sky-500">{item.date}</span>
-                    <p className="text-xs font-bold truncate">{item.summary}</p>
+                    <p className="text-xs font-bold truncate text-[var(--text-main)]">{item.summary}</p>
                     <button onClick={() => performRealCopy(item.fullPrompt)} className="w-full mt-2 py-2 bg-sky-600/20 text-sky-400 rounded-xl text-[10px] font-black">نسخ الكل</button>
                   </div>
                 ))}
@@ -440,7 +524,7 @@ const App: React.FC = () => {
         )}
       </main>
       <footer className="fixed bottom-0 w-full glass-ui p-3 text-center z-[10000]">
-        <span className="text-[8px] font-black opacity-20 uppercase tracking-[0.5em]">DicelionTechnique Millionth Synthesis V40.0</span>
+        <span className="text-[8px] font-black opacity-20 uppercase tracking-[0.5em]">DicelionTechnique Millionth Synthesis V64.0 PRO</span>
       </footer>
     </div>
   );
@@ -450,6 +534,7 @@ const SelectBox = ({ label, options, value, onChange }: any) => (
   <div className="space-y-1 w-full text-start">
     <label className="text-[9px] font-black text-sky-500 uppercase px-1">{label}</label>
     <select value={value} onChange={onChange} className="w-full select-element outline-none cursor-pointer">
+        <option value="">{label}</option>
         {options.map((o: string, i: number) => <option key={i} value={o}>{o}</option>)}
     </select>
   </div>
