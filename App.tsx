@@ -1,5 +1,5 @@
 
-/* SYNC_STABILITY_PATCH_V68.0_MASTER_PRO_ULTRA: MEGA-ANATOMY REALISM PROTOCOL (64K) */
+/* SYNC_STABILITY_PATCH_V73.0_MASTER_PRO_ULTRA: PERFORMANCE OPTIMIZED ANATOMY & SUPREME SEARCH */
 import React, { useState, useEffect, useMemo, useRef, useLayoutEffect } from 'react';
 import { 
   ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, TEMPLATES, AI_MODELS, PRO_ULTRA_DB, WISDOM_QUOTES, getMillionthNeuralPrompt, VARIABLE_INSPIRATIONS, ANATOMY_OPTIONS
@@ -31,7 +31,7 @@ const UI_TRANSLATIONS: any = {
     saveBtn: 'أرشفة المشروع',
     editBtn: 'تعديل النص',
     copyPromptBtn: 'نسخ البرومبت',
-    editLabel: 'محرر الأوامر الذكي (V68.0 PRO)',
+    editLabel: 'محرر الأوامر الذكي (V73.0 PRO)',
     resultActions: { copy: 'نسخ', save: 'حفظ' },
     copyOptions: { ar: '🇸🇦 نسخ بالعربية', en: '🇬🇧 Copy in English', all: '🌍 نسخ الكل (عربي + إنجليزي)' },
     history: { empty: 'السجل فارغ حالياً.. ابدأ بصناعة إبداعك الأول!', title: 'سجل محفوظات DT-Prompt' },
@@ -42,7 +42,7 @@ const UI_TRANSLATIONS: any = {
     promptMode: { image: 'توليد الصور', video: 'إنتاج الفيديو', post: 'نصوص احترافية' },
     placeholders: { text: 'عنوان الحملة أو الموضوع الرئيسي الذي تريد تحويله لبرومبت احترافي...', search: 'ابحث في مليون برومبت جاهز بالرقم أو بالحرف (مثال: سيارة، طب، أو 5500)', dropdownSearch: 'اختر تخصصاً من 1000 خيار...', visualText: 'اكتب النص الذي تريده أن يظهر (أو اتركه فارغاً للصمت التام)', anatomySearch: 'ابحث في 5000 خيار للتشريح الذكي...' },
     labels: { 
-      ratio: 'أبعاد المخرج (Ratio)', mood: 'نبرة الصوت والأسلوب الفني', bg: 'سياق المحتوى والبيئة المحيطة (100 خيار)', tech: 'قالب الهيكلة الاحترافي (100 خيار)', text: 'الموضوع الأساسي (Main Subject)', quickSearch: 'تصفح التخصصات الذكية (1000 خيار)',
+      ratio: 'أبعاد المخرج (Ratio)', mood: 'نبرة الصوت والأسلوب الفني', bg: 'سياق المحتوى والبيئة المحيطة (100 خيار)', tech: 'قالب الهيكلة احترافي (100 خيار)', text: 'الموضوع الأساسي (Main Subject)', quickSearch: 'تصفح التخصصات الذكية (1000 خيار)',
       exclusivePsychology: "برومبت سيكولوجي حصري لـ Dicelion-Technique",
       analyzeImage: "برومبت مع صورة مرجعية مرفقة",
       exportEnglish: "تصدير البرومبت باللغة الإنجليزية (لنتائج أدق)",
@@ -59,7 +59,7 @@ const UI_TRANSLATIONS: any = {
       tip: 'اختر مقترحاً لتعلم أسرار هندسة الأوامر:'
     },
     guide: { 
-      title: 'موسوعة DT-Prompt الشاملة (V68.0 PRO)', 
+      title: 'موسوعة DT-Prompt الشاملة (V73.0 PRO)', 
       intro: 'مرحباً بك في المحرك الهندسي الأكثر تقدماً. DT-Prompt ليس مجرد تطبيق، بل هو جسر تقني يربط خيالك بأقوى محركات الذكاء الاصطناعي العالمية. يهدف التطبيق إلى تحويل أفكارك البسيطة إلى "أوامر برمجية" (Prompts) دقيقة ومعقدة تضمن لك مخرجات احترافية بنسبة 100% وبدون الحاجة للإنترنت.',
       masterSections: [
         { 
@@ -96,7 +96,7 @@ const UI_TRANSLATIONS: any = {
     saveBtn: 'Archive Project',
     editBtn: 'Edit Text',
     copyPromptBtn: 'Copy Prompt',
-    editLabel: 'Smart Prompt Editor (V68.0 PRO)',
+    editLabel: 'Smart Prompt Editor (V73.0 PRO)',
     resultActions: { copy: 'Copy', save: 'Save' },
     quickCopy: 'Quick Copy',
     editInStudio: 'Edit in Lab',
@@ -223,7 +223,7 @@ const Unified3DLogo = ({ isSunlight = false }: { isSunlight?: boolean }) => {
         </g>
 
         <g id="orbits">
-          <circle cx="256" cy="256" r="230" fill="none" stroke="#38bdf8" stroke-width="0.5" stroke-dasharray="10 20" opacity="0.15" />
+          <circle cx="256" cy="256" r="230" fill="none" stroke="#38bdf8" strokeWidth="0.5" strokeDasharray="10 20" opacity="0.15" />
           <circle r="10" fill="#38bdf8" filter="url(#neon_sharp_blue)">
             <animateMotion dur="8s" repeatCount="indefinite" path="M 256,46 A 210,210 0 1 1 255.9,46 Z" />
           </circle>
@@ -283,7 +283,7 @@ const HackerAnalyzerLoader = ({ isSunlight }: { isSunlight: boolean }) => {
 };
 
 const executeSystemCopy = (text: string): Promise<boolean> => {
-    let finalPayload = `/* DICELION-TECHNIQUE MILLIONTH_FACTORY v68.0 | SECURE_CORE */\n` + text;
+    let finalPayload = `/* DICELION-TECHNIQUE MILLIONTH_FACTORY v73.0 | SECURE_CORE */\n` + text;
     return new Promise((resolve) => {
         try {
             const textArea = document.createElement("textarea");
@@ -302,6 +302,34 @@ const executeSystemCopy = (text: string): Promise<boolean> => {
             navigator.clipboard.writeText(finalPayload).then(() => resolve(true)).catch(() => resolve(false));
         } else { resolve(false); }
     });
+};
+
+/* V73.0 MEGA-ENGINE: SUPREME ANATOMY PROMPT GENERATOR */
+const generateDTMegaAnatomyPrompt = (subject: string): string => {
+  const supremePrompt = `
+/* DICELION-TECHNIQUE SUPREME MILLIONTH FACTORY v73.0 | MEGA-ENGINE ACTIVE */
+/* بروتوكول التشريح العملاق - تقنية ديسيليون */
+
+تقنية ديسيليون: وصف مشهد فوتوغرافي ومجهري احترافي فائق التعقيد (64K Ultra-Res Masterpiece) يتناول عملية تشريح بصرية وهندسية شاملة لـ ${subject}.
+
+المشهد يمثل قمة التصوير الطبي والصناعي المتقدم، بعيداً تماماً عن الرسوم التعليمية أو المظهر الكرتوني أو أي أسلوب تلوين زائف. نحن أمام "Real-World Industrial Micro-dissection" تم التقاطه بكاميرا "Phase One iXM-RS 150F" المخصصة للمسح الجغرافي والجنائي، والمزودة ببصريات "Rodenstock" المجهرية بدقة تركيز تصل إلى مستوى النانو. تم استخدام تقنية "Focus Stacking" لدمج أكثر من 500 طبقة ضوئية لضمان حدة مطلقة وتفصيل عميق لكل جزيء ومسار داخلي لـ ${subject}.
+
+الإضاءة في هذا الكادر هي إضاءة "Surgical Shadowless Coherent Light" بقدرة 200,000 لوكس، تتدفق من مصفوفة هولوغرافية تلغي أي تداخل ضوئي عشوائي، كاشفة عن التفاصيل المخفية في الممرات الضيقة. يتم محاكاة الفيزياء الحيوية لانكسار الضوء (Refractive Index Tracking) وتشتت الضوء العميق (Deep Subsurface Scattering) مما يبرز الشفافية الطبيعية للأغشية الحيوية، ولمعان السوائل الترطيبية الفسيولوجية، وبريق الأسطح المعدنية المصقولة بدقة تتجاوز 0.05 ميكرون.
+
+البنية التشريحية تظهر بتقسيمات واقعية مهيبة؛ يتم عرض الألياف العضلية (Striated Myofibrils) بطبقاتها الحقيقية المتداخلة، مع توضيح شبكة الأوعية الدموية الدقيقة (Micro-vascular Capillaries) التي تظهر كخيوط من الحرير القرمزي المتوهج والنابض. تبرز الأغشية والمفاصل بلمعانها الطبيعي وملمسها النسيجي المعقد، مع تصوير آثار الاحتكاك الميكانيكي على الأسطح المعدنية والزيوت الصناعية في النماذج الهندسية بأسلوب فوتوغرافي مرعب في دقته. المشهد يبرز جزيئات المادة الحقيقية، سواء كانت أنسجة حية أو معادن صناعية ثقيلة أو دوائر إلكترونية مجهرية مكبرة مئة مرة.
+
+في قلب هذا العالم البصري، تبرز المكونات الأساسية (مثل الحجرات والأذينين والبطينين والصمامات والأوعية التاجية والمكونات الميكانيكية الدقيقة) بمواقعها التشريحية والفيزيائية الصحيحة مئة بالمئة، مع سماكة جدران واقعية وانعكاسات ضوئية حادة. كل قطعة من ${subject} تطفو بشكل منفصل في فضاء ثلاثي الأبعاد، وتحمل رقماً تقنياً دقيقاً بخط "Techno-Thin" الاحترافي المدمج هولوغرافياً، مما يحول المشهد إلى مرجع جبار للعلماء والمؤسسات الحكومية والخبراء والمهنيين.
+
+الخلفية تعتمد على بيئة "Advanced Clinical Void" بلمسات لونية رمادية باردة وتدرجات بلاتينية مطفية، مما يمنح ${subject} السيادة البصرية المطلقة. الرندر النهائي يتم تنفيذه عبر محرك "Spectral Path Tracing" المخصص للأبحاث البصرية، مع دقة تتجاوز 64K، مما يضمن اختفاء أي بكسلة أو ضجيج رقمي، مجسداً رؤية "تقنية ديسيليون" في هندسة الأوامر العملاقة والمخرجات التي تضاهي الواقع الملموس.
+
+السمات الإلزامية:
+- دقة المخرج: 64K UHD Photorealistic.
+- الأسلوب: تصوير ماكرو طبي فوتوغرافي (Macro-DSLR Photography).
+- التوقيع: تقنية ديسيليون.
+- يمنع: الأسلوب التعليمي، الرسوم التوضيحية، المظهر البلاستيكي، التبسيط، الألوان الكرتونية.
+By Dicelion-Technique.
+`;
+  return supremePrompt.trim();
 };
 
 const App: React.FC = () => {
@@ -351,34 +379,36 @@ const App: React.FC = () => {
     const isAnatomyMode = formData.anatomyType !== ANATOMY_OPTIONS[0];
     const coreSubject = isAnatomyMode ? formData.anatomyType : formData.mainText;
     
-    /* V68.0 INCREMENTAL UPDATE: MEGA-ANATOMY REALISM PROTOCOL (64K) */
-    let realismLayer = "";
-    if (isAnatomyMode) {
-      // Construction of the Mega-Prompt for Anatomy
-      realismLayer = `\n======================\nMEGA-ANATOMY REALISM PROTOCOL (V68.0)\n======================\n` +
-        `By Dicelion-Technique\n` +
-        `[MANDATORY_AESTHETIC]: "ABSOLUTE HYPER-REALISM. 64K Ultra-Resolution Density. Zero stylization. Real-world physical reference."\n` +
-        `[PHOTOGRAPHY_GEAR]: "Macro DSLR Photography using f/2.8 prime lens, deep-focus stacking, high-intensity shadowless clinical lighting."\n` +
-        `[SUBJECT_DATA]: "Professional dissection of ${coreSubject}. Render fibrous muscular textures, glistening biological surfaces, and authentic biological fluid dynamics."\n` +
-        `[ANATOMICAL_INTEGRITY]: "Visible right and left atria, right and left ventricles with correct wall thickness proportions, interventricular septum, tricuspid/pulmonary/mitral/aortic valves in exact anatomical positions, detailed coronary artery network with microscopic capillaries."\n` +
-        `[MATERIAL_PROPERTIES]: "Subsurface scattering for tissues, raw industrial finish for mechanical parts, micro-level imperfections, no clean/perfect CG surfaces."\n` +
-        `[COMPOSITION]: "Isometric 3D exploded view, every internal component numbered with high-precision technical font overlays."\n` +
-        `[RENDER_TARGET]: "32K-64K Masterpiece quality, ray-traced reflections, global illumination, path-tracing for internal cavities."\n` +
-        `[EXCLUSIONS]: "NO educational illustrations, NO 2D flat diagrams, NO cartoon aesthetics, NO low-poly artifacts."\n`;
-    }
-
-    const finalOutput = `/* MASTER ARCHITECTURE | v68.0 PRO | DICELION-TECHNIQUE */\n` +
-      `DicelionTechnique: TOPIC: ${coreSubject}\n` +
-      `DicelionTechnique: SEARCH_FACTORY: MILLION_SYNTHESIS_ACTIVE\n\n` +
-      `======================\nPROMPT CONSTRUCTION LAYER\n======================\n` +
-      `[CENTRAL_SUBJECT]: { core: "${coreSubject}", engineering: "${formData.technical}" }\n` +
-      `[ATMOSPHERIC_DATA]: { context: "${formData.background}", emotion: "${formData.mood}" }\n` +
-      realismLayer + 
-      `\n======================\nProfessional Millionth Synthesis by Dicelion-Technique\n======================`;
+    /* V73.0 INCREMENTAL UPDATE: SUPREME-MEGA-VERBOSE ANATOMY REALISM PROTOCOL (64K) */
+    const finalOutput = isAnatomyMode 
+      ? generateDTMegaAnatomyPrompt(coreSubject)
+      : `/* MASTER ARCHITECTURE | v73.0 PRO | DICELION-TECHNIQUE */\n` +
+        `DicelionTechnique: TOPIC: ${coreSubject}\n` +
+        `DicelionTechnique: SEARCH_FACTORY: MILLION_SYNTHESIS_ACTIVE\n\n` +
+        `======================\nPROMPT CONSTRUCTION LAYER\n======================\n` +
+        `[CENTRAL_SUBJECT]: { core: "${coreSubject}", engineering: "${formData.technical}" }\n` +
+        `[ATMOSPHERIC_DATA]: { context: "${formData.background}", emotion: "${formData.mood}" }\n` +
+        `\n======================\nProfessional Millionth Synthesis by Dicelion-Technique\n======================`;
       
     setOriginalPrompt(finalOutput);
     setGeneratedPrompt(finalOutput);
     setIsGenerating(false);
+  };
+
+  /* V73.0 ENHANCEMENT: DIRECT ANATOMY HANDLERS FOR BETTER UX & 4000 CHAR GENERATION */
+  const handleAnatomyQuickCopy = async (anatomyOption: string) => {
+    // Generate the internal Supreme Mega Anatomy Prompt directly
+    const megaPrompt = generateDTMegaAnatomyPrompt(anatomyOption);
+    const success = await executeSystemCopy(megaPrompt);
+    if (success) alert(t.copied);
+  };
+
+  const handleAnatomyEditInLab = (anatomyOption: string) => {
+    setFormData(p => ({ ...p, anatomyType: anatomyOption }));
+    setActiveTab('create');
+    setTimeout(() => {
+        generate();
+    }, 150);
   };
 
   const saveToHistory = () => {
@@ -391,7 +421,7 @@ const App: React.FC = () => {
     };
     setHistory([newSaved, ...history]);
     localStorage.setItem('dt_history', JSON.stringify([newSaved, ...history]));
-    alert(t.copied);
+    alert(t.saved);
   };
 
   const performRealCopy = async (text: string) => {
@@ -400,7 +430,6 @@ const App: React.FC = () => {
   };
 
   const SPECIALTIES_OPTIONS = useMemo(() => {
-    // RESTORING 1000 OPTIONS: Including all prompt titles in the dropdown
     return PRO_ULTRA_DB.map(i => i.ar);
   }, []);
 
@@ -426,9 +455,9 @@ const App: React.FC = () => {
 
   const filteredAnatomy = useMemo(() => {
     const q = anatomySearch.trim().toLowerCase();
-    // UPDATED: Now filtering through 5000 items
-    if (!q) return ANATOMY_OPTIONS.slice(1, 101); // Default view still 100 for performance
-    return ANATOMY_OPTIONS.filter((s, idx) => idx > 0 && s.toLowerCase().includes(q)).slice(0, 1000);
+    // V73.0 PERFORMANCE PATCH: LIMITING SEARCH RESULTS TO 50 AS REQUESTED
+    if (!q) return ANATOMY_OPTIONS.slice(1, 101);
+    return ANATOMY_OPTIONS.filter((s, idx) => idx > 0 && s.toLowerCase().includes(q)).slice(0, 50);
   }, [anatomySearch]);
 
   const handleBracketInteraction = (e: React.MouseEvent, variableName: string, bracketId: number) => {
@@ -441,7 +470,7 @@ const App: React.FC = () => {
 
   const parsePromptToJSX = (text: string, editMode: boolean) => {
     if (!text) return null;
-    const regex = /(\[.*?\])|(\/\*.*?\*\/|DicelionTechnique:.*)/g;
+    const regex = /(\[.*?\])|(\/\*.*?\*\/|DicelionTechnique:.*|تقنية ديسيليون:.*)/g;
     const parts = text.split(regex);
     let bracketCounter = 0;
     return parts.map((part, i) => {
@@ -450,7 +479,7 @@ const App: React.FC = () => {
         const currentId = bracketCounter++;
         return <span key={i} contentEditable={editMode} suppressContentEditableWarning onClick={(e) => handleBracketInteraction(e, part, currentId)} className="text-emerald-500 font-black mx-1 border-b-2 border-emerald-500/20 bg-emerald-500/5 px-1 rounded cursor-help">{part}</span>;
       }
-      if (part.startsWith('/*') || part.includes('DicelionTechnique:')) return <span key={i} className="text-sky-400 font-mono italic opacity-60 text-[10px] block">{part}</span>;
+      if (part.startsWith('/*') || part.includes('DicelionTechnique:') || part.includes('تقنية ديسيليون:')) return <span key={i} className="text-sky-400 font-mono italic opacity-60 text-[10px] block">{part}</span>;
       return <span key={i} className="text-rose-500 font-bold">{part}</span>;
     });
   };
@@ -461,7 +490,6 @@ const App: React.FC = () => {
       <nav className="nav-fixed-top glass-ui shadow-lg">
         <div className="max-w-xl mx-auto flex items-center justify-between w-full px-4">
              <NavIcon active={activeTab === 'create'} onClick={() => setActiveTab('create')} icon="🏠" label={t.tabs.home} />
-             {/* ADDED: Smart Anatomy NavIcon */}
              <NavIcon active={activeTab === 'anatomy'} onClick={() => setActiveTab('anatomy')} icon="🧬" label={t.tabs.anatomy} />
              <NavIcon active={activeTab === 'library'} onClick={() => setActiveTab('library')} icon="💎" label={t.tabs.library} />
              <NavIcon active={isSunlightMode} onClick={() => setIsSunlightMode(!isSunlightMode)} icon="☀️" label={t.tabs.sunlight} />
@@ -487,7 +515,6 @@ const App: React.FC = () => {
                   </div>
               </div>
               <div className="glass-ui p-6 rounded-[2.5rem] space-y-4 shadow-sm">
-                  <SelectBox label={t.labels.anatomy} options={ANATOMY_OPTIONS} value={formData.anatomyType} onChange={(e:any) => setFormData(p=>({...p, anatomyType: e.target.value}))} />
                   <SelectBox label={t.labels.elements} options={ELEMENTS} value={formData.elements} onChange={(e:any) => setFormData(p=>({...p, elements: e.target.value}))} />
                   <SelectBox label={t.labels.tech} options={TECHNICALS} value={formData.technical} onChange={(e:any) => setFormData(p=>({...p, technical: e.target.value}))} />
                   <SelectBox label={t.labels.model} options={AI_MODELS} value={formData.targetModel} onChange={(e:any) => setFormData(p=>({...p, targetModel: e.target.value}))} />
@@ -520,9 +547,10 @@ const App: React.FC = () => {
         {activeTab === 'anatomy' && (
           <div className="space-y-6 pb-12 animate-in fade-in">
              <div className="glass-ui p-6 rounded-[2.5rem] shadow-sm space-y-4">
+               {/* V73.0 PERFORMANCE PATCH: LIMITING SELECTBOX TO 100 OPTIONS TO PREVENT LAGGING */}
+               <SelectBox label={t.labels.anatomy} options={ANATOMY_OPTIONS.slice(0, 101)} value={formData.anatomyType} onChange={(e:any) => setFormData(p=>({...p, anatomyType: e.target.value}))} />
                <div className="h-14 rounded-full flex items-center px-6 border border-[var(--input-border)] bg-[var(--input-bg)]">
                   <span className="mr-2 opacity-50">🧬</span>
-                  {/* UPDATED: Anatomy search placeholder now reflects 5000 items */}
                   <input type="text" placeholder={t.placeholders.anatomySearch} className="bg-transparent flex-1 outline-none font-bold text-sm text-[var(--input-text)]" value={anatomySearch} onChange={(e) => setAnatomySearch(e.target.value)} />
                </div>
              </div>
@@ -531,9 +559,21 @@ const App: React.FC = () => {
                    <div key={idx} className="p-7 glass-ui rounded-[2.5rem] flex flex-col shadow-sm border-sky-500/5 hover:border-sky-500/20 transition-all group animate-in slide-in-from-bottom-2">
                       <span className="text-[9px] font-black uppercase text-sky-500 mb-2 group-hover:tracking-widest transition-all">التشريح الذكي | {s.split(' – ')[0]}</span>
                       <p className="text-[13px] font-bold leading-tight flex-grow text-[var(--text-main)] mb-6 overflow-hidden line-clamp-2">{s.split(' – ')[1] || s}</p>
-                      <div className="mt-auto flex gap-2">
-                        <button onClick={() => performRealCopy(s)} className="flex-1 py-3 text-[11px] font-black border border-sky-500/50 rounded-xl hover:bg-white/5 transition-all text-sky-500 !opacity-100 flex items-center justify-center min-h-[45px] z-30">{t.quickCopy}</button>
-                        <button onClick={() => { setFormData(p => ({...p, anatomyType: s})); setActiveTab('create'); }} className="flex-1 py-3 rounded-xl text-[11px] font-black bg-sky-600 text-white shadow-md hover:bg-sky-500 transition-all !opacity-100 flex items-center justify-center min-h-[45px] z-30">{t.editInStudio}</button>
+                      <div className="mt-auto flex gap-2 relative z-[50]">
+                        <button 
+                            type="button"
+                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleAnatomyQuickCopy(s); }} 
+                            className="flex-1 py-3 text-[11px] font-black border border-sky-500/50 rounded-xl hover:bg-sky-500/10 transition-all text-sky-500 flex items-center justify-center min-h-[45px] pointer-events-auto cursor-pointer"
+                        >
+                            {t.quickCopy}
+                        </button>
+                        <button 
+                            type="button"
+                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleAnatomyEditInLab(s); }} 
+                            className="flex-1 py-3 rounded-xl text-[11px] font-black bg-sky-600 text-white shadow-md hover:bg-sky-500 transition-all flex items-center justify-center min-h-[45px] pointer-events-auto cursor-pointer"
+                        >
+                            {t.editInStudio}
+                        </button>
                       </div>
                    </div>
                 ))}
@@ -543,7 +583,6 @@ const App: React.FC = () => {
         {activeTab === 'library' && (
           <div className="space-y-6 pb-12 animate-in fade-in">
              <div className="glass-ui p-6 rounded-[2.5rem] shadow-sm space-y-4">
-               {/* FIX: Restoring the full width and 1000 items in the Specialties SelectBox */}
                <SelectBox label={t.labels.quickSearch} options={SPECIALTIES_OPTIONS} value={searchQuery} onChange={(e: any) => setSearchQuery(e.target.value)} />
                <div className="h-14 rounded-full flex items-center px-6 border border-[var(--input-border)] bg-[var(--input-bg)]">
                   <span className="mr-2 opacity-50">🔍</span>
@@ -580,7 +619,7 @@ const App: React.FC = () => {
         )}
       </main>
       <footer className="fixed bottom-0 w-full glass-ui p-3 text-center z-[10000]">
-        <span className="text-[8px] font-black opacity-20 uppercase tracking-[0.5em]">DicelionTechnique Millionth Synthesis V68.0 PRO</span>
+        <span className="text-[8px] font-black opacity-20 uppercase tracking-[0.5em]">DicelionTechnique Millionth Synthesis V73.0 PRO</span>
       </footer>
     </div>
   );
