@@ -36,4 +36,7 @@ export interface SavedPrompt {
   date: string;
   fullPrompt: string;
   summary: string;
+  refinedPrompt?: string;
+  qualityScore?: number;
+  analysisReport?: string;
 }
