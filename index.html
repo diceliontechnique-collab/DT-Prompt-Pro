@@ -69,8 +69,9 @@
             box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
         }
 
-        .app-content-wrapper { padding-top: calc(130px + var(--safe-top)); }
-        @media (max-width: 480px) { .app-content-wrapper { padding-top: calc(150px + var(--safe-top)); } }
+        /* V83.0 PATCH: Adjusted top padding to fix logo visibility and space compression */
+        .app-content-wrapper { padding-top: calc(110px + var(--safe-top)); }
+        @media (max-width: 480px) { .app-content-wrapper { padding-top: calc(110px + var(--safe-top)); } }
 
         main { flex: 1; width: 100%; max-width: 1024px; margin: 0 auto; padding: 0 1rem; position: relative; z-index: 20; }
 
@@ -78,7 +79,7 @@
             z-index: 9999; 
             position: fixed; 
             top: 0; left: 0; right: 0; 
-            height: 120px; 
+            height: 110px; 
             background: var(--nav-bg); 
             border-bottom: 2px solid var(--card-border); 
             display: flex; align-items: center; justify-content: center;
@@ -156,7 +157,6 @@
             text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
         }
 
-        /* V61.0 PATCH: FIXED BUTTON TEXT VISIBILITY */
         [data-theme="light"] .glass-ui p, 
         [data-theme="light"] .glass-ui input,
         [data-theme="light"] .glass-ui select,

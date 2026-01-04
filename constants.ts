@@ -40,7 +40,7 @@ export const LANGUAGES = [
 export const ASPECT_RATIOS = ['1:1', '9:16', '16:9', '4:5', '2:3'];
 
 export const BACKGROUNDS = [
-  'اختيار جو عام هادئ وبسيط يسمح بظهور العنصر الأساسي بوضوح تام', 
+  'بدون', 
   'استوديو سينمائي احترافي', 'مدينة نيون مستقبلية', 'غابة استوائية كثيفة', 
   'قصر ملكي تاريخي', 'مختبر أبحاث متطور', 'فضاء خارجي عميق', 'صحراء رملية شاسعة', 
   'محيط هادئ تحت الماء', 'مكتب فخم في ناطحة سحاب', 'خلفية تجريدية ناعمة', 'بيئة صناعية مهجورة',
@@ -75,7 +75,7 @@ export const MOODS = [
 ];
 
 export const TECHNICALS = [
-  'قالب هيكلة احترافي يوازن بين الدقة والجمالية لضمان مخرجات مبهرة', 
+  'بدون', 
   'Octane Render, Sub-surface scattering, physically based rendering (PBR)', 
   'Unreal Engine 5.4, Lumen lighting, Nanite geometry, cinematic post-processing', 
   'High Dynamic Range (HDR), meticulous texture detail, shallow depth of field', 
@@ -142,7 +142,7 @@ export const TECHNICALS = [
   'Holographic scanline, flickering projection, blue tint glow',
   'Blueprint drafting style, technical annotations, white lines on blue',
   'Pencil sketch cross-hatching, graphite texture, smudged edges',
-  'Charcoal drawing, deep blacks, dusty texture, expressive strokes',
+  'Charcoal drawing, deep blacks, dusty texture, expressway strokes',
   'Ukiyo-e woodblock print style, flat planes of color, bold lines',
   'Stained glass mosaic, lead lines, prismatic color diffusion',
   'Tapestry weave, textile texture, historical woven narrative',
@@ -160,7 +160,7 @@ export const TECHNICALS = [
   'Etch-a-sketch line art, continuous silver line, red frame',
   'Spirograph mathematical curves, repetitive geometric patterns',
   'Kaleidoscope symmetry, mirrored fractals, prismatic explosion',
-  'Shadow puppet theater, silهوetted forms, backlight screen',
+  'Shadow puppet theater, silhouetted forms, backlight screen',
   'Stained wood inlay (Marquetry), contrasting wood grains',
   'Intaglio printmaking, fine engraved lines, ink plate pressure',
   'Lithographic stone print, subtle texture, classic illustration',
@@ -235,7 +235,7 @@ const ANATOMY_TEMPLATES = [
 ];
 
 export const ANATOMY_OPTIONS = (() => {
-  const list = ["هيكل تشريحي ذكي يوضح تفاصيل الأجزاء بأسلوب تعليمي مبسط وواضح"];
+  const list = ["بدون"];
   // EXPANDED TO 5000 ITEMS AS REQUESTED
   for(let i=1; i<=5000; i++) {
     const template = ANATOMY_TEMPLATES[i % ANATOMY_TEMPLATES.length];
@@ -300,7 +300,7 @@ export const PRO_ULTRA_DB = (() => {
 })();
 
 export const ELEMENTS = [
-  'إضافة لمسات بصرية سحرية تعزز واقعية المشهد وتضفي روحاً إبداعية جذابة',
+  'بدون',
   'تأثيرات ضوئية نيون (Neon Glow)',
   'جسيمات متطايرة (Floating Particles)',
   'أشكال هندسية مقدسة (Sacred Geometry)',
@@ -312,7 +312,7 @@ export const ELEMENTS = [
   'حلقات طاقة حول العنصر الأساسي',
   'أورق شجر ذهبية متساقطة',
   'فقاعات سائلة شفافة',
-  'خطوط كود برمجية متدفقة',
+  'خطوط كود برمجية متتدفقة',
   'أجنحة ضوئية شفافة',
   'تأثير الهولوغرام المتذبذب',
   'جسيمات نانوية ذكية',
@@ -391,7 +391,7 @@ export const ELEMENTS = [
   'خطوط المسار الإلكتروني',
   'تأثير السكون التام',
   'جسيمات من النار الباردة',
-  'تأثير التداخل الكوانتي',
+  'تأداخل كوانتي متوهج',
   'خيوط من الفضة السائلة',
   'تأثير الانفصال الروحي',
   'جسيمات من الغبار الكوني',

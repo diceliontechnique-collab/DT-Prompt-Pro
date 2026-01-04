@@ -1,5 +1,5 @@
 
-/* SYNC_STABILITY_PATCH_V73.0_MASTER_PRO_ULTRA: PERFORMANCE OPTIMIZED ANATOMY & SUPREME SEARCH */
+/* SYNC_STABILITY_PATCH_V86.0_MASTER_PRO_ULTRA: DROPDOWN FIRST OPTIONS SET TO "WITHOUT" */
 import React, { useState, useEffect, useMemo, useRef, useLayoutEffect } from 'react';
 import { 
   ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, TEMPLATES, AI_MODELS, PRO_ULTRA_DB, WISDOM_QUOTES, getMillionthNeuralPrompt, VARIABLE_INSPIRATIONS, ANATOMY_OPTIONS
@@ -26,12 +26,12 @@ const SUPPORTED_APP_LANGS = [
 const UI_TRANSLATIONS: any = {
   ar: {
     dir: 'rtl',
-    tabs: { create: 'المختبر', library: 'مليون برومبت', anatomy: 'التشريح الذكي', history: 'سجل المحفوظات', appLang: 'اللغة', guide: 'دليل', about: 'عن المطور', home: 'الرئيسية', sunlight: 'سطوع' },
+    tabs: { create: 'الرئيسية', library: 'مليون برومبت', anatomy: 'التشريح الذكي', history: 'سجل المحفوظات', appLang: 'اللغة', guide: 'دليل', about: 'عن المطور', home: 'الرئيسية', sunlight: 'سطوع', settings: 'الإعدادات' },
     generateBtn: 'معالجة الأمر ✨',
     saveBtn: 'أرشفة المشروع',
     editBtn: 'تعديل النص',
     copyPromptBtn: 'نسخ البرومبت',
-    editLabel: 'محرر الأوامر الذكي (V73.0 PRO)',
+    editLabel: 'محرر الأوامر الذكي (V86.0 PRO)',
     resultActions: { copy: 'نسخ', save: 'حفظ' },
     copyOptions: { ar: '🇸🇦 نسخ بالعربية', en: '🇬🇧 Copy in English', all: '🌍 نسخ الكل (عربي + إنجليزي)' },
     history: { empty: 'السجل فارغ حالياً.. ابدأ بصناعة إبداعك الأول!', title: 'سجل محفوظات DT-Prompt' },
@@ -39,6 +39,7 @@ const UI_TRANSLATIONS: any = {
     saved: 'تمت الأرشفة بنجاح!',
     quickCopy: 'نسخ سريع',
     editInStudio: 'تعديل في المختبر',
+    backToSettings: 'العودة للإعدادات ↩️',
     promptMode: { image: 'توليد الصور', video: 'إنتاج الفيديو', post: 'نصوص احترافية' },
     placeholders: { text: 'عنوان الحملة أو الموضوع الرئيسي الذي تريد تحويله لبرومبت احترافي...', search: 'ابحث في مليون برومبت جاهز بالرقم أو بالحرف (مثال: سيارة، طب، أو 5500)', dropdownSearch: 'اختر تخصصاً من 1000 خيار...', visualText: 'اكتب النص الذي تريده أن يظهر (أو اتركه فارغاً للصمت التام)', anatomySearch: 'ابحث في 5000 خيار للتشريح الذكي...' },
     labels: { 
@@ -52,14 +53,21 @@ const UI_TRANSLATIONS: any = {
       elements: "العناصر والجماليات (100 خيار احترافي)",
       disableAutoText: "إلغاء النصوص التلقائية (Clean Visuals)",
       visualTextLabel: "النص المخصص المكتوب (Visual Typography)",
-      anatomy: "برومبت التشريح الذكي (هاردوير وتقنيات صيانة)"
+      anatomy: "برومبت التشريح الذكي (هاردوير وتقنيات صيانة)",
+      settingsItems: {
+        history: 'سجل الحفظ',
+        lang: 'إعدادات اللغة',
+        theme: 'الوضع الداكن والساطع',
+        guide: 'دليل المستخدم',
+        about: 'عن المطور'
+      }
     },
     inspiration: {
       title: 'سحابة الإلهام (Inspiration Cloud)',
       tip: 'اختر مقترحاً لتعلم أسرار هندسة الأوامر:'
     },
     guide: { 
-      title: 'موسوعة DT-Prompt الشاملة (V73.0 PRO)', 
+      title: 'موسوعة DT-Prompt الشاملة (V86.0 PRO)', 
       intro: 'مرحباً بك في المحرك الهندسي الأكثر تقدماً. DT-Prompt ليس مجرد تطبيق، بل هو جسر تقني يربط خيالك بأقوى محركات الذكاء الاصطناعي العالمية. يهدف التطبيق إلى تحويل أفكارك البسيطة إلى "أوامر برمجية" (Prompts) دقيقة ومعقدة تضمن لك مخرجات احترافية بنسبة 100% وبدون الحاجة للإنترنت.',
       masterSections: [
         { 
@@ -67,7 +75,7 @@ const UI_TRANSLATIONS: any = {
           points: [
             { label: 'الرئيسية (🏠)', content: 'نقلك إلى "المختبر الهندسي" حيث تبدأ عملية التصميم من الصفر.' },
             { label: 'مليون برومبت (💎)', content: 'مكتبة سحابية ضخمة تضم مليون فكرة جاهزة وقابلة للتطوير فوراً.' },
-            { label: 'سطوع (☀️)', content: 'زر التحول اللوني؛ يحمي عينيك بالوضع الداكن أو يوفر وضوحاً فائقاً بالوضع الساطع.' }
+            { label: 'الإعدادات (⚙️)', content: 'مركز التحكم الكامل حيث تجد السجل، اللغة، الدليل، ومعلومات المطور.' }
           ] 
         }
       ],
@@ -91,15 +99,16 @@ const UI_TRANSLATIONS: any = {
   },
   en: {
     dir: 'ltr',
-    tabs: { create: 'Lab', library: '1M Prompts', anatomy: 'Smart Anatomy', history: 'History', appLang: 'Language', guide: 'Guide', about: 'Developer', home: 'Home', sunlight: 'Sunlight' },
+    tabs: { create: 'Lab', library: '1M Prompts', anatomy: 'Smart Anatomy', history: 'History', appLang: 'Language', guide: 'Guide', about: 'Developer', home: 'Home', sunlight: 'Sunlight', settings: 'Settings' },
     generateBtn: 'Process Command ✨',
     saveBtn: 'Archive Project',
     editBtn: 'Edit Text',
     copyPromptBtn: 'Copy Prompt',
-    editLabel: 'Smart Prompt Editor (V73.0 PRO)',
+    editLabel: 'Smart Prompt Editor (V86.0 PRO)',
     resultActions: { copy: 'Copy', save: 'Save' },
     quickCopy: 'Quick Copy',
     editInStudio: 'Edit in Lab',
+    backToSettings: 'Back to Settings ↩️',
     history: { empty: 'History is empty.. start creating!', title: 'DT-Prompt Archive' },
     copied: 'Copied successfully!',
     saved: 'Archived successfully!',
@@ -116,7 +125,14 @@ const UI_TRANSLATIONS: any = {
       elements: "Visual Elements (100 Options)",
       disableAutoText: "Disable Auto-Text",
       visualTextLabel: "Custom Visual Label",
-      anatomy: "Smart Anatomy Prompt"
+      anatomy: "Smart Anatomy Prompt",
+      settingsItems: {
+        history: 'Save History',
+        lang: 'Language Settings',
+        theme: 'Dark/Light Mode',
+        guide: 'User Guide',
+        about: 'About Developer'
+      }
     },
     about: { 
       title: 'DicelionTechnique Services', 
@@ -194,14 +210,18 @@ const WisdomBox = ({ isSunlight, label }: { isSunlight: boolean, label: string }
   );
 };
 
-/* ENHANCED: LIVING 5D LOGO WITH SHARP NEURAL BRAIN LAYER */
+/* ENHANCED: LIVING 5D LOGO - MINIMALIST PRO V86.0 */
 const Unified3DLogo = ({ isSunlight = false }: { isSunlight?: boolean }) => {
   return (
-    <div className="relative flex flex-col items-center justify-center select-none scale-90 sm:scale-100 transition-transform duration-500">
+    <div className="relative flex flex-col items-center justify-center select-none scale-[0.45] sm:scale-[0.5] transition-transform duration-1000 -mt-32 -mb-32">
       <svg width="420" height="420" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="dt-master-svg" className="drop-shadow-2xl">
         <defs>
           <filter id="neon_sharp_blue" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="3" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+          <filter id="neon_sharp_green" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
           <filter id="d5_depth" x="-20%" y="-20%" width="140%" height="140%">
@@ -215,20 +235,43 @@ const Unified3DLogo = ({ isSunlight = false }: { isSunlight?: boolean }) => {
           </linearGradient>
         </defs>
 
-        <g id="neural-brain-layer" opacity="0.6" filter="url(#neon_sharp_blue)" className="brain-wire">
-            <path d="M256,60 C180,60 120,120 100,180 C80,240 100,320 160,380 C120,420 120,460 180,480 C240,500 272,480 272,480 C272,480 304,500 364,480 C424,460 424,420 384,380 C444,320 464,240 444,180 C424,120 364,60 256,60 Z" 
-                  fill="none" stroke="var(--neon-blue)" strokeWidth="3" className="brain-outline" />
-            <path d="M256,60 V480 M180,100 Q256,150 332,100 M140,200 Q256,250 372,200 M160,320 Q256,380 352,320" 
-                  fill="none" stroke="var(--neon-blue)" strokeWidth="1" strokeDasharray="10 15" opacity="0.4" />
+        {/* AI PROCESSOR CORE (V86.0 CENTERPIECE) */}
+        <g id="ai-processor-layer" transform="translate(256, 256)">
+           <path d="M-100,-100 h200 v200 h-200 z" fill="none" stroke="var(--neon-blue)" strokeWidth="1" strokeDasharray="5,10" opacity="0.1" />
+           <g filter="url(#neon_sharp_blue)">
+              <rect x="-60" y="-60" width="120" height="120" rx="10" fill={isSunlight ? '#0c4a6e' : '#020617'} stroke="#38bdf8" strokeWidth="2" opacity="0.85" />
+              <text x="0" y="15" textAnchor="middle" fill="#38bdf8" fontSize="45" fontWeight="900" fontFamily="sans-serif" style={{ filter: 'drop-shadow(0 0 10px #38bdf8)' }}>AI</text>
+           </g>
+           <path d="M-70,-60 v-20 M-50,-60 v-20 M-30,-60 v-20 M-10,-60 v-20 M10,-60 v-20 M30,-60 v-20 M50,-60 v-20 M70,-60 v-20" stroke="var(--neon-blue)" strokeWidth="1" />
+           <path d="M-70,60 v20 M-50,60 v20 M-30,60 v20 M-10,60 v20 M10,60 v20 M30,60 v20 M50,60 v20 M70,60 v20" stroke="var(--neon-blue)" strokeWidth="1" />
         </g>
 
-        <g id="orbits">
-          <circle cx="256" cy="256" r="230" fill="none" stroke="#38bdf8" strokeWidth="0.5" strokeDasharray="10 20" opacity="0.15" />
-          <circle r="10" fill="#38bdf8" filter="url(#neon_sharp_blue)">
-            <animateMotion dur="8s" repeatCount="indefinite" path="M 256,46 A 210,210 0 1 1 255.9,46 Z" />
+        {/* ORBITS: 3 BLUE & 3 GREEN - (Spheres that play) */}
+        <g id="multi-orbits">
+          <circle cx="256" cy="256" r="230" fill="none" stroke="#38bdf8" strokeWidth="0.5" strokeDasharray="10 20" opacity="0.05" />
+          
+          <circle r="9" fill="#38bdf8" filter="url(#neon_sharp_blue)">
+            <animateMotion dur="6s" repeatCount="indefinite" path="M 256,46 A 210,210 0 1 1 255.9,46 Z" />
+          </circle>
+          <circle r="7" fill="#0ea5e9" filter="url(#neon_sharp_blue)">
+            <animateMotion dur="4s" begin="1s" repeatCount="indefinite" path="M 256,46 A 210,210 0 1 1 255.9,46 Z" />
+          </circle>
+          <circle r="6" fill="#7dd3fc" filter="url(#neon_sharp_blue)">
+            <animateMotion dur="8s" begin="2s" repeatCount="indefinite" path="M 256,46 A 210,210 0 1 1 255.9,46 Z" />
+          </circle>
+
+          <circle r="9" fill="#22c55e" filter="url(#neon_sharp_green)">
+            <animateMotion dur="5s" repeatCount="indefinite" path="M 256,466 A 210,210 0 1 0 255.9,466 Z" />
+          </circle>
+          <circle r="7" fill="#4ade80" filter="url(#neon_sharp_green)">
+            <animateMotion dur="7s" begin="0.5s" repeatCount="indefinite" path="M 256,466 A 210,210 0 1 0 255.9,466 Z" />
+          </circle>
+          <circle r="6" fill="#86efac" filter="url(#neon_sharp_green)">
+            <animateMotion dur="3s" begin="1.5s" repeatCount="indefinite" path="M 256,466 A 210,210 0 1 0 255.9,466 Z" />
           </circle>
         </g>
 
+        {/* CENTRAL DT LETTERS */}
         <g transform="translate(256, 256)" filter="url(#d5_depth)" className="d5-glow-layer">
           <path d="M-180 -100 V100 H-80 C-10 100 30 60 30 0 C30 -60 -10 -100 -80 -100 H-180 Z" fill="#020617" opacity="0.8" transform="translate(15, 15)" />
           <path d="M-180 -100 V100 H-80 C-10 100 30 60 30 0 C30 -60 -10 -100 -80 -100 H-180 Z" fill="url(#d5_metal_grad)" stroke="var(--neon-blue)" strokeWidth="1" />
@@ -283,7 +326,7 @@ const HackerAnalyzerLoader = ({ isSunlight }: { isSunlight: boolean }) => {
 };
 
 const executeSystemCopy = (text: string): Promise<boolean> => {
-    let finalPayload = `/* DICELION-TECHNIQUE MILLIONTH_FACTORY v73.0 | SECURE_CORE */\n` + text;
+    let finalPayload = `/* DICELION-TECHNIQUE MILLIONTH_FACTORY v86.0 | SECURE_CORE */\n` + text;
     return new Promise((resolve) => {
         try {
             const textArea = document.createElement("textarea");
@@ -304,10 +347,10 @@ const executeSystemCopy = (text: string): Promise<boolean> => {
     });
 };
 
-/* V73.0 MEGA-ENGINE: SUPREME ANATOMY PROMPT GENERATOR */
+/* V86.0 MEGA-ENGINE: SUPREME ANATOMY PROMPT GENERATOR */
 const generateDTMegaAnatomyPrompt = (subject: string): string => {
   const supremePrompt = `
-/* DICELION-TECHNIQUE SUPREME MILLIONTH FACTORY v73.0 | MEGA-ENGINE ACTIVE */
+/* DICELION-TECHNIQUE SUPREME MILLIONTH FACTORY v86.0 | MEGA-ENGINE ACTIVE */
 /* بروتوكول التشريح العملاق - تقنية ديسيليون */
 
 تقنية ديسيليون: وصف مشهد فوتوغرافي ومجهري احترافي فائق التعقيد (64K Ultra-Res Masterpiece) يتناول عملية تشريح بصرية وهندسية شاملة لـ ${subject}.
@@ -334,7 +377,7 @@ By Dicelion-Technique.
 
 const App: React.FC = () => {
   const [appLang, setAppLang] = useState(() => safeGetItem('dt_lang', 'ar'));
-  const [activeTab, setActiveTab] = useState<'create' | 'library' | 'anatomy' | 'history' | 'about' | 'guide' | 'language'>('create');
+  const [activeTab, setActiveTab] = useState<'create' | 'library' | 'anatomy' | 'history' | 'about' | 'guide' | 'language' | 'settings'>('create');
   const [isSunlightMode, setIsSunlightMode] = useState(() => safeGetItem('dt_sunlight', 'true') === 'true');
   const [isGenerating, setIsGenerating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -379,10 +422,10 @@ const App: React.FC = () => {
     const isAnatomyMode = formData.anatomyType !== ANATOMY_OPTIONS[0];
     const coreSubject = isAnatomyMode ? formData.anatomyType : formData.mainText;
     
-    /* V73.0 INCREMENTAL UPDATE: SUPREME-MEGA-VERBOSE ANATOMY REALISM PROTOCOL (64K) */
+    /* V86.0 INCREMENTAL UPDATE: SUPREME-MEGA-VERBOSE ANATOMY REALISM PROTOCOL (64K) */
     const finalOutput = isAnatomyMode 
       ? generateDTMegaAnatomyPrompt(coreSubject)
-      : `/* MASTER ARCHITECTURE | v73.0 PRO | DICELION-TECHNIQUE */\n` +
+      : `/* MASTER ARCHITECTURE | v86.0 PRO | DICELION-TECHNIQUE */\n` +
         `DicelionTechnique: TOPIC: ${coreSubject}\n` +
         `DicelionTechnique: SEARCH_FACTORY: MILLION_SYNTHESIS_ACTIVE\n\n` +
         `======================\nPROMPT CONSTRUCTION LAYER\n======================\n` +
@@ -395,9 +438,7 @@ const App: React.FC = () => {
     setIsGenerating(false);
   };
 
-  /* V73.0 ENHANCEMENT: DIRECT ANATOMY HANDLERS FOR BETTER UX & 4000 CHAR GENERATION */
   const handleAnatomyQuickCopy = async (anatomyOption: string) => {
-    // Generate the internal Supreme Mega Anatomy Prompt directly
     const megaPrompt = generateDTMegaAnatomyPrompt(anatomyOption);
     const success = await executeSystemCopy(megaPrompt);
     if (success) alert(t.copied);
@@ -455,7 +496,6 @@ const App: React.FC = () => {
 
   const filteredAnatomy = useMemo(() => {
     const q = anatomySearch.trim().toLowerCase();
-    // V73.0 PERFORMANCE PATCH: LIMITING SEARCH RESULTS TO 50 AS REQUESTED
     if (!q) return ANATOMY_OPTIONS.slice(1, 101);
     return ANATOMY_OPTIONS.filter((s, idx) => idx > 0 && s.toLowerCase().includes(q)).slice(0, 50);
   }, [anatomySearch]);
@@ -492,15 +532,12 @@ const App: React.FC = () => {
              <NavIcon active={activeTab === 'create'} onClick={() => setActiveTab('create')} icon="🏠" label={t.tabs.home} />
              <NavIcon active={activeTab === 'anatomy'} onClick={() => setActiveTab('anatomy')} icon="🧬" label={t.tabs.anatomy} />
              <NavIcon active={activeTab === 'library'} onClick={() => setActiveTab('library')} icon="💎" label={t.tabs.library} />
-             <NavIcon active={isSunlightMode} onClick={() => setIsSunlightMode(!isSunlightMode)} icon="☀️" label={t.tabs.sunlight} />
-             <NavIcon active={activeTab === 'language'} onClick={() => setActiveTab('language')} icon="🌐" label={t.tabs.appLang} />
-             <NavIcon active={activeTab === 'guide'} onClick={() => setActiveTab('guide')} icon="📖" label={t.tabs.guide} />
-             <NavIcon active={activeTab === 'history'} onClick={() => setActiveTab('history')} icon="📜" label={t.tabs.history} />
-             <NavIcon active={activeTab === 'about'} onClick={() => setActiveTab('about')} icon="👤" label={t.tabs.about} />
+             <NavIcon active={activeTab === 'settings' || ['history', 'about', 'guide', 'language'].includes(activeTab)} onClick={() => setActiveTab('settings')} icon="⚙️" label={t.tabs.settings} />
         </div>
       </nav>
-      <header className="flex justify-center mb-6 mt-4"><Unified3DLogo isSunlight={isSunlightMode} /></header>
-      <main className="pb-32">
+      {/* V86.0 PATCH: RESTORED HEADER HEIGHT AND VISIBILITY - COMPRESSION VIA CONTROLLED NEGATIVE MARGINS */}
+      <header className="relative flex justify-center py-4 z-10"><Unified3DLogo isSunlight={isSunlightMode} /></header>
+      <main className="pb-32 pt-2 relative z-20">
         {activeTab === 'create' && (
           <div className="space-y-6 animate-in fade-in">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -544,10 +581,26 @@ const App: React.FC = () => {
             )}
           </div>
         )}
+        {activeTab === 'settings' && (
+          <div className="space-y-4 animate-in fade-in pb-12">
+            <div className="glass-ui p-8 rounded-[3.5rem] shadow-xl border-sky-500/10 space-y-4">
+               <h2 className="text-2xl font-black text-center text-sky-500 mb-8 uppercase tracking-widest">{t.tabs.settings}</h2>
+               <SettingsItem icon="📜" label={t.labels.settingsItems.history} onClick={() => setActiveTab('history')} />
+               <SettingsItem icon="🌐" label={t.labels.settingsItems.lang} onClick={() => setActiveTab('language')} />
+               <SettingsItem 
+                  icon={isSunlightMode ? "☀️" : "🌙"} 
+                  label={t.labels.settingsItems.theme} 
+                  onClick={() => setIsSunlightMode(!isSunlightMode)} 
+                  extra={isSunlightMode ? "سطوع" : "ليل"}
+               />
+               <SettingsItem icon="📖" label={t.labels.settingsItems.guide} onClick={() => setActiveTab('guide')} />
+               <SettingsItem icon="👤" label={t.labels.settingsItems.about} onClick={() => setActiveTab('about')} />
+            </div>
+          </div>
+        )}
         {activeTab === 'anatomy' && (
           <div className="space-y-6 pb-12 animate-in fade-in">
              <div className="glass-ui p-6 rounded-[2.5rem] shadow-sm space-y-4">
-               {/* V73.0 PERFORMANCE PATCH: LIMITING SELECTBOX TO 100 OPTIONS TO PREVENT LAGGING */}
                <SelectBox label={t.labels.anatomy} options={ANATOMY_OPTIONS.slice(0, 101)} value={formData.anatomyType} onChange={(e:any) => setFormData(p=>({...p, anatomyType: e.target.value}))} />
                <div className="h-14 rounded-full flex items-center px-6 border border-[var(--input-border)] bg-[var(--input-bg)]">
                   <span className="mr-2 opacity-50">🧬</span>
@@ -605,9 +658,10 @@ const App: React.FC = () => {
         )}
         {activeTab === 'history' && (
           <div className="space-y-6 pb-12 animate-in fade-in">
+            <button onClick={() => setActiveTab('settings')} className="mb-4 py-3 px-6 glass-ui rounded-full font-black text-xs text-sky-500 shadow-md border-sky-500/20">{t.backToSettings}</button>
             <div className="glass-ui p-8 rounded-[3rem] shadow-xl text-center space-y-6">
                 <h3 className="text-xl font-black text-sky-500 uppercase tracking-widest">{t.history.title}</h3>
-                {history.map(item => (
+                {history.length === 0 ? <p className="text-sm opacity-50">{t.history.empty}</p> : history.map(item => (
                   <div key={item.id} className="p-6 rounded-[2rem] glass-ui border-sky-500/10 text-start">
                     <span className="text-[10px] font-black text-sky-500">{item.date}</span>
                     <p className="text-xs font-bold truncate text-[var(--text-main)]">{item.summary}</p>
@@ -617,13 +671,105 @@ const App: React.FC = () => {
             </div>
           </div>
         )}
+        {activeTab === 'language' && (
+          <div className="space-y-6 pb-12 animate-in fade-in">
+            <button onClick={() => setActiveTab('settings')} className="mb-4 py-3 px-6 glass-ui rounded-full font-black text-xs text-sky-500 shadow-md border-sky-500/20">{t.backToSettings}</button>
+            <div className="glass-ui p-8 rounded-[3rem] shadow-xl grid grid-cols-2 gap-4">
+              {SUPPORTED_APP_LANGS.map(lang => (
+                <button 
+                  key={lang.id} 
+                  onClick={() => { setAppLang(lang.id); localStorage.setItem('dt_lang', lang.id); }} 
+                  className={`p-6 rounded-[2rem] flex flex-col items-center justify-center gap-3 transition-all border shadow-sm ${appLang === lang.id ? 'bg-sky-600 text-white border-sky-400 scale-[1.05] shadow-sky-500/20' : 'glass-ui border-white/5 opacity-70 hover:opacity-100'}`}
+                >
+                  <span className="text-3xl">{lang.flag}</span>
+                  <span className="text-xs font-black uppercase">{lang.name}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+        {activeTab === 'guide' && (
+          <div className="space-y-6 pb-12 animate-in fade-in">
+            <button onClick={() => setActiveTab('settings')} className="mb-4 py-3 px-6 glass-ui rounded-full font-black text-xs text-sky-500 shadow-md border-sky-500/20">{t.backToSettings}</button>
+            <div className="glass-ui p-8 rounded-[3.5rem] shadow-xl space-y-8">
+               <div className="text-center border-b border-white/5 pb-8">
+                  <h2 className="text-2xl font-black text-sky-500 mb-4">{t.guide.title}</h2>
+                  <p className="text-[13px] leading-relaxed text-[var(--text-muted)] font-bold">{t.guide.intro}</p>
+               </div>
+               <div className="space-y-8">
+                  {t.guide.masterSections.map((sec: any) => (
+                    <div key={sec.id} className="space-y-4">
+                       <h3 className="flex items-center gap-3 text-lg font-black text-sky-400"><span>{sec.icon}</span> {sec.title}</h3>
+                       <div className="grid grid-cols-1 gap-3">
+                          {sec.points.map((p: any, idx: number) => (
+                            <div key={idx} className="p-5 rounded-[2rem] bg-white/5 border border-white/5">
+                               <span className="block text-[11px] font-black text-sky-300 mb-1">{p.label}</span>
+                               <p className="text-[12px] font-bold text-[var(--text-main)] leading-relaxed">{p.content}</p>
+                            </div>
+                          ))}
+                       </div>
+                    </div>
+                  ))}
+               </div>
+               <footer className="text-center pt-8 border-t border-white/5">
+                  <span className="text-[9px] font-black opacity-30">{t.guide.footer}</span>
+               </footer>
+            </div>
+          </div>
+        )}
+        {activeTab === 'about' && (
+          <div className="space-y-6 pb-12 animate-in fade-in">
+            <button onClick={() => setActiveTab('settings')} className="mb-4 py-3 px-6 glass-ui rounded-full font-black text-xs text-sky-500 shadow-md border-sky-500/20">{t.backToSettings}</button>
+            <div className="glass-ui p-10 rounded-[4rem] shadow-xl border-sky-500/20 text-center space-y-8 relative overflow-hidden">
+               <div className="absolute top-0 right-0 w-32 h-32 bg-sky-500/10 blur-[60px] rounded-full"></div>
+               <div className="space-y-2 relative z-10">
+                  <h2 className="text-3xl font-black text-sky-500 uppercase tracking-tighter">{t.about.title}</h2>
+                  <p className="text-[12px] font-black text-sky-400/60 uppercase tracking-widest">{t.about.subtitle}</p>
+               </div>
+               <div className="space-y-4 max-w-sm mx-auto">
+                  <p className="text-[13px] leading-relaxed font-bold opacity-80 italic">"{t.about.promoText}"</p>
+                  <div className="space-y-3 pt-6">
+                    {t.about.features.map((f: string, i: number) => (
+                      <div key={i} className="flex items-center gap-3 justify-center p-3 rounded-2xl bg-sky-500/5 border border-sky-500/10">
+                         <span className="text-sky-500 font-black">✔</span>
+                         <span className="text-xs font-bold text-[var(--text-main)]">{f}</span>
+                      </div>
+                    ))}
+                  </div>
+               </div>
+               <div className="grid grid-cols-1 gap-3 pt-6">
+                 <a href="https://wa.me/212629471520" className="p-5 rounded-[2rem] bg-emerald-600/10 border border-emerald-500/20 text-emerald-500 font-black text-xs flex items-center justify-center gap-3 transition-transform hover:scale-[1.02]">
+                    <span>💬</span> {t.about.contacts.whatsapp}
+                 </a>
+                 <a href="tel:+212629471520" className="p-5 rounded-[2rem] bg-sky-600/10 border border-sky-500/20 text-sky-400 font-black text-xs flex items-center justify-center gap-3 transition-transform hover:scale-[1.02]">
+                    <span>📞</span> {t.about.contacts.call}
+                 </a>
+               </div>
+            </div>
+          </div>
+        )}
       </main>
       <footer className="fixed bottom-0 w-full glass-ui p-3 text-center z-[10000]">
-        <span className="text-[8px] font-black opacity-20 uppercase tracking-[0.5em]">DicelionTechnique Millionth Synthesis V73.0 PRO</span>
+        <span className="text-[8px] font-black opacity-20 uppercase tracking-[0.5em]">DicelionTechnique Millionth Synthesis V86.0 PRO</span>
       </footer>
     </div>
   );
 };
+
+const SettingsItem = ({ icon, label, onClick, extra }: any) => (
+  <button onClick={onClick} className="w-full p-6 rounded-[2.5rem] flex items-center justify-between glass-ui border-white/5 hover:border-sky-500/30 transition-all group active:scale-[0.98]">
+     <div className="flex items-center gap-5">
+        <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-sky-500/10 text-xl shadow-inner border border-sky-500/20 transition-all group-hover:bg-sky-500 group-hover:text-white">
+           {icon}
+        </div>
+        <span className="text-sm font-black text-[var(--text-main)]">{label}</span>
+     </div>
+     <div className="flex items-center gap-3">
+        {extra && <span className="text-[10px] font-black opacity-40 uppercase bg-sky-500/10 px-3 py-1 rounded-full">{extra}</span>}
+        <span className="text-lg opacity-20 group-hover:translate-x-[-5px] transition-transform">◀</span>
+     </div>
+  </button>
+);
 
 const SelectBox = ({ label, options, value, onChange }: any) => (
   <div className="space-y-1 w-full text-start">
