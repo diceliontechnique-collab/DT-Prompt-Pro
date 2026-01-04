@@ -1,5 +1,5 @@
 
-/* SYNC_STABILITY_PATCH_V86.0_MASTER_PRO_ULTRA: DROPDOWN FIRST OPTIONS SET TO "WITHOUT" */
+/* SYNC_STABILITY_PATCH_V91.0_MASTER_PRO_ULTRA: RESTORING PROMPT MODE ICONS - INCREMENTAL STABILITY */
 import React, { useState, useEffect, useMemo, useRef, useLayoutEffect } from 'react';
 import { 
   ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, TEMPLATES, AI_MODELS, PRO_ULTRA_DB, WISDOM_QUOTES, getMillionthNeuralPrompt, VARIABLE_INSPIRATIONS, ANATOMY_OPTIONS
@@ -31,7 +31,7 @@ const UI_TRANSLATIONS: any = {
     saveBtn: 'أرشفة المشروع',
     editBtn: 'تعديل النص',
     copyPromptBtn: 'نسخ البرومبت',
-    editLabel: 'محرر الأوامر الذكي (V86.0 PRO)',
+    editLabel: 'محرر الأوامر الذكي (V91.0 PRO)',
     resultActions: { copy: 'نسخ', save: 'حفظ' },
     copyOptions: { ar: '🇸🇦 نسخ بالعربية', en: '🇬🇧 Copy in English', all: '🌍 نسخ الكل (عربي + إنجليزي)' },
     history: { empty: 'السجل فارغ حالياً.. ابدأ بصناعة إبداعك الأول!', title: 'سجل محفوظات DT-Prompt' },
@@ -67,7 +67,7 @@ const UI_TRANSLATIONS: any = {
       tip: 'اختر مقترحاً لتعلم أسرار هندسة الأوامر:'
     },
     guide: { 
-      title: 'موسوعة DT-Prompt الشاملة (V86.0 PRO)', 
+      title: 'موسوعة DT-Prompt الشاملة (V91.0 PRO)', 
       intro: 'مرحباً بك في المحرك الهندسي الأكثر تقدماً. DT-Prompt ليس مجرد تطبيق، بل هو جسر تقني يربط خيالك بأقوى محركات الذكاء الاصطناعي العالمية. يهدف التطبيق إلى تحويل أفكارك البسيطة إلى "أوامر برمجية" (Prompts) دقيقة ومعقدة تضمن لك مخرجات احترافية بنسبة 100% وبدون الحاجة للإنترنت.',
       masterSections: [
         { 
@@ -104,7 +104,7 @@ const UI_TRANSLATIONS: any = {
     saveBtn: 'Archive Project',
     editBtn: 'Edit Text',
     copyPromptBtn: 'Copy Prompt',
-    editLabel: 'Smart Prompt Editor (V86.0 PRO)',
+    editLabel: 'Smart Prompt Editor (V91.0 PRO)',
     resultActions: { copy: 'Copy', save: 'Save' },
     quickCopy: 'Quick Copy',
     editInStudio: 'Edit in Lab',
@@ -210,7 +210,7 @@ const WisdomBox = ({ isSunlight, label }: { isSunlight: boolean, label: string }
   );
 };
 
-/* ENHANCED: LIVING 5D LOGO - MINIMALIST PRO V86.0 */
+/* ENHANCED: LIVING 5D LOGO - MINIMALIST PRO V91.0 */
 const Unified3DLogo = ({ isSunlight = false }: { isSunlight?: boolean }) => {
   return (
     <div className="relative flex flex-col items-center justify-center select-none scale-[0.45] sm:scale-[0.5] transition-transform duration-1000 -mt-32 -mb-32">
@@ -232,10 +232,9 @@ const Unified3DLogo = ({ isSunlight = false }: { isSunlight?: boolean }) => {
             <stop offset="0%" style={{stopColor: isSunlight ? '#1e293b' : '#ffffff', stopOpacity: 1}} />
             <stop offset="50%" style={{stopColor: '#38bdf8', stopOpacity: 1}} />
             <stop offset="100%" style={{stopColor: '#0c4a6e', stopOpacity: 1}} />
-          </linearGradient>
+           linearGradient>
         </defs>
 
-        {/* AI PROCESSOR CORE (V86.0 CENTERPIECE) */}
         <g id="ai-processor-layer" transform="translate(256, 256)">
            <path d="M-100,-100 h200 v200 h-200 z" fill="none" stroke="var(--neon-blue)" strokeWidth="1" strokeDasharray="5,10" opacity="0.1" />
            <g filter="url(#neon_sharp_blue)">
@@ -246,7 +245,6 @@ const Unified3DLogo = ({ isSunlight = false }: { isSunlight?: boolean }) => {
            <path d="M-70,60 v20 M-50,60 v20 M-30,60 v20 M-10,60 v20 M10,60 v20 M30,60 v20 M50,60 v20 M70,60 v20" stroke="var(--neon-blue)" strokeWidth="1" />
         </g>
 
-        {/* ORBITS: 3 BLUE & 3 GREEN - (Spheres that play) */}
         <g id="multi-orbits">
           <circle cx="256" cy="256" r="230" fill="none" stroke="#38bdf8" strokeWidth="0.5" strokeDasharray="10 20" opacity="0.05" />
           
@@ -271,7 +269,6 @@ const Unified3DLogo = ({ isSunlight = false }: { isSunlight?: boolean }) => {
           </circle>
         </g>
 
-        {/* CENTRAL DT LETTERS */}
         <g transform="translate(256, 256)" filter="url(#d5_depth)" className="d5-glow-layer">
           <path d="M-180 -100 V100 H-80 C-10 100 30 60 30 0 C30 -60 -10 -100 -80 -100 H-180 Z" fill="#020617" opacity="0.8" transform="translate(15, 15)" />
           <path d="M-180 -100 V100 H-80 C-10 100 30 60 30 0 C30 -60 -10 -100 -80 -100 H-180 Z" fill="url(#d5_metal_grad)" stroke="var(--neon-blue)" strokeWidth="1" />
@@ -326,7 +323,7 @@ const HackerAnalyzerLoader = ({ isSunlight }: { isSunlight: boolean }) => {
 };
 
 const executeSystemCopy = (text: string): Promise<boolean> => {
-    let finalPayload = `/* DICELION-TECHNIQUE MILLIONTH_FACTORY v86.0 | SECURE_CORE */\n` + text;
+    let finalPayload = `/* DICELION-TECHNIQUE MILLIONTH_FACTORY v91.0 | SECURE_CORE */\n` + text;
     return new Promise((resolve) => {
         try {
             const textArea = document.createElement("textarea");
@@ -347,10 +344,10 @@ const executeSystemCopy = (text: string): Promise<boolean> => {
     });
 };
 
-/* V86.0 MEGA-ENGINE: SUPREME ANATOMY PROMPT GENERATOR */
+/* V88.0 MEGA-ENGINE: SUPREME ANATOMY PROMPT GENERATOR (ARABIC) */
 const generateDTMegaAnatomyPrompt = (subject: string): string => {
-  const supremePrompt = `
-/* DICELION-TECHNIQUE SUPREME MILLIONTH FACTORY v86.0 | MEGA-ENGINE ACTIVE */
+  return `
+/* DICELION-TECHNIQUE SUPREME MILLIONTH FACTORY v88.0 | MEGA-ENGINE ACTIVE */
 /* بروتوكول التشريح العملاق - تقنية ديسيليون */
 
 تقنية ديسيليون: وصف مشهد فوتوغرافي ومجهري احترافي فائق التعقيد (64K Ultra-Res Masterpiece) يتناول عملية تشريح بصرية وهندسية شاملة لـ ${subject}.
@@ -371,8 +368,46 @@ const generateDTMegaAnatomyPrompt = (subject: string): string => {
 - التوقيع: تقنية ديسيليون.
 - يمنع: الأسلوب التعليمي، الرسوم التوضيحية، المظهر البلاستيكي، التبسيط، الألوان الكرتونية.
 By Dicelion-Technique.
-`;
-  return supremePrompt.trim();
+`.trim();
+};
+
+/* V88.0 NEW LAYER: SUPREME GENERAL PROMPT GENERATOR (ARABIC) */
+const generateDTMegaGeneralPrompt = (subject: string, tech: string, bg: string, mood: string): string => {
+  return `
+/* DICELION-TECHNIQUE SUPREME MILLIONTH FACTORY v88.0 | MEGA-GENERAL-ENGINE ACTIVE */
+/* بروتوكول التصميم العملاق المتكامل - تقنية ديسيليون */
+
+تقنية ديسيليون: هندسة مشهد بصري فائق التعقيد والعمق (64K Ultra-Res Masterpiece) يجسد رؤية إبداعية شاملة لموضوع: ${subject}.
+
+هذا المخرج ليس مجرد صورة عادية، بل هو "Digital Architecture" متكامل تم تصميمه بمعايير التصوير السينمائي العالمي (Cinema Grade Optics). يتم محاكاة المشهد باستخدام كاميرا "ARRI Alexa 65" مع عدسات "Prime DNA" التي توفر عمقاً لونياً ومجالاً بصرياً مذهلاً. تم دمج تقنيات "Global Illumination" و "Ray-Tracing" المتقدمة لضمان أن كل انعكاس ضوئي وكل ظل فيزيائي يتوافق مع قوانين الطبيعة بدقة 100%.
+
+المواصفات التقنية المستهدفة: ${tech}. يتم تطبيق معايير "Physically Based Rendering" لضمان أن الخامات (Materials) تبدو واقعية إلى أقصى حد؛ حيث يتم محاكاة ملمس الأسطح، انعكاسية المعادن، وشفافية الأجسام بأسلوب فوتوغرافي مهيب. الإضاءة في المشهد هي إضاءة درامية مركبة (Complex Studio Lighting) تعتمد على توزيع ثلاثي الأبعاد للمنابع الضوئية لخلق عمق بصري وتباين فائق (Ultra-High Contrast) يبرز ملامح ${subject} بأسلوب ملكي وراقي.
+
+سياق البيئة المحيطة: ${bg}. يتم دمج الموضوع الأساسي مع الخلفية بانسجام تام، مع مراعاة "Atmospheric Perspective" وتأثيرات الضباب والضوء المنساب (God Rays) التي تعزز واقعية المشهد. النبرة الصوتية والجمالية: ${mood}، مما يضفي صبغة عاطفية وسيكولوجية عميقة على العمل الفني.
+
+العمل يتميز بتركيز مجهري على التفاصيل (Microscopic Detail Focus)؛ حيث يمكن ملاحظة المسام، جزيئات الغبار العائمة في الضوء، والاهتزازات اللونية الدقيقة. يتم استبعاد أي طابع رسومي أو كرتوني أو ذكاء اصطناعي مكشوف، لصالح مخرج "Hyper-Photorealistic" يضاهي الواقع تماماً.
+
+الدقة: 64K UHD Masterpiece.
+التوقيع: تقنية ديسيليون.
+By Dicelion-Technique.
+`.trim();
+};
+
+const generateDTMegaGeneralPromptEn = (subject: string, tech: string, bg: string, mood: string): string => {
+  return `
+/* DICELION-TECHNIQUE SUPREME v88.0 | ENGLISH_ACTIVE */
+/* MASTER GENERAL ARCHITECTURE - SUPREME ENGINE */
+
+Dicelion Technique: Supreme Engineering of a hyper-complex visual scene (64K Ultra-Res Masterpiece) representing: ${subject}.
+
+Cinematic Grade Implementation: Captured via virtual ARRI Alexa 65 with Prime DNA optics. Global Illumination and Ray-Tracing core active. 
+Technical Standards: ${tech}. Physically Based Rendering (PBR) for authentic material response. 
+Atmospheric Context: ${bg}. Mood & Esthetic: ${mood}.
+Detail Density: Microscopic focus on textures, atmospheric particles, and chromatic shifts. 100% Hyper-Photorealistic.
+
+Attributes: 64K UHD Masterpiece, Cinematic Lighting, Ray-Traced Reflections.
+By Dicelion-Technique.
+`.trim();
 };
 
 const App: React.FC = () => {
@@ -411,27 +446,43 @@ const App: React.FC = () => {
     anatomyType: ANATOMY_OPTIONS[0] 
   });
 
+  const isFormValid = useMemo(() => {
+    return formData.mainText.trim() !== '' || formData.anatomyType !== ANATOMY_OPTIONS[0];
+  }, [formData.mainText, formData.anatomyType]);
+
   const generate = async () => {
-    if (!formData.mainText && formData.anatomyType === ANATOMY_OPTIONS[0]) return;
+    if (!isFormValid) return;
+
+    const subjectToUse = formData.mainText || (formData.anatomyType !== ANATOMY_OPTIONS[0] ? formData.anatomyType : "مشهد إبداعي متكامل");
+    
     setIsGenerating(true);
     setGeneratedPrompt("");
     setIsEditing(false);
     setActiveBracket(null);
+    
     await new Promise(r => setTimeout(r, 4000));
     
     const isAnatomyMode = formData.anatomyType !== ANATOMY_OPTIONS[0];
-    const coreSubject = isAnatomyMode ? formData.anatomyType : formData.mainText;
+    const forceEn = formData.forceEnglish || formData.onlyEnglishVisuals;
     
-    /* V86.0 INCREMENTAL UPDATE: SUPREME-MEGA-VERBOSE ANATOMY REALISM PROTOCOL (64K) */
-    const finalOutput = isAnatomyMode 
-      ? generateDTMegaAnatomyPrompt(coreSubject)
-      : `/* MASTER ARCHITECTURE | v86.0 PRO | DICELION-TECHNIQUE */\n` +
-        `DicelionTechnique: TOPIC: ${coreSubject}\n` +
-        `DicelionTechnique: SEARCH_FACTORY: MILLION_SYNTHESIS_ACTIVE\n\n` +
-        `======================\nPROMPT CONSTRUCTION LAYER\n======================\n` +
-        `[CENTRAL_SUBJECT]: { core: "${coreSubject}", engineering: "${formData.technical}" }\n` +
-        `[ATMOSPHERIC_DATA]: { context: "${formData.background}", emotion: "${formData.mood}" }\n` +
-        `\n======================\nProfessional Millionth Synthesis by Dicelion-Technique\n======================`;
+    let finalOutput = "";
+    if (isAnatomyMode) {
+      finalOutput = forceEn 
+        ? `/* DICELION-TECHNIQUE SUPREME v91.0 | ENGLISH_ACTIVE */\n` + 
+          `/* LATIN-ONLY EXPORT PROTOCOL - NATIVE ENGINE */\n\n` + 
+          `Dicelion Technique: Professional photographic and microscopic hyper-complex anatomy of ${subjectToUse}.\n` +
+          `Specifications: 64K UHD Masterpiece, Industrial Micro-dissection style.\n` +
+          `By Dicelion-Technique.`
+        : generateDTMegaAnatomyPrompt(subjectToUse);
+    } else {
+      finalOutput = forceEn 
+        ? generateDTMegaGeneralPromptEn(subjectToUse, formData.technical, formData.background, formData.mood)
+        : generateDTMegaGeneralPrompt(subjectToUse, formData.technical, formData.background, formData.mood);
+    }
+    
+    if (formData.onlyEnglishVisuals) {
+      finalOutput = finalOutput.replace(/[\u0600-\u06FF]/g, '');
+    }
       
     setOriginalPrompt(finalOutput);
     setGeneratedPrompt(finalOutput);
@@ -439,7 +490,10 @@ const App: React.FC = () => {
   };
 
   const handleAnatomyQuickCopy = async (anatomyOption: string) => {
-    const megaPrompt = generateDTMegaAnatomyPrompt(anatomyOption);
+    const forceEn = formData.forceEnglish || formData.onlyEnglishVisuals;
+    const megaPrompt = forceEn 
+      ? `/* DICELION-TECHNIQUE SUPREME v91.0 | ENGLISH_ACTIVE */\nBy Dicelion-Technique.\nSubject: ${anatomyOption}\nSpecifications: 64K UHD Photorealistic.`
+      : generateDTMegaAnatomyPrompt(anatomyOption);
     const success = await executeSystemCopy(megaPrompt);
     if (success) alert(t.copied);
   };
@@ -535,11 +589,29 @@ const App: React.FC = () => {
              <NavIcon active={activeTab === 'settings' || ['history', 'about', 'guide', 'language'].includes(activeTab)} onClick={() => setActiveTab('settings')} icon="⚙️" label={t.tabs.settings} />
         </div>
       </nav>
-      {/* V86.0 PATCH: RESTORED HEADER HEIGHT AND VISIBILITY - COMPRESSION VIA CONTROLLED NEGATIVE MARGINS */}
       <header className="relative flex justify-center py-4 z-10"><Unified3DLogo isSunlight={isSunlightMode} /></header>
       <main className="pb-32 pt-2 relative z-20">
         {activeTab === 'create' && (
           <div className="space-y-6 animate-in fade-in">
+            
+            {/* V91.0 INCREMENTAL UPDATE: RESTORED PROMPT MODE ICONS */}
+            <div className="flex justify-center gap-4 py-2">
+                {[
+                  { id: 'image', icon: '🖼️', label: t.promptMode.image },
+                  { id: 'video', icon: '🎬', label: t.promptMode.video },
+                  { id: 'post', icon: '📝', label: t.promptMode.post }
+                ].map(m => (
+                  <button 
+                    key={m.id}
+                    onClick={() => setFormData(p => ({...p, promptMode: m.id as any}))}
+                    className={`flex flex-col items-center gap-1 px-4 py-3 rounded-2xl glass-ui transition-all duration-300 border-2 ${formData.promptMode === m.id ? 'border-sky-500 bg-sky-500/10 scale-105 shadow-lg' : 'border-transparent opacity-60 hover:opacity-100'}`}
+                  >
+                    <span className="text-2xl">{m.icon}</span>
+                    <span className="text-[10px] font-black uppercase tracking-tighter">{m.label}</span>
+                  </button>
+                ))}
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="glass-ui p-6 rounded-[2.5rem] space-y-4 shadow-sm">
                   <SelectBox label={t.labels.ratio} options={ASPECT_RATIOS} value={formData.aspectRatio} onChange={(e:any) => setFormData(p=>({...p, aspectRatio: e.target.value}))} />
@@ -558,12 +630,19 @@ const App: React.FC = () => {
                   <div className="pt-2 grid grid-cols-1 gap-2">
                     <CheckBox label={t.labels.exclusivePsychology} checked={formData.exclusivePsychology} onChange={(e:any) => setFormData(p=>({...p, exclusivePsychology: e.target.checked}))} />
                     <CheckBox label={t.labels.analyzeImage} checked={formData.useReferenceImage} onChange={(e:any) => setFormData(p=>({...p, useReferenceImage: e.target.checked}))} />
+                    <CheckBox label={t.labels.exportEnglish} checked={formData.forceEnglish} onChange={(e:any) => setFormData(p=>({...p, forceEnglish: e.target.checked}))} />
+                    <CheckBox label={t.labels.englishLetters} checked={formData.onlyEnglishVisuals} onChange={(e:any) => setFormData(p=>({...p, onlyEnglishVisuals: e.target.checked}))} />
                   </div>
               </div>
             </div>
             <div className="glass-ui p-6 rounded-[3rem] space-y-4 shadow-md">
               <InputArea label={t.labels.text} value={formData.mainText} onChange={(e:any) => setFormData(p=>({...p, mainText: e.target.value}))} placeholder={t.placeholders.text} />
-              <button onClick={generate} disabled={isGenerating} className={`relative overflow-hidden w-full py-5 rounded-full font-black uppercase shadow-xl transition-all bg-sky-600 text-white ${isGenerating ? 'bg-black' : 'hover:bg-sky-500 scale-[1.01]'}`}>
+              <button 
+                onClick={generate} 
+                disabled={isGenerating || !isFormValid} 
+                className={`relative overflow-hidden w-full py-5 rounded-full font-black uppercase shadow-xl transition-all 
+                  ${isGenerating ? 'bg-black' : (isFormValid ? 'bg-sky-600 text-white hover:bg-sky-500 scale-[1.01]' : 'bg-slate-400 text-slate-200 cursor-not-allowed opacity-50')}`}
+              >
                 {isGenerating ? <HackerAnalyzerLoader isSunlight={isSunlightMode} /> : t.generateBtn}
               </button>
             </div>
@@ -750,7 +829,7 @@ const App: React.FC = () => {
         )}
       </main>
       <footer className="fixed bottom-0 w-full glass-ui p-3 text-center z-[10000]">
-        <span className="text-[8px] font-black opacity-20 uppercase tracking-[0.5em]">DicelionTechnique Millionth Synthesis V86.0 PRO</span>
+        <span className="text-[8px] font-black opacity-20 uppercase tracking-[0.5em]">DicelionTechnique Millionth Synthesis V91.0 PRO</span>
       </footer>
     </div>
   );

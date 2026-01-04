@@ -11,6 +11,7 @@ export const TEMPLATES = [
 ];
 
 export const AI_MODELS = [
+  'بدون',
   'Gemini 2.5 Flash (Google)',
   'Gemini 3 Pro (Google)',
   'ChatGPT-4o (OpenAI)',
@@ -69,6 +70,7 @@ export const BACKGROUNDS = [
 ];
 
 export const MOODS = [
+  'بدون',
   'Prestigious, Authoritative and Royal', 'Ethereal, Spiritual and Divine', 'Energetic, Vibrant and Viral', 
   'Calm, Zen and Minimalist Serenity', 'Dramatic, Noir and Suspenseful', 'Futuristic, High-Tech and Innovative', 
   'Luxury, High-end Corporate Excellence', 'Nostalgic, Warm and Poetic', 'Heroic, Epic and Monumental'
@@ -357,7 +359,7 @@ export const ELEMENTS = [
   'جسيمات من الزمرد الخام',
   'تأثير الطمس الفني (Artistic Blur)',
   'خطوط النبض العصبوني',
-  'تأثير الفسيفساء الرقمي',
+  'تأثير الفسيساء الرقمي',
   'جسيمات كربونية متوهجة',
   'تأثير الظلال المتعددة',
   'خيوط من النور القمري',
