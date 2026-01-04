@@ -1,5 +1,5 @@
 
-/* DT-PROMPT MASTER STABILITY V131.0 | UI SUPPRESSION LAYER | RIGID LOCK */
+/* DT-PROMPT MASTER STABILITY V134.0 | SPACE COMPRESSION LAYER | RIGID LOCK */
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { 
   ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, TEMPLATES, AI_MODELS, PRO_ULTRA_DB, WISDOM_QUOTES, getMillionthNeuralPrompt, ANATOMY_OPTIONS
@@ -78,15 +78,32 @@ const IncrementalVisualClarityLayer = () => (
     .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     .v500-status { font-size: 9px; font-weight: 900; color: #22c55e; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* V131.0 SUPPRESSION LAYER: Hide MICRO CORE INPUT section without deleting code */
-    .glass-ui.p-8.rounded-\[3rem\].opacity-70 {
+    /* V132.0 REINFORCED SUPPRESSION LAYER: Block MICRO CORE INPUT permanently across all render cycles */
+    div.glass-ui.p-8.rounded-\[3rem\].opacity-70,
+    div.glass-ui.p-8.rounded-\[3rem\].opacity-70 * {
       display: none !important;
       visibility: hidden !important;
+      opacity: 0 !important;
       height: 0 !important;
+      width: 0 !important;
       margin: 0 !important;
       padding: 0 !important;
+      border: none !important;
       pointer-events: none !important;
+      position: absolute !important;
       overflow: hidden !important;
+      z-index: -9999 !important;
+      clip-path: circle(0) !important;
+    }
+
+    /* V134.0 SPACE COMPRESSION LAYER: Eliminate redundant top gap without deleting source classes */
+    main.app-content-wrapper {
+      padding-top: 0 !important;
+      margin-top: -3.5rem !important; /* Forces the content up to bridge the gap under the navbar */
+    }
+    
+    .app-content-wrapper {
+       overflow-y: auto;
     }
   `}</style>
 );
@@ -334,6 +351,11 @@ const App: React.FC = () => {
             </div>
 
             <div className="glass-ui p-6 rounded-[3rem] space-y-4 shadow-2xl border-sky-500/20">
+              {/* V133.0 UI REPOSITIONING: Generate Button moved ABOVE Main Subject Input */}
+              <button onClick={generate} disabled={isGenerating} className="relative w-full py-5 rounded-full font-black uppercase bg-sky-600 text-white shadow-2xl hover:bg-sky-500 transition-all flex items-center justify-center min-h-[70px] overflow-hidden">
+                {isGenerating ? <HackerAnalyzerLoader /> : t.generateBtn}
+              </button>
+
               <InputArea label={t.labels.text} value={formData.mainText} onChange={(e:any) => setFormData(p=>({...p, mainText: e.target.value}))} placeholder={t.placeholders.text} />
               
               {isGenerating && (
@@ -348,10 +370,6 @@ const App: React.FC = () => {
                    </div>
                 </div>
               )}
-
-              <button onClick={generate} disabled={isGenerating} className="relative w-full py-5 rounded-full font-black uppercase bg-sky-600 text-white shadow-2xl hover:bg-sky-500 transition-all flex items-center justify-center min-h-[70px] overflow-hidden">
-                {isGenerating ? <HackerAnalyzerLoader /> : t.generateBtn}
-              </button>
             </div>
 
             {(generatedPrompt || refinedPrompt) && (
@@ -365,6 +383,10 @@ const App: React.FC = () => {
                            <div className="quality-bar w-32"><div className="quality-fill bg-emerald-500" style={{ width: `${qualityScore}%` }} /></div>
                         </div>
                      </div>
+
+                     {/* V133.0 UI REPOSITIONING: Copy Button moved ABOVE Master Output box */}
+                     <button onClick={() => performCopy(refinedPrompt)} className="w-full mb-4 py-5 bg-emerald-600 text-white rounded-[1.5rem] font-black shadow-lg hover:bg-emerald-500 transform active:scale-95 transition-all">نسخ البرومبت المطور V500</button>
+
                      <div className="p-7 rounded-[2rem] text-[12px] font-mono leading-relaxed bg-black/20 border h-[450px] overflow-y-auto whitespace-pre-wrap text-emerald-400 scrollbar-hide">
                        {refinedPrompt}
                      </div>
@@ -372,7 +394,6 @@ const App: React.FC = () => {
                         <span className="block text-[9px] uppercase opacity-50 mb-1">تقرير التحليل العصبى v500:</span>
                         {analysisReport}
                      </div>
-                     <button onClick={() => performCopy(refinedPrompt)} className="w-full mt-4 py-5 bg-emerald-600 text-white rounded-[1.5rem] font-black shadow-lg hover:bg-emerald-500 transform active:scale-95 transition-all">نسخ البرومبت المطور V500</button>
                    </div>
                  )}
                  
