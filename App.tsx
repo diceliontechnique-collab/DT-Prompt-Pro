@@ -1,5 +1,5 @@
 
-/* SYNC_STABILITY_PATCH_V64.0_MASTER_PRO_ULTRA: HUMAN ANATOMY TITLES & UI STABILITY */
+/* SYNC_STABILITY_PATCH_V68.0_MASTER_PRO_ULTRA: MEGA-ANATOMY REALISM PROTOCOL (64K) */
 import React, { useState, useEffect, useMemo, useRef, useLayoutEffect } from 'react';
 import { 
   ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, TEMPLATES, AI_MODELS, PRO_ULTRA_DB, WISDOM_QUOTES, getMillionthNeuralPrompt, VARIABLE_INSPIRATIONS, ANATOMY_OPTIONS
@@ -26,12 +26,12 @@ const SUPPORTED_APP_LANGS = [
 const UI_TRANSLATIONS: any = {
   ar: {
     dir: 'rtl',
-    tabs: { create: 'المختبر', library: 'مليون برومبت', history: 'سجل المحفوظات', appLang: 'اللغة', guide: 'دليل', about: 'عن المطور', home: 'الرئيسية', sunlight: 'سطوع' },
+    tabs: { create: 'المختبر', library: 'مليون برومبت', anatomy: 'التشريح الذكي', history: 'سجل المحفوظات', appLang: 'اللغة', guide: 'دليل', about: 'عن المطور', home: 'الرئيسية', sunlight: 'سطوع' },
     generateBtn: 'معالجة الأمر ✨',
     saveBtn: 'أرشفة المشروع',
     editBtn: 'تعديل النص',
     copyPromptBtn: 'نسخ البرومبت',
-    editLabel: 'محرر الأوامر الذكي (V64.0 PRO)',
+    editLabel: 'محرر الأوامر الذكي (V68.0 PRO)',
     resultActions: { copy: 'نسخ', save: 'حفظ' },
     copyOptions: { ar: '🇸🇦 نسخ بالعربية', en: '🇬🇧 Copy in English', all: '🌍 نسخ الكل (عربي + إنجليزي)' },
     history: { empty: 'السجل فارغ حالياً.. ابدأ بصناعة إبداعك الأول!', title: 'سجل محفوظات DT-Prompt' },
@@ -40,7 +40,7 @@ const UI_TRANSLATIONS: any = {
     quickCopy: 'نسخ سريع',
     editInStudio: 'تعديل في المختبر',
     promptMode: { image: 'توليد الصور', video: 'إنتاج الفيديو', post: 'نصوص احترافية' },
-    placeholders: { text: 'عنوان الحملة أو الموضوع الرئيسي الذي تريد تحويله لبرومبت احترافي...', search: 'ابحث في مليون برومبت جاهز بالرقم أو بالحرف (مثال: سيارة، طب، أو 5500)', dropdownSearch: 'اختر تخصصاً من 1000 خيار...', visualText: 'اكتب النص الذي تريده أن يظهر (أو اتركه فارغاً للصمت التام)' },
+    placeholders: { text: 'عنوان الحملة أو الموضوع الرئيسي الذي تريد تحويله لبرومبت احترافي...', search: 'ابحث في مليون برومبت جاهز بالرقم أو بالحرف (مثال: سيارة، طب، أو 5500)', dropdownSearch: 'اختر تخصصاً من 1000 خيار...', visualText: 'اكتب النص الذي تريده أن يظهر (أو اتركه فارغاً للصمت التام)', anatomySearch: 'ابحث في 5000 خيار للتشريح الذكي...' },
     labels: { 
       ratio: 'أبعاد المخرج (Ratio)', mood: 'نبرة الصوت والأسلوب الفني', bg: 'سياق المحتوى والبيئة المحيطة (100 خيار)', tech: 'قالب الهيكلة الاحترافي (100 خيار)', text: 'الموضوع الأساسي (Main Subject)', quickSearch: 'تصفح التخصصات الذكية (1000 خيار)',
       exclusivePsychology: "برومبت سيكولوجي حصري لـ Dicelion-Technique",
@@ -59,7 +59,7 @@ const UI_TRANSLATIONS: any = {
       tip: 'اختر مقترحاً لتعلم أسرار هندسة الأوامر:'
     },
     guide: { 
-      title: 'موسوعة DT-Prompt الشاملة (V64.0 PRO)', 
+      title: 'موسوعة DT-Prompt الشاملة (V68.0 PRO)', 
       intro: 'مرحباً بك في المحرك الهندسي الأكثر تقدماً. DT-Prompt ليس مجرد تطبيق، بل هو جسر تقني يربط خيالك بأقوى محركات الذكاء الاصطناعي العالمية. يهدف التطبيق إلى تحويل أفكارك البسيطة إلى "أوامر برمجية" (Prompts) دقيقة ومعقدة تضمن لك مخرجات احترافية بنسبة 100% وبدون الحاجة للإنترنت.',
       masterSections: [
         { 
@@ -91,12 +91,12 @@ const UI_TRANSLATIONS: any = {
   },
   en: {
     dir: 'ltr',
-    tabs: { create: 'Lab', library: '1M Prompts', history: 'History', appLang: 'Language', guide: 'Guide', about: 'Developer', home: 'Home', sunlight: 'Sunlight' },
+    tabs: { create: 'Lab', library: '1M Prompts', anatomy: 'Smart Anatomy', history: 'History', appLang: 'Language', guide: 'Guide', about: 'Developer', home: 'Home', sunlight: 'Sunlight' },
     generateBtn: 'Process Command ✨',
     saveBtn: 'Archive Project',
     editBtn: 'Edit Text',
     copyPromptBtn: 'Copy Prompt',
-    editLabel: 'Smart Prompt Editor (V64.0 PRO)',
+    editLabel: 'Smart Prompt Editor (V68.0 PRO)',
     resultActions: { copy: 'Copy', save: 'Save' },
     quickCopy: 'Quick Copy',
     editInStudio: 'Edit in Lab',
@@ -104,7 +104,7 @@ const UI_TRANSLATIONS: any = {
     copied: 'Copied successfully!',
     saved: 'Archived successfully!',
     promptMode: { image: 'Image Gen', video: 'Video Gen', post: 'Pro Text' },
-    placeholders: { text: 'Core concept for your prompt...', search: 'Search 1M prompts by letter or ID...', dropdownSearch: 'Choose from 1000 categories...', visualText: 'Type custom label text' },
+    placeholders: { text: 'Core concept for your prompt...', search: 'Search 1M prompts by letter or ID...', dropdownSearch: 'Choose from 1000 categories...', visualText: 'Type custom label text', anatomySearch: 'Search 5000 anatomy options...' },
     labels: { 
       ratio: 'Output Ratio', mood: 'Tone & Style', bg: 'Context (100 Opts)', tech: 'Pro Template (100 Opts)', text: 'Core Subject', quickSearch: 'Browse 1000 Categories',
       exclusivePsychology: "Psychology Exclusive",
@@ -283,7 +283,7 @@ const HackerAnalyzerLoader = ({ isSunlight }: { isSunlight: boolean }) => {
 };
 
 const executeSystemCopy = (text: string): Promise<boolean> => {
-    let finalPayload = `/* DICELION-TECHNIQUE MILLIONTH_FACTORY v64.0 | SECURE_CORE */\n` + text;
+    let finalPayload = `/* DICELION-TECHNIQUE MILLIONTH_FACTORY v68.0 | SECURE_CORE */\n` + text;
     return new Promise((resolve) => {
         try {
             const textArea = document.createElement("textarea");
@@ -306,11 +306,12 @@ const executeSystemCopy = (text: string): Promise<boolean> => {
 
 const App: React.FC = () => {
   const [appLang, setAppLang] = useState(() => safeGetItem('dt_lang', 'ar'));
-  const [activeTab, setActiveTab] = useState<'create' | 'library' | 'history' | 'about' | 'guide' | 'language'>('create');
+  const [activeTab, setActiveTab] = useState<'create' | 'library' | 'anatomy' | 'history' | 'about' | 'guide' | 'language'>('create');
   const [isSunlightMode, setIsSunlightMode] = useState(() => safeGetItem('dt_sunlight', 'true') === 'true');
   const [isGenerating, setIsGenerating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [anatomySearch, setAnatomySearch] = useState('');
   const [generatedPrompt, setGeneratedPrompt] = useState('');
   const [originalPrompt, setOriginalPrompt] = useState('');
   const [history, setHistory] = useState<SavedPrompt[]>(() => JSON.parse(safeGetItem('dt_history', '[]')));
@@ -346,14 +347,35 @@ const App: React.FC = () => {
     setIsEditing(false);
     setActiveBracket(null);
     await new Promise(r => setTimeout(r, 4000));
-    const coreSubject = formData.anatomyType !== ANATOMY_OPTIONS[0] ? formData.anatomyType : formData.mainText;
-    const finalOutput = `/* MASTER ARCHITECTURE | v64.0 PRO | DICELION-TECHNIQUE */\n` +
+    
+    const isAnatomyMode = formData.anatomyType !== ANATOMY_OPTIONS[0];
+    const coreSubject = isAnatomyMode ? formData.anatomyType : formData.mainText;
+    
+    /* V68.0 INCREMENTAL UPDATE: MEGA-ANATOMY REALISM PROTOCOL (64K) */
+    let realismLayer = "";
+    if (isAnatomyMode) {
+      // Construction of the Mega-Prompt for Anatomy
+      realismLayer = `\n======================\nMEGA-ANATOMY REALISM PROTOCOL (V68.0)\n======================\n` +
+        `By Dicelion-Technique\n` +
+        `[MANDATORY_AESTHETIC]: "ABSOLUTE HYPER-REALISM. 64K Ultra-Resolution Density. Zero stylization. Real-world physical reference."\n` +
+        `[PHOTOGRAPHY_GEAR]: "Macro DSLR Photography using f/2.8 prime lens, deep-focus stacking, high-intensity shadowless clinical lighting."\n` +
+        `[SUBJECT_DATA]: "Professional dissection of ${coreSubject}. Render fibrous muscular textures, glistening biological surfaces, and authentic biological fluid dynamics."\n` +
+        `[ANATOMICAL_INTEGRITY]: "Visible right and left atria, right and left ventricles with correct wall thickness proportions, interventricular septum, tricuspid/pulmonary/mitral/aortic valves in exact anatomical positions, detailed coronary artery network with microscopic capillaries."\n` +
+        `[MATERIAL_PROPERTIES]: "Subsurface scattering for tissues, raw industrial finish for mechanical parts, micro-level imperfections, no clean/perfect CG surfaces."\n` +
+        `[COMPOSITION]: "Isometric 3D exploded view, every internal component numbered with high-precision technical font overlays."\n` +
+        `[RENDER_TARGET]: "32K-64K Masterpiece quality, ray-traced reflections, global illumination, path-tracing for internal cavities."\n` +
+        `[EXCLUSIONS]: "NO educational illustrations, NO 2D flat diagrams, NO cartoon aesthetics, NO low-poly artifacts."\n`;
+    }
+
+    const finalOutput = `/* MASTER ARCHITECTURE | v68.0 PRO | DICELION-TECHNIQUE */\n` +
       `DicelionTechnique: TOPIC: ${coreSubject}\n` +
       `DicelionTechnique: SEARCH_FACTORY: MILLION_SYNTHESIS_ACTIVE\n\n` +
       `======================\nPROMPT CONSTRUCTION LAYER\n======================\n` +
       `[CENTRAL_SUBJECT]: { core: "${coreSubject}", engineering: "${formData.technical}" }\n` +
-      `[ATMOSPHERIC_DATA]: { context: "${formData.background}", emotion: "${formData.mood}" }\n\n` +
-      `======================\nProfessional Millionth Synthesis by Dicelion-Technique\n======================`;
+      `[ATMOSPHERIC_DATA]: { context: "${formData.background}", emotion: "${formData.mood}" }\n` +
+      realismLayer + 
+      `\n======================\nProfessional Millionth Synthesis by Dicelion-Technique\n======================`;
+      
     setOriginalPrompt(finalOutput);
     setGeneratedPrompt(finalOutput);
     setIsGenerating(false);
@@ -378,7 +400,8 @@ const App: React.FC = () => {
   };
 
   const SPECIALTIES_OPTIONS = useMemo(() => {
-    return PRO_ULTRA_DB.map(i => i.cat).filter((v, i, a) => a.indexOf(v) === i);
+    // RESTORING 1000 OPTIONS: Including all prompt titles in the dropdown
+    return PRO_ULTRA_DB.map(i => i.ar);
   }, []);
 
   const filteredLibrary = useMemo(() => {
@@ -400,6 +423,13 @@ const App: React.FC = () => {
     }
     return results.slice(0, 1000);
   }, [searchQuery]);
+
+  const filteredAnatomy = useMemo(() => {
+    const q = anatomySearch.trim().toLowerCase();
+    // UPDATED: Now filtering through 5000 items
+    if (!q) return ANATOMY_OPTIONS.slice(1, 101); // Default view still 100 for performance
+    return ANATOMY_OPTIONS.filter((s, idx) => idx > 0 && s.toLowerCase().includes(q)).slice(0, 1000);
+  }, [anatomySearch]);
 
   const handleBracketInteraction = (e: React.MouseEvent, variableName: string, bracketId: number) => {
     if (!isEditing) return;
@@ -431,6 +461,8 @@ const App: React.FC = () => {
       <nav className="nav-fixed-top glass-ui shadow-lg">
         <div className="max-w-xl mx-auto flex items-center justify-between w-full px-4">
              <NavIcon active={activeTab === 'create'} onClick={() => setActiveTab('create')} icon="🏠" label={t.tabs.home} />
+             {/* ADDED: Smart Anatomy NavIcon */}
+             <NavIcon active={activeTab === 'anatomy'} onClick={() => setActiveTab('anatomy')} icon="🧬" label={t.tabs.anatomy} />
              <NavIcon active={activeTab === 'library'} onClick={() => setActiveTab('library')} icon="💎" label={t.tabs.library} />
              <NavIcon active={isSunlightMode} onClick={() => setIsSunlightMode(!isSunlightMode)} icon="☀️" label={t.tabs.sunlight} />
              <NavIcon active={activeTab === 'language'} onClick={() => setActiveTab('language')} icon="🌐" label={t.tabs.appLang} />
@@ -485,9 +517,33 @@ const App: React.FC = () => {
             )}
           </div>
         )}
+        {activeTab === 'anatomy' && (
+          <div className="space-y-6 pb-12 animate-in fade-in">
+             <div className="glass-ui p-6 rounded-[2.5rem] shadow-sm space-y-4">
+               <div className="h-14 rounded-full flex items-center px-6 border border-[var(--input-border)] bg-[var(--input-bg)]">
+                  <span className="mr-2 opacity-50">🧬</span>
+                  {/* UPDATED: Anatomy search placeholder now reflects 5000 items */}
+                  <input type="text" placeholder={t.placeholders.anatomySearch} className="bg-transparent flex-1 outline-none font-bold text-sm text-[var(--input-text)]" value={anatomySearch} onChange={(e) => setAnatomySearch(e.target.value)} />
+               </div>
+             </div>
+             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {filteredAnatomy.map((s, idx) => (
+                   <div key={idx} className="p-7 glass-ui rounded-[2.5rem] flex flex-col shadow-sm border-sky-500/5 hover:border-sky-500/20 transition-all group animate-in slide-in-from-bottom-2">
+                      <span className="text-[9px] font-black uppercase text-sky-500 mb-2 group-hover:tracking-widest transition-all">التشريح الذكي | {s.split(' – ')[0]}</span>
+                      <p className="text-[13px] font-bold leading-tight flex-grow text-[var(--text-main)] mb-6 overflow-hidden line-clamp-2">{s.split(' – ')[1] || s}</p>
+                      <div className="mt-auto flex gap-2">
+                        <button onClick={() => performRealCopy(s)} className="flex-1 py-3 text-[11px] font-black border border-sky-500/50 rounded-xl hover:bg-white/5 transition-all text-sky-500 !opacity-100 flex items-center justify-center min-h-[45px] z-30">{t.quickCopy}</button>
+                        <button onClick={() => { setFormData(p => ({...p, anatomyType: s})); setActiveTab('create'); }} className="flex-1 py-3 rounded-xl text-[11px] font-black bg-sky-600 text-white shadow-md hover:bg-sky-500 transition-all !opacity-100 flex items-center justify-center min-h-[45px] z-30">{t.editInStudio}</button>
+                      </div>
+                   </div>
+                ))}
+             </div>
+          </div>
+        )}
         {activeTab === 'library' && (
           <div className="space-y-6 pb-12 animate-in fade-in">
              <div className="glass-ui p-6 rounded-[2.5rem] shadow-sm space-y-4">
+               {/* FIX: Restoring the full width and 1000 items in the Specialties SelectBox */}
                <SelectBox label={t.labels.quickSearch} options={SPECIALTIES_OPTIONS} value={searchQuery} onChange={(e: any) => setSearchQuery(e.target.value)} />
                <div className="h-14 rounded-full flex items-center px-6 border border-[var(--input-border)] bg-[var(--input-bg)]">
                   <span className="mr-2 opacity-50">🔍</span>
@@ -524,7 +580,7 @@ const App: React.FC = () => {
         )}
       </main>
       <footer className="fixed bottom-0 w-full glass-ui p-3 text-center z-[10000]">
-        <span className="text-[8px] font-black opacity-20 uppercase tracking-[0.5em]">DicelionTechnique Millionth Synthesis V64.0 PRO</span>
+        <span className="text-[8px] font-black opacity-20 uppercase tracking-[0.5em]">DicelionTechnique Millionth Synthesis V68.0 PRO</span>
       </footer>
     </div>
   );
