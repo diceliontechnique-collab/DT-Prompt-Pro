@@ -28,10 +28,15 @@
             --safe-bottom: env(safe-area-inset-bottom);
             --neon-blue: #38bdf8;
             --neon-green: #22c55e;
+            --sys-primary: #38bdf8;
+            --sys-surface: #0f172a;
+            --sys-border: #1e293b;
+            --sys-text: #f8fafc;
+            --sys-text-muted: #94a3b8;
         }
 
         [data-theme="light"] { 
-            --bg-page: #f8fafc; 
+            --bg-page: #f1f5f9; 
             --text-main: #0f172a;
             --text-muted: #475569;
             --card-bg: #ffffff;
@@ -43,6 +48,11 @@
             --modal-overlay: rgba(15, 23, 42, 0.5);
             --neon-blue: #0284c7;
             --neon-green: #15803d;
+            --sys-primary: #0284c7;
+            --sys-surface: #f1f5f9;
+            --sys-border: #cbd5e1;
+            --sys-text: #0f172a;
+            --sys-text-muted: #475569;
         }
 
         body { 
@@ -65,11 +75,10 @@
             background: var(--card-bg); 
             backdrop-filter: blur(12px); 
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--card-border); 
-            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+            border: 1.5px solid var(--sys-border) !important;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
         }
 
-        /* V83.0 PATCH: Adjusted top padding to fix logo visibility and space compression */
         .app-content-wrapper { padding-top: calc(110px + var(--safe-top)); }
         @media (max-width: 480px) { .app-content-wrapper { padding-top: calc(110px + var(--safe-top)); } }
 
@@ -104,47 +113,34 @@
             font-weight: 700;
         }
 
-        @keyframes float-around {
-            0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
-            33% { transform: translate(60px, 40px) scale(1.1); opacity: 0.8; }
-            66% { transform: translate(-40px, 120px) scale(0.95); opacity: 0.5; }
-            100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+        /* Interaction States - Mandatory Enforcements */
+        button, select, input, textarea, .action-icon-btn, [role="button"] {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            outline: none !important;
+        }
+        button:not(:disabled):hover, .action-icon-btn:not(:disabled):hover {
+            filter: brightness(1.1) !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+        }
+        button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible {
+            box-shadow: 0 0 0 3px var(--bg-page), 0 0 0 5px var(--sys-primary) !important;
+        }
+        button:active:not(:disabled), .action-icon-btn:active:not(:disabled) {
+            transform: scale(0.96) !important;
+            filter: brightness(0.9) !important;
+        }
+        button:disabled {
+            opacity: 0.4 !important;
+            cursor: not-allowed !important;
+            filter: grayscale(1) !important;
+            transform: none !important;
         }
 
-        .ai-orb {
-            position: fixed;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 1;
-            filter: blur(4px);
-            mix-blend-mode: screen;
-            transition: opacity 0.5s ease;
-        }
-
-        [data-theme="dark"] .ai-orb { box-shadow: 0 0 15px currentColor, 0 0 5px #fff; }
-
-        [data-theme="light"] .ai-orb { 
-            mix-blend-mode: multiply; 
-            filter: blur(6px); 
-            opacity: 0.25; 
-            box-shadow: 0 0 10px currentColor;
-        }
-
-        @keyframes drift {
-            0%, 100% { transform: translateY(0) scale(1); filter: brightness(1); }
-            50% { transform: translateY(-10px) scale(1.05); filter: brightness(1.2); }
-        }
-        #dt-master-svg { animation: drift 4s infinite ease-in-out; }
-
-        @keyframes cyber-vibrate {
-            0% { transform: translate(0, 0); }
-            20% { transform: translate(-1px, 1px); }
-            40% { transform: translate(1px, -1px); }
-            60% { transform: translate(-1px, -1px); }
-            80% { transform: translate(1px, 1px); }
-            100% { transform: translate(0, 0); }
-        }
-        .animate-cyber-shake { animation: cyber-vibrate 0.15s infinite linear; }
+        /* Institutional Consistency */
+        [data-theme="dark"] .text-muted, [data-theme="dark"] .opacity-50 { color: #cbd5e1 !important; opacity: 1 !important; }
+        [data-theme="light"] .text-muted, [data-theme="light"] .opacity-50 { color: #475569 !important; opacity: 1 !important; }
+        [data-theme="dark"] * { text-shadow: none !important; }
 
         @keyframes matrix-rtl-ultra-fast {
             0% { transform: translateX(0); }
@@ -152,24 +148,24 @@
         }
         .animate-matrix-rtl-fast { animation: matrix-rtl-ultra-fast 0.3s linear infinite; }
 
-        .luxury-logo-font {
-            letter-spacing: -0.05em;
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        #dt-master-svg { animation: drift 4s infinite ease-in-out; }
+        @keyframes drift {
+            0%, 100% { transform: translateY(0) scale(1); filter: brightness(1); }
+            50% { transform: translateY(-10px) scale(1.05); filter: brightness(1.2); }
         }
 
-        [data-theme="light"] .glass-ui p, 
-        [data-theme="light"] .glass-ui input,
-        [data-theme="light"] .glass-ui select,
-        [data-theme="light"] .glass-ui span:not([class*="text-sky"]):not([class*="text-emerald"]):not([class*="text-[#00ff41]"]):not([class*="text-white"]),
-        [data-theme="light"] .glass-ui button:not([class*="bg-sky"]):not([class*="bg-emerald"]):not([class*="text-sky"]):not([class*="text-white"]) {
-            color: #0f172a !important;
+        /* V450.0 NEURAL CORE PULSE */
+        .neural-pulse-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+            animation: neural-pulse 10s infinite ease-in-out;
         }
-
-        [data-theme="dark"] .glass-ui p, 
-        [data-theme="dark"] .glass-ui input,
-        [data-theme="dark"] .glass-ui span:not([class*="text-sky"]):not([class*="text-emerald"]):not([class*="text-[#00ff41]"]):not([class*="text-white"]),
-        [data-theme="dark"] .glass-ui button:not([class*="bg-sky"]):not([class*="bg-emerald"]):not([class*="text-sky"]):not([class*="text-white"]) {
-            color: #ffffff !important;
+        @keyframes neural-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
         }
     </style>
 <script type="importmap">
@@ -186,6 +182,7 @@
 </script>
 </head>
 <body class="app-content-wrapper">
+    <div class="neural-pulse-bg"></div>
     <div id="root"></div>
     <script type="module" src="./index.tsx"></script>
 </body>

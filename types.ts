@@ -29,6 +29,7 @@ export interface PromptFormData {
   disableAutoText: boolean;
   visualText: string;
   anatomyType: string;
+  arabicInfographic: boolean;
 }
 
 export interface SavedPrompt {
