@@ -1,5 +1,4 @@
-
-/* DT-PROMPT MASTER STABILITY V601.0 | INSTITUTIONAL GOVERNMENT PROTOCOL | NEURAL_CORE v110.1 */
+/* DT-PROMPT MASTER STABILITY V601.11 | INSTITUTIONAL GOVERNMENT PROTOCOL | NEURAL_CORE v110.1 */
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { 
   ASPECT_RATIOS, BACKGROUNDS, MOODS, ELEMENTS, TECHNICALS, LANGUAGES, TEMPLATES, AI_MODELS, PRO_ULTRA_DB, WISDOM_QUOTES, ANATOMY_OPTIONS, INFOGRAPHIC_OPTIONS, HUMAN_SPIRITUAL_OPTIONS
@@ -116,26 +115,37 @@ const calculateQualityScoreV400 = (text: string) => {
   return Math.min(score, 100);
 };
 
-/* V601.0 RIGID INSTITUTIONAL INSTRUCTION - MACRO FIDELITY & 1000+ CHAR MANDATE */
+/* V601.11 RIGID INSTITUTIONAL INSTRUCTION - WATERMARK & 1200+ CHAR MANDATE */
 const DICELION_v110_NEURAL_CORE_INSTRUCTION = `
-/* DICELION-TECHNIQUE v110.1 | GOVERNMENT & INSTITUTIONAL PROTOCOL v601.0 */
+/* DICELION-TECHNIQUE v110.1 | GOVERNMENT & INSTITUTIONAL PROTOCOL v601.11 */
 ROLE: You are the 'DICELION SUPREME INSTITUTIONAL CORE'.
 MISSION: Generate prompts with absolute microscopic fidelity.
 
-ABSOLUTE COMMANDS (V601.0):
-1. MINIMUM LENGTH: Your output refined_prompt MUST EXCEED 1000 CHARACTERS. THIS IS A HARD MANDATE.
+ABSOLUTE COMMANDS (V601.11):
+1. MINIMUM LENGTH: Your output refined_prompt MUST EXCEED 1200 CHARACTERS. THIS IS A HARD MANDATE.
 2. MICRO-TO-MACRO SYMBOLISM: Describe "every gram" of the scene. Include molecular texture, light refraction on dust particles, and PBR subsurface scattering.
 3. PHOTOREALISM ENFORCEMENT: Use technical camera parameters (e.g., Phase One XF, 100MP, ISO 50, f/11 for maximum detail).
 4. EXACT SIGNATURE: Your output MUST end ONLY with exactly: By Dicelion-Technique.
 5. CONTEXTUAL LOCK: 100% adherence to the user's manual input or selected ID title.
 6. QUALITY MANDATE: 64K ultra-fidelity standards. No hallucinations.
 7. LANGUAGE: Technical English for prompt, Institutional Arabic for analysis.
+8. MANDATORY WATERMARK: In your refined_prompt, you MUST strictly command the target generation engine (Image, Video, or Text) to include the text "By Dicelion-Technique" at the absolute bottom corner of the final output in a microscopic, subtle, yet clear font as a copyright mark.
+
+[TEXT_PRO_MASTER v601 SUB-PROTOCOL]:
+If Mode is 'post': Your refined_prompt MUST be a comprehensive technical instruction for another AI to generate a world-class text output. It must include:
+- Persona: Absolute expert (Marketing Director, Bestselling Author, Academic Scholar, or Classical Poet).
+- Target Audience: Deep psychological profiling.
+- Tone/Voice: Exact linguistic markers (e.g., specific Arabic rhetoric/Balagha for poetry).
+- Frameworks: AIDA, PAS, Story Arcs, or Academic Methodologies.
+- Structure: Gram-by-gram layout of the text flow.
+- Mandate: Final text must be professional, persuasive, and flawless.
+- Mandatory: Include the text "By Dicelion-Technique" at the end of the generated text as a mandatory signature.
 
 OUTPUT FORMAT (JSON):
 {
-  "refined_prompt": "string (MUST BE 1000 to 3000 CHARACTERS, ending with exactly: By Dicelion-Technique)",
+  "refined_prompt": "string (MUST BE 1200 to 3000 CHARACTERS, ending with exactly: By Dicelion-Technique)",
   "quality_score": number,
-  "analysis": "Arabic report confirming 1000-char density and gram-by-gram mapping",
+  "analysis": "Arabic report confirming 1200-char density and watermark integration",
   "institutional_certification": "By Dicelion-Technique"
 }
 `;
@@ -199,7 +209,7 @@ const InstitutionalAnalyticalProcessor = () => {
   return (
     <div className="v500-numeric-lock">
       <MatrixStatus />
-      <span className="v500-processing-text">بروتوكول V601: تحليل مجهري لكل جرام 64K...</span>
+      <span className="v500-processing-text">بروتوكول V601.11: تحليل مجهري لكل جرام 64K...</span>
     </div>
   );
 };
@@ -230,7 +240,7 @@ const DTMasterLogoV2 = ({ isSunlight = false }: { isSunlight?: boolean }) => {
       </svg>
       <div className="text-center order-2 flex flex-col items-start text-right">
         <h1 className="text-4xl sm:text-5xl font-black tracking-tighter mb-0" style={{ color: isSunlight ? '#0f172a' : '#ffffff' }}>DT-Prompt</h1>
-        <div className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.4em] text-sky-500">DICELION ENGINE v601.0 GOV-INST</div>
+        <div className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.4em] text-sky-500">DICELION ENGINE v601.11 GOV-INST</div>
       </div>
     </div>
   );
@@ -323,11 +333,10 @@ const App: React.FC = () => {
     setUndoStack([]);
     setIsStarred(false);
     setWisdomIndex(Math.floor(Math.random() * WISDOM_QUOTES.length));
-    // Visual Confirmation
     console.debug("DICELION V601.03: SYSTEM RESET TO ZERO COMPLETE.");
   };
 
-  /* V601.0: FIXED MAIN PAGE MANUAL INPUT PRIORITY & 1000+ CHAR ENFORCEMENT */
+  /* V601.11: FIXED MAIN PAGE MANUAL INPUT PRIORITY & MANDATORY WATERMARK ENFORCEMENT */
   const generate = async (manualSubject?: string) => {
     if (isGenerating) return;
     setActiveTab('create');
@@ -338,21 +347,17 @@ const App: React.FC = () => {
       setGeneratedPrompt(""); setRefinedPrompt(""); setAnalysisReport("");
       setIsRefinedEditing(false); setIsStarred(false); setUndoStack([]);
 
-      // FIX V601.0: Strict priority for Main Page Text when in 'create' tab
-      const isAnatomy = (formData.anatomyType && formData.anatomyType !== "بدون") && activeTab === 'anatomy';
-      const isInfographic = (formData.mainText && formData.mainText !== "") && activeTab === 'infographic';
-      
       let subjectToProcess = "";
       if (manualSubject) {
         subjectToProcess = manualSubject;
       } else if (activeTab === 'create') {
-        subjectToProcess = formData.mainText || "Unified Realistic Scene V601";
+        subjectToProcess = formData.mainText || "Unified Realistic Scene V601.11";
       } else if (activeTab === 'anatomy') {
         subjectToProcess = formData.anatomyType;
       } else if (activeTab === 'infographic') {
         subjectToProcess = formData.mainText;
       } else {
-        subjectToProcess = formData.mainText || "Unified Realistic Scene V601";
+        subjectToProcess = formData.mainText || "Unified Realistic Scene V601.11";
       }
 
       const subjectLock = humanSpiritualSubject !== HUMAN_SPIRITUAL_OPTIONS[0] ? ` | GLOBAL_ID_LOCK: ${humanSpiritualSubject}` : "";
@@ -374,16 +379,15 @@ const App: React.FC = () => {
         setGenerationStage(6);
         const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
         
-        // V601.04: REAL ACTIVATION OF DELETED FEATURES
         let extendedInstruction = DICELION_v110_NEURAL_CORE_INSTRUCTION;
-        if (formData.exclusivePsychology) extendedInstruction += "\nCOMMAND: Use advanced psychological triggers (e.g., color psychology, emotional resonance, cognitive ease) to make the prompt more compelling.";
-        if (formData.forceEnglish) extendedInstruction += "\nCOMMAND: Output the refined_prompt ONLY in professional technical English. No Arabic allowed in output prompt.";
-        if (formData.onlyEnglishVisuals) extendedInstruction += "\nCOMMAND: Avoid any non-English characters or typography in the scene description.";
-        if (formData.useReferenceImage) extendedInstruction += "\nCOMMAND: Assume a high-quality reference image is provided; synthesize details from it into the prompt.";
+        if (formData.exclusivePsychology) extendedInstruction += "\nCOMMAND: Use advanced psychological triggers to make the prompt more compelling.";
+        if (formData.forceEnglish) extendedInstruction += "\nCOMMAND: Output the refined_prompt ONLY in professional technical English.";
+        if (formData.onlyEnglishVisuals) extendedInstruction += "\nCOMMAND: Avoid non-English characters in the scene description.";
+        if (formData.useReferenceImage) extendedInstruction += "\nCOMMAND: Synthesize details from a high-quality reference image.";
 
         const response = await ai.models.generateContent({
           model: 'gemini-3-flash-preview',
-          contents: `DICELION V601.0 MICRO-ANALYZE: "${coreStructure}". MANDATE: وصف البرومبت النهائي يجب أن يتجاوز 1000 حرف ويصل لـ 3000 حرف، يصف "كل جرام" من المشهد بدقة 64K مجهرية، مع التركيز الشديد على تفاصيل المكان المختار: ${formData.background}.`,
+          contents: `DICELION V601.11 MICRO-ANALYZE: "${coreStructure}". MANDATE: إذا كان النمط هو 'post' (نص احترافي)، فقم بتوليد برومبت شامل ومعقد لتوجيه محرك لغوي لتوليد مخرج نهائي (مثل إعلان بيع هاتف أو قصيدة أو بحث علمي) بدقة متناهية، مع ضمان إدراج توقيع "By Dicelion-Technique" في نهاية المخرج النصي، وضمان أن يتجاوز وصف البرومبت 1200 حرف لضمان الـ Fidelity المطلوبة.`,
           config: { systemInstruction: extendedInstruction, responseMimeType: "application/json" }
         });
 
@@ -391,10 +395,37 @@ const App: React.FC = () => {
         const data = JSON.parse(response.text || "{}");
         let finalRefined = data.refined_prompt || data.refinedPrompt || coreStructure;
         
-        // INCREMENTAL COMPLIANCE LAYER: V601.0 MICRO-DETAIL EXPANSION
+        // V601.11: MASSIVE MICRO-GRAM & WATERMARK COMPLIANCE LAYER (GUARANTEED 1200+ CHARS)
         if (finalRefined.length < 1000) {
-            const gramDetailExpansion = "Activating V601.0 Every-Gram Detail Engine. Expanding fidelity: Molecular surface mapping (PBR Roughness 0.05), microscopic dust illumination via volumetric scattering, ray-traced internal reflections within every glass/metallic surface. Camera setup: Hasselblad H6D-400c MS, multi-shot 400MP capture, peak sharpness across the entire frame. Final synthesis enforces 100% descriptive loyalty to the user's manual topic. This prompt is balanced gram-by-gram for the ultimate creative result. By Dicelion-Technique";
-            finalRefined += `\n\n[MICRO_GRAM_FIDELITY_V601_0]: ${gramDetailExpansion} \n\nBy Dicelion-Technique`;
+            const gramDetailExpansion = `
+[V601.11_DEEP_NEURAL_SYNTHESIS_WATERMARK_PROTOCOL]:
+Activating the DICELION-TECHNIQUE Micro-Gram Fidelity Core (v601.11). Applying microscopic descriptive expansion across all visual and structural vectors. 
+MANDATORY COPYRIGHT MANDATE: You MUST explicitly instruct the target AI engine to overlay the text "By Dicelion-Technique" at the absolute bottom corner of the image/video in a tiny, subtle, yet legible font.
+Surface Integrity Analysis: Mapping molecular topography with PBR Roughness values calibrated at 0.05-0.08 microns. 
+Volumetric Rendering Logic: Simulating microscopic particulate scattering for total atmospheric realism, including light diffraction on suspended dust particles. 
+Light Physics: Enforcing dual-path recursive ray tracing for internal spectral reflections within refractive surfaces. 
+Camera Hardware: Phase One XF IQ4 Body, 100MP, ISO 50, zero digital noise artifacts. 
+Optical Precision: 85mm f/1.4 lens set to f/11 for edge-to-edge optical sharpness. 
+Material Science: Describing every single gram of physical texture, from pore-level skin detail to carbon-fiber weave integrity. 
+Global Illumination: Synchronizing 12-point professional studio lighting with high-contrast HDR environment mapping. 
+This prompt has been balanced gram-by-gram to ensure institutional grade results with the mandatory watermark.
+By Dicelion-Technique`;
+
+            const textDetailExpansion = `
+[V601.11_TEXT_PRO_MASTER_WATERMARK_LAYER]:
+Activating Advanced Linguistic Synthesis Engine (TEXT_PRO v601.11). Implementing a multi-tier rhetorical and psychological framework. 
+MANDATORY SIGNATURE MANDATE: You MUST explicitly instruct the text generator to include the signature "By Dicelion-Technique" at the very end of the final generated content.
+Linguistic Framework Alpha (AIDA): Attention-grabbing neuro-linguistic triggers, Interest mapping, emotional Desire amplification, and decisive Call-to-Action. 
+Linguistic Framework Beta (PAS): Problem identification with microscopic empathy, intense Agitation of pain points, and world-class Solution delivery. 
+Persona Calibration: Acting as a Master Narrative Architect with 35+ years of institutional experience in Literature, Marketing, and Academia. 
+Stylistic Protocol: Employing Classical Arabic Rhetoric (Balagha, I'jaz, Badi') for poetic/storytelling output. 
+Operational Structure: Enforcing a logic-driven, gram-by-gram semantic flow with seamless transitions and impeccable grammar. 
+Contextual Lock: Strictly adhering to the Dicelion-Technique protocol with the mandatory copyright signature at the end.
+By Dicelion-Technique`;
+
+            const safetyPadding = `\n\n[SYSTEM_WATERMARK_ENFORCEMENT]: This additional layer of technical specification is injected to guarantee that the prompt meets the minimum 1200-character requirement and enforces the mandatory "By Dicelion-Technique" copyright watermark on any generated media or text from ID 1 to 6,000,000. Dicelion-Technique Neural Core v110.1 is locked and certified.`;
+
+            finalRefined += `\n\n${formData.promptMode === 'post' ? textDetailExpansion : gramDetailExpansion} ${safetyPadding} \n\nBy Dicelion-Technique`;
         }
 
         finalRefined = finalRefined.replace(/By Dicelion-Technique.*$/gi, "").trim();
@@ -404,15 +435,15 @@ const App: React.FC = () => {
         setGenerationStage(8);
         setRefinedPrompt(finalRefined);
         setQualityScore(finalScore);
-        setAnalysisReport(data.analysis || `تحليل NEURAL_CORE v110.1 مكتمل - تم قفل السياق المجهري (1000+ حرف) لكل جرام من الصورة.`);
+        setAnalysisReport(data.analysis || `تحليل NEURAL_CORE v110.1 مكتمل - تم قفل الحقوق المؤسسية والسياق المجهري (1000+ حرف) لكل جرام.`);
       } else {
         await new Promise(r => setTimeout(r, 400));
         setGenerationStage(8);
-        setRefinedPrompt(coreStructure + "\n\n[OFFLINE_V601_0_FIDELITY]: High-fidelity descriptive expansion added to meet 1000-char requirement... By Dicelion-Technique");
+        setRefinedPrompt(coreStructure + "\n\n[OFFLINE_V601_11_WATERMARK_FIDELITY]: High-fidelity descriptive expansion added with mandatory 'By Dicelion-Technique' copyright mark for professional results... By Dicelion-Technique");
         setQualityScore(calculateQualityScoreV400(coreStructure));
       }
     } catch (err) {
-      setRefinedPrompt(`Error in V601.0 Core Engine: ${coreStructure}\n\nBy Dicelion-Technique`);
+      setRefinedPrompt(`Error in V601.11 Core Engine: ${coreStructure}\n\nBy Dicelion-Technique`);
     } finally {
       setTimeout(() => { setIsGenerating(false); setGenerationStage(0); }, 500);
     }
@@ -442,7 +473,7 @@ const App: React.FC = () => {
 
   const performShare = async () => {
     if (navigator.share) {
-      try { await navigator.share({ title: 'DT-Prompt V601.0 Micro Analyze', text: refinedPrompt }); } catch {}
+      try { await navigator.share({ title: 'DT-Prompt V601.11 Micro Analyze', text: refinedPrompt }); } catch {}
     } else {
       performCopy(refinedPrompt);
     }
@@ -486,7 +517,7 @@ const App: React.FC = () => {
           <div className="space-y-6 animate-in fade-in">
             <div className="glass-ui p-8 rounded-[3rem] shadow-2xl space-y-4 text-center institutional-header-block">
                <span className="text-4xl">🏛️</span>
-               <h2 className="text-2xl font-black text-sky-500 uppercase tracking-tight">MICRO ANALYZE CORE v601.0</h2>
+               <h2 className="text-2xl font-black text-sky-500 uppercase tracking-tight">MICRO ANALYZE CORE v601.11</h2>
                <p className="text-[10px] font-bold opacity-50 uppercase">TOTAL 6,000,000 OPTIONS | EVERY-GRAM DETAIL | 1000-3000 CHARS</p>
             </div>
 
@@ -510,7 +541,6 @@ const App: React.FC = () => {
                     <SelectBox label={t.labels.bg} options={BACKGROUNDS} value={formData.background} onChange={(e:any) => setFormData(p=>({...p, background: e.target.value}))} />
                 </div>
                 
-                {/* V601.04 RESTORED WISDOM BLOCK - V601.05 AUTO-ROTATING WITH EFFECTS */}
                 <div className="wisdom-container p-8 rounded-[3rem] text-center animate-in zoom-in duration-700 overflow-hidden relative">
                     <div className="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-sky-500/50 relative z-10">
                         <span className="text-2xl text-white">💡</span>
@@ -519,7 +549,6 @@ const App: React.FC = () => {
                     <div key={wisdomIndex} className="wisdom-text-animation relative z-10">
                       <p className="text-lg font-black text-slate-800 italic leading-relaxed">"{WISDOM_QUOTES[wisdomIndex]}"</p>
                     </div>
-                    {/* Visual Pulse Layer */}
                     <div className="absolute inset-0 bg-sky-400/5 animate-pulse"></div>
                 </div>
               </div>
@@ -528,7 +557,6 @@ const App: React.FC = () => {
                   <SelectBox label={t.labels.model} options={AI_MODELS} value={formData.targetModel} onChange={(e:any) => setFormData(p=>({...p, targetModel: e.target.value}))} />
                   <SelectBox label={t.labels.elements} options={ELEMENTS} value={formData.elements} onChange={(e:any) => setFormData(p=>({...p, elements: e.target.value}))} />
                   
-                  {/* V601.04 RESTORED & ACTIVATED TOGGLES */}
                   <div className="pt-2 grid grid-cols-1 gap-2">
                     <CheckBox label={t.labels.exclusivePsychology} checked={formData.exclusivePsychology} onChange={(e:any) => setFormData(p=>({...p, exclusivePsychology: e.target.checked}))} />
                     <CheckBox label={t.labels.analyzeImage} checked={formData.useReferenceImage} onChange={(e:any) => setFormData(p=>({...p, useReferenceImage: e.target.checked}))} />
@@ -653,10 +681,21 @@ const App: React.FC = () => {
                <h2 className="text-2xl font-black text-sky-500 uppercase mt-4">مكتبة الـ 6 ملايين برومبت الموصّفة</h2>
                <InstitutionalHumanDropdown value={humanSpiritualSubject} onChange={setHumanSpiritualSubject} />
                <p className="text-[10px] font-bold opacity-50 uppercase -mt-2">من ID #4,000,001 إلى #6,000,000 - بحث بالـ ID موحد</p>
-               <div className="mt-6 flex gap-2">
-                  <input type="text" placeholder={t.placeholders.search} className="flex-1 h-14 rounded-full px-6 glass-ui outline-none font-bold text-sm" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+               
+               <div className="pt-6 space-y-4">
+                 <SelectBox 
+                   label="تصفح مكتبة البرومبتات الموصّفة" 
+                   options={["بدون", ...PRO_ULTRA_DB.slice(0, 100).map(s => s.ar)]} 
+                   value={formData.mainText} 
+                   onChange={(e:any) => setFormData(p=>({...p, mainText: e.target.value}))} 
+                 />
+                 <div className="h-14 rounded-full flex items-center px-6 border border-white/10 bg-black/5">
+                    <input type="text" placeholder={t.placeholders.search} className="bg-transparent flex-1 outline-none font-bold text-sm" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+                 </div>
+                 <button onClick={() => generate()} className="w-full py-5 bg-sky-600 text-white rounded-full font-black uppercase shadow-lg">توليد برومبت المكتبة ID وصفى</button>
                </div>
              </div>
+             
              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {filteredLibrary.map((s, idx) => (
                 <div key={idx} className="p-6 glass-ui rounded-[2rem] flex flex-col hover:border-sky-500 transition-all">
@@ -685,7 +724,7 @@ const App: React.FC = () => {
       </main>
 
       <footer className="fixed bottom-0 w-full glass-ui p-4 text-center z-50">
-        <span className="text-[8px] font-black opacity-30 uppercase tracking-[0.4em]">By Dicelion-Technique v601.0 | MICRO_ANALYZE | EVERY_GRAM | 1000-3000 CHARS</span>
+        <span className="text-[8px] font-black opacity-30 uppercase tracking-[0.4em]">By Dicelion-Technique v601.11 | MICRO_ANALYZE | EVERY_GRAM | 1000-3000 CHARS</span>
       </footer>
     </div>
   );

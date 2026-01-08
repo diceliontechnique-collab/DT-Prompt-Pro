@@ -259,29 +259,46 @@ export const LANGUAGES = [
   'العربية', 'English', 'Español', 'Français', 'Nederlands', 'Türkçe', 'فارسی', 'Kurdî'
 ];
 
-/* V600.99 6,000,000 OPTIONS GENERATOR (TOTAL FIDELITY) */
+/* V601.07 DESCRIPTIVE ANATOMY GENERATOR (VISUAL FIDELITY) */
+const ANATOMY_VISUAL_SUBJECTS = ["قلب بشري نابض", "دماغ بمعالجة عصبية مضيئة", "عين قزحية ملونة مجهرية", "عمود فقري بهيكل فضي", "جهاز تنفسي بمسارات هوائية", "خلايا دم تحت المجهر الضوئي", "بنية عظمية كريستالية شفافة", "ألياف عضلية قوية متداخلة"];
+const ANATOMY_VISUAL_STYLES = ["بإضاءة طبية واقعية", "بتفاصيل مجهرية 64K مذهلة", "برؤية سينمائية فائقة الدقة", "بألوان زاهية وتباين عالٍ", "بتصوير فوتوغرافي احترافي"];
+
 export const ANATOMY_OPTIONS = (() => {
   const list = ["بدون"];
   for(let i=1; i<=2000000; i++) {
-    list.push(`${i} – مشهد تشريحي واقعي ID: ${i}`);
+    const sub = ANATOMY_VISUAL_SUBJECTS[i % ANATOMY_VISUAL_SUBJECTS.length];
+    const sty = ANATOMY_VISUAL_STYLES[i % ANATOMY_VISUAL_STYLES.length];
+    list.push(`${i} – ${sub} ${sty} تعكس دقة التشريح`);
   }
   return list;
 })();
+
+/* V601.07 DESCRIPTIVE INFOGRAPHIC GENERATOR (VISUAL FIDELITY) */
+const INFOGRAPHIC_VISUAL_TYPES = ["رسم بياني ثلاثي الأبعاد", "إنفوجرافيك تقني معقد", "خارطة بيانات رقمية متوهجة", "هيكل تنظيمي بتصميم مستقبلي", "جدول زمني بلمسات نيون", "تحليل إحصائي بواجهة عصرية"];
+const INFOGRAPHIC_VISUAL_ADJECTIVES = ["يعرض البيانات بوضوح فائق", "بتنسيق بصري مذهل وجذاب", "بإخراج جرافيكي عالمي المستوى", "بدقة هندسية متناهية الجمال"];
 
 export const INFOGRAPHIC_OPTIONS = (() => {
   const list = ["بدون"];
   for(let i=2000001; i<=4000000; i++) {
-    list.push(`${i} – إنفوجرافيك موصّف ID: ${i}`);
+    const type = INFOGRAPHIC_VISUAL_TYPES[i % INFOGRAPHIC_VISUAL_TYPES.length];
+    const adj = INFOGRAPHIC_VISUAL_ADJECTIVES[i % INFOGRAPHIC_VISUAL_ADJECTIVES.length];
+    list.push(`${i} – ${type} ${adj} لوصف محتوى ID`);
   }
   return list;
 })();
 
+/* V601.07 DESCRIPTIVE LIBRARY GENERATOR (VISUAL FIDELITY) */
+const LIBRARY_VISUAL_SCENES = ["مدينة مستقبلية نيون", "غابة سحرية بضوء القمر", "روبوت بذكاء بشري", "سيارة سباق انسيابية", "سوق تراثي بتفاصيل حية", "فضاء كوني بسدم ملونة", "بحر هائج بأمواج عملاقة", "ناطحة سحاب زجاجية شاهقة"];
+const LIBRARY_VISUAL_TREATMENTS = ["بإخراج سينمائي مبهر", "بتفاصيل واقعية مجهرية 64K", "بإضاءة درامية مذهلة الأثر", "بألوان واقعية فائقة الجمال"];
+
 export const PRO_ULTRA_DB = (() => {
   const items = [];
   for (let i = 4000001; i <= 6000000; i++) {
+    const sc = LIBRARY_VISUAL_SCENES[i % LIBRARY_VISUAL_SCENES.length];
+    const tr = LIBRARY_VISUAL_TREATMENTS[i % LIBRARY_VISUAL_TREATMENTS.length];
     items.push({
-      ar: `${i} – برومبت موصّف من المكتبة ID: ${i}`,
-      en: `Descriptive prompt ID: ${i}`,
+      ar: `${i} – ${sc} ${tr} تجذب الناظر بقوة`,
+      en: `Cinematic visualization of ${sc} with high fidelity`,
       cat: 'General',
       id: i 
     });
@@ -292,7 +309,7 @@ export const PRO_ULTRA_DB = (() => {
 export const HUMAN_SPIRITUAL_OPTIONS = (() => {
   const list = ["محرك الـ 6 مليون خيار: ابحث بالـ ID.."];
   for(let i=1; i<=1000; i++) {
-    list.push(`${i} – وصف نتيجة ID: ${i}`);
+    list.push(`${i} – وصف بصري لنتيجة ID: ${i}`);
   }
   return list;
 })();
@@ -407,7 +424,7 @@ export const WISDOM_QUOTES = [
   "الجهل يهدم بيت العز والشرف.",
   "تعلم الذكاء الاصطناعي لتختصر الأوقات.",
   "اجعل الروبوت يعمل لخدمة دينك.",
-  "لا تخف من العلم، خف من الجهل.",
+  "لا تخم من العلم، خف من الجهل.",
   "تقنية بلا أخلاق دمار شامل.",
   "كن منتجاً للمعرفة لا مستهلكاً لها.",
   "الذكاء هبة، فلا تستخدمه في معصية.",
